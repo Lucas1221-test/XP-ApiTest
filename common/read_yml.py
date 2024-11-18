@@ -7,14 +7,17 @@ def read_yml(yml_path):
     f.close()
     return d
 
-#host_url=yaml.load(open('/test_data/host.yml','r',encoding='utf-8'),Loader=yaml.FullLoader)
-#excel_file=ExcelUtil('/test_data/dropweb/'+host_url['excel']['excel_name'])
-
-
+def get_login_data():
+    current_path = os.path.dirname(os.path.realpath(__file__))
+    ymlpath = os.path.join(os.path.dirname(current_path), 'data', 'login_data.yaml')
+    with open(ymlpath, 'r') as stream:
+        return yaml.safe_load(stream)['tests']
 
 
 if __name__=='__main__':
     current_path=os.path.dirname(os.path.realpath(__file__))
-    ymlp=os.path.join(os.path.dirname(current_path),'data','file_yml.yaml')
+    ymlp=os.path.join(os.path.dirname(current_path),'data','environments.yaml')
+    ymlp2 = os.path.join(os.path.dirname(current_path), 'data', 'login_data.yaml')
     r=read_yml(ymlp)
-    print(r)
+    s=r['environments']['active']['base_url']
+    print(s)

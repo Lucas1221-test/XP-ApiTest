@@ -1,0 +1,9 @@
+# environments.yaml
+environments:
+  active:
+    base_url: http://172.21.0.52:8080
+  pg:
+    base_url: http://172.18.26.172:8080
+  dev:
+    base_url: http://172.18.25.250:8080/
+

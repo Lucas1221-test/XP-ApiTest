@@ -1,13 +1,7 @@
 import pymysql
+from allure_commons import logger
+from pymysql.cursors import DictCursor
 
-dbinfo={
-    "host":"",
-    "user":"",
-    "password":"",
-    "port":"",
-    "database":"",
-    "charset":"utf8"
-}
 
 class Dbconnect():
     def __init__(self,dbinfo):
@@ -44,14 +38,15 @@ class Dbconnect():
 
 
 if __name__=='__main__':
-    dbinfo={
-         "host":"",
-         "user":"",
-         "password":"",
-         "port":"",
-         "database":""
+    dbinfo = {
+        "host": "sh-tdsqlshard-ob3i44x2.sql.tencentcdb.com",
+        "user": "agnes",
+        "password": "Hex!1324",
+        "port": "29452",
+        "database": "agnes",
+        "charset": "utf8"
     }
-    mysql=Dbconnect(dbinfo)
-    result=mysql.select("")
+    mysql=pymysql.connect(dbinfo)
+    result=mysql.select("SELECT * FROM `ac_hi_case_step_exec_log` where PK_ID='1ivthwi7m7swg'")
     print(result)
     mysql.close()
