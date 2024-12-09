@@ -1,52 +1,45 @@
-import pymysql
-from allure_commons import logger
-from pymysql.cursors import DictCursor
+from pymysql import Connection
 
+class Dbconnect_mysql():
+    def __init__(self):
+        self.conn = Connection(
+            host='sh-tdsqlshard-ob3i44x2.sql.tencentcdb.com',
+            user='agnes',
+            password="Hex!1324",
+            port=29452,
+            database="agnes",
+            charset="utf8"
+        )
 
-class Dbconnect():
-    def __init__(self,dbinfo):
-        self.db=pymysql.connect(cursorclass=pymysql.cursors.DictCursor,**dbinfo)
-        self.cursor=self.db.cursor()
-
-
+    #查询
     def select(self,sql):
-        self.cursor.execute(sql)
-        result=self.cursor.fetchall()
+        self.cursor = self.conn.cursor()  # 获取游标对象
+        # conn.select_db("agnes")  # 选择数据库
+        self.cursor.execute(sql)  # 查询语句
+
+        result = self.cursor.fetchall()  # 获取查询结果
         return result
 
-    def excute(self,sql2):
-        try:
-            self.cursor.excute(sql2)
-            self.db.commit()
-        except Exception as e:
-            print("错误",e)
-            self.db.rollback()
+    # 插入
+    def excute(self,sql):
+        self.cursor = self.conn.cursor()  # 获取游标对象
+        #conn.select_db("test_database")  # 选择数据库
 
+        # 插入语句
+        self.cursor.execute(sql)
+        self.conn.commit()  # 提交事务
+
+    #关闭
     def close(self):
-        self.cursor.close()
-        self.db.close()
+        self.cursor.close()  # 关闭游标
+        self.conn.close()  # 关闭连接
 
-
-    def get_result(self,sql,filename):
-        results=self.select(sql)
-        print("记录数:{}".format(len(results)))
-        with open(filename,'w') as f:
-            for one in results:
-                f.write(str(one)+'\n')
-
-        return results
 
 
 if __name__=='__main__':
-    dbinfo = {
-        "host": "sh-tdsqlshard-ob3i44x2.sql.tencentcdb.com",
-        "user": "agnes",
-        "password": "Hex!1324",
-        "port": "29452",
-        "database": "agnes",
-        "charset": "utf8"
-    }
-    mysql=pymysql.connect(dbinfo)
-    result=mysql.select("SELECT * FROM `ac_hi_case_step_exec_log` where PK_ID='1ivthwi7m7swg'")
+    a=Dbconnect_mysql()
+    result=a.select("select * from ac_re_task_def where TASK_ID='1j6tzf1f5spss'")
     print(result)
-    mysql.close()
+    a.close()
+
+
