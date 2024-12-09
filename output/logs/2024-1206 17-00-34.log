@@ -1,0 +1,70 @@
+[2024-12-06 17:00:35] [INFO] -----------测试用例请求开始-----------
+[2024-12-06 17:00:35] [INFO] 用例名称: test_get_brick_type
+[2024-12-06 17:00:35] [INFO] 用户故事: 积木定义-数据采集
+[2024-12-06 17:00:35] [INFO] 用例标题: 获取积木类型
+[2024-12-06 17:00:35] [INFO] 请求方式: POST
+[2024-12-06 17:00:35] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v2/block/get-tree-node
+[2024-12-06 17:00:35] [INFO] 请求头: {'cookie': "token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM0NzU2MzUsInVzZXJJZCI6ImFnbmVzIn0.8OY0LQkxuEuxDg_COlBD3gWI99QLWZGyRizR0peBj50'"}
+[2024-12-06 17:00:35] [INFO] 实际响应状态码: 200
+[2024-12-06 17:00:35] [INFO] 实际响应内容: {"message":"登录已过期，请重新登录！","ok":false,"status":"9999"}
+[2024-12-06 17:00:35] [WARNING] JSONPath 未提取到值: $.data.children[0].id
+[2024-12-06 17:00:35] [INFO] equals断言失败: 返回结果中没有键 msgType
+[2024-12-06 17:00:35] [INFO] -----------测试用例请求开始-----------
+[2024-12-06 17:00:35] [INFO] 用例名称: test_add_interface_collection
+[2024-12-06 17:00:35] [INFO] 用户故事: 积木定义-数据采集
+[2024-12-06 17:00:35] [INFO] 用例标题: 新增接口采集-积木
+[2024-12-06 17:00:35] [INFO] 请求方式: POST
+[2024-12-06 17:00:35] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v2/block/check/blockName
+[2024-12-06 17:00:35] [INFO] 请求头: {'cookie': "token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM0NzU2MzUsInVzZXJJZCI6ImFnbmVzIn0.8OY0LQkxuEuxDg_COlBD3gWI99QLWZGyRizR0peBj50'"}
+[2024-12-06 17:00:35] [INFO] 请求 JSON 参数: {'blockName': '数据采集-接口积木1', 'dealType': '01'}
+[2024-12-06 17:00:35] [INFO] 实际响应状态码: 200
+[2024-12-06 17:00:35] [INFO] 实际响应内容: {"message":"登录已过期，请重新登录！","ok":false,"status":"9999"}
+[2024-12-06 17:00:35] [INFO] equals断言失败: 返回结果中没有键 msgType
+[2024-12-06 17:00:35] [INFO] -----------测试用例请求开始-----------
+[2024-12-06 17:00:35] [INFO] 用例名称: test_get_blockCode
+[2024-12-06 17:00:35] [INFO] 用户故事: 积木定义-数据采集
+[2024-12-06 17:00:35] [INFO] 用例标题: 新增积木后获取blockCode
+[2024-12-06 17:00:35] [INFO] 请求方式: POST
+[2024-12-06 17:00:35] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v2/model/code/get-model-code?model=block
+[2024-12-06 17:00:35] [INFO] 请求头: {'cookie': "token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM0NzU2MzUsInVzZXJJZCI6ImFnbmVzIn0.8OY0LQkxuEuxDg_COlBD3gWI99QLWZGyRizR0peBj50'"}
+[2024-12-06 17:00:35] [INFO] 请求 JSON 参数: {'model': 'block'}
+[2024-12-06 17:00:35] [INFO] 实际响应状态码: 200
+[2024-12-06 17:00:35] [INFO] 实际响应内容: {"message":"登录已过期，请重新登录！","ok":false,"status":"9999"}
+[2024-12-06 17:00:35] [WARNING] JSONPath 未提取到值: $.data
+[2024-12-06 17:00:35] [INFO] equals断言失败: 返回结果中没有键 msgType
+[2024-12-06 17:00:35] [INFO] -----------测试用例请求开始-----------
+[2024-12-06 17:00:35] [INFO] 用例名称: test_pre_save
+[2024-12-06 17:00:35] [INFO] 用户故事: 积木定义-数据采集
+[2024-12-06 17:00:35] [INFO] 用例标题: 新增数据采集-接口积木-pre-save
+[2024-12-06 17:00:35] [INFO] 请求方式: POST
+[2024-12-06 17:00:35] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v2/block/pre-save
+[2024-12-06 17:00:35] [INFO] 请求头: {'cookie': "token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM0NzU2MzUsInVzZXJJZCI6ImFnbmVzIn0.8OY0LQkxuEuxDg_COlBD3gWI99QLWZGyRizR0peBj50'"}
+[2024-12-06 17:00:35] [INFO] 请求 JSON 参数: {'blockCode': 'block-00000134', 'blockName': '数据采集-接口积木1', 'blockType': '01', 'dealType': '01'}
+[2024-12-06 17:00:35] [INFO] 实际响应状态码: 200
+[2024-12-06 17:00:35] [INFO] 实际响应内容: {"message":"登录已过期，请重新登录！","ok":false,"status":"9999"}
+[2024-12-06 17:00:35] [WARNING] JSONPath 未提取到值: $.data.blockName
+[2024-12-06 17:00:35] [WARNING] JSONPath 未提取到值: $.data.
+[2024-12-06 17:00:35] [WARNING] JSONPath 未提取到值: $.data.pkId
+[2024-12-06 17:00:35] [INFO] equals断言失败: 返回结果中没有键 msgType
+[2024-12-06 17:00:35] [INFO] -----------测试用例请求开始-----------
+[2024-12-06 17:00:35] [INFO] 用例名称: test_send_test
+[2024-12-06 17:00:35] [INFO] 用户故事: 积木定义-数据采集
+[2024-12-06 17:00:35] [INFO] 用例标题: 数据采集-接口积木-发送测试
+[2024-12-06 17:00:35] [INFO] 请求方式: POST
+[2024-12-06 17:00:35] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v2/block/verify-interface-collect
+[2024-12-06 17:00:35] [INFO] 请求头: {'cookie': "token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM0NzU2MzUsInVzZXJJZCI6ImFnbmVzIn0.8OY0LQkxuEuxDg_COlBD3gWI99QLWZGyRizR0peBj50'"}
+[2024-12-06 17:00:35] [INFO] 请求 JSON 参数: {'blockInfo': {'acReInterfaceDef': {'checkHeaderFields': [], 'checkHeaders': '', 'checkMethod': '0', 'checkParamFields': [], 'checkParamType': '1', 'checkParams': '', 'checkUrl': '', 'dealType': '01', 'dipName': '数据采集-接口积木1', 'headerFields': [], 'headers': '', 'isCheck': '0', 'method': '0', 'outParamFields': [], 'param1': '00', 'paramFields': [], 'paramType': '2', 'params': '{\r\n  "userId": "agnes",\r\n  "password": "04d4755ecc4702fd0077823661a5c4a1cf308c14e2eac3e0502cdd71720bda147aefa2c9698cef2803d158c272cd40b75fab223e3f130b567953b646d322a8a68c27819de6e9a122d600b775bc190b4bd8dad0205b86abdabd9750453fe533dde10152eec3db6e5d1d1e",\r\n  "captcha": "",\r\n  "captchaId": ""\r\n}', 'reqParam': '', 'reqParamType': '1', 'respParam': '', 'url': 'http://172.21.0.52:8080/api/gf-admin/gf/index/login'}, 'blockParamInfos': [], 'dealType': '01', 'param1': '00'}}
+[2024-12-06 17:00:35] [INFO] 实际响应状态码: 200
+[2024-12-06 17:00:35] [INFO] 实际响应内容: {"message":"登录已过期，请重新登录！","ok":false,"status":"9999"}
+[2024-12-06 17:00:35] [INFO] equals断言失败: message 的值不匹配，预期=ok，实际=['登录已过期，请重新登录！']
+[2024-12-06 17:00:35] [INFO] -----------测试用例请求开始-----------
+[2024-12-06 17:00:35] [INFO] 用例名称: test_add_interface_building_blocks
+[2024-12-06 17:00:35] [INFO] 用户故事: 积木定义-数据采集
+[2024-12-06 17:00:35] [INFO] 用例标题: 新增数据采集-接口积木
+[2024-12-06 17:00:35] [INFO] 请求方式: POST
+[2024-12-06 17:00:35] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v2/block/save
+[2024-12-06 17:00:35] [INFO] 请求头: {'cookie': "token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM0NzU2MzUsInVzZXJJZCI6ImFnbmVzIn0.8OY0LQkxuEuxDg_COlBD3gWI99QLWZGyRizR0peBj50'"}
+[2024-12-06 17:00:35] [INFO] 请求 JSON 参数: {'acReInterfaceDef': {'allowManualConfirm': '1', 'blockCode': 'block-00000134', 'checkHeaderFields': [], 'checkHeaders': '', 'checkMethod': '0', 'checkParamFields': [], 'checkParamType': '1', 'checkParams': '', 'checkUrl': '', 'dealType': '01', 'dipName': '数据采集-接口积木1', 'headerFields': [], 'headers': '', 'isCheck': '0', 'method': '0', 'outParamFields': [], 'param1': '00', 'paramFields': [], 'paramType': '2', 'params': '{\r\n  "userId": "agnes",\r\n  "password": "04d4755ecc4702fd0077823661a5c4a1cf308c14e2eac3e0502cdd71720bda147aefa2c9698cef2803d158c272cd40b75fab223e3f130b567953b646d322a8a68c27819de6e9a122d600b775bc190b4bd8dad0205b86abdabd9750453fe533dde10152eec3db6e5d1d1e",\r\n  "captcha": "",\r\n  "captchaId": ""\r\n}', 'reqParam': '', 'reqParamType': '1', 'respParam': '', 'url': 'http://172.21.0.52:8080/api/gf-admin/gf/index/login'}, 'allowManualConfirm': '1', 'blockCode': 'block-00000134', 'blockDesc': '', 'blockName': '数据采集-接口积木1', 'blockType': '01', 'crtUser': 'agnes', 'dealType': '01', 'isAllowExecAgain': '1', 'isDel': '0', 'isEditCode': False, 'pkId': '1j8mg21cilojw', 'targetFields': []}
+[2024-12-06 17:00:35] [INFO] 实际响应状态码: 200
+[2024-12-06 17:00:35] [INFO] 实际响应内容: {"message":"登录已过期，请重新登录！","ok":false,"status":"9999"}
+[2024-12-06 17:00:35] [INFO] equals断言失败: 返回结果中没有键 msgType

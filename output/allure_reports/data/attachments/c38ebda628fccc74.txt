@@ -1,0 +1,12 @@
+INFO     common.logs_config:request_utils.py:20 -----------测试用例请求开始-----------
+INFO     common.logs_config:request_utils.py:45 用例名称: test_edit_external_organization
+INFO     common.logs_config:request_utils.py:46 用户故事: 外部机构
+INFO     common.logs_config:request_utils.py:47 用例标题: 编辑外部机构
+INFO     common.logs_config:request_utils.py:48 请求方式: POST
+INFO     common.logs_config:request_utils.py:49 请求路径: http://172.18.26.254:8080/api/agnes-app/v1/dop/org/save
+INFO     common.logs_config:request_utils.py:51 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzMzNzAzNzgsInVzZXJJZCI6ImFnbmVzIn0.6FWj5IhEmHjIBvgJ_aV_CbjoOZEaVVwcyjUxf3Zb1aQ'}
+INFO     common.logs_config:request_utils.py:53 请求 JSON 参数: {'dopEeExternalOrg': {'extOrgCode': '007-edit', 'extOrgId': '1j8i3zu8fyv7w', 'extOrgName': '测试-edit', 'extOrgNameShort': 'test-edit', 'extOrgRemark': '测试-edit', 'extOrgType': '1j8i3ztj9hpqk', 'parentExtOrgId': 'root', 'parentExtOrgName': '机构树'}}
+INFO     common.logs_config:request_utils.py:69 实际响应状态码: 200
+INFO     common.logs_config:request_utils.py:70 实际响应内容: 
+INFO     common.logs_config:request_utils.py:79 接口测试通过
+INFO     common.logs_config:request_utils.py:80 -----------测试用例请求结束-----------

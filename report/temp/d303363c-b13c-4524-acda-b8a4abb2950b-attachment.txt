@@ -1,0 +1,11 @@
+INFO     common.logs_config:request_utils.py:20 -----------测试用例请求开始-----------
+INFO     common.logs_config:request_utils.py:45 用例名称: test_del_product_parameter
+INFO     common.logs_config:request_utils.py:46 用户故事: 产品参数
+INFO     common.logs_config:request_utils.py:47 用例标题: 删除TA产品信息
+INFO     common.logs_config:request_utils.py:48 请求方式: POST
+INFO     common.logs_config:request_utils.py:49 请求路径: http://172.21.0.52:8080/api/agnes-app/v1/prdt/param/delete?paramCode=test&pkId=1j7wnaq4oo78c
+INFO     common.logs_config:request_utils.py:51 请求头: {'content-type': 'application/json;charset=UTF-8', 'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzI4NTA1ODcsInVzZXJJZCI6ImFnbmVzIn0.9Ljty21oQ5SGba2Vq4jZhHLmF4IvCUU_NGoD485SLfY'}
+INFO     common.logs_config:request_utils.py:53 请求 JSON 参数: {'paramCode': 'test', 'pkId': '1j7wnaq4oo78c'}
+INFO     common.logs_config:request_utils.py:69 实际响应状态码: 200
+INFO     common.logs_config:request_utils.py:70 实际响应内容: 
+INFO     common.logs_config:request_utils.py:79 接口测试通过

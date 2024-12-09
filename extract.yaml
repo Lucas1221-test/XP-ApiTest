@@ -1,0 +1,9 @@
+token: token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM0NzYyNDIsInVzZXJJZCI6ImFnbmVzIn0.bVsFTsNfG1qxJKW1NOEJVHEk7I1VWsa8cbLFds2Hia0
+blockType: '01'
+blockCode: block-00000135
+blockName: 数据采集-接口积木1
+pre_save_info: '{''blockCode'': ''block-00000135'', ''blockName'': ''数据采集-接口积木1'',
+  ''blockType'': ''01'', ''crtTs'': ''2024-12-06 17:10:43'', ''crtUser'': ''agnes'',
+  ''dealType'': ''01'', ''isDel'': ''0'', ''pkId'': ''1j8mhdttgegzw'', ''updateTs'':
+  ''2024-12-06 17:10:43'', ''updateUser'': ''agnes''}'
+pre_save_pkId: 1j8mhdttgegzw

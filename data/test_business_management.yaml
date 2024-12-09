@@ -1,0 +1,728 @@
+-
+  name: test_login
+  story: 登录
+  title: 正常登录
+  request:
+    method: POST
+    url: api/gf-admin/gf/index/login
+    json:
+      "password": 043a2af86b213accb9378539ad8fcf270f42fb81f727736b8bb280958ba0a9c41cf75c683876232b9fa24b800b097598a67d6627dfbe7b6d871b5304e9c89d759c29898aa25caac1122686366d57f4403c288cc8b930ba2dd7ff1b929d9e211c725a8aa713e6cf4920d9dc
+      "userId": agnes
+  extract:
+    token: $.data.attrs.token
+  validate:
+    codes: 200
+    equals:
+      status: '0000'
+
+#######  ↓ 市场日历--测试用例 ↓  #######
+-
+  name: test_jump_market_calendar
+  story: 市场日历
+  title: 日历视图
+  request:
+    method: POST
+    url: api/agnes-app/v1/config/workday/get/market/calendar-info?multiMarketCode=&date=2024-10-17
+    headers:
+      cookie: ${read_extract_arg(token)}
+    data:
+      "date": 2024-10-17
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_init_calendar
+  story: 市场日历
+  title: 初始化
+  request:
+    method: POST
+    url: api/agnes-app/v1/config/workday/init?areaCode=HK&year=2024
+    headers:
+      cookie: ${read_extract_arg(token)}
+      content-type: application/x-www-form-urlencoded
+    json:
+      "areaCode": "HK"
+      "year": 2024
+  validate:
+    codes: 200
+
+-
+  name: test_list_view
+  story: 市场日历
+  title: 列表视图
+  request:
+    method: POST
+    url: api/agnes-app/v1/config/workday/get/market/calendar-page?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageSize": 100
+      "workdayAreaCode":
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_filter_calendar_by_market
+  story: 市场日历
+  title: 列表视图-按市场名称筛选
+  request:
+    method: POST
+    url: api/agnes-app/v1/config/workday/get/market/calendar-page?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageSize": 100
+      "workdayAreaCode": "HK"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+      workdayAreaCode: "HK"
+
+-
+  name: test_trading_day_change
+  story: 市场日历
+  title: 交易日变更
+  request:
+    method: POST
+    url: api/agnes-app/v1/config/workday/update/market-tradingDay
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "workdayId": ${read_extract_arg(workdayId)}
+      "workdayAreaCode": "HK"
+      "workday": ${read_extract_arg(workday)}
+  validate:
+    codes: 200
+
+#######  ↓ 外部机构-测试用例 ↓  #######
+-
+  name: test_add_institution_type
+  story: 外部机构
+  title: 新增机构类型
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/type/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      dopReOrgType:
+       "orgTypeCode": "0001"
+       "orgTypeName": "d测试"
+  validate:
+    codes: 200
+
+-
+  name: test_query_institution_type
+  story: 外部机构
+  title: 查看机构类型
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/type/page/list?pageIndex=0&pageSize=500
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageSize": 500
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_edit_institution_type
+  story: 外部机构
+  title: 编辑机构类型
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/type/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      dopReOrgType:
+       "orgTypeCode": "0001-edit"
+       "orgTypeName": "d测试-编辑"
+       "orgTypeId": ${read_extract_arg(extOrgId)}
+  validate:
+    codes: 200
+
+
+-
+  name: test_del_institution_type
+  story: 外部机构
+  title: 删除机构类型
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/type/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      typeIds: ['${read_extract_arg(extOrgId)}']
+  validate:
+    codes: 200
+
+
+-
+  name: test_get_superior_institution
+  story: 外部机构
+  title: 获取上级机构信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/list
+    headers:
+      cookie: ${read_extract_arg(token)}
+  validate:
+    codes: 200
+
+-
+  name: test_get_organization_type
+  story: 外部机构
+  title: 获取机构类别
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/type/list
+    headers:
+      cookie: ${read_extract_arg(token)}
+  validate:
+    codes: 200
+
+-
+  name: test_add_external_organization
+  story: 外部机构
+  title: 添加外部机构
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "dopEeExternalOrg":
+        "extOrgCode": "007"
+        "extOrgName": "测试"
+        "extOrgNameShort": "test"
+        "parentExtOrgName": "机构树"
+        "extOrgType": ${read_extract_arg(extOrgId)}
+        "extOrgRemark": "测试"
+        "parentExtOrgId": ${read_extract_arg(parentExtOrgId)}
+  validate:
+    codes: 200
+
+-
+  name: test_check_after_add_external_organization
+  story: 外部机构
+  title: 新增外部结构后校验
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/list
+    headers:
+      cookie: ${read_extract_arg(token)}
+  validate:
+    codes: 200
+    equals:
+      extOrgCode: "007"
+      extOrgName: "测试"
+      extOrgNameShort: "test"
+      extOrgType: ${read_extract_arg(extOrgId)}
+      extOrgRemark: "测试"
+      parentExtOrgId: ${read_extract_arg(parentExtOrgId)}
+
+-
+  name: test_edit_external_organization
+  story: 外部机构
+  title: 编辑外部机构
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "dopEeExternalOrg":
+        "extOrgCode": "007-edit"
+        "extOrgName": "测试-edit"
+        "extOrgNameShort": "test-edit"
+        "parentExtOrgName": "机构树"
+        "extOrgType": ${read_extract_arg(extOrgType)}
+        "extOrgRemark": "测试-edit"
+        "parentExtOrgId": ${read_extract_arg(parentExtOrgId)}
+        "extOrgId": ${read_extract_arg(new_extOrgId)}
+  validate:
+    codes: 200
+
+
+-
+  name: test_check_after_edit_external_organization
+  story: 外部机构
+  title: 校验修改外部机构是否生效
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/approve/all
+    headers:
+      cookie: ${read_extract_arg(token)}
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+
+-
+  name: test_copy_external_organization
+  story: 外部机构
+  title: 复制外部机构
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "dopEeExternalOrg":
+        "extOrgCode": "007-copy"
+        "extOrgName": "测试-copy"
+        "extOrgNameShort": "test-copy"
+        "parentExtOrgName": "机构树"
+        "extOrgType": ${read_extract_arg(extOrgId)}
+        "extOrgRemark": "测试-copy"
+        "parentExtOrgId": ${read_extract_arg(parentExtOrgId)}
+  validate:
+    codes: 200
+
+
+-
+  name: test_del_external_organization
+  story: 外部机构
+  title: 删除外部机构
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        ['${read_extract_arg(extOrgId)}']
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_del_after_copy_external_organization
+  story: 外部机构
+  title: 复制后删除外部机构
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        ['${read_extract_arg(copy_extOrgId)}']
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+### 机构联系人维护 ###
+-
+  name: test_organization_contact_list
+  story: 机构联系人维护
+  title: 查看机构联系人列表
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/linkman/org/list?pageIndex=0&pageSize=500
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageSize: 500
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_add_organization_contact
+  story: 机构联系人维护
+  title: 新增机构联系人
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/linkman/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "dopReLinkman":
+        "extOrgId": ${read_extract_arg(new_extOrgId)}
+        "linkmanDept": "研发"
+        "linkmanMobile": "13199999999"
+        "linkmanName": "测试人员"
+        "linkmanRemark": "测试-新增"
+        "linkmanRoleId": "测试"
+        "linkmanStatus": "01"
+  validate:
+    codes: 200
+
+
+-
+  name: test_edit_organization_contact
+  story: 机构联系人维护
+  title: 编辑机构联系人
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/linkman/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "dopReLinkman":
+        "linkmanId": ${read_extract_arg(linkmanId)}
+        "extOrgId": ${read_extract_arg(new_extOrgId)}
+        "linkmanDept": "研发-编辑"
+        "linkmanMobile": "13188888888"
+        "linkmanName": "测试人员-编辑"
+        "linkmanRemark": "测试-编辑"
+        "linkmanRoleId": "测试编辑"
+        "linkmanStatus": "02"
+  validate:
+    codes: 200
+
+
+-
+  name: test_del_organization_contact
+  story: 机构联系人维护
+  title: 删除机构联系人
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/linkman/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "linkmanId": ${read_extract_arg(linkmanId)}
+      "extOrgId": ${read_extract_arg(new_extOrgId)}
+  validate:
+    codes: 200
+
+
+### 产品联系人维护 ###
+-
+  name: test_get_user_info
+  story: 产品联系人维护
+  title: 获取用户信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/structure/get/user/info
+    headers:
+      cookie: ${read_extract_arg(token)}
+  extract:
+    userId: $.data[0].userId
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_tree_code
+  story: 产品联系人维护
+  title: 获取treeCode
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/structure/get-tree-by-code?treeCode=0009
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "treeCode": 0009
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_add_product_type
+  story: 产品联系人维护
+  title: 新增产品类型
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/structure/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "parentNodeCode": "[root]"  #${read_extract_arg(parentExtOrgId)}
+      "treeName": "测试-结构名称"
+      "treeCode": "0009"
+      "rootNodeCode": "0009"
+      "productPermission": "0"
+      "isShowUndis": "1"
+      "userId": ${read_extract_arg(userId)}
+  validate:
+    codes: 200
+
+-
+  name: test_check_after_add_product_type
+  story: 产品联系人维护
+  title: 新增后校验产品类型信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/structure/get/root/tree?parentCode=
+    headers:
+      cookie: ${read_extract_arg(token)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_add_product_type_node
+  story: 产品联系人维护
+  title: 新增产品类型节点
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/prod/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      - "treeCode": "0009"
+        "rootNodeCode": "0009"
+        "prodCode": "8888-edit"
+  validate:
+    codes: 200
+
+-
+  name: test_get_system_user_info
+  story: 产品联系人维护
+  title: 获取系统用户信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/user/group/page/user/list?pageIndex=0&pageSize=500
+    headers:
+      cookie: ${read_extract_arg(token)}
+  extract:
+    user_id: $.data.rows[0].userId
+    user_name: $.data.rows[0].userName
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_sl_product_type
+  story: 产品联系人维护
+  title: 选择产品类型
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/auth/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "menuId": "public-tree-auth"
+      "treeCode": "0009"
+  validate:
+    codes: 200
+
+
+- name: test_add_product_contact
+  story: 产品联系人维护
+  title: 新增产品联系人
+  request:
+    method: POST
+    url: api/agnes-app/v1/prdt/contact/cfg/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      businessType: "01"
+      contactType: "01"
+      checkContactList:
+        - '["[{"refType":"1","memberId":"${read_extract_arg(user_id)}","memberDesc":"${read_extract_arg(user_name)}"}]", "[]"]'
+      internalContact:
+        - linkmanId: "${read_extract_arg(linkmanId)}"
+          linkmanName: "${read_extract_arg(user_name)}"
+      contact:
+        - contactId: "${read_extract_arg(user_id)}"
+          contactName: "${read_extract_arg(user_name)}"
+          contactFrom: "00"
+      externalContact:
+        - refType: "1"
+          memberId: "${read_extract_arg(user_id)}"
+          memberDesc: "${read_extract_arg(user_name)}"
+      productCode: "8888-edit"
+      productCodeArr:
+        - "8888-edit"
+  validate:
+    codes: 200
+
+#- name: test_add_product_contact
+#  story: 产品联系人维护
+#  title: 新增产品联系人
+#  request:
+#    method: POST
+#    url: api/agnes-app/v1/prdt/contact/cfg/save
+#    headers:
+#      content-type: application/json;charset=UTF-8
+#      cookie: ${read_extract_arg(token)}
+#      Accept: application/json, text/plain, */*
+#    json:
+#      businessType: "01"
+#      contactType: "01"
+#      checkContactList:
+#        - '["[{"refType":"1","memberId":"${read_extract_arg(user_id)}","memberDesc":"${read_extract_arg(linkmanName)}"}]", "[]"]'
+#        - "[]"
+#      internalContact: "[]"
+#      contact: [{"contactId": "${read_extract_arg(user_id)}", "contactName": "${read_extract_arg(linkmanName)}", "contactFrom": "00"}]
+#      externalContact: "[{\"refType\":\"1\",\"memberId\":\"${read_extract_arg(user_id)}\",\"memberDesc\":\"${read_extract_arg(linkmanName)}\"}]"
+#      productCode: "009"
+#      productCodeArr:
+#        - "009"
+#      tempCode: ""
+#  validate:
+#    codes: 200
+
+-
+  name: test_check_after_add_product_contact
+  story: 产品联系人维护
+  title: 新增后查询产品联系人
+  request:
+    method: POST
+    url: api/agnes-app/v1/prdt/contact/cfg/list/page?pageSize=500&pageIndex=0&total=0
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "productCode": "8888-edit"
+  extract:
+    product_contact_pkId: $.data.rows[0].pkId
+  validate:
+    codes: 200
+    equals:
+      businessType: "01"
+      contactType: "01"
+      contactId: ${read_extract_arg(user_id)}
+      contactName: ${read_extract_arg(user_name)}
+
+-
+  name: test_del_product_contact
+  story: 产品联系人维护
+  title: 删除产品联系人
+  request:
+    method: POST
+    url: api/agnes-app/v1/prdt/contact/cfg/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      [{"pkId":"${read_extract_arg(product_contact_pkId)}"}]
+  validate:
+    codes: 200
+
+-
+  name: test_check_after_del_product_contact
+  story: 产品联系人维护
+  title: 删除后查询产品联系人
+  request:
+    method: POST
+    url: api/agnes-app/v1/prdt/contact/cfg/list/page?pageSize=500&pageIndex=0&total=0
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "productCode": "8888-edit"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+      total: 0
+
+-
+  name: test_query_product_type_info
+  story: 产品联系人维护
+  title: 查询产品类型信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/structure/get/tree/data?rootNodeCode=0009
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "rootNodeCode": "0009"
+  extract:
+    product_type_info: $.data[0]
+    product_type_node_info: $.data[1]
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_edit_product_type
+  story: 产品联系人维护
+  title: 编辑产品类型
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/structure/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json: ${read_extract_arg(product_type_node_info)}
+  validate:
+    codes: 200
+
+-
+  name: test_check_after_edit_product_type_info
+  story: 产品联系人维护
+  title: 编辑后校验产品类型信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/structure/get/tree/data?rootNodeCode=0009
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "rootNodeCode": "0009"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+      treeName: "测试-编辑-结构名称"
+
+-
+  name: test_del_product_type_node
+  story: 产品联系人维护
+  title: 删除产品类型--节点
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/structure/delete/tree
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json: ${read_extract_arg(product_type_node_info)}
+  validate:
+    codes: 200
+
+
+-
+  name: test_del_product_type
+  story: 产品联系人维护
+  title: 删除产品类型
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/structure/delete/tree
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json: ${read_extract_arg(product_type_info)}
+  validate:
+    codes: 200
+
+
+-
+  name: test_check_after_product_type_info
+  story: 产品联系人维护
+  title: 删除产品类型后校验
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/structure/get/tree/data?rootNodeCode=0009
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "rootNodeCode": "0009"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+      data: []
