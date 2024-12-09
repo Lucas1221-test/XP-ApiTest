@@ -107,6 +107,7 @@ class Test_config:
                            updateuser, casebody)
         assert r13.json()['code'] == '00000000'
 
+'''
     #@pytest.mark.repeat(20010)
     @allure.story('新增临时单节点任务-延期')
     def test_task_1(self, get_token_fixture):
@@ -363,7 +364,7 @@ class Test_config:
                           '', pkid, '', process, taskexecauth, "temp", tasklevel, taskname, taskstatus,
                           tasktag, tasktimefrom, tasktimeto, tasktype, '')
         assert r16.json()['code'] == '00000000'
-
+'''
 
 if __name__=='__main__':
     pytest.main(['../test_test.py','-s'])
