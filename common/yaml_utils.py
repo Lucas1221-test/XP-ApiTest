@@ -2,7 +2,7 @@
 
 import yaml
 
-from common.files_path import extract_path
+from common.files_path import extract_path, token_path
 
 
 #读
@@ -24,4 +24,8 @@ def clear_yaml():
     with open(extract_path, encoding='utf-8', mode='w') as f:
         f.truncate()
 
+#清空
+def clear_token_yaml():
+    with open(token_path, encoding='utf-8', mode='w') as f:
+        f.truncate()
 

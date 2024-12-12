@@ -1,0 +1,285 @@
+[2024-12-12 14:40:13] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:13] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:13] [INFO] 用例名称: test_task_notify_save
+[2024-12-12 14:40:13] [INFO] 用户故事: 任务通知方案
+[2024-12-12 14:40:13] [INFO] 用例标题: 新增通知方案-产品任务：1，岗位任务：2
+[2024-12-12 14:40:13] [INFO] 请求方式: POST
+[2024-12-12 14:40:13] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/task/notify/save
+[2024-12-12 14:40:13] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:13] [INFO] 请求 JSON 参数: {'isDefault': '0', 'jobBlon': '', 'planName': '自动化通知方案894048', 'remark': '', 'taskType': '1', 'userGroupId': '', 'userGroupName': ''}
+[2024-12-12 14:40:13] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:13] [INFO] 实际响应内容: {"code":"00000000","msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:13] [INFO] 接口测试通过
+[2024-12-12 14:40:13] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:13] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:13] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:13] [INFO] 用例名称: test_task_get_notify
+[2024-12-12 14:40:13] [INFO] 用户故事: 任务通知方案
+[2024-12-12 14:40:13] [INFO] 用例标题: 查询通知方案，获取configid
+[2024-12-12 14:40:13] [INFO] 请求方式: POST
+[2024-12-12 14:40:13] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/task/notify/get
+[2024-12-12 14:40:13] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:13] [INFO] 请求 JSON 参数: {}
+[2024-12-12 14:40:13] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:13] [INFO] 实际响应内容: {"code":"00000000","data":[{"configId":"1j97ip0mxurve","isDefault":"0","pkId":"1j97ip0mxurve","planName":"自动化通知方案894048","taskType":"1"},{"configId":"1j97hx9mra00q","isDefault":"0","pkId":"1j97hx9mra00q","planName":"自动化通知方案113925","taskType":"1"},{"configId":"1j939g1qqcjv0","isDefault":"0","jobBlon":"1861945785122443266","pkId":"1j939g1qqcjv0","planName":"汤汤测试数据121101","remark":"测试汤汤","taskType":"2","userGroupName":"核算"},{"configId":"1j8xil0rhgj2k","isDefault":"1","pkId":"1j8xil0rhgj2k","planName":"汤汤测试数据1211","taskType":"1"},{"configId":"1j8ixmfeavc7g","isDefault":"0","pkId":"1j8ixmfeavc7g","planName":"黄锋005","taskType":"2"},{"configId":"1j7tq5myut4eu","isDefault":"1","jobBlon":"1861945975262826498","pkId":"1j7tq5myut4eu","planName":"test222","taskType":"2","userGroupName":"稽核"}],"msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:13] [INFO] 接口测试通过
+[2024-12-12 14:40:13] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:13] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:13] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:13] [INFO] 用例名称: test_task_notifyrule_save
+[2024-12-12 14:40:13] [INFO] 用户故事: 任务通知方案
+[2024-12-12 14:40:13] [INFO] 用例标题: 新增通知规则
+[2024-12-12 14:40:13] [INFO] 请求方式: POST
+[2024-12-12 14:40:13] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/task/notifyRule/save
+[2024-12-12 14:40:13] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:13] [INFO] 请求 JSON 参数: {'conditionT': '2', 'configId': '1j97ip0mxurve', 'editable': True, 'notifyRule': '1j4reyzsaxuhg_1', 'offsetT': '0', 'remark': '', 'standard': '2', 'taskConfig': [{'dictId': '1', 'dictName': '提前'}, {'dictId': '2', 'dictName': '延后'}], 'unit': '1'}
+[2024-12-12 14:40:13] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:13] [INFO] 实际响应内容: {"code":"00000000","msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:13] [INFO] 接口测试通过
+[2024-12-12 14:40:13] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:13] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:13] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:13] [INFO] 用例名称: test_task_get_notifyrule
+[2024-12-12 14:40:13] [INFO] 用户故事: 任务通知方案
+[2024-12-12 14:40:13] [INFO] 用例标题: 查询通知规则,获取通知规则的pkid
+[2024-12-12 14:40:13] [INFO] 请求方式: POST
+[2024-12-12 14:40:13] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/task/notifyRule/get
+[2024-12-12 14:40:13] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:13] [INFO] 请求 JSON 参数: {'configId': '1j97ip0mxurve'}
+[2024-12-12 14:40:13] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:13] [INFO] 实际响应内容: {"code":"00000000","data":[{"conditionT":"2","configId":"1j97ip0mxurve","notifyRule":"1j4reyzsaxuhg_1","notifyScene":"0","offsetT":"0","pkId":"00000029","standard":"2","taskConfig":"[{\"dictName\":\"提前\",\"dictId\":\"1\"},{\"dictName\":\"延后\",\"dictId\":\"2\"}]","unit":"1"}],"msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:13] [INFO] 接口测试通过
+[2024-12-12 14:40:13] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:13] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:13] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:13] [INFO] 用例名称: test_task_notify_get_userlist
+[2024-12-12 14:40:13] [INFO] 用户故事: 任务通知方案
+[2024-12-12 14:40:13] [INFO] 用例标题: 获取用户列表userid、username
+[2024-12-12 14:40:13] [INFO] 请求方式: POST
+[2024-12-12 14:40:13] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-app/v1/dop/user/group/page/user/list?pageIndex=0&pageSize=500
+[2024-12-12 14:40:13] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:13] [INFO] 请求 JSON 参数: {'pageIndex': 0, 'pageSize': 500}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"00000000","data":{"rows":[{"empId":"suzhou2","empStatus":"01","id":"36d52ab790744525a05a4b74e2c0e5d8","orgId":19,"orgName":"苏州银行","userId":"suzhou2","userName":"suzhou2","userStatus":"00","validSdateDt":"2024-12-06"},{"empId":"suzhou1","empStatus":"01","id":"2d9b894a8afa4ddfb5092c0b6e43299b","orgId":19,"orgName":"苏州银行","userId":"suzhou1","userName":"suzhou1","userStatus":"00","validSdateDt":"2024-12-06"},{"empId":"dsada","empStatus":"01","id":"ff84ce499463420db61b38d4c840bcd3","oemail":"1328032322@qq.com","orgId":19,"orgName":"苏州银行","sex":"2","userId":"dsada","userName":"dsadasd","userStatus":"00","validSdateDt":"2024-12-05"},{"empId":"CZYQ","empStatus":"01","id":"5465a45c192a4c1ea5a393fa280f2718","orgId":25,"orgName":"批量开发部","userId":"CZYQ","userName":"垂直越权验证用户","userStatus":"00","validSdateDt":"2024-12-04"},{"empId":"jiaojie4","empStatus":"01","id":"19b226031074466cb4934192dfb22750","orgId":24,"orgName":"资产托管部","userId":"jiaojie4","userName":"jiaojie4","userStatus":"00","validSdateDt":"2024-11-29"},{"empId":"jiaojie3","empStatus":"01","id":"205970abc2e54645a53eb1b0b91b67ab","orgId":24,"orgName":"资产托管部","userId":"jiaojie3","userName":"jiaojie3","userStatus":"00","validSdateDt":"2024-11-29"},{"empId":"jiaojie2","empStatus":"01","id":"d2a9df75641447bbae24dd7c41d00315","orgId":24,"orgName":"资产托管部","userId":"jiaojie2","userName":"jiaojie2","userStatus":"00","validSdateDt":"2024-11-29"},{"empId":"jiaojie1","empStatus":"01","id":"e7302084130349078724ab76f2995755","orgId":24,"orgName":"资产托管部","userId":"jiaojie1","userName":"jiaojie1","userStatus":"00","validSdateDt":"2024-11-29"},{"empId":"tuoguan3","empStatus":"01","id":"9ee1f60296154deebbece8ab760d54f3","orgId":24,"orgName":"资产托管部","userId":"tuoguan3","userName":"tuoguan3","userStatus":"00","validSdateDt":"2024-11-28"},{"empId":"tuoguan2","empStatus":"01","id":"0f6d375eb1a94a70961e67edbe1cb3a8","orgId":24,"orgName":"资产托管部","userId":"tuoguan2","userName":"tuoguan2","userStatus":"00","validSdateDt":"2024-11-28"},{"empId":"tuoguan1","empStatus":"01","id":"faceaa828b474277b9eac14696e2b51a","orgId":24,"orgName":"资产托管部","userId":"tuoguan1","userName":"tuoguan1","userStatus":"00","validSdateDt":"2024-11-28"},{"empId":"jihe3","empStatus":"01","id":"6494fea2cd0b417aa21e420442f1a3c8","orgId":53,"orgName":"内控稽核部","userId":"jihe3","userName":"jihe3","userStatus":"00","validSdateDt":"2024-11-28"},{"empId":"jihe2","empStatus":"01","id":"bc9b69fe810945d7810eb76be4ab83a9","orgId":53,"orgName":"内控稽核部","userId":"jihe2","userName":"jihe2","userStatus":"00","validSdateDt":"2024-11-28"},{"empId":"jihe1","empStatus":"01","id":"06b6016ac44e4d02a5ba465f366d8ec4","orgId":53,"orgName":"内控稽核部","userId":"jihe1","userName":"jihe1","userStatus":"00","validSdateDt":"2024-11-28"},{"empId":"qingsuan3","empStatus":"01","id":"d4635351caca4db6b742c2c3bd6fe41e","orgId":52,"orgName":"资金清算部","userId":"qingsuan3","userName":"qingsuan3","userStatus":"00","validSdateDt":"2024-11-28"},{"empId":"qingsuan2","empStatus":"01","id":"3194336849184e26a487dff6389c26ad","orgId":52,"orgName":"资金清算部","userId":"qingsuan2","userName":"qingsuan2","userStatus":"00","validSdateDt":"2024-11-28"},{"empId":"qingsuan1","empStatus":"01","id":"692d4f13d2e94e7ca401690396157566","orgId":52,"orgName":"资金清算部","userId":"qingsuan1","userName":"qingsuan1","userStatus":"00","validSdateDt":"2024-11-28"},{"empId":"hesuan3","empStatus":"01","id":"d4fd2cd9205f4b54be7b9d3a5aa7cfaf","oemail":"ihuangfeng@yandex.com","orgId":51,"orgName":"估值核算部","userId":"hesuan3","userName":"hesuan3","userStatus":"00","validSdateDt":"2024-11-28"},{"empId":"hesuan2","empStatus":"01","id":"590964bee926404fad1c7f6264877479","oemail":"hilbert.huang@outlook.com","orgId":51,"orgName":"估值核算部","userId":"hesuan2","userName":"hesuan2","userStatus":"00","validSdateDt":"2024-11-28"},{"empId":"hesuan1","empStatus":"01","id":"2b05c27a50a84ef0a3f06249db506087","oemail":"ihuangfeng@outlook.com","orgId":51,"orgName":"估值核算部","userId":"hesuan1","userName":"hesuan1","userStatus":"00","validSdateDt":"2024-11-28"},{"empId":"agnes","empStatus":"01","id":"3","oemail":"hl.she@hexinfo.cn","orgId":19,"orgName":"苏州银行","userId":"agnes","userName":"致宇小智","userStatus":"00","validSdateDt":"2020-07-03"}],"total":21},"msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:14] [INFO] 接口测试通过
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_notify_get_config_fun
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务通知方案
+[2024-12-12 14:40:14] [INFO] 用例标题: 查询通知对象，获取fnid(notifyrule)
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/config/fun/query/fun-by-apply-scence?applyScence=06
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"00000000","data":[{"apiHeader":"[]","applyScence":"01,06,05,04,03","bizParamDb":"758e98faff8e492093c148d4e8efc23b","bizParamSql":"SELECT DISTINCT to_char(everyDay, 'yyyy-MM-dd') AS bizDate\r\nFROM(\r\n\tSELECT sysdate + (rownum - 1) everyDay\r\n\tFROM user_objects\r\n\tWHERE rownum < 367\r\n\tAND sysdate + (rownum - 1) < add_months(sysdate, 12)\r\n)\r\nWHERE\r\n\t(to_char(everyDay, 'yyyy-MM-dd') = to_char(add_months(trunc(everyDay, 'yyyy'), 0), 'yyyy-MM-dd')\r\n\tOR to_char(everyDay, 'yyyy-MM-dd') = to_char(add_months(trunc(everyDay, 'yyyy'), 6), 'yyyy-MM-dd'))\r\nORDER BY bizDate ASC","crtTs":"2024-12-04 21:22:06","crtUser":"CZYQ","fnCode":"00000011","fnDesc":"半年","fnId":"1gm5d3kf5a6mu_1","fnKey":"1gm5d3kf5a6mu","fnName":"每半年","fnReturn":"1gm5d3kelazva_1","fnReturnModelFields":[{"crtTs":"2024-12-04 16:15:35","crtUser":"agnes","fieldKey":"bizDate","fieldName":"基准日期","fieldType":"string","isDel":"0","modelFieldId":"1j8f7jz5w82a4","modelTypeId":"1gm5d3kelazva_1","mustFill":"0"}],"fnType":"sql","isDel":"0","isDisplay":"1","isLastestVersion":"1","isReturnArray":"0","status":"03","updateTs":"2024-12-04 21:22:06","updateUser":"CZYQ"},{"apiHeader":"[]","applyScence":"03,04,06,tjhs,05","crtTs":"2024-12-05 09:42:05","crtUser":"CZYQ","fnCode":"FN000004","fnId":"1j7x37xpxhg9i_1","fnKey":"1j7x37xpxhg9i","fnName":"汤汤测试2","fnType":"inner","isDel":"0","isDisplay":"1","isLastestVersion":"1","isReturnArray":"0","status":"03","updateTs":"2024-12-05 09:42:05","updateUser":"CZYQ"}],"msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:14] [INFO] 接口测试通过
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_notifyrule_saveemail
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务通知方案
+[2024-12-12 14:40:14] [INFO] 用例标题: 新增通知方式-邮件
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/task/notifyRule/saveEmailInfo
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 请求 JSON 参数: {'notifyContent': {'remindProp': [{'fillFlag': True, 'isSendAttach': '', 'remindBcc': '', 'remindBccList': [], 'remindCc': '', 'remindCcList': [], 'remindContent': {'html': '<p><span style="color: rgb(51, 135, 243);"><span class="tag-blot" data-code="taskInformation.taskName" data-name="任务信息.任务名称">\ufeff<span contenteditable="false">${任务信息.任务名称}</span>\ufeff</span></span></p>', 'res': '<p><span style="color: rgb(51, 135, 243);"><span>#{taskInformation.taskName}</span></span></p>'}, 'remindMode': '2', 'remindTitle': {'html': '<span key="taskInformation.taskName" contenteditable="false" class="tag">任务信息.任务名称</span>', 'res': '${taskInformation.taskName}'}, 'remindUser': [{'memberDesc': 'suzhou2', 'memberId': 'suzhou2', 'refType': '1'}], 'remindUserList': [{'memberDesc': 'suzhou2', 'memberId': 'suzhou2', 'refType': '1'}], 'sendAttachFile': '0', 'sendDataList': '0'}]}, 'pkId': '00000029'}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"00000000","msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:14] [INFO] 接口测试通过
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_notifyrule_delete
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务通知方案
+[2024-12-12 14:40:14] [INFO] 用例标题: 删除通知规则
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/task/notifyRule/delete
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 请求 JSON 参数: {'pkId': '00000029'}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"00000000","msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:14] [INFO] 接口测试通过
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_notify_delete
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务通知方案
+[2024-12-12 14:40:14] [INFO] 用例标题: 删除通知方案（pkid是通知方案的configid
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/task/notifyRule/delete
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 请求 JSON 参数: {'pkId': '1j97ip0mxurve'}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"00000000","msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:14] [INFO] 接口测试通过
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_theme_todo_save
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务中心定义
+[2024-12-12 14:40:14] [INFO] 用例标题: 新增一级分组（任务实例00）
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/theme/todo/save
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 请求 JSON 参数: {'bizType': '', 'linkPageId': '', 'linkPageName': '', 'operateType': '01', 'ownerGroup': '[]', 'parentThemeName': '', 'status': '00', 'summaryMethod': '', 'taskDefTheme': '', 'themeName': '自动化一级分组404204', 'type': '00'}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"00000000","msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:14] [INFO] 接口测试通过
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] 用例名称: test_tasktheme_todo_gettree
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务中心定义
+[2024-12-12 14:40:14] [INFO] 用例标题: 查询分组列表，获取分组的basepath,themepkid,themepkname
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/theme/todo/getTreeNew
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"00000000","data":[{"basePath":"R0000001/00000004/00000005","childCount":1,"leaf":true,"operateType":"01","ownerGroup":"[]","parentThemeId":"00000004","parentThemeName":"test指标监控","pkId":"00000005","sortNum":1,"status":"00","summaryMethod":"1","taskCount":0,"themeName":"test下层","treeCode":"00000005","treeCodes":["00000004","00000005"],"treeName":"test下层","treeNameString":"test指标监控,test下层","treeNames":["test指标监控","test下层"],"type":"03","updateTs":"2024-12-09 19:04:43","updateUser":"agnes"},{"basePath":"R0000001/00000001","childCount":1,"leaf":true,"operateType":"01","ownerGroup":"[]","parentThemeId":"R0000001","pkId":"00000001","sortNum":1,"status":"00","taskCount":1,"themeName":"核算","treeCode":"00000001","treeCodes":["00000001"],"treeName":"核算","treeNameString":"核算","treeNames":["核算"],"type":"00"},{"basePath":"R0000001/00000002","childCount":1,"leaf":true,"operateType":"01","ownerGroup":"[]","parentThemeId":"R0000001","pkId":"00000002","sortNum":2,"status":"00","taskCount":7,"taskDefTheme":"00000001","taskDefThemeName":"数据计算","themeName":"test任务实例","treeCode":"00000002","treeCodes":["00000002"],"treeName":"test任务实例","treeNameString":"test任务实例","treeNames":["test任务实例"],"type":"00","updateTs":"2024-12-04 09:19:48","updateUser":"agnes"},{"basePath":"R0000001/00000003","childCount":1,"leaf":true,"linkPageId":"A1112397","operateType":"01","ownerGroup":"[{\"refType\":\"1\",\"memberId\":\"hesuan1\",\"memberDesc\":\"hesuan1\"},{\"refType\":\"1\",\"memberId\":\"hesuan2\",\"memberDesc\":\"hesuan2\"},{\"refType\":\"1\",\"memberId\":\"hesuan3\",\"memberDesc\":\"hesuan3\"}]","parentThemeId":"R0000001","pkId":"00000003","sortNum":3,"status":"00","taskCount":0,"themeName":"test自定义","treeCode":"00000003","treeCodes":["00000003"],"treeName":"test自定义","treeNameString":"test自定义","treeNames":["test自定义"],"type":"01","updateTs":"2024-12-02 16:31:00","updateUser":"agnes"},{"basePath":"R0000001/00000004","childCount":2,"leaf":false,"operateType":"01","ownerGroup":"[]","parentThemeId":"R0000001","pkId":"00000004","sortNum":4,"status":"00","summaryMethod":"1","taskCount":0,"themeName":"test指标监控","treeCode":"00000004","treeCodes":["00000004"],"treeName":"test指标监控","treeNameString":"test指标监控","treeNames":["test指标监控"],"type":"04"},{"basePath":"R0000001/00000007","childCount":1,"leaf":true,"operateType":"01","ownerGroup":"[]","parentThemeId":"R0000001","pkId":"00000007","sortNum":5,"status":"00","taskCount":2,"taskDefTheme":"00000005","taskDefThemeName":"实例测试-yaxu","themeName":"任务中心定义展示测试","treeCode":"00000007","treeCodes":["00000007"],"treeName":"任务中心定义展示测试","treeNameString":"任务中心定义展示测试","treeNames":["任务中心定义展示测试"],"type":"00","updateTs":"2024-12-04 20:51:22","updateUser":"CZYQ"},{"basePath":"R0000001/00000006","childCount":1,"leaf":true,"operateType":"01","ownerGroup":"[{\"refType\":\"1\",\"memberId\":\"agnes\",\"memberDesc\":\"致宇小智\"}]","parentThemeId":"R0000001","pkId":"00000006","sortNum":6,"status":"00","summaryMethod":"2","taskCount":0,"themeName":"指标场景","treeCode":"00000006","treeCodes":["00000006"],"treeName":"指标场景","treeNameString":"指标场景","treeNames":["指标场景"],"type":"04","updateTs":"2024-12-05 17:11:53","updateUser":"CZYQ"},{"basePath":"R0000001/00000010","childCount":1,"leaf":true,"operateType":"01","ownerGroup":"[]","parentThemeId":"R0000001","pkId":"00000010","sortNum":7,"status":"00","taskCount":0,"themeName":"自动化一级分组171646","treeCode":"00000010","treeCodes":["00000010"],"treeName":"自动化一级分组171646","treeNameString":"自动化一级分组171646","treeNames":["自动化一级分组171646"],"type":"00"},{"basePath":"R0000001/00000011","childCount":1,"leaf":true,"operateType":"01","ownerGroup":"[]","parentThemeId":"R0000001","pkId":"00000011","sortNum":8,"status":"00","taskCount":0,"themeName":"自动化一级分组404204","treeCode":"00000011","treeCodes":["00000011"],"treeName":"自动化一级分组404204","treeNameString":"自动化一级分组404204","treeNames":["自动化一级分组404204"],"type":"00"}],"msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:14] [INFO] 接口测试通过
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_theme_todo_getthemeinfo
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务中心定义
+[2024-12-12 14:40:14] [INFO] 用例标题: 查询任务主题列表,获取themeid
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/theme/todo/getThemeInfo
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 请求 JSON 参数: {'taskDefTheme': 'none'}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"00000000","data":[{"leaf":false,"parentThemeId":"00000015","themeId":"00000016","themeName":"汤汤测试数据02"},{"leaf":false,"parentThemeId":"R0000001","themeId":"00000015","themeName":"汤汤测试主题"},{"leaf":false,"parentThemeId":"R0000001","themeId":"99999999","themeName":"无归属"},{"leaf":false,"parentThemeId":"R0000001","themeId":"00000003","themeName":"场景队列测试"},{"leaf":false,"parentThemeId":"R0000001","themeId":"00000009","themeName":"自动化任务主题717418"},{"leaf":false,"parentThemeId":"00000015","themeId":"00000022","themeName":"汤汤测试数据01"}],"msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:14] [INFO] 接口测试通过
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_theme_todo_querytasklistforsave
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务中心定义
+[2024-12-12 14:40:14] [INFO] 用例标题: 查询任务列表,通过特定任务主题，获取关联任务的taskidlist
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/theme/todo/queryTaskListForSave
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 请求 JSON 参数: {'themeIdList': [18]}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"00000000","data":[],"msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:14] [WARNING] JSONPath 未提取到值: $.data[0].[taskDefId]
+[2024-12-12 14:40:14] [INFO] 接口测试通过
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_theme_todo_querytasklist
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务中心定义
+[2024-12-12 14:40:14] [INFO] 用例标题: 查询关联任务列表,获取关联任务的pkidlist
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/theme/todo/queryTaskLink
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 请求 JSON 参数: {'basePath': 'R0000001/00000011', 'pkId': 9}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"00000000","data":[],"msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:14] [INFO] 接口测试通过
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_theme_todo_deletetasklink
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务中心定义
+[2024-12-12 14:40:14] [INFO] 用例标题: 删除关联任务
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/theme/todo/deleteTaskLink
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 请求 JSON 参数: {'pkIdList': []}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"00000000","msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:14] [INFO] 接口测试通过
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_theme_todo_movestep
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务中心定义
+[2024-12-12 14:40:14] [INFO] 用例标题: 上移"01"/下移"02" 分组
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/theme/todo/moveOneStep
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 请求 JSON 参数: {'moveType': '01', 'parentThemeId': 'R0000001', 'pkId': 9}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"E0001","message":"该数据为最上层不能上移！","service":"agnes-single","success":false}
+[2024-12-12 14:40:14] [INFO] equals断言失败: 返回结果中没有键 msgType
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_theme_todo_delete
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务中心定义
+[2024-12-12 14:40:14] [INFO] 用例标题: 删除分组
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/theme/todo/delete
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 请求 JSON 参数: {'pkId': 9}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 500
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"message":"服务异常","ok":false,"status":"0001"}
+[2024-12-12 14:40:14] [INFO] code断言失败，预期结果：200,实际结果：500
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_post_config_list
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务分配方案
+[2024-12-12 14:40:14] [INFO] 用例标题: 查询产品任务("1")的任务配置列表,获取tasklist
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-app/v1/dop/ru/post/config/list-all
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:14] [INFO] 请求 JSON 参数: {'isProductTask': '1', 'status': '1'}
+[2024-12-12 14:40:14] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:14] [INFO] 实际响应内容: {"code":"00000000","data":[{"crtTs":"2024-11-28 09:31:28","crtUser":"agnes","isDel":"0","isMustHandDown":"1","isProductTask":"1","orgId":"1j7ss9z0ashhy","status":"1","updateTs":"2024-12-02 10:22:14","updateUser":"agnes","userGroupId":"1861945975262826498","userGroupName":"稽核","userGroupTag":"02"},{"crtTs":"2024-11-29 09:20:40","crtUser":"agnes","isDel":"0","isMustHandDown":"1","isProductTask":"1","orgId":"1j7ss7ybt5ehi","status":"1","updateTs":"2024-12-02 10:22:22","updateUser":"agnes","userGroupId":"1862305645777276930","userGroupName":"资产托管","userGroupTag":"02"},{"crtTs":"2024-12-10 14:01:51","crtUser":"agnes","isDel":"0","isMustHandDown":"1","isProductTask":"1","orgId":"1j7ss7ybt5ehi","status":"1","updateTs":"2024-12-11 19:07:28","updateUser":"agnes","userGroupId":"1866362673156042753","userGroupName":"测试数据汤汤","userGroupTag":"02,01,03"},{"crtTs":"2024-11-28 09:30:43","crtUser":"agnes","isDel":"0","isMustHandDown":"1","isProductTask":"1","orgId":"1j7ss8yu0q7py","status":"1","updateTs":"2024-12-02 10:22:27","updateUser":"agnes","userGroupId":"1861945785122443266","userGroupName":"核算","userGroupTag":"02"},{"crtTs":"2024-11-28 09:31:01","crtUser":"agnes","isDel":"0","isMustHandDown":"1","isProductTask":"1","orgId":"1j7ss9ea74bdi","status":"1","updateTs":"2024-12-02 10:22:30","updateUser":"agnes","userGroupId":"1861945861035151361","userGroupName":"清算","userGroupTag":"02"}],"msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:14] [INFO] 接口测试通过
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:14] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:14] [INFO] 用例名称: test_task_post_get_config_fun
+[2024-12-12 14:40:14] [INFO] 用户故事: 任务分配方案
+[2024-12-12 14:40:14] [INFO] 用例标题: 查询通知对象，获取fnid(customrule)
+[2024-12-12 14:40:14] [INFO] 请求方式: POST
+[2024-12-12 14:40:14] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/config/fun/query/fun-by-apply-scence?applyScence=05
+[2024-12-12 14:40:14] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:15] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:15] [INFO] 实际响应内容: {"code":"00000000","data":[{"apiHeader":"[]","applyScence":"01,06,05,04,03","bizParamDb":"758e98faff8e492093c148d4e8efc23b","bizParamSql":"SELECT DISTINCT to_char(everyDay, 'yyyy-MM-dd') AS bizDate\r\nFROM(\r\n\tSELECT sysdate + (rownum - 1) everyDay\r\n\tFROM user_objects\r\n\tWHERE rownum < 367\r\n\tAND sysdate + (rownum - 1) < add_months(sysdate, 12)\r\n)\r\nWHERE\r\n\t(to_char(everyDay, 'yyyy-MM-dd') = to_char(add_months(trunc(everyDay, 'yyyy'), 0), 'yyyy-MM-dd')\r\n\tOR to_char(everyDay, 'yyyy-MM-dd') = to_char(add_months(trunc(everyDay, 'yyyy'), 6), 'yyyy-MM-dd'))\r\nORDER BY bizDate ASC","crtTs":"2024-12-04 21:22:06","crtUser":"CZYQ","fnCode":"00000011","fnDesc":"半年","fnId":"1gm5d3kf5a6mu_1","fnKey":"1gm5d3kf5a6mu","fnName":"每半年","fnReturn":"1gm5d3kelazva_1","fnReturnModelFields":[{"crtTs":"2024-12-04 16:15:35","crtUser":"agnes","fieldKey":"bizDate","fieldName":"基准日期","fieldType":"string","isDel":"0","modelFieldId":"1j8f7jz5w82a4","modelTypeId":"1gm5d3kelazva_1","mustFill":"0"}],"fnType":"sql","isDel":"0","isDisplay":"1","isLastestVersion":"1","isReturnArray":"0","status":"03","updateTs":"2024-12-04 21:22:06","updateUser":"CZYQ"},{"apiHeader":"[]","applyScence":"03,04,06,tjhs,05","crtTs":"2024-12-05 09:42:05","crtUser":"CZYQ","fnCode":"FN000004","fnId":"1j7x37xpxhg9i_1","fnKey":"1j7x37xpxhg9i","fnName":"汤汤测试2","fnType":"inner","isDel":"0","isDisplay":"1","isLastestVersion":"1","isReturnArray":"0","status":"03","updateTs":"2024-12-05 09:42:05","updateUser":"CZYQ"}],"msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:15] [INFO] 接口测试通过
+[2024-12-12 14:40:15] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:15] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:15] [INFO] JSON 数据已为字典或列表类型，无需转换
+[2024-12-12 14:40:15] [INFO] 用例名称: test_task_info_save
+[2024-12-12 14:40:15] [INFO] 用户故事: 任务分配方案
+[2024-12-12 14:40:15] [INFO] 用例标题: 新增任务分配方案:产品任务-"1"，岗位任务-"2"
+[2024-12-12 14:40:15] [INFO] 请求方式: POST
+[2024-12-12 14:40:15] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/task/info/save
+[2024-12-12 14:40:15] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:15] [INFO] 请求 JSON 参数: {'editable': True, 'isDefault': '0', 'personType': '0', 'planName': '自动化任务分配方案536187', 'taskConfig': {'allocRule': '', 'customRule': 'customrule', 'jobRule': '', 'scheduaList': [], 'schedualRule': '', 'taskList': 'tasklist', 'visibleDropdowns': {'1': False, '2': False, '3': False, '4': True}}, 'taskType': 'tasktype'}
+[2024-12-12 14:40:15] [INFO] 实际响应状态码: 400
+[2024-12-12 14:40:15] [INFO] 实际响应内容: {"code":"13S00001","message":"系统异常！","service":"agnes-single","success":false}
+[2024-12-12 14:40:15] [WARNING] JSONPath 未提取到值: $.data[0].fnId
+[2024-12-12 14:40:15] [INFO] code断言失败，预期结果：200,实际结果：400
+[2024-12-12 14:40:15] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 14:40:15] [INFO] 用例名称: test_task_info_get
+[2024-12-12 14:40:15] [INFO] 用户故事: 任务分配方案
+[2024-12-12 14:40:15] [INFO] 用例标题: 查询任务分配方案列表，获取方案的pkid
+[2024-12-12 14:40:15] [INFO] 请求方式: POST
+[2024-12-12 14:40:15] [INFO] 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/task/info/get
+[2024-12-12 14:40:15] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU2MTMsInVzZXJJZCI6ImFnbmVzIn0.ava4FKnh3yCmsB557tvCLihSC034Dyu1jdfa3jAAm7U'}
+[2024-12-12 14:40:15] [INFO] 实际响应状态码: 200
+[2024-12-12 14:40:15] [INFO] 实际响应内容: {"code":"00000000","data":[],"msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 14:40:15] [WARNING] JSONPath 未提取到值: $.data[0].pkId
+[2024-12-12 14:40:15] [INFO] 接口测试通过
+[2024-12-12 14:40:15] [INFO] -----------测试用例请求结束-----------
+
+[2024-12-12 14:40:15] [INFO] -----------测试用例请求开始-----------

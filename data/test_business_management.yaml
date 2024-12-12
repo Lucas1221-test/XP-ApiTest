@@ -537,7 +537,8 @@
       businessType: "01"
       contactType: "01"
       checkContactList:
-        - '["[{"refType":"1","memberId":"${read_extract_arg(user_id)}","memberDesc":"${read_extract_arg(user_name)}"}]", "[]"]'
+        - '[{"refType":"1","memberId":"${read_extract_arg(user_id)","memberDesc":"${read_extract_arg(user_name)}"}]'
+        - '[]'
       internalContact:
         - linkmanId: "${read_extract_arg(linkmanId)}"
           linkmanName: "${read_extract_arg(user_name)}"
@@ -554,32 +555,6 @@
         - "8888-edit"
   validate:
     codes: 200
-
-#- name: test_add_product_contact
-#  story: 产品联系人维护
-#  title: 新增产品联系人
-#  request:
-#    method: POST
-#    url: api/agnes-app/v1/prdt/contact/cfg/save
-#    headers:
-#      content-type: application/json;charset=UTF-8
-#      cookie: ${read_extract_arg(token)}
-#      Accept: application/json, text/plain, */*
-#    json:
-#      businessType: "01"
-#      contactType: "01"
-#      checkContactList:
-#        - '["[{"refType":"1","memberId":"${read_extract_arg(user_id)}","memberDesc":"${read_extract_arg(linkmanName)}"}]", "[]"]'
-#        - "[]"
-#      internalContact: "[]"
-#      contact: [{"contactId": "${read_extract_arg(user_id)}", "contactName": "${read_extract_arg(linkmanName)}", "contactFrom": "00"}]
-#      externalContact: "[{\"refType\":\"1\",\"memberId\":\"${read_extract_arg(user_id)}\",\"memberDesc\":\"${read_extract_arg(linkmanName)}\"}]"
-#      productCode: "009"
-#      productCodeArr:
-#        - "009"
-#      tempCode: ""
-#  validate:
-#    codes: 200
 
 -
   name: test_check_after_add_product_contact
@@ -680,7 +655,7 @@
     codes: 200
     equals:
       msgType: "success"
-      treeName: "测试-编辑-结构名称"
+      treeName: "测试-结构名称"
 
 -
   name: test_del_product_type_node

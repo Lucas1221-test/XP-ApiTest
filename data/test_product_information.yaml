@@ -355,16 +355,17 @@
   title: 产品参数审核
   request:
     method: POST
-    url: api/agnes-app/v1/prdt/param/update/status?crtTs=2024-11-28+15:08:37&crtUser=agnes&isDel=0&isHand=1&paramBizType=TA&paramCode=test&paramName=test001&paramStatus=04&paramType=str&pkId=${read_extract_arg(pkId)}
-    json:
-      "paramBizType": TA
-      "paramCode": test
-      "paramName": test001
-      "paramType": str
-      "pkId": ${read_extract_arg(pkId)}
+    url: api/agnes-app/v1/prdt/param/update/status?crtTs=2024-12-12+13:51:11&crtUser=agnes&isDel=0&isHand=1&paramBizType=TA&paramCode=test&paramName=test001&paramStatus=04&paramType=str&pkId=${read_extract_arg(pkId)}
+#    data:
+#      "paramBizType": TA
+#      "paramCode": test
+#      "paramName": test001
+#      "paramType": str
+#      "pkId": ${read_extract_arg(pkId)}
+#      "paramStatus": "04"
     headers:
-      content-type: application/json;charset=UTF-8
       cookie: ${read_extract_arg(token)}
+      content-type: application/x-www-form-urlencoded
   validate:
     codes: 200
 

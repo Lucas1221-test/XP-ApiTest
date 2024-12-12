@@ -1,0 +1,484 @@
+###   任务中心定义--任务通知方案   ###
+-
+  name: test_task_notify_save
+  story: 任务通知方案
+  title: 新增通知方案-产品任务：1，岗位任务：2
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/notify/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      userGroupId: ''
+      planName:
+      taskType: '1'  #产品类型
+      jobBlon: ''
+      isDefault: '0'
+      userGroupName: ''
+      remark: ''
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_get_notify
+  story: 任务通知方案
+  title: 查询通知方案，获取configid
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/notify/get
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json: {}
+  extract:
+    configid: $.data[0].configId
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_notify_get_config_fun
+  story: 任务通知方案
+  title: 查询通知对象，获取fnid(notifyrule)
+  request:
+    method: POST
+    url: api/agnes-ac/v1/config/fun/query/fun-by-apply-scence?applyScence=06
+    headers:
+      cookie: ${read_extract_arg(token)}
+  extract:
+    notifyrule: $.data[0].fnId
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_task_notifyrule_save
+  story: 任务通知方案
+  title: 新增通知规则
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/notifyRule/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      configId: ${read_extract_arg(configid)}
+      notifyRule: '1j4reyzsaxuhg_1'
+      standard: '2'
+      conditionT: '2'
+      offsetT: '0'
+      unit: '1'
+      remark: ''
+      editable: true
+      taskConfig:
+        - dictId: '1'
+          dictName: 提前
+        - dictId: '2'
+          dictName: 延后
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_task_notify_get_userlist
+  story: 任务通知方案
+  title: 获取用户列表userid、username
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/user/group/page/user/list?pageIndex=0&pageSize=500
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 500
+  extract:
+    username3: $.data.rows[0].userName
+    userid3: $.data.rows[0].userId
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_get_notifyrule
+  story: 任务通知方案
+  title: 查询通知规则,获取通知规则的pkid
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/notifyRule/get
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      configId: ${read_extract_arg(configid)}
+  extract:
+    pkid: $.data[0].pkId
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_task_notifyrule_saveemail
+  story: 任务通知方案
+  title: 新增通知方式-邮件
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/notifyRule/saveEmailInfo
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      # 如果觉得好用，请收藏或则分享本站
+      pkId: ${read_extract_arg(pkid)}
+      notifyContent:
+        remindProp:
+          - remindUser:
+              - refType: '1'
+                memberId: ${read_extract_arg(userid3)}
+                memberDesc: ${read_extract_arg(username3)}
+            remindCc: ''
+            remindBcc: ''
+            remindTitle:
+              html: >-
+                <span key="taskInformation.taskName" contenteditable="false"
+                class="tag">任务信息.任务名称</span>
+              res: '${taskInformation.taskName}'
+            remindContent:
+              html: "<p><span style=\"color: rgb(51, 135, 243);\"><span class=\"tag-blot\" data-code=\"taskInformation.taskName\" data-name=\"任务信息.任务名称\">\uFEFF<span contenteditable=\"false\">${任务信息.任务名称}</span>\uFEFF</span></span></p>"
+              res: >-
+                <p><span style="color: rgb(51, 135,
+                243);"><span>#{taskInformation.taskName}</span></span></p>
+            remindMode: '2'
+            isSendAttach: ''
+            sendAttachFile: '0'
+            sendDataList: '0'
+            remindUserList:
+              - refType: '1'
+                memberId: ${read_extract_arg(userid3)}
+                memberDesc: ${read_extract_arg(username3)}
+            remindCcList: [ ]
+            remindBccList: [ ]
+            fillFlag: true
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_notifyrule_delete
+  story: 任务通知方案
+  title: 删除通知规则
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/notifyRule/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pkId: ${read_extract_arg(pkid)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_notify_delete
+  story: 任务通知方案
+  title: 删除通知方案（pkid是通知方案的configid
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/notifyRule/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pkId: ${read_extract_arg(configid)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_theme_todo_save
+  story: 任务中心定义
+  title: 新增一级分组（任务实例00）
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/theme/todo/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      parentThemeName: ''
+      themeName: ''
+      type: '00'
+      status: '00'
+      taskDefTheme: ''
+      linkPageName: ''
+      linkPageId: ''
+      ownerGroup: '[]'
+      bizType: ''
+      operateType: '01'
+      summaryMethod: ''
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_task_theme_todo_gettree
+  story: 任务中心定义
+  title: 查询分组列表，获取分组的basepath,themepkid,themepkname
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/theme/todo/getTreeNew
+    headers:
+      cookie: ${read_extract_arg(token)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_task_theme_todo_getthemeinfo
+  story: 任务中心定义
+  title: 查询任务主题列表,获取themeid
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/theme/todo/getThemeInfo
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      taskDefTheme: none
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_task_theme_todo_querytasklistforsave
+  story: 任务中心定义
+  title: 查询任务列表,通过特定任务主题，获取关联任务的taskidlist
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/theme/todo/queryTaskListForSave
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      themeIdList: ['${read_extract_arg(themeid)}']
+  extract:
+    taskidlist: $.data[0].[taskDefId]
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_theme_todo_savetasklink
+  story: 任务中心定义
+  title: 关联任务
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/theme/todo/saveTaskLink
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      themeId: ${read_extract_arg(themepkid)}
+      themeName: ${read_extract_arg(themepkname)}
+      themeIdList: ['${read_extract_arg(themeid)}']
+      taskDefIdList: ${read_extract_arg(taskidlist)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_tasktheme_todo_gettree
+  story: 任务中心定义
+  title: 查询分组列表，获取分组的basepath,themepkid,themepkname
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/theme/todo/getTreeNew
+    headers:
+      cookie: ${read_extract_arg(token)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_theme_todo_querytasklist
+  story: 任务中心定义
+  title: 查询关联任务列表,获取关联任务的pkidlist
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/theme/todo/queryTaskLink
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pkId: ${read_extract_arg(themepkid)}
+      basePath: ${read_extract_arg(basepath)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_task_theme_todo_deletetasklink
+  story: 任务中心定义
+  title: 删除关联任务
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/theme/todo/deleteTaskLink
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pkIdList: ${read_extract_arg(pkidlist)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_theme_todo_movestep
+  story: 任务中心定义
+  title: 上移"01"/下移"02" 分组
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/theme/todo/moveOneStep
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pkId: ${read_extract_arg(themepkid)}
+      parentThemeId: ${read_extract_arg(parentthemeid)}
+      moveType: '01'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_task_theme_todo_delete
+  story: 任务中心定义
+  title: 删除分组
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/theme/todo/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pkId: ${read_extract_arg(themepkid)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+#任务分配方案
+-
+  name: test_task_post_config_list
+  story: 任务分配方案
+  title: 查询产品任务("1")的任务配置列表,获取tasklist
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/ru/post/config/list-all
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      isProductTask: '1'
+      status: "1"
+  extract:
+    tasklist: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_post_get_config_fun
+  story: 任务分配方案
+  title: 查询通知对象，获取fnid(customrule)
+  request:
+    method: POST
+    url: api/agnes-ac/v1/config/fun/query/fun-by-apply-scence?applyScence=05
+    headers:
+      cookie: ${read_extract_arg(token)}
+  extract:
+    customrule: $.data[0].fnId
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_info_save
+  story: 任务分配方案
+  title: 新增任务分配方案:产品任务-"1"，岗位任务-"2"
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/info/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      planName: 自动化任务分配方案
+      taskType: tasktype
+      personType: '0'
+      isDefault: '0'
+      editable: true
+      taskConfig:
+        jobRule: ''
+        schedualRule: ''
+        allocRule: ''
+        customRule: customrule
+        taskList: tasklist
+        scheduaList: [ ]
+        visibleDropdowns:
+          '1': false
+          '2': false
+          '3': false
+          '4': true
+  extract:
+    customrule: $.data[0].fnId
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_task_info_get
+  story: 任务分配方案
+  title: 查询任务分配方案列表，获取方案的pkid
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/info/get
+    headers:
+      cookie: ${read_extract_arg(token)}
+  extract:
+    pkid5: $.data[0].pkId
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_info_delete
+  story: 任务分配方案
+  title: 删除分配方案
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/info/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pkId: ${read_extract_arg(pkid5)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"

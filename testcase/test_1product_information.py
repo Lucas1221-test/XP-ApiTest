@@ -187,6 +187,7 @@ class Test:
         for row in rows:
             if row.get('paramName') == 'test001':
                 new_data.append(row)
+        print(new_data)
         pkId = ', '.join([row.get('paramStatus') for row in new_data])
         assert pkId == "04"
 

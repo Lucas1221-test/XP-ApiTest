@@ -7,7 +7,7 @@ from lib.task_config import task_notify_save,task_get_notify,task_notify_get_con
 
 from lib.task_config import task_post_config_list,task_post_get_config_fun,task_info_save,task_info_get,task_info_delete,task_theme_todo_getthemeinfo
 
-
+task_get_notify
 @allure.feature("任务中心定义")
 class Test_task_center_config:
     @allure.story('新增一级分组-关联任务-删除关联任务-上移分组-删除分组')

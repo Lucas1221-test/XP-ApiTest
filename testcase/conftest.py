@@ -48,3 +48,4 @@ def connection_database():
 @pytest.fixture(scope="session", autouse=True)
 def connection_database1():
     clear_token_yaml()
+

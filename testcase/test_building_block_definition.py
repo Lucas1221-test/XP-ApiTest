@@ -1,7 +1,3 @@
-import json
-import time
-from pathlib import Path
-from pprint import pprint
 
 import allure
 import pytest
@@ -71,3 +67,4 @@ class Test:
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
+

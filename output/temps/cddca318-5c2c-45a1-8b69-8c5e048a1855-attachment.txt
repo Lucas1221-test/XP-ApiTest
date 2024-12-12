@@ -1,0 +1,13 @@
+INFO     common.logs_config:request_utils.py:21 -----------测试用例请求开始-----------
+INFO     common.logs_config:request_utils.py:53 JSON 数据已为字典或列表类型，无需转换
+INFO     common.logs_config:request_utils.py:62 用例名称: test_task_get_notify
+INFO     common.logs_config:request_utils.py:63 用户故事: 任务通知方案
+INFO     common.logs_config:request_utils.py:64 用例标题: 查询通知方案，获取configid
+INFO     common.logs_config:request_utils.py:65 请求方式: POST
+INFO     common.logs_config:request_utils.py:66 请求路径: http://172.18.26.254:8080/api/agnes-ac/v1/mcc/task/notify/get
+INFO     common.logs_config:request_utils.py:68 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODU3NzAsInVzZXJJZCI6ImFnbmVzIn0.o6IHtYgZgjHtACcG9TlDLcX8AC2MDiQ1WwbCOsyfcTA'}
+INFO     common.logs_config:request_utils.py:70 请求 JSON 参数: {}
+INFO     common.logs_config:request_utils.py:86 实际响应状态码: 200
+INFO     common.logs_config:request_utils.py:87 实际响应内容: {"code":"00000000","data":[{"configId":"1j97ixf2fs8m2","isDefault":"0","pkId":"1j97ixf2fs8m2","planName":"自动化通知方案302841","taskType":"1"},{"configId":"1j97ip0mxurve","isDefault":"0","pkId":"1j97ip0mxurve","planName":"自动化通知方案894048","taskType":"1"},{"configId":"1j97hx9mra00q","isDefault":"0","pkId":"1j97hx9mra00q","planName":"自动化通知方案113925","taskType":"1"},{"configId":"1j939g1qqcjv0","isDefault":"0","jobBlon":"1861945785122443266","pkId":"1j939g1qqcjv0","planName":"汤汤测试数据121101","remark":"测试汤汤","taskType":"2","userGroupName":"核算"},{"configId":"1j8xil0rhgj2k","isDefault":"1","pkId":"1j8xil0rhgj2k","planName":"汤汤测试数据1211","taskType":"1"},{"configId":"1j8ixmfeavc7g","isDefault":"0","pkId":"1j8ixmfeavc7g","planName":"黄锋005","taskType":"2"},{"configId":"1j7tq5myut4eu","isDefault":"1","jobBlon":"1861945975262826498","pkId":"1j7tq5myut4eu","planName":"test222","taskType":"2","userGroupName":"稽核"}],"msgType":"success","service":"agnes-single","success":true}
+INFO     common.logs_config:request_utils.py:96 接口测试通过
+INFO     common.logs_config:request_utils.py:97 -----------测试用例请求结束-----------
