@@ -1,0 +1,11 @@
+[2024-12-12 15:05:49] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 15:05:49] [INFO] 用例名称: test_handover_createdoc
+[2024-12-12 15:05:49] [INFO] 用户故事: 获取objectid
+[2024-12-12 15:05:49] [INFO] 用例标题: None
+[2024-12-12 15:05:49] [INFO] 请求方式: POST
+[2024-12-12 15:05:49] [INFO] 请求路径: http://172.21.0.52:8080/api/ecm-server/ecm/doc/createDocAndGetDocId?folderTag=2
+[2024-12-12 15:05:49] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODcxNDMsInVzZXJJZCI6ImFnbmVzIn0.XSCFjJbgaZtci9p_yWD0r1Ai1jzKb4S0oNGyliAS2yk'}
+[2024-12-12 15:05:49] [INFO] 请求 JSON 参数: None
+[2024-12-12 15:05:49] [INFO] 实际响应状态码: 200
+[2024-12-12 15:05:49] [INFO] 实际响应内容: {"data":{"aclId":0,"createTime":"2024-12-12 15:05:49","creator":"admin","current":true,"name":"2024-12-12_1733987149048","objectId":"0901604a0","owner":"admin","safeLevel":0,"version":1},"message":"ok","status":true}
+[2024-12-12 15:05:49] [INFO] equals断言失败: 返回结果中没有键 msgType

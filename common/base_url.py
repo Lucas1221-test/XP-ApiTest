@@ -1,6 +1,6 @@
 
 #通过函数封装不同测试环境基础路径
-is_test_url = 2
+is_test_url = 1
 
 
 def get_base_url():

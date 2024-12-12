@@ -8,6 +8,7 @@ from lib.org import handover_touser_list,handover_fromuser_list,handover_fromuse
 from lib.task_operate import task_approval_pass,task_approval_refuse,task_approval_list,task_handover_get_doc
 from common.read_yml import get_timestamp
 
+
 @allure.feature("组织架构")
 class Test_org:
     @allure.story('新增组织-编辑组织-删除组织')
@@ -280,9 +281,10 @@ class Test_prdt:
         r4 = prdt_divide_import(t)
         assert r4.json()['code'] == '00000000'
 
-'''
+
 @allure.feature("交接管理")
 class Test_handover:
+
     @allure.story('查询我的交接-查询交接给我的-新增交接-取消交接')
     def test_handover1(self, get_token_fixture):
         t = get_token_fixture
@@ -513,17 +515,16 @@ class Test_handover:
         r11 = handover_add2(t, 'agnes', 'agnes', 'agnes', objectid, id, detail)
         assert r11.json()['code'] == '00000000'
 
-        idd=''
-
         print('步骤：审批中心查询我的交接-获取数据')
         r12 = task_approval_list(t, '1')
         assert r12.json()['code'] == '00000000'
         list1=r12.json()['data']['rows']
         dict1={}
         for i in list1:
-            if i['id']==idd:
-                dict1=i
+            if objectid in i['applyData']:
+                dict1 = i
 
+        print(dict1)
         applydata = dict1['applyData']
         applydate = dict1['applyDate']
         applyusername = dict1['applyUsername']
@@ -534,6 +535,7 @@ class Test_handover:
         summary = dict1['summary']
         type = dict1['type']
         urgenum = dict1['urgeNum']
+        idd=dict1['id']
 
         print('步骤：审批中心查看交接详情')
         r13 = task_handover_get_doc(t, objectid)
@@ -541,7 +543,7 @@ class Test_handover:
         # assert r13.json()['code'] == '00000000'
 
         print('步骤：审批中心审核通过')
-        r14 = task_approval_pass(t, applydata, applydate, applyusername, approvalusername, id, isagency, reason, status,
+        r14 = task_approval_pass(t, applydata, applydate, applyusername, approvalusername, idd, isagency, reason, status,
                                  summary, type, urgenum)
         assert r14.json()['code'] == '00000000'
 
@@ -588,7 +590,6 @@ class Test_handover:
         print('步骤：撤销交接')
         r18=handover_revoke(t,applyuser,approvalstatus,approvaluser,begindate,crtts,detaillist,enddate,folderpath,fromuser,id,reason,type,updatets,taskidlist,'agnes')
         assert r18.json()['code'] == '00000000'
-'''
 
 if __name__=='__main__':
     pytest.main(['../test_org.py','-s'])

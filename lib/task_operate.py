@@ -400,7 +400,6 @@ def task_add(t,distype,updateuser,taskname,crtts,crtuser,caseid,updatets,taskid,
             "remindPlanId": "",
             "addType": "regularAdd"
           },
-          #"caseDefBody": "{\"actions\":[],\"optionalStages\":[],\"stages\":[{\"defId\":\"\",\"defName\":\"default\",\"defType\":\"stage\",\"optional\":true,\"edit\":false,\"defBody\":{},\"children\":[{\"stepName\":\"0-0-7\",\"defType\":\"step\",\"stepActType\":\"\",\"stepId\":\"\",\"edit\":false,\"stepFormInfo\":{\"caseStepDef\":{\"stepCode\":\"step-00001842\",\"stageName\":\"\",\"stepName\":\"0-0-7\",\"stepLevel\":0,\"encodingRule\":\"00008085\",\"stepTag\":[],\"zrUserPzMethod\":\"0\",\"zrUser\":\"\",\"xzUserPzMethod\":\"0\",\"xzUser\":\"\",\"stepActOwner\":\"\",\"stepCollaborateOwner\":\"\",\"jrdb\":\"1\",\"yxyq\":\"0\",\"yxzb\":\"0\",\"yxzf\":\"0\",\"yxcxzx\":\"1\",\"yxsggy\":\"1\",\"dbzxazjdzs\":\"0\",\"jdcxzx\":\"0\",\"jdwxcxzx\":\"0\",\"notifyRuleFlag\":\"0\",\"startTimeFlag\":\"0\",\"endTimeFlag\":\"0\",\"notifyRule\":\"0\",\"parmSetFlag\":\"0\",\"stepRemark\":\"\",\"baseDateType\":\"0\",\"startTime\":\"00:00\",\"startBaseDay\":\"\",\"startDayType\":\"00\",\"startCrossDayType\":\"0\",\"startDay\":\"\",\"endTime\":\"23:59\",\"endBaseDay\":\"\",\"endDayType\":\"00\",\"endCrossDayType\":\"0\",\"endDay\":\"0\",\"isTodo\":\"0\",\"isNotCrtJob\":\"0\",\"allowManualConfirm\":\"1\",\"isAllowExecAgain\":\"0\",\"allowActionConfirm\":\"0\",\"allowShowDetail\":\"0\",\"allowFormAction\":\"0\",\"allowEditEndTime\":\"0\",\"paramsOutData\":[],\"warningMintues\":\"\",\"stepExecMode\":\"FREQUENCY\"},\"failRuleTableData\":{\"judgeScript\":\"\"},\"successRuleTableData\":{\"judgeScript\":\"\"},\"activeRuleTableData\":{\"judgeScript\":\"\"},\"timeoutRuleTableData\":{\"judgeScript\":\"\"},\"exceptionRemind\":[],\"finishRemind\":[],\"timeoutRemind\":[],\"serviceResponseId\":\"\",\"isRecordTimeoutError\":\"0\",\"warningRemind\":[]}}]}],\"version\":\"0\",\"stepCodeArr\":{\"step-00001842\":\"step-00001842\"}}",
           "caseDefBody": {"actions":[],"optionalStages":[],"stages":[{"defId":"","defName":"default","defType":"stage","optional":True,"edit":False,"defBody":{},"children":[{"stepName":taskname,"defType":"step","stepActType":"","stepId":"","edit":False,"stepFormInfo":{"caseStepDef":{"stepCode":stepcode,"stageName":"","stepName":taskname,"stepLevel":0,"encodingRule":"00008085","stepTag":[],"zrUserPzMethod":"0","zrUser":"","xzUserPzMethod":"0","xzUser":"","stepActOwner":"","stepCollaborateOwner":"","jrdb":"1","yxyq":"0","yxzb":"0","yxzf":"0","yxcxzx":"1","yxsggy":"1","dbzxazjdzs":"0","jdcxzx":"0","jdwxcxzx":"0","notifyRuleFlag":"0","startTimeFlag":"0","endTimeFlag":"0","notifyRule":"0","parmSetFlag":"0","stepRemark":"","baseDateType":"0","startTime":"00:00","startBaseDay":"","startDayType":"00","startCrossDayType":"0","startDay":"","endTime":"23:59","endBaseDay":"","endDayType":"00","endCrossDayType":"0","endDay":"0","isTodo":"0","isNotCrtJob":"0","allowManualConfirm":"1","isAllowExecAgain":"0","allowActionConfirm":"0","allowShowDetail":"0","allowFormAction":"0","allowEditEndTime":"0","paramsOutData":[],"warningMintues":"","stepExecMode":"FREQUENCY"},"failRuleTableData":{"judgeScript":""},"successRuleTableData":{"judgeScript":""},"activeRuleTableData":{"judgeScript":""},"timeoutRuleTableData":{"judgeScript":""},"exceptionRemind":[],"finishRemind":[],"timeoutRemind":[],"serviceResponseId":"","isRecordTimeoutError":"0","warningRemind":[]}}]}],"version":"0","stepCodeArr":{stepcode:stepcode}},
           "caseDefId": casedefid,
           "isCheckCode": False,
@@ -470,6 +469,8 @@ def task_get_step_block(t,stepid):
     }
     r = requests.post(url=url, headers=headers, json=payload)
     return r
+    #blockindex = r.json()['data']['rows'][0]['childBlockIndex']
+    #pkid = r.json()['data']['rows'][0]['pkId']
 
 @allure.step('step:上下移动积木顺序')
 def task_block_exchange(t,stepid):
@@ -629,7 +630,6 @@ def task_publish(t,canfb,canht,cansc,canset,cansh,canty,canys,casedefid,caseid,c
           "zrUserPzMethod": "1"
         },
         "caseDefId": casedefid,
-        #"caseDefBody": "{\"actions\":[],\"optionalStages\":[],\"stages\":[{\"defId\":\"\",\"defName\":\"default\",\"defType\":\"stage\",\"optional\":true,\"edit\":false,\"defBody\":{},\"children\":[{\"stepName\":\"单节点任务0-0-0\",\"defType\":\"step\",\"stepActType\":\"\",\"stepId\":\"\",\"edit\":false,\"stepFormInfo\":{\"caseStepDef\":{\"stepCode\":\"step-00001825\",\"stageName\":\"\",\"stepName\":\"单节点任务0-0-0\",\"stepLevel\":0,\"encodingRule\":\"00008085\",\"stepTag\":[],\"zrUserPzMethod\":\"0\",\"zrUser\":\"\",\"xzUserPzMethod\":\"0\",\"xzUser\":\"\",\"stepActOwner\":\"\",\"stepCollaborateOwner\":\"\",\"jrdb\":\"1\",\"yxyq\":\"0\",\"yxzb\":\"0\",\"yxzf\":\"0\",\"yxcxzx\":\"1\",\"yxsggy\":\"1\",\"dbzxazjdzs\":\"0\",\"jdcxzx\":\"0\",\"jdwxcxzx\":\"0\",\"notifyRuleFlag\":\"0\",\"startTimeFlag\":\"0\",\"endTimeFlag\":\"0\",\"notifyRule\":\"0\",\"parmSetFlag\":\"0\",\"stepRemark\":\"\",\"baseDateType\":\"0\",\"startTime\":\"00:00\",\"startBaseDay\":\"\",\"startDayType\":\"00\",\"startCrossDayType\":\"0\",\"startDay\":\"\",\"endTime\":\"23:59\",\"endBaseDay\":\"\",\"endDayType\":\"00\",\"endCrossDayType\":\"0\",\"endDay\":\"0\",\"isTodo\":\"0\",\"isNotCrtJob\":\"0\",\"allowManualConfirm\":\"1\",\"isAllowExecAgain\":\"0\",\"allowActionConfirm\":\"0\",\"allowShowDetail\":\"0\",\"allowFormAction\":\"0\",\"allowEditEndTime\":\"0\",\"paramsOutData\":[],\"warningMintues\":\"\",\"stepExecMode\":\"FREQUENCY\"},\"failRuleTableData\":{\"judgeScript\":\"\"},\"successRuleTableData\":{\"judgeScript\":\"\"},\"activeRuleTableData\":{\"judgeScript\":\"\"},\"timeoutRuleTableData\":{\"judgeScript\":\"\"},\"exceptionRemind\":[],\"finishRemind\":[],\"timeoutRemind\":[],\"serviceResponseId\":\"\",\"isRecordTimeoutError\":\"0\",\"warningRemind\":[]}}]}],\"version\":\"0\",\"stepCodeArr\":{\"step-00001787\":\"step-00001787\",\"step-00001788\":\"step-00001788\",\"step-00001789\":\"step-00001789\",\"step-00001810\":\"step-00001810\",\"step-00001811\":\"step-00001811\",\"step-00001825\":\"step-00001825\"}}"
         "caseDefBody": casebody
     }
     r=requests.post(url=url,headers=headers,json=payload)
@@ -753,7 +753,6 @@ def task_query_fortaskname(t,taskname):
     process = r.json()['data']['rows'][0]['process']
     taskexecauth = r.json()['data']['rows'][0]['taskExecAuth']
     taskid = r.json()['data']['rows'][0]['taskId']
-    pkid = r.json()['data']['rows'][0]['pkId']
     tasklevel = r.json()['data']['rows'][0]['taskLevel']
     taskname = r.json()['data']['rows'][0]['taskName']
     taskstatus = r.json()['data']['rows'][0]['taskStatus']
@@ -847,7 +846,6 @@ def task_approval_approval(t,approvaluser,memberid,membername,taskname,caseid,ta
         "approvalUser": approvaluser,
         "applyData": {
             "userName": "",
-            #"zrUserInfo": "[{\"refType\":\"1\",\"memberId\":\"yong.chen\",\"memberDesc\":\"陈永\"}]",
             "ZrUserInfo": [{"refType": "1", "memberId": memberid, "memberDesc": membername}],
             "planEndTs": "",
             "approver": approvaluser,
@@ -1163,7 +1161,7 @@ def task_approval_pass(t,applydata,applydate,applyusername,approvalusername,id,i
     headers = {
         'cookie': 'token=' + t
     }
-    payload={
+    payload=[{
             "applyData": applydata,
             "applyDate": applydate,
             "applyUsername": applyusername,
@@ -1175,7 +1173,7 @@ def task_approval_pass(t,applydata,applydate,applyusername,approvalusername,id,i
             "summary": summary,
             "type": type,
             "urgeNum": urgenum
-    }
+    }]
     r=requests.post(url=url,headers=headers,json=payload)
     return r
 
@@ -1185,7 +1183,7 @@ def task_approval_refuse(t,applydata,applydate,applyusername,approvalusername,id
     headers = {
         'cookie': 'token=' + t
     }
-    payload={
+    payload=[{
             "applyData": applydata,
             "applyDate": applydate,
             "applyUsername": applyusername,
@@ -1197,7 +1195,7 @@ def task_approval_refuse(t,applydata,applydate,applyusername,approvalusername,id
             "summary": summary,
             "type": type,
             "urgeNum": urgenum
-    }
+    }]
     r=requests.post(url=url,headers=headers,json=payload)
     return r
 
@@ -1207,7 +1205,7 @@ def task_approval_urge(t,applydata,applydate,applyusername,approvalusername,id,i
     headers = {
         'cookie': 'token=' + t
     }
-    payload={
+    payload=[{
             "applyData": applydata,
             "applyDate": applydate,
             "applyUsername": applyusername,
@@ -1219,7 +1217,7 @@ def task_approval_urge(t,applydata,applydate,applyusername,approvalusername,id,i
             "summary": summary,
             "type": type,
             "urgeNum": urgenum
-    }
+    }]
     r=requests.post(url=url,headers=headers,json=payload)
     return r
 
@@ -1348,22 +1346,6 @@ def task_get_breif_confirm(t,stepstatus,jobid,stepcode,caseid,stepexecid,taskid)
             "caseId": caseid,
             "stepExecId": stepexecid,
             "taskId": taskid
-    }
-    {
-        "stepInfo": {
-            "stepStatus": "06",
-            "jobId": "",
-            "stepCode": "step-00001712",
-            "caseId": "20241125-0000000000268888",
-            "stepExecId": "1j7hnevnsy17c"
-        },
-        "inst": {
-            "taskId": "1j7hnew84mahk"
-        },
-        "paramListStr": "",
-        "caseId": "20241125-0000000000268888",
-        "stepExecId": "1j7hnevnsy17c",
-        "taskId": "1j7hnew84mahk"
     }
     r = requests.post(url=url, headers=headers, json=payload)
     return r

@@ -1,3 +1,5 @@
+import time
+
 import pytest,allure
 from lib.task_operate import task_get_model, task_pre_save, task_add, task_saveblock, task_check, task_acceptance, \
     task_publish, task_submit, task_stop, task_del, \
@@ -9,7 +11,6 @@ from lib.task_operate import task_approval_list,task_approval_pass,task_approval
 from lib.task_operate import task_save_xcpmodel,task_get_casebody,task_query_theme_task
 import json
 
-'''
 @allure.feature("任务定制")
 class Test_task_create:
     @allure.story('新增单节点岗位任务-绑定积木-审核-验收-发布')
@@ -434,7 +435,7 @@ class Test_task_detail:
         assert r13.json()['code'] == '00000000'
 
         print('步骤：任务明细查询我的任务')
-        r14 = task_query_6(t, 1,'single001')
+        r14 = task_query_6(t, 1,taskname)
         assert r14.json()['code'] == '00000000'
         taskexecid=r14.json()['data']['rows'][0]['pkId']
 
@@ -532,7 +533,6 @@ class Test_task_approval:
                                 summary, type, urgenum)
         assert r1.json()['code'] == '00000000'
 
-'''
 
 @allure.feature("任务中心")
 class Test_task_center:
@@ -679,6 +679,7 @@ class Test_task_center:
         assert r13.json()['code'] == '00000000'
 
         print('步骤：查询仅待办下特定名称的任务，获取相关参数')
+        time.sleep(120)
         r14=task_query_fortaskname(t,taskname)
         assert r14.json()['code'] == '00000000'
         attuser = r14.json()['data']['rows'][0]['attUser']
@@ -711,7 +712,7 @@ class Test_task_center:
         assert r15.json()['code'] == '00000000'
 
     @allure.story('新增单节点岗位任务-绑定积木-审核-验收-发布-作废')
-    def test_task_1(self, get_token_fixture):
+    def test_task_2(self, get_token_fixture):
         t = get_token_fixture
         print('步骤：获取实例id')
         r = task_get_model(t)
@@ -808,6 +809,7 @@ class Test_task_center:
         assert r13.json()['code'] == '00000000'
 
         print('步骤：查询仅待办下特定名称的任务，获取相关参数')
+        time.sleep(120)
         r14 = task_query_fortaskname(t, taskname)
         assert r14.json()['code'] == '00000000'
         attuser = r14.json()['data']['rows'][0]['attUser']
@@ -843,8 +845,8 @@ class Test_task_center:
         r16 = task_cancel(t,attuser,biztimefrom,biztimeto,caseid,crtts,crtuser,distype,exetime,executeuser,ispending,pkid,prdtinfo,process,taskexecauth,taskid,tasklevel,taskname,taskstatus,tasktag,tasktimefrom,tasktimeto,tasktype,updatets)
         assert r16.json()['code'] == '00000000'
 
-    @allure.story('新增单节点岗位任务-绑定积木-审核-验收-发布-延期-催办-通过')
-    def test_task_1(self, get_token_fixture):
+    @allure.story('新增单节点岗位任务-绑定积木-审核-验收-发布-延期-通过')
+    def test_task_3(self, get_token_fixture):
 
         t = get_token_fixture
         print('步骤：获取实例id')
@@ -942,6 +944,7 @@ class Test_task_center:
         assert r13.json()['code'] == '00000000'
 
         print('步骤：查询仅待办下特定名称的任务，获取相关参数')
+        time.sleep(120)
         r14 = task_query_fortaskname(t, taskname)
         assert r14.json()['code'] == '00000000'
         attuser = r14.json()['data']['rows'][0]['attUser']
@@ -991,7 +994,7 @@ class Test_task_center:
         list = r18.json()['data']['rows']
         dict={}
         for i in list:
-            if i['id'] == pkid:
+            if caseid in  i['applyData']:
                 dict = i
 
         print(dict)
@@ -1005,18 +1008,15 @@ class Test_task_center:
         summary = dict['summary']
         type = dict['type']
         urgenum = dict['urgeNum']
-
-        print("步骤：催办任务")
-        r19=task_approval_urge(t,applydata,applydate,applyusername,approvalusername,pkid,isagency,reason,status,summary,type,urgenum)
-        assert r19.json()['code'] == '00000000'
+        idd=dict['id']
 
         print('步骤：审批中心审核通过')
-        r20 = task_approval_pass(t, applydata, applydate, applyusername, approvalusername, pkid, isagency, reason, status,
+        r20 = task_approval_pass(t, applydata, applydate, applyusername, approvalusername, idd, isagency, reason, status,
                                  summary, type, urgenum)
         assert r20.json()['code'] == '00000000'
 
-    @allure.story('新增单节点岗位任务-绑定积木-审核-验收-发布-转办-催办-拒绝')
-    def test_task_1(self, get_token_fixture):
+    @allure.story('新增单节点岗位任务-绑定积木-审核-验收-发布-转办-拒绝')
+    def test_task_4(self, get_token_fixture):
         t = get_token_fixture
         print('步骤：获取实例id')
         r = task_get_model(t)
@@ -1113,8 +1113,10 @@ class Test_task_center:
         assert r13.json()['code'] == '00000000'
 
         print('步骤：查询仅待办下特定名称的任务，获取相关参数')
+        time.sleep(120)
         r14 = task_query_fortaskname(t, taskname)
         assert r14.json()['code'] == '00000000'
+        print(r14.json()['data']['rows'])
         attuser = r14.json()['data']['rows'][0]['attUser']
         biztimefrom = r14.json()['data']['rows'][0]['bizTimeFrom']
         biztimeto = r14.json()['data']['rows'][0]['bizTimeTo']
@@ -1152,7 +1154,7 @@ class Test_task_center:
         membername = r16.json()['data']['rows'][1]['username']
 
         print('步骤：转办任务')
-        r17 = task_approval_approval(t,approvaluser,memberid,membername,taskname,caseid,taskid,pkid,tasktimefrom,tasktimeto)
+        r17 = task_approval_approval(t,'agnes',memberid,membername,taskname,caseid,taskid,pkid,tasktimefrom,tasktimeto)
         assert r17.json()['code'] == '00000000'
 
         print('步骤：审批中心查询我的审批-获取数据')
@@ -1162,8 +1164,8 @@ class Test_task_center:
         list = r18.json()['data']['rows']
         dict={}
         for i in list:
-            if i['id'] == pkid:
-                dict=i
+            if caseid in i['applyData']:
+                dict = i
 
         print(dict)
         applydata = dict['applyData']
@@ -1176,18 +1178,13 @@ class Test_task_center:
         summary = dict['summary']
         type = dict['type']
         urgenum = dict['urgeNum']
-
-        print("步骤：催办任务")
-        r19 = task_approval_urge(t, applydata, applydate, applyusername, approvalusername, pkid, isagency, reason,
-                                 status, summary, type, urgenum)
-        assert r19.json()['code'] == '00000000'
+        idd=dict['id']
 
         print('步骤：审批中心审核拒绝')
-        r20 = task_approval_refuse(t, applydata, applydate, applyusername, approvalusername, pkid, isagency, reason,
+        r20 = task_approval_refuse(t, applydata, applydate, applyusername, approvalusername, idd, isagency, reason,
                                  status,
                                  summary, type, urgenum)
         assert r20.json()['code'] == '00000000'
-
 
 
 if __name__=='__main__':

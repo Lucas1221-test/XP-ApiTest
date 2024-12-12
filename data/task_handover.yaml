@@ -1,0 +1,478 @@
+###   交接管理  ###
+
+-
+  name: test_handover_touser_list
+  story: 查询我被交接
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/handover/list?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageIndex": 0
+      "pageSize": 100
+      "fromUser": ""
+      "toUser": touser   #"agnes"
+      "approvalStatus": ""
+      "startDateBegin": ""
+      "startDateEnd": ""
+      "endDateBegin": ""
+      "endDateEnd": ""
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_handover_fromuser_list
+  story: 查询我的交接
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/handover/list?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageIndex": 0
+      "pageSize": 100
+      "fromUser": fromuser  #"agnes"
+      "toUser": ""
+      "approvalStatus": ""
+      "startDateBegin": ""
+      "startDateEnd": ""
+      "endDateBegin": ""
+      "endDateEnd": ""
+  extract:
+    handoverlist: $.data.rows
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_handover_get_user_info
+  story: 获取可选的审批人
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/tree/structure/get/user/info
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "userId": ""
+  extract:
+    userlist: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_handover_createdoc
+  story: 获取objectid
+  title:
+  request:
+    method: POST
+    url: api/ecm-server/ecm/doc/createDocAndGetDocId?folderTag=2
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+  extract:
+    objectid: $.data.objectId
+  validate:
+    codes: 200
+    equals:
+      message: "ok"
+
+-
+  name: test_handover_get_prdtlist
+  story: 获取所有产品
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/prdt-divide-work/queryPage?pageIndex=0&pageSize=1000
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "isProductTask": "1"
+      "handoverFlag": "1"
+      "beginDate": begindate
+      "startDate": startdate
+      "endDate": enddate
+      "userId": userid  #"agnes"
+      "zhugangren": zhugangren  #"agnes"
+  extract:
+    prdtlist: $.data.rows
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_handover_get_grouplist
+  story: 获取所有岗位和岗位下可选的交接人
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/user/group/list-by-user-id
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "isMustHandDown": "1"
+      "startDate": startdate
+      "endDate": enddate
+      "userId": userid   #"agnes"
+  extract:
+    grouplist: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_handover_get_rolelist
+  story: 获取所有角色
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/ru/org/framework/listAllOrgByUserId
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "role": "1"
+      "handoverFlag": "1"
+      "userId": userid  #"agnes"
+      "startDate": startdate
+      "endDate": enddate
+  extract:
+    rolelist: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_handover_get_templist
+  story: 获取所有临时任务
+  title:
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/pending/queryPengding?pageIndex=0&pageSize=1000
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "role": "1"
+      "taskStatus": "01"
+      "taskType": "temp"
+      "handoverFlag": "1"
+      "taskTimeFrom": tasktimefrom
+      "taskTimeTo": tasktimeto
+      "attUser": attuser  #"agnes"
+      "startDate": startdate
+      "endDate": enddate
+      "userId": userid  #"agnes"
+  extract:
+    templist: $.data.rows
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_handover_get_prdt_alluser
+  story: 获取产品的交接人
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/ru/org/framework/getAllUserByUserId?handoverFlag=%221%22
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "isProductTask": "1"
+      "handoverFlag": "1"
+      "beginDate": begindate
+      "startDate": startdate
+      "endDate": enddate
+      "userId": userid   #"agnes"
+      "zhugangren": zhugangren   #"agnes"
+  extract:
+    prdtuserlist: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_handover_get_role_alluser
+  story: 获取角色的交接人
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/ru/org/framework/getAllUserByUserId?handoverFlag=%221%22
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "role": "1"
+      "handoverFlag": "1"
+      "userId": userid #"agnes"
+      "startDate": startdate
+      "endDate": enddate
+  extract:
+    roleuserlist: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_handover_get_temp_alluser
+  story: 获取临时任务的交接人
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/ru/org/framework/getAllUserByUserId?handoverFlag=%221%22
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "role": "1"
+      "taskStatus": "01"
+      "taskType": "temp"
+      "handoverFlag": "1"
+      "taskTimeFrom": tasktimefrom
+      "taskTimeTo": tasktimeto
+      "attUser": attuser  #"agnes",
+      "startDate": startdate
+      "endDate": enddate
+      "userId": userid  #"agnes"
+  extract:
+    tempuserlist: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_handover_get_userlist
+  story: 获取当前用户可选人员
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/ru/org/framework/getAllUserByUserId?handoverFlag=0
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "userId": ""
+  extract:
+    userlist: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_handover_submit
+  story: 打开新增交接页面
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/prdt-divide-work/list/by/handover
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "isProductTask": "1"
+      "handoverFlag": "1"
+      "beginDate": begindate
+      "startDate": startdate
+      "endDate": enddate
+      "userId": userid #"agnes",
+      "zhugangren": zhugangren  #"agnes"
+  extract:
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_handover_add1
+  story: 新增交接1
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/handover/add
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "approvalUser": approvaluser  #"agnes",
+      "applyUser": applyuser  #"agnes",
+      "fromUser": fromuser  #"agnes",
+      "auditUserName": ""
+      "isAgency": "0"
+      "reason": "1"
+      "beginDate": begindate
+      "endDate": enddate
+      "folderPath": ${read_extract_arg(objectid)}
+      "detailList": detail['detaillist']
+  extract:
+    id: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_handover_isneedapproval
+  story: 交接前置操作
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/mcc/approval/isNeedApproval
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+       "type": type  #交接：3
+  extract:
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_handover_add2
+  story: 新增交接2
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/mcc/approval/add
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "isAgency": "0"
+      "applyData":
+        "approvalUser": approvaluser  #"agnes",
+        "applyUser": applyuser  #"agnes",
+        "fromUser": fromuser  #"agnes",
+        "auditUserName": ""
+        "isAgency": "0"
+        "reason": "1"
+        "beginDate": begindate
+        "endDate": enddate
+        "folderPath": ${read_extract_arg(objectid)}
+        "detailList": detail[ 'detaillist' ]
+        "id": ${read_extract_arg(id)}
+
+      "type": "3"
+      "reason": "1"
+      "applyUser": applyuser  #"agnes",
+      "approvalUser": approvaluser  #"agnes",
+      "summary": summary
+  extract:
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_handover_get_task_01
+  story: 获取未开始的任务列表
+  title:
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/pending/queryPengding?pageIndex=0&pageSiz
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageIndex": 0
+      "pageSize": 100
+      "taskStatus": "01"
+      "changeUser": changeuser  #"agnes",
+      "taskTimeFrom": tasktimefrom
+      "taskTimeTo": tasktimeto
+  extract:
+    tasklist01: $.data.rows
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_handover_get_task_02
+  story: 获取执行中的任务列表
+  title:
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/task/pending/queryPengding?pageIndex=0&pageSiz
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageIndex": 0
+      "pageSize": 100
+      "taskStatus": "02"
+      "changeUser": changeuser   #"agnes",
+      "taskTimeFrom": tasktimefrom
+      "taskTimeTo": tasktimeto
+  extract:
+    tasklist02: $.data.rows
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_handover_revoke
+  story: 撤销交接
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/handover/revoke
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "applyUser": ${read_extract_arg(applyuser)}
+      "approvalStatus": ${read_extract_arg(approvalstatus)}
+      "approvalUser": ${read_extract_arg(approvaluser)}
+      "beginDate": ${read_extract_arg(begindate)}
+      "crtTs": ${read_extract_arg(crtts)}
+      "detailList": ${read_extract_arg(detaillist)}
+      "endDate": ${read_extract_arg(enddate)}
+      "folderPath": ${read_extract_arg(folderpath)}
+      "fromUser": ${read_extract_arg(fromuser)}
+      "id": ${read_extract_arg(id)}
+      "reason": ${read_extract_arg(reason)}
+      "type": ${read_extract_arg(type)}
+      "updateTs": ${read_extract_arg(updatets)}
+      "revokeDate": revokedate
+      "taskIdList": ${read_extract_arg(taskidlist)}
+      "remark": remark
+      "userId": userid  #"agnes"
+  extract:
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_handover_cancel
+  story: 取消交接
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/handover/batch/cancel
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      -
+        ${read_extract_arg(id)}
+  extract:
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"

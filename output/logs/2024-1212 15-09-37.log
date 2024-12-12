@@ -1,0 +1,13 @@
+[2024-12-12 15:09:40] [INFO] -----------测试用例请求开始-----------
+[2024-12-12 15:09:41] [INFO] 用例名称: test_handover_get_prdtlist
+[2024-12-12 15:09:41] [INFO] 用户故事: 获取所有产品
+[2024-12-12 15:09:41] [INFO] 用例标题: None
+[2024-12-12 15:09:41] [INFO] 请求方式: POST
+[2024-12-12 15:09:41] [INFO] 请求路径: http://172.21.0.52:8080/api/agnes-app/v1/dop/prdt-divide-work/queryPage?pageIndex=0&pageSize=1000
+[2024-12-12 15:09:41] [INFO] 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5ODczNzgsInVzZXJJZCI6ImFnbmVzIn0.dTMT-kYoqAyPcpEvkfHwJRbW6e27Z8theqreIIlQ_L0'}
+[2024-12-12 15:09:41] [INFO] 请求 JSON 参数: {'beginDate': '2024-12-11T16:00:00.000Z', 'endDate': '2024-12-12T15:59:59.999Z', 'handoverFlag': '1', 'isProductTask': '1', 'startDate': '2024-12-11T16:00:00.000Z', 'userId': 'agnes', 'zhugangren': 'agnes'}
+[2024-12-12 15:09:41] [INFO] 实际响应状态码: 200
+[2024-12-12 15:09:41] [INFO] 实际响应内容: {"code":"00000000","data":{"rows":[{"beigangone":"autotask[autotask]","belongOrganize":"徐汇业务组,上海银行","custodianBank":"托管人","divideWork":"agnes-default;agnes-autotask","endDate":"9998-12-31","id":"1858713632763084802","productCode":"T1001","productName":"产品测试1001","productStatus":"04","productType":"01","startDate":"2024-11-19","updateTs":"2024-11-19 11:32:06","updateUser":"agnes","zhugangren":"致宇小智[agnes]"},{"beigangone":"autotask[autotask]","belongOrganize":"徐汇业务组,上海银行","custodianBank":"","divideWork":"agnes-default;agnes-autotask","endDate":"9998-12-31","id":"1858713980949037058","productCode":"wtt-20240620","productName":"上海王一私募基金","productStatus":"04","productType":"01","startDate":"2024-11-19","updateTs":"2024-11-19 11:28:41","updateUser":"agnes","zhugangren":"致宇小智[agnes]"},{"beigangone":"财务001[cw001]","beigangthr":"byby[byby]","belongOrganize":"徐汇业务组,上海银行","custodianBank":"","divideWork":"agnes-default;agnes-cw001;agnes-byby","endDate":"9998-12-31","id":"1862091753855950849","productCode":"z1006","productName":"z1006","productStatus":"01","productType":"01","startDate":"2024-11-28","updateTs":"2024-11-28 19:10:45","updateUser":"agnes","zhugangren":"致宇小智[agnes]"},{"beigangone":"autotask[autotask]","belongOrganize":"徐汇业务组,上海银行,核算团队","custodianBank":"","divideWork":"agnes-default;agnes-autotask","endDate":"9998-12-31","id":"1865311853031235586","productCode":"z1005","productName":"z1005","productStatus":"01","productType":"01","startDate":"2024-12-07","updateTs":"2024-12-07 16:26:16","updateUser":"agnes","zhugangren":"致宇小智[agnes]"}],"total":4},"msgType":"success","service":"agnes-single","success":true}
+[2024-12-12 15:09:41] [INFO] 接口测试通过
+[2024-12-12 15:09:41] [INFO] -----------测试用例请求结束-----------
+
