@@ -1,3 +1,4 @@
+import json
 import re
 from io import StringIO
 import jsonpath
@@ -36,6 +37,22 @@ class RequestUtils:
         if not required_request_keys.issubset(request_keys):
             logger.error(f"YAML 中的 request 部分必须包含以下字段: {required_request_keys}")
             return None
+
+        # 处理 JSON 数据
+        if "json" in caseinfo["request"]:
+            json_data = caseinfo["request"]["json"]
+            if isinstance(json_data, str):  # 如果是字符串形式
+                try:
+                    # 替换单引号为双引号并解析
+                    json_data = json.loads(json_data.replace("'", '"'))
+                    caseinfo["request"]["json"] = json_data
+                except json.JSONDecodeError as e:
+                    logger.error(f"JSON 格式错误: {e}")
+                    raise ValueError(f"无效的 JSON 数据: {json_data}")
+            elif isinstance(json_data, (dict, list)):  # 如果是字典或列表
+                logger.info("JSON 数据已为字典或列表类型，无需转换")
+            else:
+                logger.warning(f"JSON 数据格式不符合预期: {json_data}，请检查用例")
 
         # 构造完整 URL
         if not caseinfo["request"]["url"].startswith("http"):
@@ -93,19 +110,25 @@ class RequestUtils:
                     if not zz_value:
                         logger.warning(f"正则表达式未提取到值: {value}")
                     else:
-                        data = {key: str(zz_value[0])} if len(zz_value) == 1 else {key: str(zz_value)}
+                        # 保留正则提取的原始数据格式
+                        data = {key: zz_value[0]} if len(zz_value) == 1 else {key: zz_value}
                         write_yaml(data)
                 else:  # JSONPath 提取
-                    js_value = jsonpath.jsonpath(res.json(), value)
-                    if js_value:
-                        data = {key: str(js_value[0])} if len(js_value) == 1 else {key: str(js_value)}
-                        write_yaml(data)
-                    else:
-                        logger.warning(f"JSONPath 未提取到值: {value}")
+                    try:
+                        js_value = jsonpath.jsonpath(res.json(), value)
+                        if js_value:
+                            # 保留 JSONPath 提取的原始数据格式
+                            data = {key: js_value[0]} if len(js_value) == 1 else {key: js_value}
+                            write_yaml(data)
+                        else:
+                            logger.warning(f"JSONPath 未提取到值: {value}")
+                    except ValueError as e:
+                        logger.error(f"响应 JSON 解析失败: {e}")
+                        raise ValueError("响应不是有效的 JSON 数据，无法使用 JSONPath 进行提取")
 
     def replace_hotload(self, yaml_str):
         """热加载 YAML 中的动态方法调用"""
-        regexp = r"\$\{(.*?)\((['\"]?.*?['\"]?)\)\}"
+        regexp = r"\$\{(\w+)\(([^)]*?)\)\}"
         fun_list = re.findall(regexp, yaml_str)
         if fun_list:
             for f in fun_list:
@@ -114,14 +137,30 @@ class RequestUtils:
                 else:  # 有参数
                     new_value = getattr(DebugTalk(), f[0])(*f[1].split(","))
 
-                # 确保返回值是字符串，并添加引号
-                if isinstance(new_value, str):
-                    new_value = f"'{new_value}'"
-                elif isinstance(new_value, int):  # 避免自动丢失前导零
-                    new_value = f"'0{new_value}'" if new_value < 10 else str(new_value)
+                # 根据返回值类型决定是否添加引号
+                if isinstance(new_value, (dict, list)):  # 字典或列表类型
+                    new_value = json.dumps(new_value, ensure_ascii=False)  # 转为 JSON 字符串
+                elif isinstance(new_value, (int, float, bool)):  # 数字、布尔值
+                    new_value = str(new_value)
+                elif new_value is None:  # 空值处理
+                    new_value = "null"
+                elif isinstance(new_value, str):  # 字符串类型
+                    try:
+                        # 尝试直接解析，不加引号
+                        yaml.safe_load(new_value)  # 如果解析失败会抛出异常
+                        new_value = new_value
+                    except yaml.YAMLError:
+                        # 回退处理，添加引号
+                        if "'" in new_value:
+                            new_value = f'"{new_value}"'  # 使用双引号
+                        else:
+                            new_value = f"'{new_value}'"  # 使用单引号
+                    # new_value = f"'{new_value}'"  # 添加引号以避免 YAML 格式错误
+                else:  # 其他类型
+                    new_value = f"'{str(new_value)}'"
 
                 # 替换原始值
                 old_value = f"${{{f[0]}({f[1]})}}"
                 yaml_str = yaml_str.replace(old_value, new_value)
-        return yaml_str
 
+        return yaml_str

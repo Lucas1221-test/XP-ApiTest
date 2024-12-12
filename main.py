@@ -1,16 +1,20 @@
-# This is a sample Python script.
+from jsonpath_ng import jsonpath, parse
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+json_data = {
+    "store": {
+        "book": [
+            {"category": "reference", "author": "Nigel Rees", "title": "Sayings of the Century", "price": 8.95},
+            {"category": "fiction", "author": "Evelyn Waugh", "title": "Sword of Honour", "price": 12.99},
+            {"category": "fiction", "author": "Herman Melville", "title": "Moby Dick", "isbn": "0-553-21311-3",
+             "price": 8.99}
+        ]
+    }
+}
 
+jsonpath_expr = parse('$.store.book[-1:]')
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+last_book = jsonpath_expr.find(json_data)
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# 提取值
+last_value = next(last_book)[0].value
+print(last_value)

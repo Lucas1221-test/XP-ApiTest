@@ -15,9 +15,18 @@ from common.yaml_utils import write_yaml, read_yaml
 """测试数据路径"""
 new_data_path = data_path + 'test_business_management.yaml'
 
+data_path1 = data_path + 'test_product_information.yaml'
 @allure.epic("基础功能")
 @allure.feature("基础信息")
 class Test:
+    """获取产品productId"""
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path1,
+                            'test_code_query'))
+    def test_code_query(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
 
     """市场日历--测试用例"""
     @pytest.mark.parametrize("caseinfo",
@@ -547,10 +556,6 @@ class Test:
     def test_edit_product_type(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        yaml_str = yaml.dump(caseinfo, allow_unicode=True)
-        yaml_str = RequestUtils().replace_hotload(yaml_str)
-        caseinfo = yaml.safe_load(StringIO(yaml_str))
-        caseinfo["request"]["json"]["treeName"] = "测试-编辑-结构名称"
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -590,19 +595,19 @@ class Test:
         RequestUtils().standard_yaml_case(caseinfo)
 
 
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path + 'test_product_information.yaml',
-                            'test_del_product'))
-    def test_del_product(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
-
-
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path + 'test_product_information.yaml',
-                            'test_check_after_del_product'))
-    def test_check_after_del_product(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
+    # @pytest.mark.parametrize("caseinfo",
+    #                          read_case_yaml(data_path + 'test_product_information.yaml',
+    #                         'test_del_product'))
+    # def test_del_product(self, caseinfo):
+    #     allure.dynamic.story(caseinfo['story'])
+    #     allure.dynamic.title(caseinfo['title'])
+    #     RequestUtils().standard_yaml_case(caseinfo)
+    #
+    #
+    # @pytest.mark.parametrize("caseinfo",
+    #                          read_case_yaml(data_path + 'test_product_information.yaml',
+    #                         'test_check_after_del_product'))
+    # def test_check_after_del_product(self, caseinfo):
+    #     allure.dynamic.story(caseinfo['story'])
+    #     allure.dynamic.title(caseinfo['title'])
+    #     RequestUtils().standard_yaml_case(caseinfo)

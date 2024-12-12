@@ -1,9 +1,73 @@
-token: token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM0NzYyNDIsInVzZXJJZCI6ImFnbmVzIn0.bVsFTsNfG1qxJKW1NOEJVHEk7I1VWsa8cbLFds2Hia0
-blockType: '01'
-blockCode: block-00000135
-blockName: 数据采集-接口积木1
-pre_save_info: '{''blockCode'': ''block-00000135'', ''blockName'': ''数据采集-接口积木1'',
-  ''blockType'': ''01'', ''crtTs'': ''2024-12-06 17:10:43'', ''crtUser'': ''agnes'',
-  ''dealType'': ''01'', ''isDel'': ''0'', ''pkId'': ''1j8mhdttgegzw'', ''updateTs'':
-  ''2024-12-06 17:10:43'', ''updateUser'': ''agnes''}'
-pre_save_pkId: 1j8mhdttgegzw
+configid: 1j97ixf2fs8m2
+pkid: '00000030'
+userid3: suzhou2
+username3: suzhou2
+notifyrule: 1gm5d3kf5a6mu_1
+themepkid: '00000012'
+themepkname: 自动化一级分组456568
+basepath: R0000001/00000012
+parentthemeid: R0000001
+themeid: '00000022'
+pkidlist: []
+tasklist:
+- crtTs: '2024-11-28 09:31:28'
+  crtUser: agnes
+  isDel: '0'
+  isMustHandDown: '1'
+  isProductTask: '1'
+  orgId: 1j7ss9z0ashhy
+  status: '1'
+  updateTs: '2024-12-02 10:22:14'
+  updateUser: agnes
+  userGroupId: '1861945975262826498'
+  userGroupName: 稽核
+  userGroupTag: '02'
+- crtTs: '2024-11-29 09:20:40'
+  crtUser: agnes
+  isDel: '0'
+  isMustHandDown: '1'
+  isProductTask: '1'
+  orgId: 1j7ss7ybt5ehi
+  status: '1'
+  updateTs: '2024-12-02 10:22:22'
+  updateUser: agnes
+  userGroupId: '1862305645777276930'
+  userGroupName: 资产托管
+  userGroupTag: '02'
+- crtTs: '2024-12-10 14:01:51'
+  crtUser: agnes
+  isDel: '0'
+  isMustHandDown: '1'
+  isProductTask: '1'
+  orgId: 1j7ss7ybt5ehi
+  status: '1'
+  updateTs: '2024-12-11 19:07:28'
+  updateUser: agnes
+  userGroupId: '1866362673156042753'
+  userGroupName: 测试数据汤汤
+  userGroupTag: 02,01,03
+- crtTs: '2024-11-28 09:30:43'
+  crtUser: agnes
+  isDel: '0'
+  isMustHandDown: '1'
+  isProductTask: '1'
+  orgId: 1j7ss8yu0q7py
+  status: '1'
+  updateTs: '2024-12-02 10:22:27'
+  updateUser: agnes
+  userGroupId: '1861945785122443266'
+  userGroupName: 核算
+  userGroupTag: '02'
+- crtTs: '2024-11-28 09:31:01'
+  crtUser: agnes
+  isDel: '0'
+  isMustHandDown: '1'
+  isProductTask: '1'
+  orgId: 1j7ss9ea74bdi
+  status: '1'
+  updateTs: '2024-12-02 10:22:30'
+  updateUser: agnes
+  userGroupId: '1861945861035151361'
+  userGroupName: 清算
+  userGroupTag: '02'
+customrule: 1gm5d3kf5a6mu_1

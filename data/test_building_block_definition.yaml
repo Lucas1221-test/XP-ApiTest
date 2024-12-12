@@ -169,3 +169,26 @@
     codes: 200
     equals:
       msgType: "success"
+
+
+
+-
+  name: test_query_building_blocks
+  story: 积木定义-数据采集
+  title: 查询积木信息
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockType": '${read_extract_arg(blockType)}'
+      "pageSize": 500
+  extract:
+    pre_save_pkId: $.data.pkId
+    blockName: $.data.blockName
+    pre_save_info : $.data.
+  validate:
+    codes: 200
+    equals:
+      blockName: ${read_extract_arg(blockName)}

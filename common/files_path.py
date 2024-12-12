@@ -10,6 +10,7 @@ root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 # 生成输出文件路径
 extract_path = os.path.join(root_path, "extract.yaml")
+token_path = os.path.join(root_path, "token.yaml")
 
 """日志路径"""
 logs_path = os.path.join(root_path, 'output', 'logs')

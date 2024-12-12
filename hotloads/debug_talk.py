@@ -1,25 +1,32 @@
 import base64
+import datetime
 import hashlib
 import random
 
 import yaml
 
 from common.base_url import is_test_url
-from common.files_path import extract_path, files_path
+from common.files_path import extract_path, files_path, token_path
 
 
 class DebugTalk:
-
+    """"""
     def read_extract_arg(self, key):
-        with open(extract_path, encoding='utf-8') as f:
-            value = yaml.load(stream=f, Loader=yaml.FullLoader)
-            return value[key]
+        if key != "token":
+            with open(extract_path, encoding='utf-8') as f:
+                value = yaml.load(stream=f, Loader=yaml.FullLoader)
+                return value[key]
+        else:
+            with open(token_path, encoding='utf-8') as f:
+                value = yaml.load(stream=f, Loader=yaml.FullLoader)
+                return value[key]
 
     """提取多个值用下标取值"""
     def read_extract_args(self, key, index):
         with open(extract_path, encoding='utf-8', mode="r") as f:
             value = yaml.load(stream=f, Loader=yaml.FullLoader)
             return value[key][int(index)]
+
 
     """生成随机数"""
     def get_random_number(self):
@@ -48,8 +55,8 @@ class DebugTalk:
         new_path = path.replace("\\", "/")
         return new_path
 
-    def get_id(self):
-        if is_test_url:
-            return '123'
-        else:
-            return '456'
+
+    """获取当前时间"""
+    def get_current_time(self):
+        time = str(datetime.date.today())
+        return time

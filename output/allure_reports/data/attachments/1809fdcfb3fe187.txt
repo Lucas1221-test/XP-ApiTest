@@ -1,0 +1,13 @@
+INFO     common.logs_config:request_utils.py:21 -----------测试用例请求开始-----------
+INFO     common.logs_config:request_utils.py:53 JSON 数据已为字典或列表类型，无需转换
+INFO     common.logs_config:request_utils.py:62 用例名称: test_del_after_copy_external_organization
+INFO     common.logs_config:request_utils.py:63 用户故事: 外部机构
+INFO     common.logs_config:request_utils.py:64 用例标题: 复制后删除外部机构
+INFO     common.logs_config:request_utils.py:65 请求方式: POST
+INFO     common.logs_config:request_utils.py:66 请求路径: http://172.18.26.254:8080/api/agnes-app/v1/dop/org/delete
+INFO     common.logs_config:request_utils.py:68 请求头: {'cookie': 'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBJZCI6IkFHTkVTIiwidGVuYW50SWQiOiIwIiwiY3J0VHMiOjE3MzM5NzM2ODMsInVzZXJJZCI6ImFnbmVzIn0.N3ZVoaZSK0cYqk5gh6v3IavgZHWMRMR9SH0Mic3CqO8'}
+INFO     common.logs_config:request_utils.py:70 请求 JSON 参数: {'ids': ['1j970ys1tb2ca']}
+INFO     common.logs_config:request_utils.py:86 实际响应状态码: 200
+INFO     common.logs_config:request_utils.py:87 实际响应内容: {"code":"00000000","data":"success","msgType":"success","service":"agnes-single","success":true}
+INFO     common.logs_config:request_utils.py:96 接口测试通过
+INFO     common.logs_config:request_utils.py:97 -----------测试用例请求结束-----------
