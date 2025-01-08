@@ -1,0 +1,331 @@
+###   积木管理-文件处理类   ###
+-
+  name: test_get_fh_brick_type
+  story: 积木定义-文件处理类-在线编辑
+  title: 获取积木类型-文件处理类
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/get-tree-node
+    headers:
+      cookie: ${read_extract_arg(token)}
+  extract:
+    fh_blockType: $.data.children[2].id
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+-
+  name: test_check_before_add_fh_blocks
+  story: 积木定义-文件处理类-在线编辑
+  title: 新增前查询积木信息
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    json:
+      blockType: ${read_extract_arg(fh_blockType)}
+      pageSize: 500
+      dealType: '25'
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
+  extract:
+    pre_fh_total: $.data.total
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_add_fhedit_interface_collection
+  story: 积木定义-文件处理类-在线编辑
+  title: 新增文件处理类-获取积木处理类型
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/check/blockName
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockName: autotest-文件处理类-在线编辑
+      dealType: '25'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_fhedit_blockCode
+  story: 积木定义-文件处理类-在线编辑
+  title: 新增在线编辑积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    fhedit_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+-
+  name: test_add_fhedit_pre_save
+  story: 积木定义-文件处理类-在线编辑
+  title: 新增文件处理-在线编辑-pre-save
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/pre-save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockCode": ${read_extract_arg(fhedit_blockCode)}
+      "blockName": "autotest-文件处理类-在线编辑"
+      "blockType": ${read_extract_arg(fh_blockType)}
+      "dealType": "25"
+      "status": "00"
+  extract:
+    pre_save_fhedit_pkId: $.data.pkId
+    fhedit_blockName: $.data.blockName
+    pre_save_fhedit_info : $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_add_fhedit_interface_blocks
+  story: 积木定义-文件处理类-在线编辑
+  title: 文件处理类-在线编辑-新增保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockType: ${read_extract_arg(fh_blockType)}
+      blockName: ${read_extract_arg(fhedit_blockName)}
+      dealType: '25'
+      pkId: ${read_extract_arg(pre_save_fhedit_pkId)}
+      blockCode: ${read_extract_arg(fhedit_blockCode)}
+      isEditCode: false
+      allowManualConfirm: '1'
+      targetFields: [ ]
+      dealId: ''
+      blockDesc: test-add
+      dealConfJson: '[{"fileName":"资料","docId":"test$x$$y$"}]'
+      blockParamInfos:
+        - fieldCode: x
+          fieldName: x
+          paramType: in
+          fieldType: String
+        - fieldCode: 'y'
+          fieldName: 'y'
+          paramType: in
+          fieldType: String
+      isNeedCheck: '1'
+      isAdd: '1'
+      status: '01'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_check_after_add_fhedit_blocks
+  story: 积木定义-文件处理类-在线编辑
+  title: 查询积木信息
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    json:
+      blockType: ${read_extract_arg(fh_blockType)}
+      pageSize: 500
+      dealType: '25'
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
+  extract:
+    fh_total: $.data.total
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_edit_fhedit_interface_building_blocks
+  story: 积木定义-文件处理类-在线编辑
+  title: 文件处理类-在线编辑-编辑保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      allowManualConfirm: '1'
+      blockCode: ${read_extract_arg(fhedit_blockCode)}
+      blockDesc: test-edit
+      blockName: autotest-文件处理类-在线编辑-edit
+      blockType: ${read_extract_arg(fh_blockType)}
+      crtTs: '2024-12-18 14:01:16'
+      crtUser: agnes
+      dealConfJson: '[{"fileName":"资料","docId":"$m$test$x$$y$"}]'
+      dealType: '25'
+      isDel: '0'
+      isEditCode: false
+      pkId: ${read_extract_arg(pre_save_fhedit_pkId)}
+      status: '01'
+      updateTs: '2024-12-18 14:01:16'
+      updateUser: agnes
+      isAllowExecAgain: '1'
+      targetFields: [ ]
+      dealId: ''
+      blockParamInfos:
+        - fieldCode: m
+          fieldName: m
+          paramType: in
+          fieldType: String
+        - fieldCode: x
+          fieldName: x
+          paramType: in
+          fieldType: String
+        - fieldCode: 'y'
+          fieldName: 'y'
+          paramType: in
+          fieldType: String
+      isNeedCheck: '1'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_fhedit_copy_blockCode
+  story: 积木定义-文件处理类-在线编辑
+  title: 复制积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    fhedit_copy_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_copy_fhedit_interface_building_blocks
+  story: 积木定义-文件处理类-在线编辑
+  title: 文件处理类-在线编辑-复制保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      allowManualConfirm: '1'
+      blockCode: ${read_extract_arg(fhedit_copy_blockCode)}
+      blockDesc: test-copy
+      blockName: autotest-文件处理类-在线编辑-edit(copy)
+      blockType: ${read_extract_arg(fh_blockType)}
+      crtTs: '2024-12-18 14:01:16'
+      crtUser: agnes
+      dealConfJson: '[{"fileName":"资料","docId":"$m$test$x$$y$"}]'
+      dealType: '25'
+      isAllowExecAgain: '1'
+      isDel: '0'
+      isEditCode: false
+      pkId: ''
+      status: '01'
+      updateTs: '2024-12-18 14:34:53'
+      updateUser: agnes
+      targetFields: [ ]
+      dealId: ''
+      blockParamInfos:
+        - fieldCode: m
+          fieldName: m
+          paramType: in
+          fieldType: String
+        - fieldCode: x
+          fieldName: x
+          paramType: in
+          fieldType: String
+        - fieldCode: 'y'
+          fieldName: 'y'
+          paramType: in
+          fieldType: String
+      isNeedCheck: '1'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_fhedit_approve_blocks
+  story: 积木定义-文件处理类-在线编辑
+  title: 文件处理类-在线编辑-审核保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/approve
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_fhedit_pkId)}
+        - ${read_extract_arg(fhedit_copy_pkId)}
+      status: '02'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_fhedit_publish_blocks
+  story: 积木定义-文件处理类-在线编辑
+  title: 文件处理类-在线编辑-发布数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/publish
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_fhedit_pkId)}
+        - ${read_extract_arg(fhedit_copy_pkId)}
+      status: '03'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_fhedit_delete_blocks
+  story: 积木定义-文件处理类-在线编辑
+  title: 文件处理类-在线编辑-删除数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_fhedit_pkId)}
+        - ${read_extract_arg(fhedit_copy_pkId)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
