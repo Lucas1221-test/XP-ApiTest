@@ -1,0 +1,1654 @@
+###   积木管理--数据采集类   ###
+-
+  name: test_get_dc_brick_type
+  story: 积木定义-数据采集-接口采集
+  title: 获取积木类型-数据采集
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/get-tree-node
+    headers:
+      cookie: ${read_extract_arg(token)}
+  extract:
+    blockType: $.data.children[0].id
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_add_interface_collection
+  story: 积木定义-数据采集-接口采集
+  title: 新增接口采集-获取积木处理类型
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/check/blockName
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockName": "autotest-数据采集-接口采集"
+      "dealType": "01"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_blockCode
+  story: 积木定义-数据采集-接口采集
+  title: 新增积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_pre_save
+  story: 积木定义-数据采集-接口采集
+  title: 新增数据采集-接口积木-pre-save
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/pre-save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockCode": ${read_extract_arg(blockCode)}
+      "blockName": "autotest-数据采集-接口采集"
+      "blockType": '${read_extract_arg(blockType)}'
+      "dealType": "01"
+  extract:
+    pre_save_pkId: $.data.pkId
+    blockName: $.data.blockName
+#    pre_save_info : $.data.
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_send_test
+  story: 积木定义-数据采集-接口采集
+  title: 数据采集-接口积木-发送测试
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/verify-interface-collect
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockInfo:
+        acReInterfaceDef:
+          param1: '00'
+          url: "http://172.21.0.52:8080/api/gf-admin/gf/index/login"
+          paramType: '2'
+          checkParamType: '1'
+          checkUrl: ''
+          isCheck: '0'
+          checkMethod: '0'
+          method: '0' #post
+          headerFields: [ ]
+          checkHeaderFields: [ ]
+          paramFields: [ ]
+          params: "{\r\n  \"userId\": \"agnes\",\r\n  \"password\": \"04d4755ecc4702fd0077823661a5c4a1cf308c14e2eac3e0502cdd71720bda147aefa2c9698cef2803d158c272cd40b75fab223e3f130b567953b646d322a8a68c27819de6e9a122d600b775bc190b4bd8dad0205b86abdabd9750453fe533dde10152eec3db6e5d1d1e\",\r\n  \"captcha\": \"\",\r\n  \"captchaId\": \"\"\r\n}"
+          checkParams: ''
+          checkParamFields: [ ]
+          dealType: '01'
+          reqParam: ''
+          reqParamType: '1'
+          outParamFields: [ ]
+          respParam: ''
+          headers: ''
+          checkHeaders: ''
+          dipName: ${read_extract_arg(blockName)}
+        dealType: '01'
+        blockParamInfos: [ ]
+        param1: '00'
+        dealConfJson: '{"resValueType":"json","resValueFields":[]}'
+      paramsInfo: { }
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_add_interface_building_blocks
+  story: 积木定义-数据采集-接口采集
+  title: 数据采集-接口采集-新增保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockType: ${read_extract_arg(blockType)}
+      blockName: ${read_extract_arg(blockName)}
+      dealType: '01'
+      pkId: ${read_extract_arg(pre_save_pkId)}
+      blockCode: ${read_extract_arg(blockCode)}
+      isEditCode: false
+      allowManualConfirm: '1'
+      isAllowExecAgain: '1'
+      targetFields: [ ]
+      acReInterfaceDef:
+        param1: '00'
+        url: "http://172.21.0.52:8080/api/gf-admin/gf/index/login"
+        paramType: '2'
+        checkParamType: '1'
+        checkUrl: ''
+        isCheck: '0'
+        checkMethod: '0'
+        method: '0'
+        headerFields: [ ]
+        checkHeaderFields: [ ]
+        paramFields: [ ]
+        params: "{\r\n  \"userId\": \"agnes\",\r\n  \"password\": \"04d4755ecc4702fd0077823661a5c4a1cf308c14e2eac3e0502cdd71720bda147aefa2c9698cef2803d158c272cd40b75fab223e3f130b567953b646d322a8a68c27819de6e9a122d600b775bc190b4bd8dad0205b86abdabd9750453fe533dde10152eec3db6e5d1d1e\",\r\n  \"captcha\": \"\",\r\n  \"captchaId\": \"\"\r\n}"
+        checkParams: ''
+        checkParamFields: [ ]
+        dealType: '01'
+        reqParam: ''
+        reqParamType: '1'
+        outParamFields: [ ]
+        respParam: ''
+        headers: ''
+        checkHeaders: ''
+        dipName: ${read_extract_arg(blockName)}
+      blockParamInfos: [ ]
+      param1: '00'
+      blockDesc: 'test'
+      dealConfJson: '{"resValueType":"json","resValueFields":[]}'
+      isNeedCheck: '1'
+      isAdd: '1'
+      status: '01'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_check_after_add_blocks
+  story: 积木定义-数据采集-接口采集
+  title: 查询积木信息
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    json:
+      "blockType": '${read_extract_arg(blockType)}'
+      "pageSize": 500
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+#      blockName: ${read_extract_arg(blockName)}
+
+
+-
+  name: test_get_copy_blockCode
+  story: 积木定义-数据采集-接口采集
+  title: 复制积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    dc_copy_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_dc_copy_blocks
+  story: 积木定义-数据采集-接口采集
+  title: 数据采集-接口采集-复制保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      acReInterfaceDef:
+        param1: '00'
+        url: 'http://172.21.0.52:8080/api/gf-admin/gf/index/login'
+        paramType: '2'
+        checkParamType: '1'
+        checkUrl: ''
+        isCheck: '0'
+        checkMethod: '0'
+        method: '0'
+        headerFields: [ ]
+        checkHeaderFields: [ ]
+        paramFields: [ ]
+        params: "{\r\n  \"userId\": \"agnes\",\r\n  \"password\": \"04d4755ecc4702fd0077823661a5c4a1cf308c14e2eac3e0502cdd71720bda147aefa2c9698cef2803d158c272cd40b75fab223e3f130b567953b646d322a8a68c27819de6e9a122d600b775bc190b4bd8dad0205b86abdabd9750453fe533dde10152eec3db6e5d1d1e\",\r\n  \"captcha\": \"\",\r\n  \"captchaId\": \"\"\r\n}"
+        checkParams: ''
+        checkParamFields: [ ]
+        crtTs: '2024-12-20 09:55:09'
+        crtUser: agnes
+        dipName: autotest-数据采集-接口采集-copy
+        isDel: '0'
+        pkId: 1j9zcwrh2o49m
+        dealId: 1j9zcwrh2o49m
+        dealType: '01'
+        dealConfJson: '{"resValueType":"json","resValueFields":[]}'
+        headers: ''
+        checkHeaders: ''
+      allowManualConfirm: '1'
+      blockCode: ${read_extract_arg(dc_copy_blockCode)}
+      blockDesc: test-copy
+      blockName: autotest-数据采集-接口采集-copy
+      blockType: '01'
+      crtTs: '2024-12-20 09:55:06'
+      crtUser: agnes
+      dealConfJson: '{"resValueType":"json","resValueFields":[]}'
+      dealId: ''
+      dealType: '01'
+      isAllowExecAgain: '1'
+      isDel: '0'
+      isEditCode: false
+      param1: '00'
+      pkId: ''
+      status: '01'
+      updateTs: '2024-12-20 09:55:09'
+      updateUser: agnes
+      targetFields: [ ]
+      blockParamInfos: [ ]
+      isNeedCheck: '1'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+-
+  name: test_dc_approve_blocks
+  story: 积木定义-数据采集-接口采集
+  title: 数据采集-接口采集-审核数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/approve
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_pkId)}
+        - ${read_extract_arg(copy_pkId)}
+      status: '02'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_dc_publish_blocks
+  story: 积木定义-数据采集-接口采集
+  title: 数据采集-接口采集-发布数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/publish
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_pkId)}
+        - ${read_extract_arg(copy_pkId)}
+      status: '03'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_dc_delete_blocks
+  story: 积木定义-数据采集-接口采集
+  title: 数据采集-接口采集-删除数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_pkId)}
+        - ${read_extract_arg(copy_pkId)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_fetch_dc_hexETL_type
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 新增接口采集-获取ETL采集 单JOB类
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/check/blockName
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockName": "autotest-数据采集-hexETL"
+      "dealType": "02"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_hexETL_blockCode
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 新增积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    hexETL_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_dc_hexETL_pre_save
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 新增数据采集-ETL单JOB-pre-save
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/pre-save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockCode": ${read_extract_arg(hexETL_blockCode)}
+      "blockName": "autotest-数据采集-hexETL"
+      "blockType": '${read_extract_arg(blockType)}'
+      "dealType": "02"
+  extract:
+    pre_save_hexETL_pkId: $.data.pkId
+    hexETL_blockName: $.data.blockName
+    pre_save_hexETL_info : $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_dc_hexETL_onLoad
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 新增数据采集-ETL单JOB-加载映射字段
+  request:
+    method: POST
+    url: api/data-pipe/hexETL/extract/onLoad
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      dopETLReConfDBFields: [ ]
+      fieldMap: [ ]
+      paramFields: [ ]
+      mode: ''
+      confName: test
+      originDs: 758e98faff8e492093c148d4e8efc23b
+      selectClause: select *
+      fromClause: from AUTO_Student
+      whereClause: where 1=1
+      groupClause: ''
+      orderKeys: SBIRTHDAY
+      destDs: 758e98faff8e492093c148d4e8efc23b
+      currentTable: AUTO_Student_AIM_DISTINCT
+      delDest: '0'
+      destTable: AUTO_Student_AIM
+  validate:
+    status: 200
+    equals:
+      destTable: "AUTO_Student_AIM"
+
+
+-
+  name: test_add_dc_hexETL_blocks
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 新增数据采集-ETL单JOB-新增保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockType: ${read_extract_arg(blockType)}
+      blockName: ${read_extract_arg(hexETL_blockName)}
+      dealType: '02'
+      pkId: ${read_extract_arg(pre_save_hexETL_pkId)}
+      blockCode: ${read_extract_arg(hexETL_blockCode)}
+      isEditCode: false
+      allowManualConfirm: '1'
+      isAllowExecAgain: '1'
+      targetFields: [ ]
+      dopETLReConfDB:
+        dopETLReConfDBFields:
+          - destField: SNO
+            destFieldType: VARCHAR2
+            destTable: AUTO_Student_AIM
+            nullAble: '1'
+            originField: SNO
+            originFieldType: VARCHAR2
+            originTable: from AUTO_Student
+            pkId: 3c6435fab8374ed0ab09eb0c8a243211
+            isPk: '1'
+          - destField: SNAME
+            destFieldType: VARCHAR2
+            destTable: AUTO_Student_AIM
+            nullAble: '1'
+            originField: SNAME
+            originFieldType: VARCHAR2
+            originTable: from AUTO_Student
+            pkId: efb36e306f28424ebb7cd8aef1dfbe96
+          - destField: SSEX
+            destFieldType: VARCHAR2
+            destTable: AUTO_Student_AIM
+            nullAble: '1'
+            originField: SSEX
+            originFieldType: VARCHAR2
+            originTable: from AUTO_Student
+            pkId: d2ec626eb5cc43719cabcdb0fc8a2a2b
+          - destField: SBIRTHDAY
+            destFieldType: DATE
+            destTable: AUTO_Student_AIM
+            nullAble: '0'
+            originField: SBIRTHDAY
+            originFieldType: DATE
+            originTable: from AUTO_Student
+            pkId: ea23985cd5d14319b126c3046495ba94
+          - destField: SCLASS
+            destFieldType: VARCHAR2
+            destTable: AUTO_Student_AIM
+            nullAble: '0'
+            originField: SCLASS
+            originFieldType: VARCHAR2
+            originTable: from AUTO_Student
+            pkId: 3263c02d9c17494e9e3272da2d1e71f0
+        fieldMap:
+          - fieldDesc: SNO
+            fieldName: SNO
+            fieldType: VARCHAR2
+            nullable: 1
+            tableName: ''
+          - fieldDesc: SNAME
+            fieldName: SNAME
+            fieldType: VARCHAR2
+            nullable: 1
+            tableName: ''
+          - fieldDesc: SSEX
+            fieldName: SSEX
+            fieldType: VARCHAR2
+            nullable: 1
+            tableName: ''
+          - fieldDesc: SBIRTHDAY
+            fieldName: SBIRTHDAY
+            fieldType: DATE
+            nullable: 0
+            tableName: ''
+          - fieldDesc: SCLASS
+            fieldName: SCLASS
+            fieldType: VARCHAR2
+            nullable: 0
+            tableName: ''
+        paramFields: [ ]
+        mode: ''
+        confName: test
+        originDs: 758e98faff8e492093c148d4e8efc23b
+        selectClause: select *
+        fromClause: from AUTO_Student
+        whereClause: where 1=1
+        groupClause: ''
+        orderKeys: Sbirthday
+        destDs: 758e98faff8e492093c148d4e8efc23b
+        currentTable: AUTO_Student_AIM_DISTINCT
+        delDest: '0'
+        destTable: AUTO_Student_AIM
+      dealConfJson: '[test]'
+      blockParamInfos: [ ]
+      isNeedCheck: '1'
+      isAdd: '1'
+      status: '01'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+-
+  name: test_check_after_add_dchexETL_blocks
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 查询积木信息
+  extract:
+    total: $.data.total
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    json:
+      "blockType": '${read_extract_arg(blockType)}'
+      "pageSize": 500
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_get_copy_hexETL_blockCode
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 复制积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    copy_hexETL_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_copy_dc_hexETL_blocks
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 新增数据采集-ETL单JOB-复制保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockType: ${read_extract_arg(blockType)}
+      blockName: 'autotest-数据采集-hexETL-copy'
+      dealType: '02'
+      pkId: ''
+      blockCode: ${read_extract_arg(copy_hexETL_blockCode)}
+      isEditCode: false
+      allowManualConfirm: '1'
+      isAllowExecAgain: '1'
+      targetFields: [ ]
+      dopETLReConfDB:
+        dopETLReConfDBFields:
+          - destField: SNO
+            destFieldType: VARCHAR2
+            destTable: AUTO_Student_AIM
+            nullAble: '1'
+            originField: SNO
+            originFieldType: VARCHAR2
+            originTable: from AUTO_Student
+            pkId: 3c6435fab8374ed0ab09eb0c8a243211
+            isPk: '1'
+          - destField: SNAME
+            destFieldType: VARCHAR2
+            destTable: AUTO_Student_AIM
+            nullAble: '1'
+            originField: SNAME
+            originFieldType: VARCHAR2
+            originTable: from AUTO_Student
+            pkId: efb36e306f28424ebb7cd8aef1dfbe96
+          - destField: SSEX
+            destFieldType: VARCHAR2
+            destTable: AUTO_Student_AIM
+            nullAble: '1'
+            originField: SSEX
+            originFieldType: VARCHAR2
+            originTable: from AUTO_Student
+            pkId: d2ec626eb5cc43719cabcdb0fc8a2a2b
+          - destField: SBIRTHDAY
+            destFieldType: DATE
+            destTable: AUTO_Student_AIM
+            nullAble: '0'
+            originField: SBIRTHDAY
+            originFieldType: DATE
+            originTable: from AUTO_Student
+            pkId: ea23985cd5d14319b126c3046495ba94
+          - destField: SCLASS
+            destFieldType: VARCHAR2
+            destTable: AUTO_Student_AIM
+            nullAble: '0'
+            originField: SCLASS
+            originFieldType: VARCHAR2
+            originTable: from AUTO_Student
+            pkId: 3263c02d9c17494e9e3272da2d1e71f0
+        fieldMap:
+          - fieldDesc: SNO
+            fieldName: SNO
+            fieldType: VARCHAR2
+            nullable: 1
+            tableName: ''
+          - fieldDesc: SNAME
+            fieldName: SNAME
+            fieldType: VARCHAR2
+            nullable: 1
+            tableName: ''
+          - fieldDesc: SSEX
+            fieldName: SSEX
+            fieldType: VARCHAR2
+            nullable: 1
+            tableName: ''
+          - fieldDesc: SBIRTHDAY
+            fieldName: SBIRTHDAY
+            fieldType: DATE
+            nullable: 0
+            tableName: ''
+          - fieldDesc: SCLASS
+            fieldName: SCLASS
+            fieldType: VARCHAR2
+            nullable: 0
+            tableName: ''
+        paramFields: [ ]
+        mode: ''
+        confName: test
+        originDs: 758e98faff8e492093c148d4e8efc23b
+        selectClause: select *
+        fromClause: from AUTO_Student
+        whereClause: where 1=1
+        groupClause: ''
+        orderKeys: Sbirthday
+        destDs: 758e98faff8e492093c148d4e8efc23b
+        currentTable: AUTO_Student_AIM_DISTINCT
+        delDest: '0'
+        destTable: AUTO_Student_AIM
+      dealConfJson: '[test]'
+      blockParamInfos: [ ]
+      isNeedCheck: '1'
+      isAdd: '1'
+      status: '01'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_edit_dc_hexETL_blocks
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 新增数据采集-ETL单JOB-编辑保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockType: ${read_extract_arg(blockType)}
+      blockName: 'autotest-数据采集-hexETL-edit'
+      dealType: '02'
+      pkId: ${read_extract_arg(pre_save_hexETL_pkId)}
+      blockCode: ${read_extract_arg(hexETL_blockCode)}
+      isEditCode: false
+      allowManualConfirm: '1'
+      isAllowExecAgain: '1'
+      targetFields: [ ]
+      dopETLReConfDB:
+        dopETLReConfDBFields:
+          - destField: SNO
+            destFieldType: VARCHAR2
+            destTable: AUTO_Student_AIM
+            nullAble: '1'
+            originField: SNO
+            originFieldType: VARCHAR2
+            originTable: from AUTO_Student
+            pkId: 3c6435fab8374ed0ab09eb0c8a243211
+            isPk: '1'
+          - destField: SNAME
+            destFieldType: VARCHAR2
+            destTable: AUTO_Student_AIM
+            nullAble: '1'
+            originField: SNAME
+            originFieldType: VARCHAR2
+            originTable: from AUTO_Student
+            pkId: efb36e306f28424ebb7cd8aef1dfbe96
+          - destField: SSEX
+            destFieldType: VARCHAR2
+            destTable: AUTO_Student_AIM
+            nullAble: '1'
+            originField: SSEX
+            originFieldType: VARCHAR2
+            originTable: from AUTO_Student
+            pkId: d2ec626eb5cc43719cabcdb0fc8a2a2b
+          - destField: SBIRTHDAY
+            destFieldType: DATE
+            destTable: AUTO_Student_AIM
+            nullAble: '0'
+            originField: SBIRTHDAY
+            originFieldType: DATE
+            originTable: from AUTO_Student
+            pkId: ea23985cd5d14319b126c3046495ba94
+          - destField: SCLASS
+            destFieldType: VARCHAR2
+            destTable: AUTO_Student_AIM
+            nullAble: '0'
+            originField: SCLASS
+            originFieldType: VARCHAR2
+            originTable: from AUTO_Student
+            pkId: 3263c02d9c17494e9e3272da2d1e71f0
+        fieldMap:
+          - fieldDesc: SNO
+            fieldName: SNO
+            fieldType: VARCHAR2
+            nullable: 1
+            tableName: ''
+          - fieldDesc: SNAME
+            fieldName: SNAME
+            fieldType: VARCHAR2
+            nullable: 1
+            tableName: ''
+          - fieldDesc: SSEX
+            fieldName: SSEX
+            fieldType: VARCHAR2
+            nullable: 1
+            tableName: ''
+          - fieldDesc: SBIRTHDAY
+            fieldName: SBIRTHDAY
+            fieldType: DATE
+            nullable: 0
+            tableName: ''
+          - fieldDesc: SCLASS
+            fieldName: SCLASS
+            fieldType: VARCHAR2
+            nullable: 0
+            tableName: ''
+        paramFields: [ ]
+        mode: ''
+        confName: test-edit
+        originDs: 758e98faff8e492093c148d4e8efc23b
+        selectClause: select *
+        fromClause: from AUTO_Student
+        whereClause: where 1=1
+        groupClause: ''
+        orderKeys: Sbirthday
+        destDs: 758e98faff8e492093c148d4e8efc23b
+        currentTable: AUTO_Student_AIM_DISTINCT
+        delDest: '0'
+        destTable: AUTO_Student_AIM
+      dealConfJson: '[test]'
+      blockParamInfos: [ ]
+      isNeedCheck: '1'
+      isAdd: '1'
+      status: '01'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+-
+  name: test_dc_hexETL_approve_blocks
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 数据采集-ETL单JOB-审核数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/approve
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_hexETL_info)}
+        - ${read_extract_arg(hexETL_copy_pkId)}
+      status: '02'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_dc_hexETL_publish_blocks
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 数据采集-ETL单JOB-发布数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/publish
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_hexETL_info)}
+        - ${read_extract_arg(hexETL_copy_pkId)}
+      status: '03'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+-
+  name: test_dc_hexETL_delete_blocks
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 数据采集-ETL采集 单JOB类-删除数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_hexETL_info)}
+        - ${read_extract_arg(hexETL_copy_pkId)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_check_before_add_mulETL_blocks
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: ETL采集多JOB查询积木信息
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    json:
+      blockType: ${read_extract_arg(blockType)}
+      pageSize: 500
+      dealType: '26'
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
+  extract:
+    pre_mulETL_total: $.data.total
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_add_dc_mulETL_interface_collection
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: 新增ETL采集-多JOB-获取积木处理类型
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/check/blockName
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockName: autotest-数据采集类-ETL多JOB
+      dealType: '26'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_mulETL_fhedit_blockCode
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: 新增ETL采集多JOB积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    mulETL_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+-
+  name: test_add_mulETL_pre_save
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: 新增数据采集类-ETL采集多JOB-pre-save
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/pre-save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockName: autotest-数据采集类-ETL多JOB
+      dealType: '26'
+      blockCode: ${read_extract_arg(mulETL_blockCode)}
+      blockType: ${read_extract_arg(blockType)}
+      status: '00'
+  extract:
+    pre_save_mulETL_pkId: $.data.pkId
+    mulETL_blockName: $.data.blockName
+    pre_save_mulETL_info : $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_add_mulETL_interface_blocks
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: 新增数据采集类-ETL采集多JOB-新增保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockType: ${read_extract_arg(blockType)}
+      blockName: ${read_extract_arg(mulETL_blockName)}
+      dealType: '26'
+      pkId: ${read_extract_arg(pre_save_mulETL_pkId)}
+      blockCode: ${read_extract_arg(mulETL_blockCode)}
+      isEditCode: false
+      allowManualConfirm: '1'
+      isAllowExecAgain: '1'
+      targetFields: [ ]
+      dealId: ''
+      dopETLReConfDBVos:
+        - dopETLReConfDBFields:
+            - destTable: AUTO_STUDENT_AIM_test
+              originField: SNO
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student
+              pkId: a5542ead969043a0b989413b2cea69cc
+            - destTable: AUTO_STUDENT_AIM_test
+              originField: SNAME
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student
+              pkId: 30f2765df75a466ba2deaef294dd2e3d
+            - destTable: AUTO_STUDENT_AIM_test
+              originField: SSEX
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student
+              pkId: 480a8b08cca7414e8284fabb753ae7c3
+            - destTable: AUTO_STUDENT_AIM_test
+              originField: SBIRTHDAY
+              originFieldType: DATE
+              originTable: from AUTO_Student
+              pkId: b9083e87739740b3af49405bd65abd00
+            - destTable: AUTO_STUDENT_AIM_test
+              originField: SCLASS
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student
+              pkId: 86c447f2a660479fa90f46f9c96ea699
+          fieldMap:
+            - fieldDesc: SNO1
+              fieldName: SNO1
+              fieldType: VARCHAR2
+              nullable: 1
+              tableName: ''
+            - fieldDesc: SNAME1
+              fieldName: SNAME1
+              fieldType: VARCHAR2
+              nullable: 1
+              tableName: ''
+            - fieldDesc: SSEX1
+              fieldName: SSEX1
+              fieldType: VARCHAR2
+              nullable: 1
+              tableName: ''
+            - fieldDesc: SBIRTHDAY1
+              fieldName: SBIRTHDAY1
+              fieldType: DATE
+              nullable: 0
+              tableName: ''
+            - fieldDesc: SCLASS1
+              fieldName: SCLASS1
+              fieldType: VARCHAR2
+              nullable: 0
+              tableName: ''
+          mode: ''
+          confName: test-job1
+          originDs: 758e98faff8e492093c148d4e8efc23b
+          selectClause: select *
+          fromClause: from AUTO_Student
+          whereClause: where 1=1
+          groupClause: ''
+          orderKeys: SBIRTHDAY
+          destDs: 758e98faff8e492093c148d4e8efc23b
+          currentTable: ''
+          delDest: '0'
+          destTable: AUTO_STUDENT_AIM_test
+          confId: default
+          stepOrder: 1
+          paramFields:
+            - fieldName: ''
+              fieldCode: ''
+              example: example
+              confId: default
+            - fieldName: ''
+              fieldCode: ''
+              example: example
+              confId: default
+            - fieldName: ''
+              fieldCode: ''
+              example: example
+              confId: default
+        - dopETLReConfDBFields:
+            - destTable: AUTO_STUDENT_AIM_test
+              originField: SNO
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student_AIM
+              pkId: 78e625fa457241fc86f4a829f8bd7545
+              isPk: '1'
+            - destTable: AUTO_STUDENT_AIM_test
+              originField: SNAME
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student_AIM
+              pkId: 9af04d8ea7f747c585a1873190ef63dc
+            - destTable: AUTO_STUDENT_AIM_test
+              originField: SSEX
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student_AIM
+              pkId: 84223fdabe694aa28bcc12bf6e44c582
+            - destTable: AUTO_STUDENT_AIM_test
+              originField: SBIRTHDAY
+              originFieldType: DATE
+              originTable: from AUTO_Student_AIM
+              pkId: 2e5a4dea60934c888dd569b500453d57
+            - destTable: AUTO_STUDENT_AIM_test
+              originField: SCLASS
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student_AIM
+              pkId: 142a30bd08dc4a0ebd8991dddb519628
+          fieldMap:
+            - fieldDesc: SNO1
+              fieldName: SNO1
+              fieldType: VARCHAR2
+              nullable: 1
+              tableName: ''
+            - fieldDesc: SNAME1
+              fieldName: SNAME1
+              fieldType: VARCHAR2
+              nullable: 1
+              tableName: ''
+            - fieldDesc: SSEX1
+              fieldName: SSEX1
+              fieldType: VARCHAR2
+              nullable: 1
+              tableName: ''
+            - fieldDesc: SBIRTHDAY1
+              fieldName: SBIRTHDAY1
+              fieldType: DATE
+              nullable: 0
+              tableName: ''
+            - fieldDesc: SCLASS1
+              fieldName: SCLASS1
+              fieldType: VARCHAR2
+              nullable: 0
+              tableName: ''
+          mode: ''
+          confName: test-job2
+          originDs: 758e98faff8e492093c148d4e8efc23b
+          selectClause: select *
+          fromClause: from AUTO_Student_AIM
+          whereClause: where 1=1
+          groupClause: ''
+          orderKeys: SBIRTHDAY
+          destDs: 758e98faff8e492093c148d4e8efc23b
+          currentTable: ''
+          delDest: '0'
+          destTable: AUTO_STUDENT_AIM_test
+          confId: default
+          stepOrder: 2
+      dealConfJson: '[]'
+      blockParamInfos: [ ]
+      isNeedCheck: '1'
+      isAdd: '1'
+      status: '01'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_check_after_add_mulETL_blocks
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: ETL采集多JOB查询积木信息
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    json:
+      blockType: ${read_extract_arg(blockType)}
+      pageSize: 500
+      dealType: '26'
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
+  extract:
+    mulETL_total: $.data.total
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_edit_mulETL_interface_building_blocks
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: 数据采集类-ETL采集多JOB-编辑保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      allowManualConfirm: '1'
+      blockCode: ${read_extract_arg(mulETL_blockCode)}
+      blockName: autotest-数据采集类-ETL多JOB-edit
+      blockType: ${read_extract_arg(blockType)}
+      crtTs: '2024-12-19 14:44:54'
+      crtUser: agnes
+      dealConfJson: '[]'
+      dealId: 6504b4e952594dc9a967bd11e037e326
+      dealType: '26'
+      isAllowExecAgain: '1'
+      isDel: '0'
+      isEditCode: false
+      pkId: ${read_extract_arg(pre_save_mulETL_pkId)}
+      status: '01'
+      updateTs: '2024-12-19 16:17:46'
+      updateUser: agnes
+      blockDesc: test-edit
+      targetFields: [ ]
+      dopETLReConfDBVos:
+        - confId: b74d1a7276354a21ab922267e8a7f173
+          confName: test-ejob1
+          creator: agnes
+          crtTime: '2024-12-19 16:17:45'
+          delDest: '0'
+          destDs: 758e98faff8e492093c148d4e8efc23b
+          destTable: AUTO_STUDENT_AIM_test
+          dopETLReConfDBFields:
+            - confId: b74d1a7276354a21ab922267e8a7f173
+              creator: agnes
+              crtTime: '2024-12-19 16:17:45'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SNO
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student
+              pkId: 79b21cc9775942949f9a5628d1d87a79
+              updateTime: '2024-12-19 16:17:45'
+              updateUser: agnes
+            - confId: b74d1a7276354a21ab922267e8a7f173
+              creator: agnes
+              crtTime: '2024-12-19 16:17:45'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SNAME
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student
+              pkId: 268d13957028452f833547253d0a2e17
+              updateTime: '2024-12-19 16:17:45'
+              updateUser: agnes
+            - confId: b74d1a7276354a21ab922267e8a7f173
+              creator: agnes
+              crtTime: '2024-12-19 16:17:45'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SSEX
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student
+              pkId: 33a0c931787142b080bdba6ab8890eb5
+              updateTime: '2024-12-19 16:17:45'
+              updateUser: agnes
+            - confId: b74d1a7276354a21ab922267e8a7f173
+              creator: agnes
+              crtTime: '2024-12-19 16:17:45'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SBIRTHDAY
+              originFieldType: DATE
+              originTable: from AUTO_Student
+              pkId: b6841cb73830445e9f3ae329909e7aab
+              updateTime: '2024-12-19 16:17:45'
+              updateUser: agnes
+            - confId: b74d1a7276354a21ab922267e8a7f173
+              creator: agnes
+              crtTime: '2024-12-19 16:17:45'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SCLASS
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student
+              pkId: 0f07ff05d0da401da5a10cfe4d84fcd7
+              updateTime: '2024-12-19 16:17:45'
+              updateUser: agnes
+          fromClause: from AUTO_Student
+          isDel: '0'
+          orderKeys: SBIRTHDAY
+          originDs: 758e98faff8e492093c148d4e8efc23b
+          selectClause: select *
+          stepOrder: 1
+          updateTime: '2024-12-19 16:17:45'
+          updateUser: agnes
+          whereClause: where 1=1
+          paramFields: [ ]
+          fieldMap:
+            - fieldDesc: SNO1
+              fieldName: SNO1
+              fieldType: VARCHAR2
+              nullable: 1
+              tableName: ''
+            - fieldDesc: SNAME1
+              fieldName: SNAME1
+              fieldType: VARCHAR2
+              nullable: 1
+              tableName: ''
+            - fieldDesc: SSEX1
+              fieldName: SSEX1
+              fieldType: VARCHAR2
+              nullable: 1
+              tableName: ''
+            - fieldDesc: SBIRTHDAY1
+              fieldName: SBIRTHDAY1
+              fieldType: DATE
+              nullable: 0
+              tableName: ''
+            - fieldDesc: SCLASS1
+              fieldName: SCLASS1
+              fieldType: VARCHAR2
+              nullable: 0
+              tableName: ''
+        - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+          confName: test-ejob2
+          creator: agnes
+          crtTime: '2024-12-19 16:17:46'
+          delDest: '0'
+          destDs: 758e98faff8e492093c148d4e8efc23b
+          destTable: AUTO_STUDENT_AIM_test
+          dopETLReConfDBFields:
+            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+              creator: agnes
+              crtTime: '2024-12-19 16:17:46'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              isPk: '1'
+              originField: SNO
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student_AIM
+              pkId: 2ad71e9839564034ad99b96a796b6143
+              updateTime: '2024-12-19 16:17:46'
+              updateUser: agnes
+            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+              creator: agnes
+              crtTime: '2024-12-19 16:17:46'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SNAME
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student_AIM
+              pkId: 3a332b94b2354591b8c730382d70224b
+              updateTime: '2024-12-19 16:17:46'
+              updateUser: agnes
+            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+              creator: agnes
+              crtTime: '2024-12-19 16:17:46'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SSEX
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student_AIM
+              pkId: be9bf084543f4558a4cb19bf4f7147f7
+              updateTime: '2024-12-19 16:17:46'
+              updateUser: agnes
+            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+              creator: agnes
+              crtTime: '2024-12-19 16:17:46'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SBIRTHDAY
+              originFieldType: DATE
+              originTable: from AUTO_Student_AIM
+              pkId: 68eba6939c854afcae5bdd9e4370ad82
+              updateTime: '2024-12-19 16:17:46'
+              updateUser: agnes
+            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+              creator: agnes
+              crtTime: '2024-12-19 16:17:46'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SCLASS
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student_AIM
+              pkId: 3ec97ca9c5a14ee6964844c38bd8b87a
+              updateTime: '2024-12-19 16:17:46'
+              updateUser: agnes
+          fromClause: from AUTO_Student_AIM
+          isDel: '0'
+          orderKeys: SBIRTHDAY
+          originDs: 758e98faff8e492093c148d4e8efc23b
+          selectClause: select *
+          stepOrder: 2
+          updateTime: '2024-12-19 16:17:46'
+          updateUser: agnes
+          whereClause: where 1=1
+          paramFields: [ ]
+          fieldMap:
+            - fieldDesc: SNO1
+              fieldName: SNO1
+              fieldType: VARCHAR2
+              nullable: 1
+              tableName: ''
+            - fieldDesc: SNAME1
+              fieldName: SNAME1
+              fieldType: VARCHAR2
+              nullable: 1
+              tableName: ''
+            - fieldDesc: SSEX1
+              fieldName: SSEX1
+              fieldType: VARCHAR2
+              nullable: 1
+              tableName: ''
+            - fieldDesc: SBIRTHDAY1
+              fieldName: SBIRTHDAY1
+              fieldType: DATE
+              nullable: 0
+              tableName: ''
+            - fieldDesc: SCLASS1
+              fieldName: SCLASS1
+              fieldType: VARCHAR2
+              nullable: 0
+              tableName: ''
+      blockParamInfos: [ ]
+      isNeedCheck: '1'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_mulETL_copy_blockCode
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: 复制积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    mulETL_copy_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_copy_mulETL_interface_building_blocks
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: 数据采集类-ETL采集-多JOB-复制保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      allowManualConfirm: '1'
+      blockCode: ${read_extract_arg(mulETL_copy_blockCode)}
+      blockDesc: test-copy
+      blockName: autotest-数据采集类-ETL多JOB-copy
+      blockType: '01'
+      crtTs: '2024-12-19 14:44:54'
+      crtUser: agnes
+      dealConfJson: '[]'
+      dealId: 6504b4e952594dc9a967bd11e037e326
+      dealType: '26'
+      isAllowExecAgain: '1'
+      isDel: '0'
+      isEditCode: false
+      pkId: 1jab0rumekcd6
+      status: '01'
+      updateTs: '2024-12-23 16:21:51'
+      updateUser: agnes
+      targetFields: [ ]
+      dopETLReConfDBVos:
+        - confId: b74d1a7276354a21ab922267e8a7f173
+          confName: test-c1job
+          creator: agnes
+          crtTime: '2024-12-19 16:17:45'
+          delDest: '0'
+          destDs: 758e98faff8e492093c148d4e8efc23b
+          destTable: AUTO_STUDENT_AIM_test
+          dopETLReConfDBFields:
+            - confId: b74d1a7276354a21ab922267e8a7f173
+              creator: agnes
+              crtTime: '2024-12-23 16:28:12'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SNO
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student
+              pkId: 195084abf6f947b0ac5d7231f4276c49
+              updateTime: '2024-12-23 16:28:12'
+              updateUser: agnes
+            - confId: b74d1a7276354a21ab922267e8a7f173
+              creator: agnes
+              crtTime: '2024-12-23 16:28:12'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SNAME
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student
+              pkId: 1a664f61b1fa498d8d9ce2a133669ab6
+              updateTime: '2024-12-23 16:28:12'
+              updateUser: agnes
+            - confId: b74d1a7276354a21ab922267e8a7f173
+              creator: agnes
+              crtTime: '2024-12-23 16:28:12'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SSEX
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student
+              pkId: 9675b5b269c944fba0b67bc48cb84cb9
+              updateTime: '2024-12-23 16:28:12'
+              updateUser: agnes
+            - confId: b74d1a7276354a21ab922267e8a7f173
+              creator: agnes
+              crtTime: '2024-12-23 16:28:12'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SBIRTHDAY
+              originFieldType: DATE
+              originTable: from AUTO_Student
+              pkId: 7a579d7259344d8aa3debf32c3b13ffc
+              updateTime: '2024-12-23 16:28:12'
+              updateUser: agnes
+            - confId: b74d1a7276354a21ab922267e8a7f173
+              creator: agnes
+              crtTime: '2024-12-23 16:28:12'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SCLASS
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student
+              pkId: 5be9f3fa010c4858b9fc1289c4aaa7d0
+              updateTime: '2024-12-23 16:28:12'
+              updateUser: agnes
+          fromClause: from AUTO_Student
+          isDel: '0'
+          orderKeys: SBIRTHDAY
+          originDs: 758e98faff8e492093c148d4e8efc23b
+          selectClause: select *
+          stepOrder: 1
+          updateTime: '2024-12-23 16:28:12'
+          updateUser: agnes
+          whereClause: where 1=1
+          paramFields: [ ]
+        - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+          confName: test-c2job
+          creator: agnes
+          crtTime: '2024-12-19 16:17:46'
+          delDest: '0'
+          destDs: 758e98faff8e492093c148d4e8efc23b
+          destTable: AUTO_STUDENT_AIM_test
+          dopETLReConfDBFields:
+            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+              creator: agnes
+              crtTime: '2024-12-23 16:28:12'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              isPk: '1'
+              originField: SNO
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student_AIM
+              pkId: 2f04198150b94f57832bc0dc2761bcfd
+              updateTime: '2024-12-23 16:28:12'
+              updateUser: agnes
+            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+              creator: agnes
+              crtTime: '2024-12-23 16:28:12'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SNAME
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student_AIM
+              pkId: 3340e880c17c4bef90892c19d82ff1b4
+              updateTime: '2024-12-23 16:28:12'
+              updateUser: agnes
+            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+              creator: agnes
+              crtTime: '2024-12-23 16:28:12'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SSEX
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student_AIM
+              pkId: 306489efe10949c88a150664bf1b8eb6
+              updateTime: '2024-12-23 16:28:12'
+              updateUser: agnes
+            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+              creator: agnes
+              crtTime: '2024-12-23 16:28:12'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SBIRTHDAY
+              originFieldType: DATE
+              originTable: from AUTO_Student_AIM
+              pkId: 8795121f8e994e4f95a2bb0d268f17a4
+              updateTime: '2024-12-23 16:28:12'
+              updateUser: agnes
+            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+              creator: agnes
+              crtTime: '2024-12-23 16:28:12'
+              destTable: AUTO_STUDENT_AIM_test
+              isDel: '0'
+              originField: SCLASS
+              originFieldType: VARCHAR2
+              originTable: from AUTO_Student_AIM
+              pkId: 747ae37fe641449bbdb9367a921e8174
+              updateTime: '2024-12-23 16:28:12'
+              updateUser: agnes
+          fromClause: from AUTO_Student_AIM
+          isDel: '0'
+          orderKeys: SBIRTHDAY
+          originDs: 758e98faff8e492093c148d4e8efc23b
+          selectClause: select *
+          stepOrder: 2
+          updateTime: '2024-12-23 16:28:12'
+          updateUser: agnes
+          whereClause: where 1=1
+          paramFields: [ ]
+      blockParamInfos: [ ]
+      isNeedCheck: '1'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_mulETL_approve_blocks
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: 数据采集类-ETL采集-多JOB-审核保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/approve
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_mulETL_pkId)}
+        - ${read_extract_arg(mulETL_copy_pkId)}
+      status: '02'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_mulETL_publish_blocks
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: 数据采集类-ETL采集-多JOB-发布保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/publish
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_mulETL_pkId)}
+        - ${read_extract_arg(mulETL_copy_pkId)}
+      status: '03'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_mulETL_delete_blocks
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: 数据采集类-ETL采集-多JOB-删除数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_mulETL_pkId)}
+        - ${read_extract_arg(mulETL_copy_pkId)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

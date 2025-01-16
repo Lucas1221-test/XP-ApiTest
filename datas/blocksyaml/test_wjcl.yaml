@@ -1,0 +1,696 @@
+#积木管理--文件处理类-混合处理
+-
+  name: test_get_brick_type
+  story: 积木定义-文件处理-混合处理
+  title: 获取积木类型
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/get-tree-node
+    headers:
+      cookie: ${read_extract_arg(token)}
+  extract:
+    blockType: $.data.children[2].id
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_save_server
+  story: 积木定义-文件处理-混合处理
+  title: 文件服务规则-新增文件服务器配置
+  request:
+    method: POST
+    url: api/agnes-app/v1/dc/server/info/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      serverName: '1'
+      serverId: ''
+      serverAddress: '1'
+      transMode: '0'
+      serverPort: '1'
+      serverUser: '1'
+      domain: ''
+      serverAa: Shhex.111
+      rootFilePath: ''
+  validate:
+    codes: 200
+
+-
+  name: get_serverId
+  story: 积木定义-文件处理-混合处理
+  title: 文件服务规则-获取文件服务器配置id
+  request:
+    method: POST
+    url: api/agnes-app/v1/dc/server/info/list-page?pageIndex=0&pageSize=500
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+        "pageIndex": 0
+        "pageSize": 500
+  extract:
+    server_total: $.data.total
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_add_mixemail
+  story: 积木定义-文件处理-混合处理
+  title: 新增混合处理积木
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/check/blockName
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockName": "111"
+      "dealType": "07"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: mixEmail_blockCode
+  story: 积木定义-文件处理-混合处理
+  title: 新增积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: mixEmail_pre_save
+  story: 积木定义-文件处理-混合处理
+  title: 新增混合处理-接口积木-pre-save
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/pre-save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockCode": ${read_extract_arg(blockCode)}
+      "blockName": "111"
+      "blockType": ${read_extract_arg(blockType)}
+      "dealType": "07"
+      "status": "00"
+  extract:
+    pre_save_pkId: $.data.pkId
+    blockName: $.data.blockName
+    pre_save_info : $.data.
+    dealType : $.data.dealType
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: mixEmail_add
+  story: 积木定义-文件处理-混合处理
+  title: 新增混合处理-接口积木
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockType": ${read_extract_arg(blockType)}
+      "blockName": ${read_extract_arg(blockName)}
+      "dealType": ${read_extract_arg(dealType)}
+      "pkId": ${read_extract_arg(pre_save_pkId)}
+      "blockCode": ${read_extract_arg(blockCode)}
+      "isEditCode": false
+      "isAllowExecAgain": "1"
+      "targetFields": []
+      "fileInfo":
+        "procDefId": ""
+        "procCode": ${read_extract_arg(blockCode)}
+        "procName": ${read_extract_arg(blockName)}
+        "srcServerId": ${read_extract_arg(serverId)}
+        "srcFileEncoding": "GBK"
+        "srcFilePath": "1"
+        "srcFileName": "1"
+        stepDefVos:
+          - fileDefId: ''
+            stepType: '1'
+            stepName: 文件扫描
+            serverId: ''
+            filePath: ''
+            ruleId: ''
+            stepNo: 0
+            fileName: ''
+            fileEncoding: ''
+            procFileDefs:
+              - fileName: '1'
+                serverId: ${read_extract_arg(serverId)}
+                filePath: '1'
+                fileEncoding: GBK
+                fileMode: '1'
+                signFile: ''
+                signFileCount: ''
+                isCreateForAll: ''
+                isCreateSignFile: ''
+                createSignFileName: ''
+                createSignFileExt: ''
+          - fileDefId: ''
+            stepType: '2'
+            stepName: 文件解压
+            serverId: ''
+            filePath: ''
+            ruleId: ''
+            stepNo: 1
+            fileName: ''
+            fileEncoding: ''
+            procFileDefs: [ ]
+          - fileDefId: ''
+            stepType: '3'
+            stepName: 文件压缩
+            serverId: ''
+            filePath: ''
+            ruleId: ''
+            stepNo: 2
+            fileName: ''
+            fileEncoding: ''
+            procFileDefs: [ ]
+          - fileDefId: ''
+            stepType: '4'
+            stepName: 文件解析
+            serverId: ''
+            filePath: ''
+            ruleId: ''
+            stepNo: 3
+            fileName: ''
+            fileEncoding: ''
+            procFileDefs: [ ]
+          - fileDefId: ''
+            stepType: '5'
+            stepName: 文件导出
+            serverId: ''
+            filePath: ''
+            ruleId: ''
+            stepNo: 4
+            fileName: ''
+            fileEncoding: ''
+            procFileDefs: [ ]
+          - fileDefId: ''
+            stepType: '6'
+            stepName: 文件分发
+            serverId: ''
+            filePath: ''
+            ruleId: ''
+            stepNo: 5
+            fileName: ''
+            fileEncoding: ''
+            procFileDefs: [ ]
+          - fileDefId: ''
+            stepType: '7'
+            stepName: 文件归集
+            serverId: ''
+            filePath: ''
+            ruleId: ''
+            stepNo: 6
+            fileName: ''
+            fileEncoding: ''
+            procFileDefs: [ ]
+          - fileDefId: ''
+            stepType: '8'
+            stepName: 脚本执行
+            serverId: ''
+            filePath: ''
+            ruleId: ''
+            stepNo: 7
+            fileName: ''
+            fileEncoding: ''
+            procFileDefs: []
+        "isNeedCheck": false
+      "blockParamInfos": []
+      "isNeedCheck": "1"
+      "isAdd": "1"
+      "status": "01"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: mixEmail_list
+  story: 积木定义-文件处理-混合处理
+  title: 新增混合处理-查看列表
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageIndex": 0
+      "pageSize": 500
+      "blockName": ""
+      "blockType": ${read_extract_arg(blockType)}
+      "status": ""
+  extract:
+    total: $.data.total
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: mixEmail_proc_info
+  story: 积木定义-文件处理-混合处理
+  title: 新增混合处理-获取处理过程信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dc/proc/def/get/proc-info
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      procDefId: ${read_extract_arg(list_dealId)}
+  extract:
+    srcFilePath: $.data.srcFilePath
+    srcFileName: $.data.srcFileName
+    srcFileEncoding: $.data.srcFileEncoding
+    stepCode1: $.data.stepDefVos.0.stepCode
+    procCode1: $.data.stepDefVos.0.procCode
+    procDefId1: $.data.stepDefVos.0.procDefId
+    stepDefId1: $.data.stepDefVos.0.stepDefId
+    stepCode2: $.data.stepDefVos.1.stepCode
+    procCode2: $.data.stepDefVos.1.procCode
+    procDefId2: $.data.stepDefVos.1.procDefId
+    stepDefId2: $.data.stepDefVos.1.stepDefId
+    stepCode3: $.data.stepDefVos.2.stepCode
+    procCode3: $.data.stepDefVos.2.procCode
+    procDefId3: $.data.stepDefVos.2.procDefId
+    stepDefId3: $.data.stepDefVos.2.stepDefId
+    stepCode4: $.data.stepDefVos.3.stepCode
+    procCode4: $.data.stepDefVos.3.procCode
+    procDefId4: $.data.stepDefVos.3.procDefId
+    stepDefId4: $.data.stepDefVos.3.stepDefId
+    stepCode5: $.data.stepDefVos.4.stepCode
+    procCode5: $.data.stepDefVos.4.procCode
+    procDefId5: $.data.stepDefVos.4.procDefId
+    stepDefId5: $.data.stepDefVos.4.stepDefId
+    stepCode6: $.data.stepDefVos.5.stepCode
+    procCode6: $.data.stepDefVos.5.procCode
+    procDefId6: $.data.stepDefVos.5.procDefId
+    stepDefId6: $.data.stepDefVos.5.stepDefId
+    stepCode7: $.data.stepDefVos.6.stepCode
+    procCode7: $.data.stepDefVos.6.procCode
+    procDefId7: $.data.stepDefVos.6.procDefId
+    stepDefId7: $.data.stepDefVos.6.stepDefId
+    stepCode8: $.data.stepDefVos.7.stepCode
+    procCode8: $.data.stepDefVos.7.procCode
+    procDefId8: $.data.stepDefVos.7.procDefId
+    stepDefId8: $.data.stepDefVos.7.stepDefId
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: mixEmail_edit
+  story: 积木定义-文件处理-混合处理
+  title: 新增混合处理-接口积木
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockCode": ${read_extract_arg(blockCode)}
+      "blockName": "1111"
+      "blockType": ${read_extract_arg(blockType)}
+      "crtUser": ${read_extract_arg(crtUser)}
+      "dealId": ${read_extract_arg(list_dealId)}
+      "dealType": ${read_extract_arg(dealType)}
+      "isAllowExecAgain": "1"
+      "isDel": "0"
+      "isEditCode": false
+      "pkId": ${read_extract_arg(pre_save_pkId)}
+      "status": "01"
+      "updateUser": ${read_extract_arg(updateUser)}
+      "updateTs": ${get_current_time()}
+      "blockDesc": ""
+      "targetFields": []
+      "fileInfo":
+        "procDefId": ${read_extract_arg(list_dealId)}
+        "procCode": ${read_extract_arg(blockCode)}
+        "procName": "1111"
+        "srcServerId": ${read_extract_arg(serverId)}
+        "srcFileEncoding": ${read_extract_arg(srcFileEncoding)}
+        "srcFilePath": ${read_extract_arg(srcFilePath)}
+        "srcFileName": ${read_extract_arg(srcFileName)}
+        "stepDefVos":
+          - crtUser: agnes
+            isDel: '0'
+            procCode: ${read_extract_arg(procCode1)}
+            procDefId: ${read_extract_arg(procDefId1)}
+            procFileDefs:
+              - fileName: ${read_extract_arg(srcFileName)}
+                serverId: ${read_extract_arg(serverId)}
+                filePath: ${read_extract_arg(srcFilePath)}
+                fileEncoding: ${read_extract_arg(srcFileEncoding)}
+                fileMode: '1'
+                signFile: ''
+                signFileCount: ''
+                isCreateForAll: ''
+                isCreateSignFile: ''
+                createSignFileName: ''
+                createSignFileExt: ''
+            stepCode: ${read_extract_arg(stepCode1)}
+            stepDefId: ${read_extract_arg(stepDefId1)}
+            stepName: 文件扫描
+            stepNo: 0
+            stepType: '1'
+          - crtUser: agnes
+            isDel: '0'
+            procCode: ${read_extract_arg(procCode2)}
+            procDefId: ${read_extract_arg(procDefId2)}
+            procFileDefs: [ ]
+            stepCode: ${read_extract_arg(stepCode2)}
+            stepDefId: ${read_extract_arg(stepDefId2)}
+            stepName: 文件解压
+            stepNo: 1
+            stepType: '2'
+          - crtUser: agnes
+            isDel: '0'
+            procCode: ${read_extract_arg(procCode3)}
+            procDefId: ${read_extract_arg(procDefId3)}
+            procFileDefs: [ ]
+            stepCode: ${read_extract_arg(stepCode3)}
+            stepDefId: ${read_extract_arg(stepDefId3)}
+            stepName: 文件压缩
+            stepNo: 2
+            stepType: '3'
+          - crtUser: agnes
+            isDel: '0'
+            procCode: ${read_extract_arg(procCode4)}
+            procDefId: ${read_extract_arg(procDefId4)}
+            procFileDefs: [ ]
+            stepCode: ${read_extract_arg(stepCode4)}
+            stepDefId: ${read_extract_arg(stepDefId4)}
+            stepName: 文件解析
+            stepNo: 3
+            stepType: '4'
+          - crtUser: agnes
+            isDel: '0'
+            procCode: ${read_extract_arg(procCode5)}
+            procDefId: ${read_extract_arg(procDefId5)}
+            procFileDefs: [ ]
+            stepCode: ${read_extract_arg(stepCode5)}
+            stepDefId: ${read_extract_arg(stepDefId5)}
+            stepName: 文件导出
+            stepNo: 4
+            stepType: '5'
+          - crtUser: agnes
+            isDel: '0'
+            procCode: ${read_extract_arg(procCode6)}
+            procDefId: ${read_extract_arg(procDefId6)}
+            procFileDefs: [ ]
+            stepCode: ${read_extract_arg(stepCode6)}
+            stepDefId: ${read_extract_arg(stepDefId6)}
+            stepName: 文件分发
+            stepNo: 5
+            stepType: '6'
+          - crtUser: agnes
+            isDel: '0'
+            procCode: ${read_extract_arg(procCode7)}
+            procDefId: ${read_extract_arg(procDefId7)}
+            procFileDefs: [ ]
+            stepCode: ${read_extract_arg(stepCode7)}
+            stepDefId: ${read_extract_arg(stepDefId7)}
+            stepName: 文件归集
+            stepNo: 6
+            stepType: '7'
+          - crtUser: agnes
+            isDel: '0'
+            procCode: ${read_extract_arg(procCode8)}
+            procDefId: ${read_extract_arg(procDefId8)}
+            procFileDefs: [ ]
+            stepCode: ${read_extract_arg(stepCode8)}
+            stepDefId: ${read_extract_arg(stepDefId8)}
+            stepName: 脚本执行
+            stepNo: 7
+            stepType: '8'
+        "isNeedCheck": false
+        "crtUser": ${read_extract_arg(crtUser)}
+        "isDel": "0"
+        "dealId": ${read_extract_arg(list_dealId)}
+      "blockParamInfos": []
+      "isNeedCheck": "1"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: mixEmail_copy_get_blockCode
+  story: 积木定义-文件处理-混合处理
+  title: 复制前获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    copy_blockCode: $.data
+  validate:
+    codes: 200
+
+-
+  name: mixEmail_copy_proc_info
+  story: 积木定义-文件处理-混合处理
+  title: 新增混合处理-获取复制积木的处理过程信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dc/proc/def/get/proc-info
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      procDefId: ${read_extract_arg(list_dealId)}
+  extract:
+    stepDefVos: $.data.stepDefVos
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: mixEmail_copy
+  story: 积木定义-文件处理-混合处理
+  title: 混合处理-复制
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockCode": ${read_extract_arg(copy_blockCode)}
+      "blockName": ${read_extract_arg(copy_blockName)}
+      "blockType": ${read_extract_arg(blockType)}
+      "crtUser": ${read_extract_arg(crtUser)}
+      "dealId": ""
+      "dealType": ${read_extract_arg(dealType)}
+      "isAllowExecAgain": "1"
+      "isDel": "0"
+      "isEditCode": false
+      "pkId": ""
+      "status": "01"
+      "updateUser": ${read_extract_arg(updateUser)}
+      "updateTs": ${get_current_time()}
+      "blockDesc": ""
+      "targetFields": []
+      "fileInfo":
+        "procCode": ${read_extract_arg(copy_blockCode)}
+        "procName": ${read_extract_arg(copy_blockName)}
+        "srcServerId": ${read_extract_arg(serverId)}
+        "dealId": ${read_extract_arg(list_dealId)}
+        "procDefId": ${read_extract_arg(list_dealId)}
+        "srcFileEncoding": ${read_extract_arg(srcFileEncoding)}
+        "srcFilePath": ${read_extract_arg(srcFilePath)}
+        "srcFileName": ${read_extract_arg(srcFileName)}
+        "stepDefVos":
+          - crtUser: agnes
+            isDel: '0'
+            procCode: ${read_extract_arg(procCode1)}
+            procDefId: ${read_extract_arg(procDefId1)}
+            procFileDefs:
+              - fileName: ${read_extract_arg(srcFileName)}
+                serverId: ${read_extract_arg(serverId)}
+                filePath: ${read_extract_arg(srcFilePath)}
+                fileEncoding: ${read_extract_arg(srcFileEncoding)}
+                fileMode: '1'
+                signFile: ''
+                signFileCount: ''
+                isCreateForAll: ''
+                isCreateSignFile: ''
+                createSignFileName: ''
+                createSignFileExt: ''
+            stepName: 文件扫描
+            stepNo: 0
+            stepType: '1'
+          - crtUser: agnes
+            isDel: '0'
+            procFileDefs: [ ]
+            stepName: 文件解压
+            stepNo: 1
+            stepType: '2'
+          - crtUser: agnes
+            isDel: '0'
+            procFileDefs: [ ]
+            stepName: 文件压缩
+            stepNo: 2
+            stepType: '3'
+          - crtUser: agnes
+            isDel: '0'
+            procFileDefs: [ ]
+            stepName: 文件解析
+            stepNo: 3
+            stepType: '4'
+          - crtUser: agnes
+            isDel: '0'
+            procFileDefs: [ ]
+            stepName: 文件导出
+            stepNo: 4
+            stepType: '5'
+          - crtUser: agnes
+            isDel: '0'
+            procFileDefs: [ ]
+            stepName: 文件分发
+            stepNo: 5
+            stepType: '6'
+          - crtUser: agnes
+            isDel: '0'
+            procFileDefs: [ ]
+            stepName: 文件归集
+            stepNo: 6
+            stepType: '7'
+          - crtUser: agnes
+            isDel: '0'
+            procFileDefs: [ ]
+            stepName: 脚本执行
+            stepNo: 7
+            stepType: '8'
+        "isNeedCheck": false
+        "crtUser": ${read_extract_arg(crtUser)}
+        "isDel": "0"
+      "blockParamInfos": []
+      "isNeedCheck": "1"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: mixEmail_approve
+  story: 积木定义-文件处理-混合处理
+  title: 混合处理-审核
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/approve
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "ids": ${read_extract_arg(pre_save_pkId)}
+      "status": "02"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: mixEmail_publish
+  story: 积木定义-文件处理-混合处理
+  title: 混合处理-发布
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/publish
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "ids": ${read_extract_arg(pre_save_pkId)}
+      "status": "03"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: mixEmail_delete
+  story: 积木定义-文件处理-混合处理
+  title: 混合处理-删除
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "ids": ${read_extract_arg(pre_save_pkId)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: mixEmail_list_check
+  story: 积木定义-文件处理-混合处理
+  title: 查看列表验证是否操作成功
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageIndex": 0
+      "pageSize": 500
+      "blockName": ""
+      "blockType": ${read_extract_arg(blockType)}
+      "status": ""
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: server_delete
+  story: 积木定义-文件处理-混合处理
+  title: 文件服务规则-删除文件服务器配置
+  request:
+    method: POST
+    url: api/agnes-app/v1/dc/server/info/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "serverId": ${read_extract_arg(serverId)}
+  validate:
+    codes: 200
+
+-
+  name: get_serverId_list
+  story: 积木定义-文件处理-混合处理
+  title: 文件服务规则-获取文件服务器配置id
+  request:
+    method: POST
+    url: api/agnes-app/v1/dc/server/info/list-page?pageIndex=0&pageSize=500
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageIndex": 0
+      "pageSize": 500
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"

@@ -1,0 +1,1152 @@
+###   积木管理-数据计算类   ###
+-
+  name: test_get_dcm_brick_type
+  story: 积木定义-数据计算类-模型计算
+  title: 获取积木类型-数据计算类
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/get-tree-node
+    headers:
+      cookie: ${read_extract_arg(token)}
+  extract:
+    dcm_blockType: $.data.children[1].id
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_check_before_add_dcm_blocks
+  story: 积木定义-数据计算类-模型计算
+  title: 新增前查询积木信息
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    json:
+      "blockType": ${read_extract_arg(dcm_blockType)}
+      "pageSize": 500
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
+  extract:
+    pre_add_total: $.data.total
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_add_dcm_interface_collection
+  story: 积木定义-数据计算类-模型计算
+  title: 新增数据计算类-获取积木处理类型
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/check/blockName
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockName": "autotest-数据计算类-模型计算"
+      "dealType": "05"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_dcm_blockCode
+  story: 积木定义-数据计算类-模型计算
+  title: 新增积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    dcm_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+-
+  name: test_add_dcm_pre_save
+  story: 积木定义-数据计算类-模型计算
+  title: 新增数据计算-模型计算-pre-save
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/pre-save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockCode": ${read_extract_arg(dcm_blockCode)}
+      "blockName": "autotest-数据计算类-模型计算"
+      "blockType": ${read_extract_arg(dcm_blockType)}
+      "dealType": "05"
+  extract:
+    pre_save_dcm_pkId: $.data.pkId
+    dcm_blockName: $.data.blockName
+    pre_save_dcm_info : $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_add_dcm_interface_building_blocks
+  story: 积木定义-数据计算类-模型计算
+  title: 数据计算类-模型计算-新增保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockType: ${read_extract_arg(dcm_blockType)}
+      blockName: ${read_extract_arg(dcm_blockName)}
+      dealType: '05'
+      pkId: ${read_extract_arg(pre_save_dcm_pkId)}
+      blockCode: ${read_extract_arg(dcm_blockCode)}
+      isEditCode: false
+      allowManualConfirm: '1'
+      isAllowExecAgain: '1'
+      targetFields: [ ]
+      dealId: ''
+      blockDesc: test-add
+      kpiList:
+        kpiCode: ${read_extract_arg(dcm_blockCode)}
+        kpiProcInfo:
+          pkId: ''
+          execType: '1'
+          execFunc: ''
+          procCode: AUTO_Student_AIMTEST
+          procName: AUTO_Student_AIMTEST
+          proc: "create table AUTO_Student_AIMTEST\r\n(\r\n    SNO1       VARCHAR2(3) not null\r\n        primary key,\r\n    SNAME1     VARCHAR2(8) not null,\r\n    SSEX1      VARCHAR2(2) not null,\r\n    SBIRTHDAY1 DATE        default NULL,\r\n    SCLASS1    VARCHAR2(5) default NULL\r\n)\r\n/\r\n\r\n"
+          file: ''
+        dopOPDSReKpiParams:
+          noManualRefresh: '0'
+        kpiAuthInfo:
+          kpiCode: ${read_extract_arg(dcm_blockCode)}
+        dopOPDSReKpi:
+          pkId: ''
+          kpiCode: ${read_extract_arg(dcm_blockCode)}
+          style: '01'
+          kpiName: ${read_extract_arg(dcm_blockName)}
+          execFunc: ''
+          execType: '1'
+        dopOPDSReKpiDetail:
+          detailType: '01'
+          allowManual: '0'
+          allowEditReason: '0'
+          externalPageAddr: ''
+          allowSkipExternalPage: '0'
+          kpiFieldsList:
+            - fieldName: SNO
+              isDisplay: '1'
+              align: left
+              isQuery: '0'
+              index: 0
+            - fieldName: SNAME
+              isDisplay: '1'
+              align: left
+              isQuery: '0'
+              index: 1
+            - fieldName: SSEX
+              isDisplay: '1'
+              align: left
+              isQuery: '0'
+              index: 2
+            - fieldName: SBIRTHDAY
+              isDisplay: '1'
+              align: left
+              isQuery: '0'
+              index: 3
+            - fieldName: SCLASS
+              isDisplay: '1'
+              align: left
+              isQuery: '0'
+              index: 4
+          mode: ''
+          exeScript: select * from AUTO_Student
+      isNeedCheck: '1'
+      isAdd: '1'
+      status: '01'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_check_after_add_dcm_blocks
+  story: 积木定义-数据计算类-模型计算
+  title: 查询积木信息
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    json:
+      "blockType": ${read_extract_arg(dcm_blockType)}
+      "pageSize": 500
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
+  extract:
+    total: $.data.total
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_edit_dcm_interface_building_blocks
+  story: 积木定义-数据计算类-模型计算
+  title: 数据计算类-模型计算-编辑保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      allowManualConfirm: '1'
+      blockCode: ${read_extract_arg(dcm_blockCode)}
+      blockDesc: test-edit
+      blockName: autotest-数据计算类-模型计算-edit
+      blockType: ${read_extract_arg(dcm_blockType)}
+      crtTs: '2024-12-17 16:10:03'
+      crtUser: agnes
+      dealId: ''
+      dealType: '05'
+      isAllowExecAgain: '1'
+      isDel: '0'
+      isEditCode: false
+      pkId: ${read_extract_arg(pre_save_dcm_pkId)}
+      status: '01'
+      updateTs: '2024-12-17 16:10:04'
+      updateUser: agnes
+      targetFields: [ ]
+      kpiList:
+        kpiCode: ${read_extract_arg(dcm_blockCode)}
+        kpiProcInfo:
+          pkId: 1j9pkzjezo03r
+          execType: '1'
+          execFunc: ''
+          procCode: AUTO_Student_AIMTEST
+          procName: AUTO_Student_AIMTEST
+          proc: |-
+            create or replace procedure AUTO_Student_AIMTEST is
+            begin
+            end AUTO_Student_AIMTEST;
+          file: ''
+          dealId: ${read_extract_arg(dcm_blockCode)}
+          dealType: '05'
+          url: ''
+          reqParam: ''
+          reqParamType: '1'
+          method: '0'
+          paramFields: [ ]
+          outParamFields: [ ]
+          respParam: ''
+          creator: agnes
+          crtTime: '2024-12-17 16:10:04'
+          isDel: '0'
+          kpiCode: ${read_extract_arg(dcm_blockCode)}
+          kpiName: autotest-数据计算类-模型计算-edit
+          style: '01'
+          updateTime: '2024-12-17 16:10:04'
+          updateUser: agnes
+        dopOPDSReKpiParams:
+          noManualRefresh: '0'
+        kpiAuthInfo:
+          kpiCode: ${read_extract_arg(dcm_blockCode)}
+        dopOPDSReKpi:
+          pkId: 1j9pkzjezo03r
+          kpiCode: ${read_extract_arg(dcm_blockCode)}
+          style: '01'
+          kpiName: autotest-数据计算类-模型计算-edit
+          execFunc: ''
+          execType: '1'
+        dopOPDSReKpiDetail:
+          dealId: ${read_extract_arg(dcm_blockCode)}
+          dealType: '05'
+          url: ''
+          reqParam: ''
+          reqParamType: '1'
+          method: '0'
+          paramFields: [ ]
+          outParamFields: [ ]
+          respParam: ''
+          allowEditReason: '0'
+          allowManual: '0'
+          allowSkipExternalPage: '0'
+          creator: agnes
+          crtTime: '2024-12-17 16:10:04'
+          detailType: '01'
+          exeScript: select * from AUTO_Student
+          isDel: '0'
+          kpiCode: ${read_extract_arg(dcm_blockCode)}
+          pkId: 0d748ba2e48d4bcdb30554fc5cb70135
+          updateTime: '2024-12-17 16:10:04'
+          updateUser: agnes
+          kpiFieldsList:
+            - align: left
+              detailId: 0d748ba2e48d4bcdb30554fc5cb70135
+              fieldName: SNO
+              isDel: '0'
+              isDisplay: '1'
+              isQuery: '0'
+              pkId: e2350580403946808e4ebc73e698ee3d
+              sortNo: 1
+              index: 0
+            - align: left
+              detailId: 0d748ba2e48d4bcdb30554fc5cb70135
+              fieldName: SNAME
+              isDel: '0'
+              isDisplay: '1'
+              isQuery: '0'
+              pkId: ebea72f4460a4f41b991e4503db645a6
+              sortNo: 2
+              index: 1
+            - align: left
+              detailId: 0d748ba2e48d4bcdb30554fc5cb70135
+              fieldName: SSEX
+              isDel: '0'
+              isDisplay: '1'
+              isQuery: '0'
+              pkId: b45558e4c7db4e4781a2a0a5b3bf7c8b
+              sortNo: 3
+              index: 2
+            - align: left
+              detailId: 0d748ba2e48d4bcdb30554fc5cb70135
+              fieldName: SBIRTHDAY
+              isDel: '0'
+              isDisplay: '1'
+              isQuery: '0'
+              pkId: de1142cab66146c9b64d8347c6648f09
+              sortNo: 4
+              index: 3
+            - align: left
+              detailId: 0d748ba2e48d4bcdb30554fc5cb70135
+              fieldName: SCLASS
+              isDel: '0'
+              isDisplay: '1'
+              isQuery: '0'
+              pkId: 3184fcb89d054cddbd95da2c77526b7c
+              sortNo: 5
+              index: 4
+      isNeedCheck: '1'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_dcm_copy_blockCode
+  story: 积木定义-数据计算类-模型计算
+  title: 复制积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    dcm_copy_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_copy_dcm_interface_building_blocks
+  story: 积木定义-数据计算类-模型计算
+  title: 数据计算类-模型计算-复制保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      allowManualConfirm: '1'
+      blockCode: ${read_extract_arg(dcm_copy_blockCode)}
+      blockDesc: test-copy
+      blockName: autotest-数据计算类-模型计算-copy
+      blockType: ${read_extract_arg(dcm_blockType)}
+      crtTs: '2024-12-17 15:59:05'
+      crtUser: agnes
+      dealId: ''
+      dealType: '05'
+      isAllowExecAgain: '1'
+      isDel: '0'
+      isEditCode: false
+      pkId: ''
+      status: '01'
+      updateTs: '2024-12-17 15:59:06'
+      updateUser: agnes
+      targetFields: [ ]
+      kpiList:
+        kpiCode: ${read_extract_arg(dcm_copy_blockCode)}
+        kpiProcInfo:
+          pkId: 1j9pk0biz2hs7
+          execType: '1'
+          execFunc: ''
+          procCode: AUTO_Student_AIMTEST
+          procName: AUTO_Student_AIMTEST
+          proc: |-
+            create or replace procedure AUTO_Student_AIMTEST is
+            begin
+            end AUTO_Student_AIMTEST;
+          file: ''
+          dealId: block-00001539
+          dealType: '05'
+          url: ''
+          reqParam: ''
+          reqParamType: '1'
+          method: '0'
+          paramFields: [ ]
+          outParamFields: [ ]
+          respParam: ''
+          creator: agnes
+          crtTime: '2024-12-17 15:59:05'
+          isDel: '0'
+          kpiCode: block-00001539
+          kpiName: autotest-数据计算类-模型计算-copy
+          style: '01'
+          updateTime: '2024-12-17 15:59:05'
+          updateUser: agnes
+        dopOPDSReKpiParams:
+          noManualRefresh: '0'
+        kpiAuthInfo:
+          kpiCode: ${read_extract_arg(dcm_copy_blockCode)}
+        dopOPDSReKpi:
+          pkId: 1j9pk0biz2hs7
+          kpiCode: ${read_extract_arg(dcm_copy_blockCode)}
+          style: '01'
+          kpiName: autotest-数据计算类-模型计算-copy
+          execFunc: ''
+          execType: '1'
+        dopOPDSReKpiDetail:
+          dealId: block-00001539
+          dealType: '05'
+          url: ''
+          reqParam: ''
+          reqParamType: '1'
+          method: '0'
+          paramFields: [ ]
+          outParamFields: [ ]
+          respParam: ''
+          allowEditReason: '0'
+          allowManual: '0'
+          allowSkipExternalPage: '0'
+          creator: agnes
+          crtTime: '2024-12-17 15:59:06'
+          detailType: '01'
+          exeScript: select * from AUTO_Student
+          isDel: '0'
+          kpiCode: block-00001539
+          pkId: 546ff826427a4ea0b8c4a75218ef14ad
+          updateTime: '2024-12-17 15:59:06'
+          updateUser: agnes
+          kpiFieldsList:
+            - align: left
+              detailId: 546ff826427a4ea0b8c4a75218ef14ad
+              fieldName: SNO
+              isDel: '0'
+              isDisplay: '1'
+              isQuery: '0'
+              pkId: f9bd33f635514898b7c3148d2c2b5785
+              sortNo: 1
+              index: 0
+            - align: left
+              detailId: 546ff826427a4ea0b8c4a75218ef14ad
+              fieldName: SNAME
+              isDel: '0'
+              isDisplay: '1'
+              isQuery: '0'
+              pkId: b34991c8270b445ea90dc395db79c1c3
+              sortNo: 2
+              index: 1
+            - align: left
+              detailId: 546ff826427a4ea0b8c4a75218ef14ad
+              fieldName: SSEX
+              isDel: '0'
+              isDisplay: '1'
+              isQuery: '0'
+              pkId: b0324930961d4b0e9fc38fdc514c37eb
+              sortNo: 3
+              index: 2
+            - align: left
+              detailId: 546ff826427a4ea0b8c4a75218ef14ad
+              fieldName: SBIRTHDAY
+              isDel: '0'
+              isDisplay: '1'
+              isQuery: '0'
+              pkId: fc6829c4b35342efbf517e011692f7dd
+              sortNo: 4
+              index: 3
+            - align: left
+              detailId: 546ff826427a4ea0b8c4a75218ef14ad
+              fieldName: SCLASS
+              isDel: '0'
+              isDisplay: '1'
+              isQuery: '0'
+              pkId: 7928528626c544b59514767c2b730740
+              sortNo: 5
+              index: 4
+      isNeedCheck: '1'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+-
+  name: test_dcm_approve_blocks
+  story: 积木定义-数据计算类-模型计算
+  title: 数据计算类-模型计算-审核数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/approve
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_dcm_pkId)}
+        - ${read_extract_arg(dcm_copy_pkId)}
+      status: '02'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_dcm_publish_blocks
+  story: 积木定义-数据计算类-模型计算
+  title: 数据计算类-模型计算-发布数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/publish
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_dcm_pkId)}
+        - ${read_extract_arg(dcm_copy_pkId)}
+      status: '03'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_dcm_delete_blocks
+  story: 积木定义-数据计算类-模型计算
+  title: 数据计算类-模型计算-删除数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_dcm_pkId)}
+        - ${read_extract_arg(dcm_copy_pkId)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+-
+  name: test_add_dcc_interface_collection
+  story: 积木定义-数据计算类-数值计算
+  title: 新增数值计算-获取积木处理类型
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/check/blockName
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockName: autotest-数据计算类-数值计算
+      dealType: '06'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_dcc_blockCode
+  story: 积木定义-数据计算类-数值计算
+  title: 新增数值计算积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    dcc_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_add_dcc_pre_save
+  story: 积木定义-数据计算类-数值计算
+  title: 新增数据计算-数值计算-pre-save
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/pre-save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockCode": ${read_extract_arg(dcc_blockCode)}
+      "blockName": "autotest-数据计算类-数值计算"
+      "blockType": ${read_extract_arg(dcm_blockType)}
+      "dealType": "06"
+  extract:
+    pre_save_dcc_pkId: $.data.pkId
+    dcc_blockName: $.data.blockName
+    pre_save_dcc_info : $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_add_dcc_interface_building_blocks
+  story: 积木定义-数据计算类-数值计算
+  title: 数据计算类-数值计算-新增保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockType: '02'
+      blockName: ${read_extract_arg(dcc_blockName)}
+      dealType: '06'
+      pkId: ${read_extract_arg(pre_save_dcc_pkId)}
+      blockCode: ${read_extract_arg(dcc_blockCode)}
+      isEditCode: false
+      allowManualConfirm: '1'
+      isAllowExecAgain: '1'
+      targetFields: [ ]
+      dealId: ''
+      blockDesc: test-add
+      caculateType: '1'
+      caculateNum: 1
+      caculateExpression: a+b=c$y$
+      fieldCode:
+        html: ''
+        res: ''
+      blockParamInfos:
+        - fieldCode: 'y'
+          fieldName: 'y'
+          paramType: out
+          fieldType: String
+      isNeedCheck: '1'
+      isAdd: '1'
+      status: '01'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_check_after_add_dcc_blocks
+  story: 积木定义-数据计算类-数值计算
+  title: 查询积木信息
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    json:
+      "blockType": ${read_extract_arg(dcm_blockType)}
+      "pageSize": 500
+      dealType: '06'
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
+  extract:
+    total: $.data.total
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_edit_dcc_interface_building_blocks
+  story: 积木定义-数据计算类-数值计算
+  title: 数据计算类-数值计算-编辑保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      allowManualConfirm: '1'
+      blockCode: ${read_extract_arg(dcc_blockCode)}
+      blockDesc: test-edit
+      blockName: autotest-数据计算类-数值计算-edit
+      blockType: '02'
+      caculateExpression: a+b=c$y$$w$
+      caculateNum: 1
+      caculateType: '1'
+      crtTs: '2024-12-17 16:50:52'
+      crtUser: agnes
+      dealType: '06'
+      isAllowExecAgain: '1'
+      isDel: '0'
+      isEditCode: false
+      pkId: ${read_extract_arg(pre_save_dcc_pkId)}
+      status: '01'
+      updateTs: '2024-12-17 17:02:37'
+      updateUser: agnes
+      targetFields: [ ]
+      dealId: ''
+      fieldCode:
+        html: ''
+        res: ''
+      blockParamInfos:
+        - fieldCode: 'y'
+          fieldName: 'y'
+          paramType: out
+          fieldType: String
+      isNeedCheck: '1'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_dcc_copy_blockCode
+  story: 积木定义-数据计算类-数值计算
+  title: 复制数值计算积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    dcc_copy_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_copy_dcc_interface_building_blocks
+  story: 积木定义-数据计算类-数值计算
+  title: 数据计算类-数值计算-复制保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      allowManualConfirm: '1'
+      blockCode: ${read_extract_arg(dcc_copy_blockCode)}
+      blockDesc: test-copy
+      blockName: autotest-数据计算类-数值计算-copy
+      blockType: '02'
+      caculateExpression: a+b=c$y$$w$
+      caculateNum: 1
+      caculateType: '1'
+      crtTs: '2024-12-17 16:50:52'
+      crtUser: agnes
+      dealType: '06'
+      isAllowExecAgain: '1'
+      isDel: '0'
+      isEditCode: false
+      pkId: ''
+      status: '01'
+      updateTs: '2024-12-17 17:37:33'
+      updateUser: agnes
+      targetFields: [ ]
+      dealId: ''
+      fieldCode:
+        html: ''
+        res: ''
+      blockParamInfos:
+        - fieldCode: 'y'
+          fieldName: 'y'
+          paramType: out
+          fieldType: String
+        - fieldCode: w
+          fieldName: w
+          paramType: in
+          fieldType: String
+      isNeedCheck: '1'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+-
+  name: test_dcc_approve_blocks
+  story: 积木定义-数据计算类-数值计算
+  title: 数据计算类-数值计算-审核数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/approve
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_dcc_pkId)}
+        - ${read_extract_arg(dcc_copy_pkId)}
+      status: '02'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_dcc_publish_blocks
+  story: 积木定义-数据计算类-数值计算
+  title: 数据计算类-数值计算-发布数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/publish
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_dcc_pkId)}
+        - ${read_extract_arg(dcc_copy_pkId)}
+      status: '03'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_dcc_delete_blocks
+  story: 积木定义-数据计算类-数值计算
+  title: 数据计算类-数值计算-删除数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_dcc_pkId)}
+        - ${read_extract_arg(dcc_copy_pkId)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_check_before_add_dra_blocks
+  story: 积木定义-数据计算类-报表稽核
+  title: 新增前查询积木信息
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    json:
+      "blockType": ${read_extract_arg(dcm_blockType)}
+      "pageSize": 500
+      dealType: '27'
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
+  extract:
+    pre_add_dra_total: $.data.total
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_get_dra_blockCode
+  story: 积木定义-数据计算类-报表稽核
+  title: 新增报表稽核积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    dra_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_add_dra_pre_save
+  story: 积木定义-数据计算类-报表稽核
+  title: 新增数据计算-报表稽核-pre-save
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/pre-save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "blockCode": ${read_extract_arg(dra_blockCode)}
+      "blockName": "aautotest-数据计算类-报表稽核"
+      "blockType": ${read_extract_arg(dcm_blockType)}
+      "dealType": "27"
+  extract:
+    pre_save_dra_pkId: $.data.pkId
+    dra_blockName: $.data.blockName
+    pre_save_dra_info : $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_add_dra_interface_building_blocks
+  story: 积木定义-数据计算类-报表稽核
+  title: 数据计算类-报表稽核-新增保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      blockType: '02'
+      blockName: ${read_extract_arg(dra_blockName)}
+      dealType: '27'
+      pkId: ${read_extract_arg(pre_save_dra_pkId)}
+      blockCode: ${read_extract_arg(dra_blockCode)}
+      isEditCode: false
+      allowManualConfirm: '1'
+      isAllowExecAgain: '1'
+      targetFields: [ ]
+      dealId: ''
+      blockOwner: >-
+        [{"refType":"1","memberId":"agnes","memberDesc":"致宇小智"},{"refType":"1","memberId":"liangjin","memberDesc":"梁靖"}]
+      blockDesc: test-add
+      dealConfJson: '{"consistencyId":"test-稽核变量$x$$y$","fileId":"test-文件来源$abc$$m$"}'
+      blockParamInfos:
+        - fieldCode: consistencyId
+          fieldName: test-稽核变量xy
+          paramType: in
+          fieldType: String
+        - fieldCode: fileIdParam
+          fieldName: test-文件来源abcm
+          paramType: in
+          fieldType: String
+      isNeedCheck: '1'
+      isAdd: '1'
+      status: '01'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_check_after_add_dra_blocks
+  story: 积木定义-数据计算类-报表稽核
+  title: 查询积木信息
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    json:
+      "blockType": ${read_extract_arg(dcm_blockType)}
+      "pageSize": 500
+      "dealType": '27'
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
+  extract:
+    total: $.data.total
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_edit_dra_interface_building_blocks
+  story: 积木定义-数据计算类-报表稽核
+  title: 数据计算类-报表稽核-编辑保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      allowManualConfirm: '1'
+      blockCode: ${read_extract_arg(dra_blockCode)}
+      blockDesc: test-edit
+      blockName: autotest-数据计算类-报表稽核-edit
+      blockOwner: >-
+        [{"refType":"1","memberId":"agnes","memberDesc":"致宇小智"},{"refType":"1","memberId":"liangjin","memberDesc":"梁靖"}]
+      blockType: '02'
+      crtTs: '2024-12-23 10:04:05'
+      crtUser: agnes
+      dealConfJson: '{"consistencyId":"test-稽核变量$x$$y$","fileId":"test-文件来源$abc$$m$"}'
+      dealType: '27'
+      isAllowExecAgain: '1'
+      isDel: '0'
+      isEditCode: false
+      pkId: ${read_extract_arg(pre_save_dra_pkId)}
+      status: '01'
+      updateTs: '2024-12-23 10:29:48'
+      updateUser: agnes
+      targetFields: [ ]
+      dealId: ''
+      blockParamInfos:
+        - fieldCode: consistencyId
+          fieldName: test-稽核变量xy
+          paramType: in
+          fieldType: String
+        - fieldCode: fileIdParam
+          fieldName: test-文件来源abcm
+          paramType: in
+          fieldType: String
+      isNeedCheck: '1'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_dra_copy_blockCode
+  story: 积木定义-数据计算类-报表稽核
+  title: 复制报表稽核积木后获取blockCode
+  request:
+    method: POST
+    url: api/agnes-ac/v2/model/code/get-model-code?model=block
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "model": "block"
+  extract:
+    dra_copy_blockCode: $.data
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_copy_dra_interface_building_blocks
+  story: 积木定义-数据计算类-报表稽核
+  title: 数据计算类-报表稽核-复制保存
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/save
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      allowManualConfirm: '1'
+      blockCode: ${read_extract_arg(dra_copy_blockCode)}
+      blockDesc: test-copy
+      blockName: autotest-数据计算类-报表稽核-edit(copy)
+      blockOwner: >-
+        [{"refType":"1","memberId":"agnes","memberDesc":"致宇小智"},{"refType":"1","memberId":"liangjin","memberDesc":"梁靖"}]
+      blockType: '02'
+      crtTs: '2024-12-23 10:04:05'
+      crtUser: agnes
+      dealConfJson: '{"consistencyId":"test-稽核变量$x$$y$","fileId":"test-文件来源$abc$$m$"}'
+      dealType: '27'
+      isAllowExecAgain: '1'
+      isDel: '0'
+      isEditCode: false
+      pkId: ''
+      status: '01'
+      updateTs: '2024-12-23 14:46:42'
+      updateUser: agnes
+      isTodo: '1'
+      targetFields: [ ]
+      dealId: ''
+      blockParamInfos:
+        - fieldCode: consistencyId
+          fieldName: test-稽核变量xy
+          paramType: in
+          fieldType: String
+        - fieldCode: fileIdParam
+          fieldName: test-文件来源abcm
+          paramType: in
+          fieldType: String
+      isNeedCheck: '1'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+
+-
+  name: test_dra_approve_blocks
+  story: 积木定义-数据计算类-报表稽核
+  title: 数据计算类-报表稽核-审核数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/approve
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_dra_pkId)}
+        - ${read_extract_arg(dra_copy_pkId)}
+      status: '02'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_dra_publish_blocks
+  story: 积木定义-数据计算类-报表稽核
+  title: 数据计算类-报表稽核-发布数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/publish
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_dra_pkId)}
+        - ${read_extract_arg(dra_copy_pkId)}
+      status: '03'
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_dra_delete_blocks
+  story: 积木定义-数据计算类-报表稽核
+  title: 数据计算类-报表稽核-删除数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_dra_pkId)}
+        - ${read_extract_arg(dra_copy_pkId)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
