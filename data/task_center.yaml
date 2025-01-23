@@ -57,31 +57,34 @@
       "taskCls": ""
       "cardType": ""
       "residueTime": ""
+      "bizType": ""
       "q": ""
   extract:
-    attuser: $.data.rows[0].attUser
-    biztimefrom: $.data.rows[0].bizTimeFrom
-    biztimeto: $.data.rows[0].bizTimeTo
+    item: $.data.rows[0]
+#    attuser: $.data.rows[0].attUser
+#    biztimefrom: $.data.rows[0].bizTimeFrom
+#    biztimeto: $.data.rows[0].bizTimeTo
     caseid: $.data.rows[0].caseId
-    crtts: $.data.rows[0].crtTs
-    crtuser: $.data.rows[0].crtUser
-    distype: $.data.rows[0].disType
-    exetime: $.data.rows[0].exeTime
-    executeuser: $.data.rows[0].executeUser
-    ispending: $.data.rows[0].isPending
+#    crtts: $.data.rows[0].crtTs
+#    crtuser: $.data.rows[0].crtUser
+#    distype: $.data.rows[0].disType
+#    exetime: $.data.rows[0].exeTime
+#    executeuser: $.data.rows[0].executeUser
+#    ispending: $.data.rows[0].isPending
     pkid: $.data.rows[0].pkId
-    prdtinfo: $.data.rows[0].prdtInfo
-    process: $.data.rows[0].process
-    taskexecauth: $.data.rows[0].taskExecAuth
+#    prdtinfo: $.data.rows[0].prdtInfo
+#    process: $.data.rows[0].process
+#    taskexecauth: $.data.rows[0].taskExecAuth
     taskid: $.data.rows[0].taskId
-    tasklevel: $.data.rows[0].taskLevel
+#    tasklevel: $.data.rows[0].taskLevel
     taskname: $.data.rows[0].taskName
-    taskstatus: $.data.rows[0].taskStatus
-    tasktag: $.data.rows[0].taskTag
+#    taskstatus: $.data.rows[0].taskStatus
     tasktimefrom: $.data.rows[0].taskTimeFrom
     tasktimeto: $.data.rows[0].taskTimeTo
-    tasktype: $.data.rows[0].taskType
-    updatets: $.data.rows[0].updateTs
+#    tasktype: $.data.rows[0].taskType
+#    updatets: $.data.rows[0].updateTs
+#    residueTime: $.data.rows[0].residueTime
+#    taskAllow: $.data.rows[0].taskAllow
   validate:
     codes: 200
     equals:
@@ -98,32 +101,35 @@
     headers:
       cookie: ${read_extract_arg(token)}
     json:
-      "taskList":
-        -
-          "attUser": ${read_extract_arg(attuser)}
-          "bizTimeFrom": ${read_extract_arg(biztimefrom)}
-          "bizTimeTo": ${read_extract_arg(biztimeto)}
-          "caseId": ${read_extract_arg(caseid)}
-          "crtTs": ${read_extract_arg(crtts)}
-          "crtUser": ${read_extract_arg(crtuser)}
-          "disType": ${read_extract_arg(distype)}
-          "exeTime": ${read_extract_arg(exetime)}
-          "executeUser": ${read_extract_arg(executeuser)}
-          "isPending": ${read_extract_arg(ispending)}
-          "pkId": ${read_extract_arg(pkid)}
-          "prdtInfo": ${read_extract_arg(prdtinfo)}
-          "process": ${read_extract_arg(process)}
-          "taskExecAuth": ${read_extract_arg(taskexecauth)}
-          "taskId": ${read_extract_arg(taskid)}
-          "taskLevel": ${read_extract_arg(tasklevel)}
-          "taskName": ${read_extract_arg(taskname)}
-          "taskStatus": ${read_extract_arg(taskstatus)}
-          "taskTag": ${read_extract_arg(tasktag)}
-          "taskTimeFrom": ${read_extract_arg(tasktimefrom)}
-          "taskTimeTo": ${read_extract_arg(tasktimeto)}
-          "taskType": ${read_extract_arg(tasktype)}
-          "updateTs": ${read_extract_arg(updatets)}
-          "remark": ""
+      taskList:
+        - ${read_extract_arg(item_submit)}
+
+  #      "taskList":
+#        -
+#          "attUser": ${read_extract_arg(attuser)}
+#          "bizTimeFrom": ${read_extract_arg(bizTimefrom)}
+#          "bizTimeTo":  ${read_extract_arg(biztimeto)}
+#          "caseId": ${read_extract_arg(caseid)}
+#          "crtTs": ${read_extract_arg(crtts)}
+#          "crtUser": ${read_extract_arg(crtuser)}
+#          "disType": ${read_extract_arg(distype)}
+#          "exeTime": ${read_extract_arg(exetime)}
+#          "executeUser": ${read_extract_arg(executeuser)}
+#          "isPending": ${read_extract_arg(ispending)}
+#          "pkId": ${read_extract_arg(pkid)}
+#          "prdtInfo": ${read_extract_arg(prdtinfo)}
+#          "process": ${read_extract_arg(process)}
+#          "taskExecAuth": ${read_extract_arg(taskexecauth)}
+#          "taskId": ${read_extract_arg(taskid)}
+#          "taskLevel": ${read_extract_arg(tasklevel)}
+#          "taskName": ${read_extract_arg(taskname)}
+#          "taskStatus": ${read_extract_arg(taskstatus)}
+#          "taskTag": ${read_extract_arg(tasktag)}
+#          "taskTimeFrom": ${read_extract_arg(tasktimefrom)}
+#          "taskTimeTo": ${read_extract_arg(tasktimeto)}
+#          "taskType": ${read_extract_arg(tasktype)}
+#          "updateTs": {read_extract_arg(updatets)}
+#          "remark": ""
   validate:
     codes: 200
     equals:
@@ -248,46 +254,48 @@
     headers:
       cookie: ${read_extract_arg(token)}
     json:
-      "userName": ""
-      "zrUserInfo": ""
-      "planEndTs": ""
-      "approver": ""
-      "remark": "作废"
-      "taskName": ${read_extract_arg(taskname)}
-      "taskTime": tasktime
-      "taskId": ${read_extract_arg(taskid)}
-      "pkId": ${read_extract_arg(pkid)}
-      "caseId": ${read_extract_arg(caseid)}
-      "rows":
-        -
-          "attUser": ${read_extract_arg(attuser)}
-          "bizTimeFrom": ${read_extract_arg(biztimefrom)}
-          "bizTimeTo": ${read_extract_arg(biztimeto)}
-          "caseId": ${read_extract_arg(caseid)}
-          "crtTs": ${read_extract_arg(crtts)}
-          "crtUser": ${read_extract_arg(crtuser)}
-          "disType": ${read_extract_arg(distype)}
-          "exeTime": ${read_extract_arg(exetime)}
-          "executeUser": ${read_extract_arg(executeuser)}
-          "isPending": ${read_extract_arg(ispending)}
-          "pkId": ${read_extract_arg(pkid)}
-          "prdtInfo": ${read_extract_arg(prdtinfo)}
-          "process": ${read_extract_arg(process)}
-          "taskExecAuth": ${read_extract_arg(taskexecauth)}
-          "taskId": ${read_extract_arg(taskid)}
-          "taskLevel": ${read_extract_arg(tasklevel)}
-          "taskName": ${read_extract_arg(taskname)}
-          "taskStatus": ${read_extract_arg(taskstatus)}
-          "taskTag": ${read_extract_arg(tasktag)}
-          "taskTimeFrom": ${read_extract_arg(tasktimefrom)}
-          "taskTimeTo": ${read_extract_arg(tasktimeto)}
-          "taskType": ${read_extract_arg(tasktype)}
-          "updateTs": ${read_extract_arg(updatets)}
+      userName: ''
+      zrUserInfo: ''
+      planEndTs: ''
+      approver: ''
+      remark: 作废
+      taskName: ${read_extract_arg(taskname)}
+      taskTime:
+      taskId: ${read_extract_arg(taskid)}
+      pkId: ${read_extract_arg(pkid)}
+      caseId: ${read_extract_arg(caseid)}
+      rows:
+        - ${read_extract_arg(item)}
+#        - attUser: ${read_extract_arg(attuser)}
+#          bizTimeFrom: ${read_extract_arg(biztimefrom)}
+#          bizTimeTo: ${read_extract_arg(biztimeto)}
+#          caseId: ${read_extract_arg(caseid)}
+#          crtTs: ${read_extract_arg(crtts)}
+#          crtUser: ${read_extract_arg(crtuser)}
+#          disType: ${read_extract_arg(distype)}
+#          exeTime: ${read_extract_arg(exetime)}
+#          executeUser: ${read_extract_arg(executeuser)}
+#          isPending: ${read_extract_arg(ispending)}
+#          pkId: ${read_extract_arg(pkid)}
+#          prdtInfo: ${read_extract_arg(prdtinfo)}
+#          process: ${read_extract_arg(process)}
+#          #remark: ${read_extract_arg(remark)}
+#          residueTime: ${read_extract_arg(residueTime)}
+#          taskAllow: ${read_extract_arg(taskAllow)}
+#          taskExecAuth: ${read_extract_arg(taskexecauth)}
+#          taskId: ${read_extract_arg(taskid)}
+#          taskLevel: ${read_extract_arg(tasklevel)}
+#          taskName: ${read_extract_arg(taskname)}
+#          taskStatus: ${read_extract_arg(taskstatus)}
+#          taskTimeFrom: ${read_extract_arg(tasktimefrom)}
+#          taskTimeTo: ${read_extract_arg(tasktimeto)}
+#          taskType: ${read_extract_arg(tasktype)}
+#          updateTs: ${read_extract_arg(updatets)}
+
   validate:
     codes: 200
     equals:
       msgType: "success"
-
 
 -
   name: test_task_addtemp_temptask
@@ -335,7 +343,7 @@
       "residueTime": ""
       "q": ""
   extract:
-    taskid: $.data.rows[-1].taskId
+    taskid: $.data.rows[0].taskId
   validate:
     codes: 200
     equals:
@@ -352,17 +360,17 @@
     headers:
       cookie: ${read_extract_arg(token)}
     json:
-      "showType": "00",
-      "authQueryParam2": "2",
-      "taskName": "",
-      "taskStatus": "04",
-      "taskType": "",
-      "basePath": "",
-      "startDate": "",
-      "endDate": "",
-      "taskCls": "",
-      "cardType": "",
-      "residueTime": "",
+      "showType": "00"
+      "authQueryParam2": "2"
+      "taskName": ""
+      "taskStatus": "04"
+      "taskType": ""
+      "basePath": ""
+      "startDate": ""
+      "endDate": ""
+      "taskCls": ""
+      "cardType": ""
+      "residueTime": ""
       "q": ""
   validate:
     codes: 200
@@ -379,17 +387,17 @@
     headers:
       cookie: ${read_extract_arg(token)}
     json:
-      "showType": "00",
-      "authQueryParam2": "3",
-      "taskName": "",
-      "taskStatus": "03",
-      "taskType": "",
-      "basePath": "",
-      "startDate": "",
-      "endDate": "",
-      "taskCls": "",
-      "cardType": "",
-      "residueTime": "",
+      "showType": "00"
+      "authQueryParam2": "3"
+      "taskName": ""
+      "taskStatus": "03"
+      "taskType": ""
+      "basePath": ""
+      "startDate": ""
+      "endDate": ""
+      "taskCls": ""
+      "cardType": ""
+      "residueTime": ""
       "q": ""
   validate:
     codes: 200
@@ -406,17 +414,17 @@
     headers:
       cookie: ${read_extract_arg(token)}
     json:
-      "showType": "00",
-      "authQueryParam2": "4",
-      "taskName": "",
-      "taskStatus": "02,03,04",
-      "taskType": "",
-      "basePath": "",
-      "startDate": "",
-      "endDate": "",
-      "taskCls": "",
-      "cardType": "",
-      "residueTime": "",
+      "showType": "00"
+      "authQueryParam2": "4"
+      "taskName": ""
+      "taskStatus": "02,03,04"
+      "taskType": ""
+      "basePath": ""
+      "startDate": ""
+      "endDate": ""
+      "taskCls": ""
+      "cardType": ""
+      "residueTime": ""
       "q": ""
   validate:
     codes: 200
@@ -434,17 +442,17 @@
     headers:
       cookie: ${read_extract_arg(token)}
     json:
-      "showType": "00",
-      "authQueryParam2": "5",
-      "taskName": "",
-      "taskStatus": "01,02,03,04",
-      "taskType": "",
-      "basePath": "",
-      "startDate": "",
-      "endDate": "",
-      "taskCls": "",
-      "cardType": "",
-      "residueTime": "",
+      "showType": "00"
+      "authQueryParam2": "5"
+      "taskName": ""
+      "taskStatus": "01,02,03,04"
+      "taskType": ""
+      "basePath": ""
+      "startDate": ""
+      "endDate": ""
+      "taskCls": ""
+      "cardType": ""
+      "residueTime": ""
       "q": ""
   validate:
     codes: 200

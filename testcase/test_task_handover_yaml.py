@@ -180,7 +180,7 @@ class Test1:
         tempidlist = []
         if len(templist) != 0:
             for i in templist:
-                if i['taskExecAuth'] == '1111':
+                if i['taskType'] == 'temp':
                     tempidlist.append(i['pkId'])
         write_yaml({"tempidlist":tempidlist})
 
@@ -209,7 +209,7 @@ class Test1:
         write_yaml({"tempuserid":tempuserid})
         write_yaml({"tempusername":tempusername})
 
-        detail=DebugTalk.get_handover_detail(read_yaml('prdtcodelist'),read_yaml('prdtuserid'),read_yaml('prdtusername'),read_yaml('groupidlist'),read_yaml('groupuserlist'),read_yaml('groupusernamelist'),read_yaml('roleidlist'),read_yaml('roleuserid'),read_yaml('roleusername'),read_yaml('tempidlist'),read_yaml('tempuserid'),read_yaml('tempusername'))
+        detail=DebugTalk().get_handover_detail(read_yaml('prdtcodelist'),read_yaml('prdtuserid'),read_yaml('prdtusername'),read_yaml('groupidlist'),read_yaml('groupuserlist'),read_yaml('groupusernamelist'),read_yaml('roleidlist'),read_yaml('roleuserid'),read_yaml('roleusername'),read_yaml('tempidlist'),read_yaml('tempuserid'),read_yaml('tempusername'))
         write_yaml({"detail":detail})
 
 
@@ -285,24 +285,6 @@ class Test2:
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
-                                            'test_handover_fromuser_list'))
-    def test_handover_fromuser_list(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        caseinfo["request"]["json"]["toUser"] = 'agnes'
-        RequestUtils().standard_yaml_case(caseinfo)
-
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                                            'test_handover_touser_list'))
-    def test_handover_touser_list2(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        caseinfo["request"]["json"]["toUser"] = 'agnes'
-        RequestUtils().standard_yaml_case(caseinfo)
-
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
                                             'test_handover_createdoc'))
     def test_handover_createdoc(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
@@ -322,15 +304,13 @@ class Test2:
         caseinfo["request"]["json"]["startDate"] = str(
             datetime.date.today() - datetime.timedelta(days=1)) + "T16:00:00.000Z"
         caseinfo["request"]["json"]["endDate"] = str(datetime.date.today()) + "T15:59:59.999Z"
-
+        RequestUtils().standard_yaml_case(caseinfo)
         prdtlist = read_yaml('prdtlist')
         prdtcodelist = []
         if len(prdtlist) != 0:
             for i in prdtlist:
                 prdtcodelist.append(i['productCode'])
         write_yaml({"prdtcodelist": prdtcodelist})
-
-        RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
@@ -345,6 +325,7 @@ class Test2:
         caseinfo["request"]["json"]["startDate"] = str(
             datetime.date.today() - datetime.timedelta(days=1)) + "T16:00:00.000Z"
         caseinfo["request"]["json"]["endDate"] = str(datetime.date.today()) + "T15:59:59.999Z"
+        RequestUtils().standard_yaml_case(caseinfo)
 
         prdtuserlist = read_yaml('prdtuserlist')
         prdtuserid = ''
@@ -354,8 +335,6 @@ class Test2:
             prdtusername = prdtuserlist[0]['userName']
         write_yaml({'prdtuserid': prdtuserid})
         write_yaml({'prdtusername': prdtusername})
-
-        RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
@@ -367,6 +346,7 @@ class Test2:
         caseinfo["request"]["json"]["startDate"] = str(
             datetime.date.today() - datetime.timedelta(days=1)) + "T16:00:00.000Z"
         caseinfo["request"]["json"]["endDate"] = str(datetime.date.today()) + "T15:59:59.999Z"
+        RequestUtils().standard_yaml_case(caseinfo)
 
         grouplist = read_yaml('grouplist')
         groupidlist = []
@@ -384,8 +364,6 @@ class Test2:
         write_yaml({"groupuserlist": groupuserlist})
         write_yaml({"groupusernamelist": groupusernamelist})
 
-        RequestUtils().standard_yaml_case(caseinfo)
-
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
                                             'test_handover_get_rolelist'))
@@ -396,6 +374,7 @@ class Test2:
         caseinfo["request"]["json"]["startDate"] = str(
             datetime.date.today() - datetime.timedelta(days=1)) + "T16:00:00.000Z"
         caseinfo["request"]["json"]["endDate"] = str(datetime.date.today()) + "T15:59:59.999Z"
+        RequestUtils().standard_yaml_case(caseinfo)
 
         rolelist = read_yaml('rolelist')
         roleidlist = []
@@ -403,8 +382,6 @@ class Test2:
             for i in rolelist:
                 roleidlist.append(i['orgId'])
         write_yaml({"roleidlist": roleidlist})
-
-        RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
@@ -416,6 +393,7 @@ class Test2:
         caseinfo["request"]["json"]["startDate"] = str(
             datetime.date.today() - datetime.timedelta(days=1)) + "T16:00:00.000Z"
         caseinfo["request"]["json"]["endDate"] = str(datetime.date.today()) + "T15:59:59.999Z"
+        RequestUtils().standard_yaml_case(caseinfo)
 
         roleuserlist = read_yaml('roleuserlist')
         roleuserid = ''
@@ -426,8 +404,6 @@ class Test2:
             roleusername = roleuserlist[0]['userName']
         write_yaml({"roleuserid": roleuserid})
         write_yaml({"roleusername": roleusername})
-
-        RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
@@ -442,16 +418,15 @@ class Test2:
         caseinfo["request"]["json"]["endDate"] = str(datetime.date.today()) + "T15:59:59.999Z"
         caseinfo["request"]["json"]["taskTimeFrom"] = str(datetime.date.today())
         caseinfo["request"]["json"]["taskTimeTo"] = str(datetime.date.today())
+        RequestUtils().standard_yaml_case(caseinfo)
 
         templist = read_yaml('templist')
         tempidlist = []
         if len(templist) != 0:
             for i in templist:
-                if i['taskExecAuth'] == '1111':
+                if i['taskType'] == 'temp':
                     tempidlist.append(i['pkId'])
         write_yaml({"tempidlist": tempidlist})
-
-        RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
@@ -465,6 +440,7 @@ class Test2:
         caseinfo["request"]["json"]["endDate"] = str(datetime.date.today()) + "T15:59:59.999Z"
         caseinfo["request"]["json"]["taskTimeFrom"] = str(datetime.date.today())
         caseinfo["request"]["json"]["taskTimeTo"] = str(datetime.date.today())
+        RequestUtils().standard_yaml_case(caseinfo)
 
         tempuserlist = read_yaml('tempuserlist')
         tempuserid = ''
@@ -476,14 +452,12 @@ class Test2:
         write_yaml({"tempusername": tempusername})
 
         detail = DebugTalk().get_handover_detail(read_yaml('prdtcodelist'), read_yaml('prdtuserid'),
-                                               read_yaml('prdtusername'), read_yaml('groupidlist'),
-                                               read_yaml('groupuserlist'), read_yaml('groupusernamelist'),
-                                               read_yaml('roleidlist'), read_yaml('roleuserid'),
-                                               read_yaml('roleusername'), read_yaml('tempidlist'),
-                                               read_yaml('tempuserid'), read_yaml('tempusername'))
+                                                 read_yaml('prdtusername'), read_yaml('groupidlist'),
+                                                 read_yaml('groupuserlist'), read_yaml('groupusernamelist'),
+                                                 read_yaml('roleidlist'), read_yaml('roleuserid'),
+                                                 read_yaml('roleusername'), read_yaml('tempidlist'),
+                                                 read_yaml('tempuserid'), read_yaml('tempusername'))
         write_yaml({"detail": detail})
-
-        RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
@@ -548,13 +522,14 @@ class Test2:
         RequestUtils().standard_yaml_case(caseinfo)
 
 
+#审批中心
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
                                             'test_task_approval_list'))
     def test_task_approval_list(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        caseinfo["request"]["json"]["pageType"] = '1'
+        RequestUtils().standard_yaml_case(caseinfo)
 
         list1 = read_yaml('approvallist')
         objectid=read_yaml('objectid')
@@ -572,10 +547,8 @@ class Test2:
         write_yaml({"status": dict1['status']})
         write_yaml({"summary": dict1['summary']})
         write_yaml({"type": dict1['type']})
-        write_yaml({"urgenum ": dict1['urgeNum']})
+        write_yaml({"urgenum": dict1['urgeNum']})
         write_yaml({"idd": dict1['id']})
-
-        RequestUtils().standard_yaml_case(caseinfo)
 
 
     @pytest.mark.parametrize("caseinfo",
@@ -596,7 +569,7 @@ class Test2:
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-
+#交接管理
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
                                             'test_handover_fromuser_list'))
@@ -604,6 +577,7 @@ class Test2:
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         caseinfo["request"]["json"]["fromUser"] = 'agnes'
+        RequestUtils().standard_yaml_case(caseinfo)
 
         list2 = read_yaml('handoverlist')
         id=read_yaml('id')
@@ -618,14 +592,12 @@ class Test2:
         write_yaml({"begindate":dict2['beginDate']})
         write_yaml({"crtts":dict2['crtTs']})
         write_yaml({"detaillist":dict2['detailList']})
-        write_yaml({"enddate ":dict2['endDate']})
+        write_yaml({"enddate":dict2['endDate']})
         write_yaml({"folderpath":dict2['folderPath']})
         write_yaml({"fromuser":dict2['fromUser']})
-        write_yaml({"reason":dict2['reason']})
-        write_yaml({"type":dict2['type']})
+        write_yaml({"reason1":dict2['reason']})
+        write_yaml({"type1":dict2['type']})
         write_yaml({"updatets":dict2['updateTs']})
-
-        RequestUtils().standard_yaml_case(caseinfo)
 
 
     @pytest.mark.parametrize("caseinfo",
@@ -649,6 +621,7 @@ class Test2:
         caseinfo["request"]["json"]["changeUser"] = 'agnes'
         caseinfo["request"]["json"]["taskTimeFrom"] = str(datetime.date.today() - datetime.timedelta(days=1))
         caseinfo["request"]["json"]["taskTimeTo"] = str(datetime.date.today())
+        RequestUtils().standard_yaml_case(caseinfo)
 
         taskidlist = []
         tasklist01=read_yaml('tasklist01')
@@ -661,8 +634,6 @@ class Test2:
                 taskidlist.append(i['pkId'])
         write_yaml({"taskidlist":taskidlist})
 
-        RequestUtils().standard_yaml_case(caseinfo)
-
 
 
     @pytest.mark.parametrize("caseinfo",
@@ -671,8 +642,8 @@ class Test2:
     def test_handover_revoke(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        caseinfo["request"]["json"]["revokeDate"] = DebugTalk().get_current_time()
-        caseinfo["request"]["json"]["remark"] = "撤销人: "+read_yaml('approvaluser')+"; 撤销时间: "+DebugTalk().get_current_time()
+        caseinfo["request"]["json"]["revokeDate"] = DebugTalk().get_current_time_bai()
+        caseinfo["request"]["json"]["remark"] = "撤销人: "+read_yaml('approvaluser')+"; 撤销时间: "+DebugTalk().get_current_time_bai()
         caseinfo["request"]["json"]["userId"]= "agnes"
         RequestUtils().standard_yaml_case(caseinfo)
 

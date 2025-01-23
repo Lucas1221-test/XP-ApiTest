@@ -1,1 +1,1 @@
-[ ]
+[{"uid":"d860849ef72c4314","name":"testcase.test_task_approval_yaml.Test2#test_task_approval_refuse","time":{"start":1737616919503,"stop":1737616919666,"duration":163},"status":"passed","severity":"normal"},{"uid":"d22a3cc7e41bf422","name":"testcase.test_task_approval_yaml.Test2#test_task_approval_list","time":{"start":1737616919440,"stop":1737616919501,"duration":61},"status":"passed","severity":"normal"}]

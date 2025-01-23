@@ -289,7 +289,6 @@
       "endDate": enddate
       "userId": userid #"agnes",
       "zhugangren": zhugangren  #"agnes"
-  extract:
   validate:
     codes: 200
     equals:
@@ -334,7 +333,6 @@
       cookie: ${read_extract_arg(token)}
     json:
        "type": type  #交接：3
-  extract:
   validate:
     codes: 200
     equals:
@@ -370,7 +368,6 @@
       "applyUser": applyuser  #"agnes",
       "approvalUser": approvaluser  #"agnes",
       "summary": summary
-  extract:
   validate:
     codes: 200
     equals:
@@ -445,14 +442,13 @@
       "folderPath": ${read_extract_arg(folderpath)}
       "fromUser": ${read_extract_arg(fromuser)}
       "id": ${read_extract_arg(id)}
-      "reason": ${read_extract_arg(reason)}
-      "type": ${read_extract_arg(type)}
+      "reason": ${read_extract_arg(reason1)}
+      "type": ${read_extract_arg(type1)}
       "updateTs": ${read_extract_arg(updatets)}
       "revokeDate": revokedate
       "taskIdList": ${read_extract_arg(taskidlist)}
       "remark": remark
       "userId": userid  #"agnes"
-  extract:
   validate:
     codes: 200
     equals:
@@ -471,7 +467,6 @@
     json:
       -
         ${read_extract_arg(id)}
-  extract:
   validate:
     codes: 200
     equals:

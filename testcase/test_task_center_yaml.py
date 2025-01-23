@@ -1,3 +1,4 @@
+import time
 
 import allure
 import pytest
@@ -6,6 +7,10 @@ from common.ddt_utils import read_case_yaml
 from common.request_utils import RequestUtils
 from common.files_path import data_path
 from common.yaml_utils import read_yaml, write_yaml
+from datetime import datetime,timedelta
+import datetime
+
+from hotloads.debug_talk import DebugTalk
 
 """测试数据路径"""
 data_path0=data_path
@@ -79,6 +84,8 @@ class Test1:
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         caseinfo["request"]["json"]["taskCls"] = '01'
+        caseinfo["request"]["json"]["startDate"] = str(datetime.date.today())
+        caseinfo["request"]["json"]["endDate"] = str(datetime.date.today())
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -88,6 +95,8 @@ class Test1:
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         caseinfo["request"]["json"]["taskCls"] = '02'
+        caseinfo["request"]["json"]["startDate"] = str(datetime.date.today())
+        caseinfo["request"]["json"]["endDate"] = str(datetime.date.today())
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -97,6 +106,8 @@ class Test1:
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         caseinfo["request"]["json"]["taskCls"] = '03'
+        caseinfo["request"]["json"]["startDate"] = str(datetime.date.today())
+        caseinfo["request"]["json"]["endDate"] = str(datetime.date.today())
         RequestUtils().standard_yaml_case(caseinfo)
 
 @allure.feature("新增单节点岗位任务-绑定积木-审核-验收-发布-转办-拒绝")
@@ -124,6 +135,7 @@ class Test2:
     def test_task_save_xcpmodel(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["xcpInfo"]["body"]["fieldList"] = DebugTalk().set_xcpmodel()
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -156,6 +168,8 @@ class Test2:
     def test_task_add(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["caseDefBody"] = DebugTalk().set_casebody(read_yaml('taskname'),
+                                                                              read_yaml('stepcode'))
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -222,6 +236,7 @@ class Test2:
                              read_case_yaml(data_path,
                                             'test_task_query_fortaskname'))
     def test_task_query_fortaskname(self, caseinfo):
+        time.sleep(180)
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
@@ -262,6 +277,8 @@ class Test2:
     def test_test_task_approval_list(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
         approvallist=read_yaml('approvallist')
         caseid = read_yaml('caseid')
         dict = {}
@@ -277,9 +294,8 @@ class Test2:
         write_yaml({"status": dict['status']})
         write_yaml({"summary": dict['summary']})
         write_yaml({"type": dict['type']})
-        write_yaml({"urgenum ": dict['urgeNum']})
+        write_yaml({"urgenum": dict['urgeNum']})
         write_yaml({"idd": dict['id']})
-        RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
@@ -291,7 +307,7 @@ class Test2:
 
 @allure.feature("新增单节点岗位任务-绑定积木-审核-验收-发布-延期-通过")
 class Test3:
-    # 任务定制
+    #任务定制
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path2,
                                             'test_task_get_model'))
@@ -314,6 +330,7 @@ class Test3:
     def test_task_save_xcpmodel(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["xcpInfo"]["body"]["fieldList"] = DebugTalk().set_xcpmodel()
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -346,6 +363,8 @@ class Test3:
     def test_task_add(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["caseDefBody"] = DebugTalk().set_casebody(read_yaml('taskname'),
+                                                                              read_yaml('stepcode'))
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -406,11 +425,12 @@ class Test3:
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-    # 任务中心
+    #任务中心
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
                                             'test_task_query_fortaskname'))
     def test_task_query_fortaskname(self, caseinfo):
+        time.sleep(180)
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
@@ -436,43 +456,44 @@ class Test3:
             'tasktimefrom')[:-3] + " 至 " + read_yaml('tasktimeto')[:-3] + "\n延期时间 : 2025-12-30 00:00:00\n"
         RequestUtils().standard_yaml_case(caseinfo)
 
-        # 审批中心
-        @pytest.mark.parametrize("caseinfo",
-                                 read_case_yaml(data_path1,
-                                                'test_task_approval_list'))
-        def test_test_task_approval_list(self, caseinfo):
-            allure.dynamic.story(caseinfo['story'])
-            allure.dynamic.title(caseinfo['title'])
-            approvallist = read_yaml('approvallist')
-            caseid = read_yaml('caseid')
-            dict = {}
-            for i in approvallist:
-                if caseid in i['applyData']:
-                    dict = i
-            write_yaml({"applydata": dict['applyData']})
-            write_yaml({"applydate": dict['applyDate']})
-            write_yaml({"applyusername": dict['applyUsername']})
-            write_yaml({"approvalusername": dict['approvalUsername']})
-            write_yaml({"isagency": dict['isAgency']})
-            write_yaml({"reason": dict['reason']})
-            write_yaml({"status": dict['status']})
-            write_yaml({"summary": dict['summary']})
-            write_yaml({"type": dict['type']})
-            write_yaml({"urgenum ": dict['urgeNum']})
-            write_yaml({"idd": dict['id']})
-            RequestUtils().standard_yaml_case(caseinfo)
+    # 审批中心
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path1,
+                                            'test_task_approval_list'))
+    def test_test_task_approval_list(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
 
-        @pytest.mark.parametrize("caseinfo",
-                                 read_case_yaml(data_path1,
-                                                'test_task_approval_pass'))
-        def test_task_approval_pass(self, caseinfo):
-            allure.dynamic.story(caseinfo['story'])
-            allure.dynamic.title(caseinfo['title'])
-            RequestUtils().standard_yaml_case(caseinfo)
+        approvallist = read_yaml('approvallist')
+        caseid = read_yaml('caseid')
+        dict = {}
+        for i in approvallist:
+            if caseid in i['applyData']:
+                dict = i
+        write_yaml({"applydata": dict['applyData']})
+        write_yaml({"applydate": dict['applyDate']})
+        write_yaml({"applyusername": dict['applyUsername']})
+        write_yaml({"approvalusername": dict['approvalUsername']})
+        write_yaml({"isagency": dict['isAgency']})
+        write_yaml({"reason": dict['reason']})
+        write_yaml({"status": dict['status']})
+        write_yaml({"summary": dict['summary']})
+        write_yaml({"type": dict['type']})
+        write_yaml({"urgenum": dict['urgeNum']})
+        write_yaml({"idd": dict['id']})
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path1,
+                                            'test_task_approval_pass'))
+    def test_task_approval_pass(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
 
 @allure.feature("新增单节点岗位任务-绑定积木-审核-验收-发布-完成")
 class Test4:
-    # 任务定制
+    #任务定制
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path2,
                                             'test_task_get_model'))
@@ -495,6 +516,7 @@ class Test4:
     def test_task_save_xcpmodel(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["xcpInfo"]["body"]["fieldList"] = DebugTalk().set_xcpmodel()
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -527,6 +549,8 @@ class Test4:
     def test_task_add(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["caseDefBody"] = DebugTalk().set_casebody(read_yaml('taskname'),
+                                                                              read_yaml('stepcode'))
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -587,11 +611,13 @@ class Test4:
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-    # 任务中心
+
+    #任务中心
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
                                             'test_task_query_fortaskname'))
     def test_task_query_fortaskname(self, caseinfo):
+        time.sleep(180)
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
@@ -603,11 +629,16 @@ class Test4:
     def test_task_submit(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+
+        item=read_yaml('item')
+        item['remark']='完成'
+        write_yaml({"item_submit":item})
+
         RequestUtils().standard_yaml_case(caseinfo)
 
 @allure.feature("新增单节点岗位任务-绑定积木-审核-验收-发布-作废")
 class Test5:
-    # 任务定制
+    #任务定制
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path2,
                                             'test_task_get_model'))
@@ -630,6 +661,7 @@ class Test5:
     def test_task_save_xcpmodel(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["xcpInfo"]["body"]["fieldList"] = DebugTalk().set_xcpmodel()
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -662,6 +694,8 @@ class Test5:
     def test_task_add(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["caseDefBody"] = DebugTalk().set_casebody(read_yaml('taskname'),
+                                                                              read_yaml('stepcode'))
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -722,11 +756,12 @@ class Test5:
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-    # 任务中心
+    #任务中心
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
                                             'test_task_query_fortaskname'))
     def test_task_query_fortaskname(self, caseinfo):
+        time.sleep(180)
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
@@ -746,5 +781,6 @@ class Test5:
     def test_task_cancel(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        caseinfo["request"]["json"]["taskTime"] = read_yaml('tasktimefrom')[:-3] + " 至 " + read_yaml('tasktimeto')[:-3]
+        caseinfo["request"]["json"]["taskTime"] = read_yaml('tasktimefrom') + " 至 " + read_yaml('tasktimeto')
         RequestUtils().standard_yaml_case(caseinfo)
+

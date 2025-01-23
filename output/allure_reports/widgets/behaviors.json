@@ -1,4 +1,1 @@
-{
-  "total" : 0,
-  "items" : [ ]
-}
+{"total":1,"items":[{"uid":"1b2f9da968624b08764518c7e520db2c","name":"查询任务-拒绝","statistic":{"failed":0,"broken":0,"skipped":0,"passed":2,"unknown":0,"total":2}}]}

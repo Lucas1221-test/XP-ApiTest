@@ -1,8 +1,12 @@
 import base64
 import datetime
+from datetime import datetime
 import hashlib
+import json
 import random
 import time
+from io import StringIO
+import string
 
 import yaml
 
@@ -41,8 +45,262 @@ class DebugTalk:
 
     "生成随机任务名称"
     def get_random_task_name(self):
-        data = "自动化测试任务"+str(random.randint(100000,999999))
+        data = "自动化场景测试任务"+str(random.randint(100000,999999))
         return data
+
+    "拼接单节点任务的casebody"
+    def set_casebody(self,taskname,stepcode):
+        casebody={"actions":[],"optionalStages":[],"stages":[{"defId":"","defName":"default","defType":"stage","optional":True,"edit":False,"defBody":{},"children":[{"stepName":taskname,"defType":"step","stepActType":"","stepId":"","edit":False,"stepFormInfo":{"caseStepDef":{"stepCode":stepcode,"stageName":"","stepName":taskname,"stepLevel":0,"encodingRule":"00008085","stepTag":[],"zrUserPzMethod":"0","zrUser":"","xzUserPzMethod":"0","xzUser":"","stepActOwner":"","stepCollaborateOwner":"","jrdb":"1","yxyq":"0","yxzb":"0","yxzf":"0","yxcxzx":"1","yxsggy":"1","dbzxazjdzs":"0","jdcxzx":"0","jdwxcxzx":"0","notifyRuleFlag":"0","startTimeFlag":"0","endTimeFlag":"0","notifyRule":"0","parmSetFlag":"0","stepRemark":"","baseDateType":"0","startTime":"00:00","startBaseDay":"","startDayType":"00","startCrossDayType":"0","startDay":"","endTime":"23:59","endBaseDay":"","endDayType":"00","endCrossDayType":"0","endDay":"0","isTodo":"0","isNotCrtJob":"0","allowManualConfirm":"1","isAllowExecAgain":"0","allowActionConfirm":"0","allowShowDetail":"0","allowFormAction":"0","allowEditEndTime":"0","paramsOutData":[],"warningMintues":"","stepExecMode":"FREQUENCY"},"failRuleTableData":{"judgeScript":""},"successRuleTableData":{"judgeScript":""},"activeRuleTableData":{"judgeScript":""},"timeoutRuleTableData":{"judgeScript":""},"exceptionRemind":[],"finishRemind":[],"timeoutRemind":[],"serviceResponseId":"","isRecordTimeoutError":"0","warningRemind":[]}}]}],"version":"0","stepCodeArr":{stepcode:stepcode}}
+        return casebody
+
+    "拼接快速新增单节点任务的casebody"
+    def set_casebody_quick(self, stepcode):
+        casebody = {"actions": [], "optionalStages": [], "stages": [
+            {"defId": "", "defName": "default", "defType": "stage", "optional": True, "edit": False, "defBody": {},
+             "children": [{"stepName": "default", "defType": "step", "stepActType": "", "stepId": "", "edit": False,
+                           "stepFormInfo": {
+                               "caseStepDef": {"stepCode": stepcode, "stageName": "", "stepName": "default",
+                                               "stepLevel": 0, "encodingRule": "00008085", "stepTag": [],
+                                               "zrUserPzMethod": "0", "zrUser": "", "xzUserPzMethod": "0", "xzUser": "",
+                                               "stepActOwner": "", "stepCollaborateOwner": "", "jrdb": "1", "yxyq": "0",
+                                               "yxzb": "0", "yxzf": "0", "yxcxzx": "1", "yxsggy": "1",
+                                               "dbzxazjdzs": "0", "jdcxzx": "0", "jdwxcxzx": "0", "notifyRuleFlag": "0",
+                                               "startTimeFlag": "0", "endTimeFlag": "0", "notifyRule": "0",
+                                               "parmSetFlag": "0", "stepRemark": "", "baseDateType": "0",
+                                               "startTime": "00:00", "startBaseDay": "", "startDayType": "00",
+                                               "startCrossDayType": "0", "startDay": "", "endTime": "23:59",
+                                               "endBaseDay": "", "endDayType": "00", "endCrossDayType": "0",
+                                               "endDay": "0", "isTodo": "0", "isNotCrtJob": "0",
+                                               "allowManualConfirm": "1", "isAllowExecAgain": "0",
+                                               "allowActionConfirm": "0", "allowShowDetail": "0",
+                                               "allowFormAction": "0", "allowEditEndTime": "0", "paramsOutData": [],
+                                               "warningMintues": "", "stepExecMode": "FREQUENCY"},
+                               "failRuleTableData": {"judgeScript": ""}, "successRuleTableData": {"judgeScript": ""},
+                               "activeRuleTableData": {"judgeScript": ""}, "timeoutRuleTableData": {"judgeScript": ""},
+                               "exceptionRemind": [], "finishRemind": [], "timeoutRemind": [], "serviceResponseId": "",
+                               "isRecordTimeoutError": "0", "warningRemind": []}}]}], "version": "0",
+                    "stepCodeArr": {stepcode: stepcode}}
+        return casebody
+
+    "拼接任务实例"
+    def set_xcpmodel(self):
+        list=[
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "1",
+                "orderNum": 0,
+                "tableField": "PK_ID",
+                "field": "pkId",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "pkId",
+                "isBizKey": "1",
+                "isPk": "1",
+                "ext": "{\"multiple\":\"0\"}",
+                "fillRule": "ATOMIC_ID"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "CASE_ID",
+                "field": "caseId",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "caseId"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "EXEC_DATE",
+                "field": "execDate",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "执行日期"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "START_DATE",
+                "field": "startDate",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "业务开始日期"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "END_DATE",
+                "field": "endDate",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "业务结束日期"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "PLAN_START_TS",
+                "field": "planStartTs",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "计划开始日期"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "PLAN_END_TS",
+                "field": "planEndTs",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "计划结束日期"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "PRDT_CODE",
+                "field": "prdtCode",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "产品代码"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "PRDT_NAME",
+                "field": "prdtName",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "产品名称"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "FIELD1",
+                "field": "field1",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "备用1"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "FIELD2",
+                "field": "field2",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "备用2"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "FIELD3",
+                "field": "field3",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "备用3"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "FIELD4",
+                "field": "field4",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "备用4"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "FIELD5",
+                "field": "field5",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "备用5"
+            },
+            {
+                "fieldLength": 32,
+                "fieldType": "text",
+                "isRequire": "0",
+                "orderNum": 1,
+                "tableField": "FIELD6",
+                "field": "field6",
+                "fileDataType": "01",
+                "linkId": "1",
+                "component": "input-text",
+                "formatType": "",
+                "format": "",
+                "fieldName": "备用6"
+            }
+        ]
+        return list
 
     "生成随机临时任务名称"
     def get_random_temp_task_name(self):
@@ -138,7 +396,7 @@ class DebugTalk:
 
     "获取当前日期和时间"
     # 获取当前时间y-m-d h:m:s
-    def get_current_time(self):
+    def get_current_time_bai(self):
         # 获取当前时间的时间戳
         timestamp = time.time()
         # 将时间戳转换为本地时间
@@ -176,3 +434,14 @@ class DebugTalk:
     def get_current_time(self):
         time = str(datetime.date.today())
         return time
+
+    # yaml文件内容转换成json格式
+    def yaml_to_json(self,yamlPath):
+        with open(yamlPath, encoding="utf-8") as f:
+            datas = yaml.load(f, Loader=yaml.FullLoader)  # 将文件的内容转换为字典形式
+        jsonDatas = json.dumps(datas, indent=5)  # 将字典的内容转换为json格式的字符串
+        return jsonDatas
+
+
+if __name__=='__main__':
+    print(DebugTalk().set_step_random_string(6))

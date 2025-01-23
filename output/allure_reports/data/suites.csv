@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","61","testcase.test_task_approval_yaml.Test2#test_task_approval_list","testcase","Thu Jan 23 15:21:59 CST 2025","passed","Thu Jan 23 15:21:59 CST 2025","Test2","test_task_approval_yaml","",""
+"","163","testcase.test_task_approval_yaml.Test2#test_task_approval_refuse","testcase","Thu Jan 23 15:21:59 CST 2025","passed","Thu Jan 23 15:21:59 CST 2025","Test2","test_task_approval_yaml","",""

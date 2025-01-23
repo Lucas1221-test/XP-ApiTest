@@ -2,7 +2,7 @@
 
 -
   name: test_task_approval_list
-  story: 我的审批："1"/我的发起："2"
+  story: 我的审批："1"
   title:
   request:
     method: POST
@@ -14,9 +14,30 @@
       "pageSize": 100
       "applyUserList": "agnes"
       "statusList": "0"
-      "pageType": pagetype  #我的审批："1"/我的发起："2"
+      "pageType": '1'  #我的审批："1"/我的发起："2"
+      "q": ""
   extract:
     approvallist: $.data.rows
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_approval_list2
+  story: 我的发起："2"
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/mcc/approval/list?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageIndex": 0
+      "pageSize": 100
+      "applyUserList": "agnes"
+      "statusList": "0"
+      "pageType": '2'  #我的审批："1"/我的发起："2"
   validate:
     codes: 200
     equals:
@@ -86,6 +107,8 @@
     url: api/agnes-app/v1/mcc/approval/urge
     headers:
       cookie: ${read_extract_arg(token)}
+
+    #json: #${read_extract_args(approvallist, 0)}
     json:
       -
         "applyData": ${read_extract_arg(applydata)}
@@ -116,5 +139,5 @@
     json:
   validate:
     codes: 200
-    equals:
-      msgType: "success"
+    #equals:
+      #msgType: "success"

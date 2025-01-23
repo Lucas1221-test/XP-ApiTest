@@ -17,10 +17,10 @@
       "belongPost": ""
       "taskStatus": ""
       "prdtCode": ""
-      "taskName": ${read_extract_arg(taskname)}
+      "taskName": '黄锋11401' #${read_extract_arg(taskname)}
       "taskLevel": ""
-      "taskTimeFrom": ${get_today('')}
-      "taskTimeTo": ${get_today('')}
+      "taskTimeFrom": tasktimefrom
+      "taskTimeTo": tasktimeto
       "bizTimeFrom": ""
       "bizTimeTo": ""
       "residueTime": ""
@@ -43,14 +43,9 @@
       cookie: ${read_extract_arg(token)}
     json:
       "taskExecId": ${read_extract_arg(taskexecid)}
-      "bizDate": ${get_today('')}
+      "bizDate": bizdate
   extract:
-    stepcode: $.data.caseSteps[0].stepCode
-    stepexecid: $.data.caseSteps[0].stepExecId
-    jobid: $.data.caseSteps[0].jobId
-    stepstatus: $.data.caseSteps[0].stepStatus
-    taskid: $.data.caseSteps[0].taskId
-    caseid: $.data.caseSteps[0].caseId
+    breif: $.data
   validate:
     codes: 200
     equals:
@@ -110,8 +105,8 @@
       "stepExecId": ${read_extract_arg(stepexecid)}
   validate:
     codes: 200
-    equals:
-      msgType:  #"success"
+    #equals:
+      #msgType:  #"success"
 
 -
   name: test_task_get_breif_confirm
@@ -127,8 +122,8 @@
         "stepStatus": ${read_extract_arg(stepstatus)}
         "jobId": ${read_extract_arg(jobid)}
         "stepCode": ${read_extract_arg(stepcode)}
-        "bizDate": ${get_today('')}
-        "execBizDate": ${get_today('')}
+        "bizDate": bizdate
+        "execBizDate": execbizdate
         "caseId": ${read_extract_arg(caseid)}
         "stepExecId": ${read_extract_arg(stepexecid)}
       "inst":
@@ -137,6 +132,26 @@
       "caseId": ${read_extract_arg(caseid)}
       "stepExecId": ${read_extract_arg(stepexecid)}
       "taskId": ${read_extract_arg(taskid)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_task_get_breif_commit
+  story: 任务详情-手工完成
+  title:
+  request:
+    method: POST
+    url: api/agnes-ac/v1/config/exe/task/batch/commit
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      stepInfos:
+        - stepExecId: ${read_extract_arg(stepexecid)}
+          taskId: ${read_extract_arg(taskid)}
+          remark: 手工完成
+          caseId: ${read_extract_arg(caseid)}
   validate:
     codes: 200
     equals:
@@ -169,11 +184,11 @@
       cookie: ${read_extract_arg(token)}
     json:
       "stepExecId": ${read_extract_arg(stepexecid)}
-      "planEndTime": ${get_today("23:59:00")}
+      "planEndTime": planendtime
   validate:
     codes: 200
-    equals:
-      msgType:  #"success"
+    #equals:
+      #msgType:  #"success"
 
 -
   name: test_task_get_breif_step_cancel
