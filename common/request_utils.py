@@ -132,35 +132,14 @@ class RequestUtils:
         fun_list = re.findall(regexp, yaml_str)
         if fun_list:
             for f in fun_list:
-                if not f[1]:  # 无参数
-                    new_value = getattr(DebugTalk(), f[0])()
-                else:  # 有参数
+                if f[1] == "":  #没有参数
+                    new_value = getattr(DebugTalk(), f[0])()  #反射
+                else:  #有参数
                     new_value = getattr(DebugTalk(), f[0])(*f[1].split(","))
-
-                # 根据返回值类型决定是否添加引号
-                if isinstance(new_value, (dict, list)):  # 字典或列表类型
-                    new_value = json.dumps(new_value, ensure_ascii=False)  # 转为 JSON 字符串
-                elif isinstance(new_value, (int, float, bool)):  # 数字、布尔值
-                    new_value = str(new_value)
-                elif new_value is None:  # 空值处理
-                    new_value = "null"
-                elif isinstance(new_value, str):  # 字符串类型
-                    try:
-                        # 尝试直接解析，不加引号
-                        yaml.safe_load(new_value)  # 如果解析失败会抛出异常
-                        new_value = new_value
-                    except yaml.YAMLError:
-                        # 回退处理，添加引号
-                        if "'" in new_value:
-                            new_value = f'"{new_value}"'  # 使用双引号
-                        else:
-                            new_value = f"'{new_value}'"  # 使用单引号
-                    # new_value = f"'{new_value}'"  # 添加引号以避免 YAML 格式错误
-                else:  # 其他类型
-                    new_value = f"'{str(new_value)}'"
-
-                # 替换原始值
-                old_value = f"${{{f[0]}({f[1]})}}"
-                yaml_str = yaml_str.replace(old_value, new_value)
+                #判断如果得到的值是字符串的话，那么加上单引号
+                if isinstance(new_value, str):
+                    new_value = "'"+new_value+"'"
+                old_value = "${"+f[0]+"("+f[1]+")}"
+                yaml_str = yaml_str.replace(old_value, str(new_value))
 
         return yaml_str
