@@ -100,7 +100,7 @@ class Test:
         res = RequestUtils().standard_yaml_case(caseinfo)
         res = res.json()
         datas = res["data"]["rows"]
-        # print(data)
+        # print(datas)
         new_data = []
         id = read_yaml("pre_save_pkId")
         # print(f"id：{id}")
@@ -423,7 +423,10 @@ class Test:
     def test_copy_dc_hexETL_blocks(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title('新增数据采集-ETL单JOB-复制保存')
-        caseinfo['request']['json']['dopETLReConfDB']['confName'] += str(datetime.now().strftime("%Y%m%d%H%M%S"))
+        caseinfo['request']['json']['blockName'] += str(datetime.now().strftime("%Y%m%d%H%M%S"))
+        hexETL_copy_blockName=caseinfo['request']['json']['blockName']
+        data = {"hexETL_copy_blockName": hexETL_copy_blockName}
+        write_yaml(data)
         RequestUtils().standard_yaml_case(caseinfo)
 
     """
@@ -445,7 +448,7 @@ class Test:
         hexETL_copy_pkId = new_data[0].get("pkId")
         data = {"hexETL_copy_pkId": hexETL_copy_pkId}
         write_yaml(data)
-        assert new_data[0]['blockName'] == "autotest-数据采集-hexETL-copy"
+        assert new_data[0]['blockName'] == read_yaml("hexETL_copy_blockName")
         assert new_data[0]['status'] == '01'
 
 
@@ -470,7 +473,7 @@ class Test:
         new_data = []
         for data in datas:
             if isinstance(data, dict) and (
-                    data.get('pkId') == read_yaml("pre_save_hexETL_info") or data.get('pkId') == read_yaml("hexETL_copy_pkId")):
+                    data.get('pkId') == read_yaml("pre_save_hexETL_pkId") or data.get('pkId') == read_yaml("hexETL_copy_pkId")):
                 new_data.append(data)
         for item in new_data:
             assert item['status'] == '02'
@@ -498,7 +501,7 @@ class Test:
         new_data = []
         for data in datas:
             if isinstance(data, dict) and (
-                    data.get('pkId') == read_yaml("pre_save_hexETL_info") or data.get('pkId') == read_yaml("hexETL_copy_pkId")):
+                    data.get('pkId') == read_yaml("pre_save_hexETL_pkId") or data.get('pkId') == read_yaml("hexETL_copy_pkId")):
                 new_data.append(data)
         for item in new_data:
             assert item['status'] == '03'
@@ -636,7 +639,7 @@ class Test:
         for data in datas:
             if data.get('blockCode') == read_yaml("mulETL_blockCode"):
                 new_data.append(data)
-        assert new_data[0]['blockName'] == "autotest-数据采集类-ETL多JOB-edit"
+        assert new_data[0]['blockName'] == "autotest-数据采集类-ETL多JOB-edit1"
         assert new_data[0]['status'] == '01'
         assert new_data[0]['blockDesc'] == "test-edit"
 
@@ -682,7 +685,7 @@ class Test:
         res=RequestUtils().standard_yaml_case(caseinfo)
         res = res.json()
         datas = res["data"]["rows"]
-        print("data 111 %s"%datas)
+        print("datas 111 %s"%datas)
         new_data = []
         mulETL_copy_blockCode = read_yaml("mulETL_copy_blockCode")
         print("mulETL_copy_blockCode 111 %s" % mulETL_copy_blockCode)
