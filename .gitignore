@@ -155,12 +155,9 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# 忽略临时文件
-output/temps
-output/logs
-output/allure_reports/data/attachments
-output/allure_reports/data/test-cases
-testcase/output/temps
+# 蹇界暐涓存椂鏂囦欢
+/output/
+
 
 
 
