@@ -158,6 +158,10 @@ cython_debug/
 # 忽略临时文件
 /output/
 
+#pycharm .idea
+mall/.idea/*
+.idea/*
+
 
 
 
