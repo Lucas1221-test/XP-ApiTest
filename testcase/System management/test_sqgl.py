@@ -9,7 +9,7 @@ from hotloads.debug_talk import DebugTalk
 """测试数据路径"""
 data_path = data_path + 'test_sqgl.yaml'
 @allure.epic("系统管理")
-@allure.feature("系统管理-角色管理")
+@allure.feature("系统管理-授权管理")
 class Test:
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
