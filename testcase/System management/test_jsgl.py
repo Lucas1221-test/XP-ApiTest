@@ -5,7 +5,7 @@ from common.request_utils import RequestUtils
 from common.yaml_utils import write_yaml, read_yaml
 from common.files_path import data_path
 """测试数据路径"""
-data_path = data_path + 'test_jsgl.yaml'
+data_path = data_path + 'systemmanagementyaml/test_jsgl.yaml'
 @allure.epic("系统管理")
 @allure.feature("系统管理-角色管理")
 class Test:
