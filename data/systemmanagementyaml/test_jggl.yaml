@@ -45,7 +45,6 @@
       cookie: ${read_extract_arg(token)}
     json:
       crtUser: ${read_extract_arg(updateUser)}
-      updateTs: ${get_current_time()}
       updateUser: ${read_extract_arg(updateUser)}
       isDel: '0'
       tenantMode: 0
