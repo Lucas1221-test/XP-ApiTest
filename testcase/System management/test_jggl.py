@@ -7,7 +7,7 @@ from common.yaml_utils import write_yaml, read_yaml
 from common.files_path import data_path
 from hotloads.debug_talk import DebugTalk
 """测试数据路径"""
-data_path = data_path + 'Systemmanagementyaml/test_jggl.yaml'
+data_path = data_path + 'systemmanagementyaml/test_jggl.yaml'
 @allure.epic("系统管理")
 @allure.feature("系统管理-机构管理")
 class Test:
