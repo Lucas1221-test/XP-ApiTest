@@ -1,0 +1,112 @@
+#系统管理-机构管理
+-
+  name: test_org_addOrg
+  story: 系统管理-机构管理
+  title: 新增机构
+  request:
+    method: POST
+    url: api/gf-admin/gf/org/addOrg
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "orgLevel": 3
+      "dataType": "hr"
+      "orgId": "null"
+      "orgCode": "111"
+      "orgName": "机构test"
+      "orgType": "01"
+      parentOrgId: "25"
+      parentOrgName: "批量开发部"
+  validate:
+    codes: 200
+
+-
+  name: test_org_getOrgTree
+  story: 系统管理-机构管理
+  title: 获取机构列表
+  request:
+    method: POST
+    url: api/gf-admin/gf/org/getOrgTree
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "dataType": "hr"
+  validate:
+    codes: 200
+
+-
+  name: test_org_editOrg
+  story: 系统管理-机构管理
+  title: 修改
+  request:
+    method: POST
+    url: api/gf-admin/gf/org/editOrg
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      crtUser: ${read_extract_arg(updateUser)}
+      updateUser: ${read_extract_arg(updateUser)}
+      isDel: '0'
+      tenantMode: 0
+      currentOrg: 0
+      orgId: ${read_extract_arg(orgId)}
+      orgCode: "1111"
+      orgName: "机构test1"
+      orgLevel: 1
+      orgSeq:  ${read_extract_arg(orgSeq)}
+      orgType: ${read_extract_arg(orgType)}
+      dataType: ${read_extract_arg(dataType)}
+      parentOrgId: ${read_extract_arg(parentOrgId)}
+      orgHierarchy:
+        - ${read_extract_arg(orgHierarchy)}
+      showTenant: 0
+      parentOrgName: ${read_extract_arg(parentOrgName)}
+  validate:
+    codes: 200
+
+-
+  name: test_org_removeOrg
+  story: 系统管理-机构管理
+  title: 修改
+  request:
+    method: POST
+    url: api/gf-admin/gf/org/removeOrg
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "orgId": ${read_extract_arg(orgId)}
+  validate:
+    codes: 200
+
+-
+  name: test_org_checkOrgCodeExist
+  story: 系统管理-机构管理
+  title: 查看机构code
+  request:
+    method: POST
+    url: api/gf-admin/gf/org/checkOrgCodeExist
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "orgCode": "111"
+      "dataType": "hr"
+  validate:
+    codes: 200
+
+-
+  name: test_org_checkOrgNameExist
+  story: 系统管理-机构管理
+  title: 查看机构code
+  request:
+    method: POST
+    url: api/gf-admin/gf/org/checkOrgNameExist
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "orgName": "机构test"
+      "dataType": "hr"
+  validate:
+    codes: 200
+
+
+
