@@ -1,0 +1,96 @@
+#系统管理-角色管理
+-
+  name: test_role_select
+  story: 系统管理-机构管理
+  title: 选择代码和名称
+  request:
+    method: POST
+    url: api/gf-admin/gf/role/select
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "roleId": "1"
+      "appId": "AGNES"
+  validate:
+    codes: 200
+
+-
+  name: test_role_add
+  story: 系统管理-机构管理
+  title: 新增角色
+  request:
+    method: POST
+    url: api/gf-admin/gf/role/add
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "appId": "AGNES"
+      "roleId": "roletest"
+      "roleName": "角色test"
+      "roleDesc": "a"
+  validate:
+    codes: 200
+
+-
+  name: test_role_queryList
+  story: 系统管理-机构管理
+  title: 查看列表
+  request:
+    method: POST
+    url: api/gf-admin/gf/role/queryList?pageIndex=0&pageSize=10
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageIndex": 0
+      "pageSize": 10
+      "q": ""
+  validate:
+    codes: 200
+
+-
+  name: test_role_edit
+  story: 系统管理-机构管理
+  title: 编辑
+  request:
+    method: POST
+    url: api/gf-admin/gf/role/edit
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "crtUser": ${read_extract_arg(appId)}
+      "updateUser": ${read_extract_arg(appId)}
+      "isDel": "0"
+      "tenantMode": 0
+      "currentOrg": 0
+      "roleId": ${read_extract_arg(roleId)}
+      "appId": ${read_extract_arg(appId)}
+      "appName": ${read_extract_arg(appName)}
+      "roleName": "角色test1"
+      "roleDesc": "aa"
+      "tenantId": ${read_extract_arg(tenantId)}
+  validate:
+    codes: 200
+
+-
+  name: test_role_remove
+  story: 系统管理-机构管理
+  title: 删除
+  request:
+    method: POST
+    url: api/gf-admin/gf/role/remove
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "crtTs": ""
+      "crtUser": ${read_extract_arg(appId)}
+      "updateUser": ${read_extract_arg(appId)}
+      "isDel": "0"
+      "tenantMode": 0
+      "currentOrg": 0
+      "roleId": ${read_extract_arg(roleId)}
+      "appId": ${read_extract_arg(appId)}
+      "appName": ${read_extract_arg(appName)}
+      "tenantId": ${read_extract_arg(tenantId)}
+  validate:
+    codes: 200
+
