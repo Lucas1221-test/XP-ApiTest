@@ -1,0 +1,110 @@
+#系统管理-租户管理
+-
+  name: test_tenant_add
+  story: 系统管理-机构管理
+  title: 新增
+  request:
+    method: POST
+    url: api/gf-admin/gf/tenant/add
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "tenantId": "6666"
+      "tenantName": "租户666"
+      "status": "00"
+      "maxUserNum": 0
+      "validSdateDt": "2024-12-26"
+  validate:
+    codes: 200
+
+-
+  name: test_tenant_edit
+  story: 系统管理-机构管理
+  title: 编辑
+  request:
+    method: POST
+    url: api/gf-admin/gf/tenant/edit
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "crtUser": ${read_extract_arg(updateUser)}
+      "updateUser": ${read_extract_arg(updateUser)}
+      "isDel": "0"
+      "tenantMode": 0
+      "currentOrg": 0
+      "id": ${read_extract_arg(id)}
+      "tenantId": ${read_extract_arg(tenantId)}
+      "tenantName": "租户6666"
+      "validSdateDt": ${read_extract_arg(validSdateDt)}
+      "status": "00"
+      "maxUserNum": 0
+  validate:
+    codes: 200
+
+-
+  name: test_tenant_queryList
+  story: 系统管理-机构管理
+  title: 获取信息
+  request:
+    method: POST
+    url: api/gf-admin/gf/tenant/queryList?pageIndex=0&pageSize=10&q=
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageIndex": 0
+      "pageSize": 10
+      "q": ""
+  validate:
+    codes: 200
+
+-
+  name: test_tenant_disable
+  story: 系统管理-机构管理
+  title: 停用
+  request:
+    method: get
+    url: api/gf-admin/gf/tenant/disable?tenantId=6666
+    headers:
+      cookie: ${read_extract_arg(token)}
+  validate:
+    codes: 200
+
+-
+  name: test_tenant_enable
+  story: 系统管理-机构管理
+  title: 启用
+  request:
+    method: get
+    url: api/gf-admin/gf/tenant/enable?tenantId=6666
+    headers:
+      cookie: ${read_extract_arg(token)}
+  validate:
+    codes: 200
+
+-
+  name: test_tenant_remove
+  story: 系统管理-机构管理
+  title: 删除
+  request:
+    method: get
+    url: api/gf-admin/gf/tenant/remove
+    headers:
+      cookie: ${read_extract_arg(token)}
+    params:
+      "id": ${read_extract_arg(id)}
+  validate:
+    codes: 200
+
+-
+  name: test_tenant_selectByTenantId
+  story: 系统管理-机构管理
+  title: 选中id
+  request:
+    method: POST
+    url: api/gf-admin/gf/tenant/selectByTenantId
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "tenantId": ${read_extract_arg(tenantId)}
+  validate:
+    codes: 200
