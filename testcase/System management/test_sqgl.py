@@ -74,7 +74,7 @@ class Test:
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
-        assert read_yaml('roleResIds') == "['00000021']"
+        assert read_yaml('roleResIds') == ['00000021']
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
