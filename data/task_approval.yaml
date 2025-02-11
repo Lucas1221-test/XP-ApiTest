@@ -141,3 +141,31 @@
     codes: 200
     #equals:
       #msgType: "success"
+
+-
+  name: test_task_approval_list3
+  story: 我的审批："1"
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/mcc/approval/list?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      approvalUser: agnes
+      statusList: ''
+      typeList:  #  '1' 延期
+      applyUserList: null
+      summary: null
+      applyBeginDate: null
+      applyEndDate: null
+      pageType: '1'
+      q: ''
+  extract:
+    approval_list: $.data.rows
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"

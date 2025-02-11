@@ -482,12 +482,12 @@
       cookie: ${read_extract_arg(token)}
     json:
       "themeId": ${read_extract_arg(themeid)}
-      "taskName": ''
+      "taskName": ${read_extract_arg(taskname)}
       "disTypes": [ ]
       "taskStatusArr": [ ]
   extract:
      actionparam: $.data.rows[0].reTaskDef.actionParam
-     biztag:  $.data.rows[0].reTaskDef.bizTag
+#     biztag:  $.data.rows[0].reTaskDef.bizTag
      crtts2: $.data.rows[0].reTaskDef.crtTs
      crtuser2: $.data.rows[0].reTaskDef.crtUser
      updatets2: $.data.rows[0].reTaskDef.updateTs
@@ -623,6 +623,28 @@
         -
           "taskId": ${read_extract_arg(taskid)}
           "isDel": "1"
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_task_query_theme_task2
+  story: 查询主题任务列表
+  title:
+  request:
+    method: POST
+    url: api/agnes-ac/v1/mcc/theme/info/task/query?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "themeId": ${read_extract_arg(themeid)}
+      "taskName": ${read_extract_arg(taskname)}
+      "disTypes": [ ]
+      "taskStatusArr": [ ]
+  extract:
+      task_status: $.data.rows[0].reTaskDef.taskStatus
   validate:
     codes: 200
     equals:

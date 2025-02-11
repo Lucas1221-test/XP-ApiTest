@@ -145,6 +145,17 @@ class Test1:
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                                            'test_task_query_theme_task2'))
+    def test_task_query_theme_task2(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+        task_status=read_yaml('task_status')
+        assert task_status=='03'
+
 @allure.feature("新增单节点岗位任务-绑定积木-上下移动积木顺序-删除积木-删除任务")
 class Test2:
 
@@ -425,6 +436,17 @@ class Test3:
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                                            'test_task_query_theme_task2'))
+    def test_task_query_theme_task2(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+        task_status = read_yaml('task_status')
+        assert task_status == '09'
 
 '''
     @pytest.mark.parametrize("caseinfo",

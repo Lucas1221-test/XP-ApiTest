@@ -305,6 +305,22 @@ class Test2:
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path1,
+                                            'test_task_approval_list3'))
+    def test_task_approval_list3(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["typeList"] = '4'  #转办
+        RequestUtils().standard_yaml_case(caseinfo)
+        approval_list = read_yaml('approval_list')
+        caseid = read_yaml('caseid')
+        status = ''
+        for i in approval_list:
+            if caseid in i['applyData']:
+                status = i['status']
+        assert status == '3'  # 状态为已拒绝
+
 @allure.feature("新增单节点岗位任务-绑定积木-审核-验收-发布-延期-通过")
 class Test3:
     #任务定制
@@ -490,6 +506,22 @@ class Test3:
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path1,
+                                            'test_task_approval_list3'))
+    def test_task_approval_list3(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["typeList"] = '1'
+        RequestUtils().standard_yaml_case(caseinfo)
+        approval_list=read_yaml('approval_list')
+        caseid = read_yaml('caseid')
+        status=''
+        for i in approval_list:
+            if caseid in i['applyData']:
+                status= i['status']
+        assert status=='2'  #状态为已审核
 
 @allure.feature("新增单节点岗位任务-绑定积木-审核-验收-发布-完成")
 class Test4:

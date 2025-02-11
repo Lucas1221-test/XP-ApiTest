@@ -61,30 +61,12 @@
       "q": ""
   extract:
     item: $.data.rows[0]
-#    attuser: $.data.rows[0].attUser
-#    biztimefrom: $.data.rows[0].bizTimeFrom
-#    biztimeto: $.data.rows[0].bizTimeTo
     caseid: $.data.rows[0].caseId
-#    crtts: $.data.rows[0].crtTs
-#    crtuser: $.data.rows[0].crtUser
-#    distype: $.data.rows[0].disType
-#    exetime: $.data.rows[0].exeTime
-#    executeuser: $.data.rows[0].executeUser
-#    ispending: $.data.rows[0].isPending
     pkid: $.data.rows[0].pkId
-#    prdtinfo: $.data.rows[0].prdtInfo
-#    process: $.data.rows[0].process
-#    taskexecauth: $.data.rows[0].taskExecAuth
     taskid: $.data.rows[0].taskId
-#    tasklevel: $.data.rows[0].taskLevel
     taskname: $.data.rows[0].taskName
-#    taskstatus: $.data.rows[0].taskStatus
     tasktimefrom: $.data.rows[0].taskTimeFrom
     tasktimeto: $.data.rows[0].taskTimeTo
-#    tasktype: $.data.rows[0].taskType
-#    updatets: $.data.rows[0].updateTs
-#    residueTime: $.data.rows[0].residueTime
-#    taskAllow: $.data.rows[0].taskAllow
   validate:
     codes: 200
     equals:

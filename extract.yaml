@@ -1,0 +1,191 @@
+caseid: case-00000408
+casedefid: 1jf5s79zd4ckd
+casetype: caseV3
+crtts1: '2025-02-10 15:49:17'
+crtuser1: agnes
+distype: '2'
+taskid: 1jf5s79yvn259
+taskinitdays: 0
+taskname: 自动化场景测试任务342614
+taskstatus: '01'
+updatets1: '2025-02-10 15:49:17'
+updateuser1: agnes
+canfb: '1'
+canht: '1'
+cansc: '1'
+canset: '1'
+cansh: '1'
+canty: '1'
+canys: '1'
+themeid: '99999999'
+themename: 无归属
+stepcode: step-00000510
+funcid: 2qxea36dtwqvq_1
+blockcode: block-00000001
+blocktype: '02'
+casebody: '{"stages":[{"defId":"","defBody":{},"defType":"stage","children":[{"defType":"step","edit":false,"stepName":"自动化场景测试任务342614","stepActType":"","stepFormInfo":{"warningRemind":[],"successRuleTableData":{"judgeScript":""},"isRecordTimeoutError":"0","serviceResponseId":"","timeoutRuleTableData":{"judgeScript":""},"exceptionRemind":[],"failRuleTableData":{"judgeScript":""},"timeoutRemind":[],"finishRemind":[],"activeRuleTableData":{"judgeScript":""},"caseStepDef":{"stepLevel":0,"jdwxcxzx":"0","endBaseDay":"","endCrossDayType":"0","stepTag":[],"isAllowExecAgain":"0","allowActionConfirm":"0","baseDateType":"0","startDay":"","stepExecMode":"FREQUENCY","startCrossDayType":"0","notifyRuleFlag":"0","isNotCrtJob":"0","stepRemark":"","yxsggy":"1","allowFormAction":"0","allowShowDetail":"0","yxzf":"0","encodingRule":"00008085","isTodo":"0","zrUserPzMethod":"0","jdcxzx":"0","stepActOwner":"","zrUser":"","yxzb":"0","stepCode":"step-00000510","xzUser":"","allowManualConfirm":"1","xzUserPzMethod":"0","endDayType":"00","yxyq":"0","endTimeFlag":"0","stageName":"","stepName":"自动化场景测试任务342614","yxcxzx":"1","endDay":"0","startTime":"00:00","parmSetFlag":"0","startTimeFlag":"0","startBaseDay":"","dbzxazjdzs":"0","notifyRule":"0","allowEditEndTime":"0","warningMintues":"","startDayType":"00","stepCollaborateOwner":"","jrdb":"1","endTime":"23:59","paramsOutData":[]}},"stepId":""}],"edit":false,"defName":"default","optional":true}],"stepCodeArr":{"step-00000510":"step-00000510"},"optionalStages":[],"actions":[],"version":"0"}'
+actionparam: '[{"paramName":"bizStartDate","paramNameFormat":"业务开始日期","paramType":"日期","bizObj":"","paramValue":"startDate","paramShif":0,"paramDateType":"0"},{"paramName":"bizEndDate","paramNameFormat":"业务结束日期","paramType":"日期","bizObj":"","paramValue":"startDate","paramShif":0,"paramDateType":"0"},{"paramName":"planStartDate","paramNameFormat":"执行开始日期","paramType":"日期","bizObj":"任务对象","paramValue":"bizStartDate","paramShif":0,"paramDateType":"0"},{"paramName":"planEndDate","paramNameFormat":"执行结束日期","paramType":"日期","bizObj":"任务对象","paramValue":"bizEndDate","paramShif":0,"paramDateType":"0"}]'
+crtts2: '2025-02-10 15:49:17'
+crtuser2: agnes
+tasktitle: '{"res":"${taskInformation.taskName}","html":"<span key=\"taskInformation.taskName\"
+  contenteditable=\"false\" class=\"tag\">任务信息.任务名称</span>"}'
+updatets2: '2025-02-10 15:49:18'
+updateuser2: agnes
+zruser: '[{"refType":"1","memberId":"agnes","memberDesc":"致宇小智"}]'
+taskexecid: 1jf5s9jkvppr1
+breif: '{"taskIdList":["1jf5s9nqs4ae5"],"caseSteps":[{"allowEditEndTime":"0","allowManualConfirm":"1","attUser":"致宇小智","baseDateType":"0","blockCode":"block-00000001","caseId":"20250210-0000000000088013","crtTs":"2025-02-10
+  15:50:02","crtUser":"autotask","dealId":"block-00000001","dealType":"05","endCrossDayType":"0","endDay":0,"endDayType":"00","endTime":"23:59","execJudgNum":0,"execStartTime":1739173802000,"execStartTs":"2025-02-10
+  15:50:02","execStatus":"error","fileNum":0,"hasTaskParam":"0","isDel":"0","isNotCrtJob":"0","isTodo":"0","jrdb":"1","nextExecTime":1739116800000,"planEndTime":"2025-02-10
+  23:59:59","planStartTime":"2025-02-10 00:00:00","stageDefId":"1jf5s7c8qba1p","startCrossDayType":"0","startDayType":"00","startTime":"00:00","stepActParam5":"0","stepActType":"02","stepBizStatus":"还未开始运行！","stepCode":"step-00000510","stepExecId":"1jf5s9nqs4ae5","stepExecMode":"FREQUENCY","stepId":"1jf5s7c8qbau5","stepLevel":0,"stepName":"自动化场景测试任务342614","stepStatus":"03","stepTag":"[]","taskId":"1jf5s9nsl1ndp","taskName":"自动化场景测试任务342614","updateTs":"2025-02-10
+  15:50:03","yxcxzx":"1","yxsggy":"1","yxyq":"1","yxzb":"1","yxzf":"1","zrUser":"致宇小智"}],"processTargetNum":1,"stages":[{"caseId":"1jf5s79zd4ckd","crtTs":"2025-02-10
+  15:49:18","crtUser":"agnes","defId":"1jf5s7c8qba1p","defName":"default","dependStepData":"{\"edges\":[],\"nodes\":[]}","endStepId":"1jf5s7c8qbau5","exceptionNum":1,"isDel":"0","percentage":"0.00","pkId":"1jf5s7c8qba1p","ruCaseStepList":[{"allowEditEndTime":"0","allowManualConfirm":"1","attUser":"致宇小智","baseDateType":"0","blockCode":"block-00000001","buttonStatus":true,"caseDefId":"1jf5s79zd4ckd","caseId":"20250210-0000000000088013","crtTs":"2025-02-10
+  15:50:02","crtUser":"autotask","dealId":"block-00000001","dealType":"05","endCrossDayType":"0","endDay":0,"endDayType":"00","endTime":"23:59","execJudgNum":0,"execStartTime":1739173802000,"execStartTs":"2025-02-10
+  15:50:02","execStatus":"error","finishedRate":"0","hasTaskParam":"0","isDel":"0","isNotCrtJob":"0","isTodo":"0","jrdb":"1","nextExecTime":1739116800000,"planEndTime":"2025-02-10
+  23:59:59","planStartTime":"2025-02-10 00:00:00","planTime":"2025-02-10 00:00:00/2025-02-10
+  23:59:59","stageDefId":"1jf5s7c8qba1p","startCrossDayType":"0","startDayType":"00","startTime":"00:00","stepActParam5":"0","stepActType":"02","stepBizStatus":"还未开始运行！","stepCode":"step-00000510","stepExecId":"1jf5s9nqs4ae5","stepExecMode":"FREQUENCY","stepId":"1jf5s7c8qbau5","stepLevel":0,"stepName":"自动化场景测试任务342614","stepStatus":"03","stepTag":"[]","taskEndTime":"2025-02-10
+  23:59","taskExecId":"1jf5s9jkvppr1","taskId":"1jf5s9nsl1ndp","taskStartTime":"2025-02-10
+  00:00","taskStatus":"03","updateTs":"2025-02-10 15:50:03","yxcxzx":"1","yxsggy":"1","yxyq":"1","yxzb":"1","yxzf":"1","zrUser":"致宇小智"}],"sortNum":"0","stageName":"default","startStepId":"1jf5s7c8qbau5","status":"03","taskId":"1jf5s79yvn259"}],"nodeList":{"nodes":[{"id":"1jf5s7c8qbau5","name":"自动化场景测试任务342614","stageId":"1jf5s7c8qba1p","status":"03","stepCode":"step-00000510"}]},"processCompleteNum":0}'
+breiflist:
+  caseSteps:
+  - allowEditEndTime: '0'
+    allowManualConfirm: '1'
+    attUser: 致宇小智
+    baseDateType: '0'
+    blockCode: block-00000001
+    caseId: 20250210-0000000000088013
+    crtTs: '2025-02-10 15:50:02'
+    crtUser: autotask
+    dealId: block-00000001
+    dealType: '05'
+    endCrossDayType: '0'
+    endDay: 0
+    endDayType: '00'
+    endTime: '23:59'
+    execJudgNum: 0
+    execStartTime: 1739173802000
+    execStartTs: '2025-02-10 15:50:02'
+    execStatus: error
+    fileNum: 0
+    hasTaskParam: '0'
+    isDel: '0'
+    isNotCrtJob: '0'
+    isTodo: '0'
+    jrdb: '1'
+    nextExecTime: 1739116800000
+    planEndTime: '2025-02-10 23:59:59'
+    planStartTime: '2025-02-10 00:00:00'
+    stageDefId: 1jf5s7c8qba1p
+    startCrossDayType: '0'
+    startDayType: '00'
+    startTime: 00:00
+    stepActParam5: '0'
+    stepActType: '02'
+    stepBizStatus: 还未开始运行！
+    stepCode: step-00000510
+    stepExecId: 1jf5s9nqs4ae5
+    stepExecMode: FREQUENCY
+    stepId: 1jf5s7c8qbau5
+    stepLevel: 0
+    stepName: 自动化场景测试任务342614
+    stepStatus: '03'
+    stepTag: '[]'
+    taskId: 1jf5s9nsl1ndp
+    taskName: 自动化场景测试任务342614
+    updateTs: '2025-02-10 15:50:03'
+    yxcxzx: '1'
+    yxsggy: '1'
+    yxyq: '1'
+    yxzb: '1'
+    yxzf: '1'
+    zrUser: 致宇小智
+  nodeList:
+    nodes:
+    - id: 1jf5s7c8qbau5
+      name: 自动化场景测试任务342614
+      stageId: 1jf5s7c8qba1p
+      status: '03'
+      stepCode: step-00000510
+  processCompleteNum: 0
+  processTargetNum: 1
+  stages:
+  - caseId: 1jf5s79zd4ckd
+    crtTs: '2025-02-10 15:49:18'
+    crtUser: agnes
+    defId: 1jf5s7c8qba1p
+    defName: default
+    dependStepData: '{"edges":[],"nodes":[]}'
+    endStepId: 1jf5s7c8qbau5
+    exceptionNum: 1
+    isDel: '0'
+    percentage: '0.00'
+    pkId: 1jf5s7c8qba1p
+    ruCaseStepList:
+    - allowEditEndTime: '0'
+      allowManualConfirm: '1'
+      attUser: 致宇小智
+      baseDateType: '0'
+      blockCode: block-00000001
+      buttonStatus: true
+      caseDefId: 1jf5s79zd4ckd
+      caseId: 20250210-0000000000088013
+      crtTs: '2025-02-10 15:50:02'
+      crtUser: autotask
+      dealId: block-00000001
+      dealType: '05'
+      endCrossDayType: '0'
+      endDay: 0
+      endDayType: '00'
+      endTime: '23:59'
+      execJudgNum: 0
+      execStartTime: 1739173802000
+      execStartTs: '2025-02-10 15:50:02'
+      execStatus: error
+      finishedRate: '0'
+      hasTaskParam: '0'
+      isDel: '0'
+      isNotCrtJob: '0'
+      isTodo: '0'
+      jrdb: '1'
+      nextExecTime: 1739116800000
+      planEndTime: '2025-02-10 23:59:59'
+      planStartTime: '2025-02-10 00:00:00'
+      planTime: 2025-02-10 00:00:00/2025-02-10 23:59:59
+      stageDefId: 1jf5s7c8qba1p
+      startCrossDayType: '0'
+      startDayType: '00'
+      startTime: 00:00
+      stepActParam5: '0'
+      stepActType: '02'
+      stepBizStatus: 还未开始运行！
+      stepCode: step-00000510
+      stepExecId: 1jf5s9nqs4ae5
+      stepExecMode: FREQUENCY
+      stepId: 1jf5s7c8qbau5
+      stepLevel: 0
+      stepName: 自动化场景测试任务342614
+      stepStatus: '03'
+      stepTag: '[]'
+      taskEndTime: 2025-02-10 23:59
+      taskExecId: 1jf5s9jkvppr1
+      taskId: 1jf5s9nsl1ndp
+      taskStartTime: 2025-02-10 00:00
+      taskStatus: '03'
+      updateTs: '2025-02-10 15:50:03'
+      yxcxzx: '1'
+      yxsggy: '1'
+      yxyq: '1'
+      yxzb: '1'
+      yxzf: '1'
+      zrUser: 致宇小智
+    sortNum: '0'
+    stageName: default
+    startStepId: 1jf5s7c8qbau5
+    status: '03'
+    taskId: 1jf5s79yvn259
+  taskIdList:
+  - 1jf5s9nqs4ae5
+stepcode: step-00000510
+stepexecid: 1jf5s9nqs4ae5
+stepstatus: '03'
+taskid: 1jf5s9nsl1ndp
+caseid: 20250210-0000000000088013

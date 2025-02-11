@@ -12,6 +12,7 @@ import yaml
 
 from common.base_url import is_test_url
 from common.files_path import extract_path, files_path, token_path
+from gmssl import sm2
 
 
 class DebugTalk:
@@ -442,6 +443,26 @@ class DebugTalk:
         jsonDatas = json.dumps(datas, indent=5)  # 将字典的内容转换为json格式的字符串
         return jsonDatas
 
+    "登录密码sm2加密"
+    def set_sm2(self):
+        params = {
+            "userId": "agnes",
+            "password": "Agnes1324!",
+            "captcha": "",
+            "captchaId": ""
+        }
+        public_key = '04abb2e4ea5937b038a066d7eee4a2583abf8b195e30e822046d6125a464413667214ad59d4099b5baf31f5b478e69aff110d4486645afb92babfb2cecb7ffd4e6'
+
+        if public_key:
+            # 假设 params['password'] 是字符串格式
+            password = params.get('password')
+            if password:
+                sm2_crypt = sm2.CryptSM2(public_key=public_key, private_key=None)
+                encrypted_password = sm2_crypt.encrypt(password.encode())
+                # 在加密后的密码前加上 '04'
+                params['password'] = '04' + encrypted_password.hex()
+
+        return params
 
 if __name__=='__main__':
-    print(DebugTalk().set_step_random_string(6))
+    a=DebugTalk()

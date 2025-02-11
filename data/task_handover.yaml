@@ -471,3 +471,30 @@
     codes: 200
     equals:
       msgType: "success"
+
+
+-
+  name: test_handover_fromuser_list2
+  story: 查询我的交接列表
+  title:
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/handover/list?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "pageIndex": 0
+      "pageSize": 100
+      "fromUser": fromuser  #"agnes"
+      "toUser": ""
+      "approvalStatus": ""
+      "startDateBegin": ""
+      "startDateEnd": ""
+      "endDateBegin": ""
+      "endDateEnd": ""
+  extract:
+    handover_list: $.data.rows
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"

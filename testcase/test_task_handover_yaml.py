@@ -82,9 +82,11 @@ class Test1:
         prdtuserlist = read_yaml('prdtuserlist')
         prdtuserid = ''
         prdtusername = ''
-        if len(prdtuserlist) != 0:
-            prdtuserid = prdtuserlist[0]['userId']
-            prdtusername = prdtuserlist[0]['userName']
+        if len(prdtuserlist) >1:
+            for i in prdtuserlist:
+                if i['userId']!='agnes':
+                    prdtuserid = i['userId']
+                    prdtusername = i['userName']
         write_yaml({'prdtuserid':prdtuserid})
         write_yaml({'prdtusername': prdtusername})
 
@@ -203,9 +205,11 @@ class Test1:
         tempuserlist = read_yaml('tempuserlist')
         tempuserid = ''
         tempusername = ''
-        if len(tempuserlist) != 0:
-            tempuserid = tempuserlist[0]['userId']
-            tempusername = tempuserlist[0]['userName']
+        if len(tempuserlist) >1:
+            for i in tempuserlist:
+                if i['userId']!='agnes':
+                    tempuserid = i['userId']
+                    tempusername = i['userName']
         write_yaml({"tempuserid":tempuserid})
         write_yaml({"tempusername":tempusername})
 
@@ -280,6 +284,24 @@ class Test1:
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                                            'test_handover_fromuser_list2'))
+    def test_handover_fromuser_list2(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["fromUser"] = 'agnes'
+        RequestUtils().standard_yaml_case(caseinfo)
+
+        handover_list = read_yaml('handover_list')
+        id = read_yaml('id')
+        approvalStatus = ''
+        for i in handover_list:
+            if i['id'] == id:
+                approvalStatus = i['approvalStatus']
+
+        assert approvalStatus == '1'
+
 @allure.feature("新增交接-任务中心查看交接详情-任务中心审核通过-撤销交接")
 class Test2:
 
@@ -330,9 +352,11 @@ class Test2:
         prdtuserlist = read_yaml('prdtuserlist')
         prdtuserid = ''
         prdtusername = ''
-        if len(prdtuserlist) != 0:
-            prdtuserid = prdtuserlist[0]['userId']
-            prdtusername = prdtuserlist[0]['userName']
+        if len(prdtuserlist) >1:
+            for i in prdtuserlist:
+                if i['userId']!='agnes':
+                    prdtuserid = i['userId']
+                    prdtusername = i['userName']
         write_yaml({'prdtuserid': prdtuserid})
         write_yaml({'prdtusername': prdtusername})
 
@@ -445,9 +469,11 @@ class Test2:
         tempuserlist = read_yaml('tempuserlist')
         tempuserid = ''
         tempusername = ''
-        if len(tempuserlist) != 0:
-            tempuserid = tempuserlist[0]['userId']
-            tempusername = tempuserlist[0]['userName']
+        if len(tempuserlist) >1:
+            for i in tempuserlist:
+                if i['userId']!='agnes':
+                    tempuserid = i['userId']
+                    tempusername = i['userName']
         write_yaml({"tempuserid": tempuserid})
         write_yaml({"tempusername": tempusername})
 
@@ -646,5 +672,23 @@ class Test2:
         caseinfo["request"]["json"]["remark"] = "撤销人: "+read_yaml('approvaluser')+"; 撤销时间: "+DebugTalk().get_current_time_bai()
         caseinfo["request"]["json"]["userId"]= "agnes"
         RequestUtils().standard_yaml_case(caseinfo)
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                                            'test_handover_fromuser_list2'))
+    def test_handover_fromuser_list2(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["fromUser"] = 'agnes'
+        RequestUtils().standard_yaml_case(caseinfo)
+
+        handover_list = read_yaml('handover_list')
+        id = read_yaml('id')
+        approvalStatus=''
+        for i in handover_list:
+            if i['id'] == id:
+                approvalStatus = i['approvalStatus']
+
+        assert approvalStatus=='4'
 
 
