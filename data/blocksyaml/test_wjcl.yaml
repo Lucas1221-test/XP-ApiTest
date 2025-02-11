@@ -340,7 +340,6 @@
       "pkId": ${read_extract_arg(pre_save_pkId)}
       "status": "01"
       "updateUser": ${read_extract_arg(updateUser)}
-      "updateTs": ${get_current_time()}
       "blockDesc": ""
       "targetFields": []
       "fileInfo":
@@ -510,7 +509,6 @@
       "pkId": ""
       "status": "01"
       "updateUser": ${read_extract_arg(updateUser)}
-      "updateTs": ${get_current_time()}
       "blockDesc": ""
       "targetFields": []
       "fileInfo":
