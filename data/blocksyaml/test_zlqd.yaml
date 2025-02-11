@@ -147,7 +147,6 @@
       "pkId": ${read_extract_arg(pkId)}
       "status": "01"
       "updateUser": ${read_extract_arg(updateUser)}
-      "updateTs": ${get_current_time()}
       "blockDesc": ""
       "targetFields": []
       "blockParamInfos": []
@@ -194,7 +193,6 @@
         "pkId": ""
         "status": "01"
         "updateUser": ${read_extract_arg(updateUser)}
-        "updateTs": ${get_current_time()}
         "blockDesc": ""
         "targetFields": [ ]
         "blockParamInfos": [ ]
@@ -415,7 +413,6 @@
       "pkId": ${read_extract_arg(pkId)}
       "status": "01"
       "updateUser": ${read_extract_arg(updateUser)}
-      "updateTs": ${get_current_time()}
       "blockDesc": ""
       "targetFields": []
       "isNeedCheck": "1"
@@ -464,7 +461,6 @@
       "pkId": ""
       "status": "01"
       "updateUser": ${read_extract_arg(updateUser)}
-      "updateTs": ${get_current_time()}
       "targetFields": []
       "blockParamInfos": []
       "isNeedCheck": "1"
