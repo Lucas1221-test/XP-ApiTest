@@ -152,7 +152,6 @@
         "status": "01"
         "updateUser": ${read_extract_arg(updateUser)}
         "blockDesc": ""
-        "updateTs": ${get_current_time()}
         "targetFields": [ ]
         "dealId": ""
         "isNeedCheck": "1"
@@ -199,7 +198,6 @@
       "pkId": ""
       "status": "01"
       "updateUser": ${read_extract_arg(updateUser)}
-      "updateTs": ${get_current_time()}
       "blockDesc": ""
       "targetFields": [ ]
       "dealId": ""
