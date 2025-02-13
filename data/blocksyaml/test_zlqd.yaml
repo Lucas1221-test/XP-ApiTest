@@ -9,7 +9,7 @@
     headers:
       cookie: ${read_extract_arg(token)}
   extract:
-    blockType: $.data.children[5].id
+    blockType: $.data.children[4].id
   validate:
     codes: 200
     equals:
