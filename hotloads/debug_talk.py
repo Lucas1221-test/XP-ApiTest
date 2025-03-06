@@ -433,8 +433,9 @@ class DebugTalk:
 
     """获取当前时间"""
     def get_current_time(self):
-        time = str(datetime.date.today())
-        return time
+        current_time = datetime.now()
+        formatted_time = current_time.strftime("%Y-%m-%d+%H:%M:%S")
+        return formatted_time
 
     # yaml文件内容转换成json格式
     def yaml_to_json(self,yamlPath):
