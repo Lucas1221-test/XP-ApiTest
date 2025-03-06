@@ -592,4 +592,4 @@ class Test_handover:
         assert r18.json()['code'] == '00000000'
 
 if __name__=='__main__':
-    pytest.main(['../test_org.py','-s'])
+    pytest.main(['../org.py','-s'])
