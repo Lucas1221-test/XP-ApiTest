@@ -169,4 +169,4 @@ class Test_memo:
 
 
 if __name__=='__main__':
-    pytest.main(['../test_schedule.py','-s'])
+    pytest.main(['../schedule.py','-s'])
