@@ -501,6 +501,10 @@
     url: api/agnes-app/v1/dop/user/group/page/user/list?pageIndex=0&pageSize=500
     headers:
       cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      filterText: ""
   extract:
     user_id: $.data.rows[0].userId
     user_name: $.data.rows[0].userName

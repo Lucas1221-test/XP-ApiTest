@@ -172,6 +172,7 @@ class Test:
     def test_product_parameter_review(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        print(caseinfo)
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -188,8 +189,8 @@ class Test:
             if row.get('paramName') == 'test001':
                 new_data.append(row)
         print(new_data)
-        pkId = ', '.join([row.get('paramStatus') for row in new_data])
-        assert pkId == "04"
+        paramStatus = ', '.join([row.get('paramStatus') for row in new_data])
+        assert paramStatus == "04"
 
 
     @pytest.mark.parametrize("caseinfo",
@@ -200,7 +201,7 @@ class Test:
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-    time.sleep(3)
+    time.sleep(10)
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
                             'test_check_after_review'))
@@ -247,10 +248,6 @@ class Test:
     def test_del_fa_product_parameter(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title('删除FA产品信息')
-        pkId = read_yaml('pkId_fa')
-        url = 'api/agnes-app/v1/prdt/param/delete?paramCode=test&pkId=' + pkId
-        caseinfo['request']['json']['pkId'] = pkId
-        caseinfo['request']['url'] = url
         RequestUtils().standard_yaml_case(caseinfo)
 
 

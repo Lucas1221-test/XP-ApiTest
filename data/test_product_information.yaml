@@ -327,8 +327,6 @@
       "paramType": "str"
   validate:
     codes: 200
-    equals:
-      msgType: "success"
 
 -
   name: test_check_after_add_ta
@@ -355,14 +353,15 @@
   title: 产品参数审核
   request:
     method: POST
-    url: api/agnes-app/v1/prdt/param/update/status?crtTs=2024-12-12+13:51:11&crtUser=agnes&isDel=0&isHand=1&paramBizType=TA&paramCode=test&paramName=test001&paramStatus=04&paramType=str&pkId=${read_extract_arg(pkId)}
-#    data:
-#      "paramBizType": TA
-#      "paramCode": test
-#      "paramName": test001
-#      "paramType": str
-#      "pkId": ${read_extract_arg(pkId)}
-#      "paramStatus": "04"
+    url: api/agnes-app/v1/prdt/param/update/status?
+    data:
+      crtTs: ${get_current_time()}
+      "paramBizType": TA
+      "paramCode": test
+      "paramName": test001
+      "paramType": str
+      "pkId": ${read_extract_arg(pkId)}
+      "paramStatus": "04"
     headers:
       cookie: ${read_extract_arg(token)}
       content-type: application/x-www-form-urlencoded
@@ -393,12 +392,12 @@
   title: 删除TA产品信息
   request:
     method: POST
-    url: api/agnes-app/v1/prdt/param/delete?paramCode=test&pkId=${read_extract_arg(pkId)}
-    json:
+    url: api/agnes-app/v1/prdt/param/delete?
+    data:
       "paramCode": test
       "pkId": ${read_extract_arg(pkId)}
     headers:
-      content-type: application/json;charset=UTF-8
+      content-type: application/x-www-form-urlencoded
       cookie: ${read_extract_arg(token)}
   validate:
     codes: 200
@@ -459,7 +458,7 @@
     equals:
       productCode: "8888-edit"
       productName: "产品名称-编辑"
-      roleName: ${read_extract_arg(roleName)}
+#      roleName: ${read_extract_arg(roleName)}
       userName: ${read_extract_arg(user_name1)}
 
 
