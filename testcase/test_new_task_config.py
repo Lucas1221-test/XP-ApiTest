@@ -1,5 +1,4 @@
 import random
-import time
 
 import allure
 import pytest
@@ -7,7 +6,7 @@ import yaml
 
 from common.ddt_utils import read_case_yaml
 from common.request_utils import RequestUtils
-from common.yaml_utils import read_yaml
+from common.yaml_utils import read_yaml, write_yaml
 from common.files_path import data_path, extract_path
 from hotloads.debug_talk import DebugTalk
 """测试数据路径"""
@@ -111,11 +110,25 @@ class Test:
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
-                            'test_task_theme_todo_gettree'))
+                            'test_tasktheme_todo_gettree'))
     def test_task_theme_todo_gettree(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
+        r1=RequestUtils().standard_yaml_case(caseinfo)
+        themepkid = r1.json()['data'][-1]['pkId']
+        themepkname = r1.json()['data'][-1]['themeName']
+        basepath = r1.json()['data'][-1]['basePath']
+        parentthemeid = r1.json()['data'][-1]['parentThemeId']
+        data = {"themepkid": themepkid}
+        write_yaml(data)
+        data = {"themepkname": themepkname}
+        write_yaml(data)
+        data = {"basepath": basepath}
+        write_yaml(data)
+        data = {"parentthemeid": parentthemeid}
+        write_yaml(data)
+
+
 
 
     @pytest.mark.parametrize("caseinfo",
@@ -124,7 +137,10 @@ class Test:
     def test_task_theme_todo_getthemeinfo(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
+        r11=RequestUtils().standard_yaml_case(caseinfo)
+        themeid = r11.json()['data'][-1]['themeId']
+        data = {"themeid": themeid}
+        write_yaml(data)
 
 
     @pytest.mark.parametrize("caseinfo",
@@ -151,8 +167,14 @@ class Test:
     def test_task_theme_todo_querytasklist(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
-
+        r4=RequestUtils().standard_yaml_case(caseinfo)
+        list=r4.json()['data']
+        print(list)
+        pkidlist=[]
+        for i in list:
+            pkidlist.append(i['pkId'])
+        data = {"pkidlist": pkidlist}
+        write_yaml(data)
 
 
     @pytest.mark.parametrize("caseinfo",
@@ -177,6 +199,53 @@ class Test:
                              read_case_yaml(data_path,
                             'test_task_theme_todo_delete'))
     def test_task_theme_todo_delete(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+#任务分配方案
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                            'test_task_post_config_list'))
+    def test_task_post_config_list(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                            'test_task_post_get_config_fun'))
+    def test_task_post_get_config_fun(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                            'test_task_info_save'))
+    def test_task_info_save(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["planName"] = "自动化任务分配方案"+str(random.randint(100000,999999))
+        print(caseinfo)
+        RequestUtils().standard_yaml_case(caseinfo)
+
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                            'test_task_info_get'))
+    def test_task_info_get(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                            'test_task_info_delete'))
+    def test_task_info_delete(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)

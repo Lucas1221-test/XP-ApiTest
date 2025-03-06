@@ -140,4 +140,4 @@ class Test_task_apply:
         assert r4.json()['code'] == '00000000'
 
 if __name__=='__main__':
-    pytest.main(['../test_task_config.py','-s'])
+    pytest.main(['../task_config.py','-s'])
