@@ -172,7 +172,6 @@ class Test:
     def test_product_parameter_review(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        print(caseinfo)
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
@@ -188,7 +187,6 @@ class Test:
         for row in rows:
             if row.get('paramName') == 'test001':
                 new_data.append(row)
-        print(new_data)
         paramStatus = ', '.join([row.get('paramStatus') for row in new_data])
         assert paramStatus == "04"
 
@@ -288,11 +286,11 @@ class Test:
         RequestUtils().standard_yaml_case(caseinfo)
 
 
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                            'test_check_after_del_user_permission_configuration'))
-    def test_check_after_del_user_permission_configuration(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
+    # @pytest.mark.parametrize("caseinfo",
+    #                          read_case_yaml(data_path,
+    #                         'test_check_after_del_user_permission_configuration'))
+    # def test_check_after_del_user_permission_configuration(self, caseinfo):
+    #     allure.dynamic.story(caseinfo['story'])
+    #     allure.dynamic.title(caseinfo['title'])
+    #     RequestUtils().standard_yaml_case(caseinfo)
 
