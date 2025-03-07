@@ -26,6 +26,7 @@ class Test:
     def test_code_query(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        caseinfo['request']['json']['productCode'] = '8888-edit'
         RequestUtils().standard_yaml_case(caseinfo)
 
     """市场日历--测试用例"""
