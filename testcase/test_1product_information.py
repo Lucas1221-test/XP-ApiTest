@@ -246,6 +246,7 @@ class Test:
     def test_del_fa_product_parameter(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title('删除FA产品信息')
+        caseinfo['request']['data']['pkId'] = read_yaml('pkId_fa')
         RequestUtils().standard_yaml_case(caseinfo)
 
 
@@ -286,11 +287,11 @@ class Test:
         RequestUtils().standard_yaml_case(caseinfo)
 
 
-    # @pytest.mark.parametrize("caseinfo",
-    #                          read_case_yaml(data_path,
-    #                         'test_check_after_del_user_permission_configuration'))
-    # def test_check_after_del_user_permission_configuration(self, caseinfo):
-    #     allure.dynamic.story(caseinfo['story'])
-    #     allure.dynamic.title(caseinfo['title'])
-    #     RequestUtils().standard_yaml_case(caseinfo)
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                            'test_check_after_del_user_permission_configuration'))
+    def test_check_after_del_user_permission_configuration(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
 
