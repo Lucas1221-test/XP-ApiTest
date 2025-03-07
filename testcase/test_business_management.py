@@ -595,19 +595,19 @@ class Test:
         RequestUtils().standard_yaml_case(caseinfo)
 
 
-    # @pytest.mark.parametrize("caseinfo",
-    #                          read_case_yaml(data_path + 'test_product_information.yaml',
-    #                         'test_del_product'))
-    # def test_del_product(self, caseinfo):
-    #     allure.dynamic.story(caseinfo['story'])
-    #     allure.dynamic.title(caseinfo['title'])
-    #     RequestUtils().standard_yaml_case(caseinfo)
-    #
-    #
-    # @pytest.mark.parametrize("caseinfo",
-    #                          read_case_yaml(data_path + 'test_product_information.yaml',
-    #                         'test_check_after_del_product'))
-    # def test_check_after_del_product(self, caseinfo):
-    #     allure.dynamic.story(caseinfo['story'])
-    #     allure.dynamic.title(caseinfo['title'])
-    #     RequestUtils().standard_yaml_case(caseinfo)
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path + 'test_product_information.yaml',
+                            'test_del_product'))
+    def test_del_product(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path + 'test_product_information.yaml',
+                            'test_check_after_del_product'))
+    def test_check_after_del_product(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
