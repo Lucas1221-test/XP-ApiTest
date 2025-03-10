@@ -8,8 +8,9 @@
     headers:
       content-type: application/json;charset=UTF-8
       cookie: ${read_extract_arg(token)}
-    params:
+    json:
       "pageSize": 100
+      "pageIndex": 0
   validate:
     codes: 200
     equals:

@@ -5,6 +5,7 @@ from pickletools import read_uint2
 import allure
 import pytest
 import yaml
+from dateutil.utils import today
 
 from common.ddt_utils import read_case_yaml
 from common.request_utils import RequestUtils
@@ -59,7 +60,7 @@ class Test:
         list = r2.json()['data']['rows']
         usergroupid = {}
         for i in list:
-            if i['userGroupName'] == '测试岗位00001':
+            if i['userGroupName'] == '测试岗位001':
                 usergroupid = i['userGroupId']
         data = {"usergroupid": usergroupid}
         write_yaml(data)
@@ -80,6 +81,7 @@ class Test:
     def test_shedule_add(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["endDate"] = today + datetime.timedelta(days=1)
         caseinfo["request"]["json"]["detailList"][0]["smallPerList"] = read_yaml("grouplist1")
         RequestUtils().standard_yaml_case(caseinfo)
 
@@ -225,5 +227,4 @@ class Test_memo:
         # caseinfo["request"]["json"]["applyData"]["postList"] = read_yaml("postlist")
         # caseinfo["request"]["json"]["applyData"]["personList"] = read_yaml("personList")
         # caseinfo["request"]["json"]["applyData"]["rosterTypeDict"] = read_yaml("rosterTypeDict")
-        print(caseinfo)
         RequestUtils().standard_yaml_case(caseinfo)

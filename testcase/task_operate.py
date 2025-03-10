@@ -1188,5 +1188,5 @@ class Test_task_center:
 
 
 if __name__=='__main__':
-    pytest.main(['../test_task_operate.py','-s'])
+    pytest.main(['../task_operate.py','-s'])
 

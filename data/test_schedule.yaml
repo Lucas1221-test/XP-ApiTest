@@ -83,7 +83,7 @@
       id: ""
       planName: "自动化排班方案05"
       cycleDays: ""
-      startDate: "2024-12-26"
+      startDate: ${get_current_time1()}
       endDate: "2024-12-27"
       detailList:
         - disabled: true
@@ -351,7 +351,7 @@
       cookie: ${read_extract_arg(token)}
       content-type: application/json;charset=UTF-8
     json:
-      "rosterDate": ${get_current_time()}
+      "rosterDate": ${get_current_time1()}
   validate:
     codes: 200
     equals:
@@ -368,7 +368,7 @@
       cookie: ${read_extract_arg(token)}
       content-type: application/json;charset=UTF-8
     json:
-      "userId": 'qinyun'
+      "userId": '7400'
   extract:
     audit_userid: $.data.userId
   validate:
@@ -403,8 +403,8 @@
       cookie: ${read_extract_arg(token)}
       content-type: application/json;charset=UTF-8
     json:
-      "rosterNoticeUser": 'qinyun'
-      "rosterDate": "2024-12-26"
+      "rosterNoticeUser": 'agnes'
+      "rosterDate": ${get_current_time1()}
   extract:
     postlist: $.data
     postid: $.data[0].userGroupId
@@ -425,8 +425,8 @@
       cookie: ${read_extract_arg(token)}
       content-type: application/json;charset=UTF-8
     json:
-      "rosterNoticeUser": 'qinyun'
-      "rosterDate": "2024-12-26"
+      "rosterNoticeUser": 'agnes'
+      "rosterDate": ${get_current_time1()}
       "postId": ${read_extract_arg(postid)}
   extract:
     rostertypelist: $.data
@@ -450,7 +450,7 @@
       content-type: application/json;charset=UTF-8
     json:
       "rosterType": ${read_extract_arg(rostertype)}
-      "rosterDate": "2024-12-26"
+      "rosterDate": ${get_current_time1()}
       "postId": ${read_extract_arg(postid)}
   extract:
     personlist: $.data
@@ -472,10 +472,10 @@
       cookie: ${read_extract_arg(token)}
       content-type: application/json;charset=UTF-8
     json:
-      "sourceDate": "2024-12-26"
+      "sourceDate": ${get_current_time1()}
       "pickerOptions": { }
       "endPickerOptions": { }
-      "targetDate": "2024-12-27"
+      "targetDate": "2025-03-11"
       "postId": ${read_extract_arg(postid)}
       "rosterType": "ZB"  #早班："ZB"
       "targetUser": ${read_extract_arg(targetuserid)}
@@ -483,7 +483,7 @@
       "postList": "${read_extract_arg(postlist)}"
       "personList": "${read_extract_arg(personlist)}"
       "rosterTypeDict": "${read_extract_arg(rostertypelist)}"
-      "sourceUser": 'qinyun'
+      "sourceUser": 'agnes'
       "auditUser": ${read_extract_arg(audit_userid)}
   validate:
     codes: 200
@@ -527,14 +527,14 @@
           "postId": ${read_extract_arg(postid)}
           "rosterType": ${read_extract_arg(rostertype)}
           "targetUser": ${read_extract_arg(targetuserid)}
-          "rosterTypeDisabled": False
+          "rosterTypeDisabled": false
           "postList": ${read_extract_arg(postlist)}
           "personList": ${read_extract_arg(personlist)}
           "rosterTypeDict": ${read_extract_arg(rostertypelist)}
-          "sourceUser": 'qinyun'
+          "sourceUser": 'agnes'
           "auditUser": ${read_extract_arg(audit_userid)}
       "type": "5"
-      "applyUser": 'qinyun'
+      "applyUser": 'agnes'
       "approvalUser": ${read_extract_arg(audit_userid)}
       "summary":
   validate:

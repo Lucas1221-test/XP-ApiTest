@@ -609,6 +609,9 @@ class Test:
             if pkid == id:
                 new_data.append(data)
         # assert res['data']['total'] == read_yaml("pre_mulETL_total") + 1
+        dealId = new_data[0]["dealId"]
+        data = {"dealId": dealId}
+        write_yaml(data)
         assert new_data[0]['status'] == '01'
         assert new_data[0]['blockName'] == read_yaml("mulETL_blockName")
 

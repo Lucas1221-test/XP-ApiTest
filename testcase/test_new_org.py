@@ -33,7 +33,10 @@ class Test:
         allure.dynamic.title(caseinfo['title'])
         r1=RequestUtils().standard_yaml_case(caseinfo)
         orglist = r1.json()['data']['rows']
-        print(orglist)
+        id1 = orglist[0]['id']
+        data = {"id1": id1}
+        write_yaml(data)
+
         new_org_case = {}
         for item in orglist:
             try:
@@ -55,14 +58,6 @@ class Test:
         RequestUtils().standard_yaml_case(caseinfo)
 
 
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                            'test_org_framework_delete'))
-    def test_org_framework_delete(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        caseinfo['request']['json'] = read_yaml("new_org_case")
-        RequestUtils().standard_yaml_case(caseinfo)
 
     """组织架构-用户设置"""
     @pytest.mark.parametrize("caseinfo",
@@ -144,7 +139,7 @@ class Test:
         orglist = r.json()['data']
         orgid = {}
         for i in orglist:
-            if i['orgName'] == '测试一级部门勿删':
+            if i['orgName'] == '自动化一级测试部门':
                 orgid = i['id']
         data = {"orgid": orgid}
         write_yaml(data)
@@ -185,6 +180,10 @@ class Test:
                 print('没有查询到岗位')
         data = {"group_config_info": group_config_info}
         write_yaml(data)
+        groupid = group_config_info['userGroupId']
+        data = {"groupid": groupid}
+        write_yaml(data)
+
 
 
     @pytest.mark.parametrize("caseinfo",
@@ -196,26 +195,6 @@ class Test:
         caseinfo["request"]["json"] = read_yaml("group_config_info")
         RequestUtils().standard_yaml_case(caseinfo)
 
-
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                            'test_group_config_edit'))
-    def test_group_config_edit(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        caseinfo["request"]["json"] = read_yaml("group_config_info")
-        RequestUtils().standard_yaml_case(caseinfo)
-
-
-
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                            'test_group_delete'))
-    def test_group_delete(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        caseinfo["request"]["json"] = read_yaml("group_config_info")
-        RequestUtils().standard_yaml_case(caseinfo)
 
 # 岗位设置-用户管理
     @pytest.mark.parametrize("caseinfo",
@@ -225,25 +204,26 @@ class Test:
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         r=RequestUtils().standard_yaml_case(caseinfo)
-        grouplist = r.json()['data']['rows']
-        groupid = {}
-        groupname = {}
-        orgid1 = {}
-        orgname1 = {}
-        for i in grouplist:
-            if i['userGroupName'] == '测试岗位勿删':
-                groupid = i['userGroupId']
-                groupname = i['userGroupName']
-                orgid = i['orgId']
-                orgname = i['orgName']
-        data = {"groupid": groupid}
-        write_yaml(data)
-        data = {"groupname": groupname}
-        write_yaml(data)
-        data = {"orgid1": orgid1}
-        write_yaml(data)
-        data = {"orgname1": orgname1}
-        write_yaml(data)
+        # grouplist = r.json()['data']['rows']
+        # print(grouplist)
+        # groupid = {}
+        # groupname = {}
+        # orgid1 = {}
+        # orgname1 = {}
+        # for i in grouplist:
+        #     if i['userGroupName'] == '自动化测试岗位':
+        #         groupid = i['userGroupId']
+        #         groupname = i['userGroupName']
+        #         orgid = i['orgId']
+        #         orgname = i['orgName']
+        # data = {"groupid": groupid}
+        # write_yaml(data)
+        # data = {"groupname": groupname}
+        # write_yaml(data)
+        # data = {"orgid1": orgid1}
+        # write_yaml(data)
+        # data = {"orgname1": orgname1}
+        # write_yaml(data)
 
 
     @pytest.mark.parametrize("caseinfo",
@@ -274,6 +254,7 @@ class Test:
         RequestUtils().standard_yaml_case(caseinfo)
 
 
+
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
                             'test_group_edit_ref'))
@@ -286,13 +267,7 @@ class Test:
 
 
 
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                            'test_group_delete_ref'))
-    def test_group_delete_ref(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
+
 
 
 #产品分工表
@@ -332,26 +307,10 @@ class Test:
         r4=RequestUtils().standard_yaml_case(caseinfo)
         prdtlist = r4.json()['data']['rows']
         selectobjid = {}
-        prdtcode = {}
-        prdtname = {}
-        startdate = {}
-        enddate = {}
         for i in prdtlist:
-            if i['productName'] == '测试产品勿删':
+            if i['productCode'] == read_yaml('productCode'):
                 selectobjid = i['id']
-                prdtcode = i['productCode']
-                prdtname = i['productName']
-                startdate = i['startDate']
-                enddate = i['endDate']
         data = {"selectobjid": selectobjid}
-        write_yaml(data)
-        data = {"prdtcode": prdtcode}
-        write_yaml(data)
-        data = {"prdtname": prdtname}
-        write_yaml(data)
-        data = {"startdate": startdate}
-        write_yaml(data)
-        data = {"enddate": enddate}
         write_yaml(data)
 
 
@@ -361,7 +320,7 @@ class Test:
     def test_prdt_divide_update(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        caseinfo["request"]["json"]["prdtCode"] = read_yaml("prdtname")+"-"+read_yaml("prdtcode")
+        caseinfo["request"]["json"]["prdtCode"] = str(read_yaml("productCode")) + '-'+ read_yaml("productCode")
         RequestUtils().standard_yaml_case(caseinfo)
 
 
@@ -400,7 +359,23 @@ class Test:
             allure.dynamic.title(caseinfo['title'])
             RequestUtils().standard_yaml_case(caseinfo)
 
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                                            'test_group_delete'))
+    def test_group_delete(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"] = read_yaml("group_config_info")
+        RequestUtils().standard_yaml_case(caseinfo)
 
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                            'test_org_framework_delete'))
+    def test_org_framework_delete(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        caseinfo['request']['json'] = read_yaml("new_org_case")
+        RequestUtils().standard_yaml_case(caseinfo)
 #交接管理
     # @pytest.mark.parametrize("caseinfo",
     #                          read_case_yaml(data_path,

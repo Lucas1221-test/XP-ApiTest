@@ -169,7 +169,6 @@ class Test:
         allure.dynamic.title(caseinfo['title'])
         r4=RequestUtils().standard_yaml_case(caseinfo)
         list=r4.json()['data']
-        print(list)
         pkidlist=[]
         for i in list:
             pkidlist.append(i['pkId'])
@@ -229,7 +228,6 @@ class Test:
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         caseinfo["request"]["json"]["planName"] = "自动化任务分配方案"+str(random.randint(100000,999999))
-        print(caseinfo)
         RequestUtils().standard_yaml_case(caseinfo)
 
 

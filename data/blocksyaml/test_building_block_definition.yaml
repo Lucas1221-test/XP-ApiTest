@@ -3296,83 +3296,83 @@
       blockCode: ${read_extract_arg(mulETL_blockCode)}
       blockName: autotest-数据采集类-ETL多JOB-edit1
       blockType: ${read_extract_arg(blockType)}
-      crtTs: '2024-12-19 14:44:54'
+      crtTs: ${get_current_time2()}
       crtUser: agnes
       dealConfJson: '[]'
-      dealId: 6504b4e952594dc9a967bd11e037e326
+      dealId: ${read_extract_arg(dealId)}
       dealType: '26'
       isAllowExecAgain: '1'
       isDel: '0'
       isEditCode: false
       pkId: ${read_extract_arg(pre_save_mulETL_pkId)}
       status: '01'
-      updateTs: '2024-12-19 16:17:46'
+      updateTs: ${get_current_time2()}
       updateUser: agnes
       blockDesc: test-edit
       targetFields: [ ]
       dopETLReConfDBVos:
-        - confId: b74d1a7276354a21ab922267e8a7f173
-          confName: Test-ejob1
+        - confId: 1932c24510424c4d94913b136a430c91
+          confName: test2-job120250310110950
           creator: agnes
-          crtTime: '2024-12-19 16:17:45'
+          crtTime: '2025-03-10 11:09:50'
           delDest: '0'
           destDs: 758e98faff8e492093c148d4e8efc23b
           destTable: AUTO_STUDENT_AIM_test
           dopETLReConfDBFields:
-            - confId: b74d1a7276354a21ab922267e8a7f173
+            - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2024-12-19 16:17:45'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SNO
               originFieldType: VARCHAR2
               originTable: from AUTO_Student
-              pkId: 79b21cc9775942949f9a5628d1d87a79
-              updateTime: '2024-12-19 16:17:45'
+              pkId: 64cd1cd6018f4eb78de18bb95c19c085
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: b74d1a7276354a21ab922267e8a7f173
+            - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2024-12-19 16:17:45'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SNAME
               originFieldType: VARCHAR2
               originTable: from AUTO_Student
-              pkId: 268d13957028452f833547253d0a2e17
-              updateTime: '2024-12-19 16:17:45'
+              pkId: 1fb02869d7b54b6688e7299991f28603
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: b74d1a7276354a21ab922267e8a7f173
+            - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2024-12-19 16:17:45'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SSEX
               originFieldType: VARCHAR2
               originTable: from AUTO_Student
-              pkId: 33a0c931787142b080bdba6ab8890eb5
-              updateTime: '2024-12-19 16:17:45'
+              pkId: 694c47810527496d9a2e57a37e41b9b8
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: b74d1a7276354a21ab922267e8a7f173
+            - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2024-12-19 16:17:45'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SBIRTHDAY
               originFieldType: DATE
               originTable: from AUTO_Student
-              pkId: b6841cb73830445e9f3ae329909e7aab
-              updateTime: '2024-12-19 16:17:45'
+              pkId: 35121a1e815e48d9b5b51ad5ddb20734
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: b74d1a7276354a21ab922267e8a7f173
+            - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2024-12-19 16:17:45'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SCLASS
               originFieldType: VARCHAR2
               originTable: from AUTO_Student
-              pkId: 0f07ff05d0da401da5a10cfe4d84fcd7
-              updateTime: '2024-12-19 16:17:45'
+              pkId: c0373a46e53c4417bdc1ca714bffb334
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
           fromClause: from AUTO_Student
           isDel: '0'
@@ -3380,99 +3380,73 @@
           originDs: 758e98faff8e492093c148d4e8efc23b
           selectClause: select *
           stepOrder: 1
-          updateTime: '2024-12-19 16:17:45'
+          updateTime: '2025-03-10 11:09:50'
           updateUser: agnes
           whereClause: where 1=1
           paramFields: [ ]
-          fieldMap:
-            - fieldDesc: SNO1
-              fieldName: SNO1
-              fieldType: VARCHAR2
-              nullable: 1
-              tableName: ''
-            - fieldDesc: SNAME1
-              fieldName: SNAME1
-              fieldType: VARCHAR2
-              nullable: 1
-              tableName: ''
-            - fieldDesc: SSEX1
-              fieldName: SSEX1
-              fieldType: VARCHAR2
-              nullable: 1
-              tableName: ''
-            - fieldDesc: SBIRTHDAY1
-              fieldName: SBIRTHDAY1
-              fieldType: DATE
-              nullable: 0
-              tableName: ''
-            - fieldDesc: SCLASS1
-              fieldName: SCLASS1
-              fieldType: VARCHAR2
-              nullable: 0
-              tableName: ''
-        - confId: 75eef8e8dc0449bfae30db1286f0e1d3
-          confName: Test-ejob2
+        - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
+          confName: test2-job220250310110950
           creator: agnes
-          crtTime: '2024-12-19 16:17:46'
+          crtTime: '2025-03-10 11:09:50'
           delDest: '0'
           destDs: 758e98faff8e492093c148d4e8efc23b
           destTable: AUTO_STUDENT_AIM_test
           dopETLReConfDBFields:
-            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+            - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2024-12-19 16:17:46'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               isPk: '1'
               originField: SNO
               originFieldType: VARCHAR2
               originTable: from AUTO_Student_AIM
-              pkId: 2ad71e9839564034ad99b96a796b6143
-              updateTime: '2024-12-19 16:17:46'
+              pkId: 6e2b3695b94b4a7e9479959c48f9f8fb
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+            - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2024-12-19 16:17:46'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SNAME
               originFieldType: VARCHAR2
               originTable: from AUTO_Student_AIM
-              pkId: 3a332b94b2354591b8c730382d70224b
-              updateTime: '2024-12-19 16:17:46'
+              pkId: 38f321c9cb9f490b813b7d8fa9ec2b6c
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+            - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2024-12-19 16:17:46'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SSEX
               originFieldType: VARCHAR2
               originTable: from AUTO_Student_AIM
-              pkId: be9bf084543f4558a4cb19bf4f7147f7
-              updateTime: '2024-12-19 16:17:46'
+              pkId: 727e2b6ac8fe48368dd36bb0366571d7
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+            - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2024-12-19 16:17:46'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SBIRTHDAY
               originFieldType: DATE
               originTable: from AUTO_Student_AIM
-              pkId: 68eba6939c854afcae5bdd9e4370ad82
-              updateTime: '2024-12-19 16:17:46'
+              pkId: a4a5dcb489724f149ac621da6eb9c005
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+            - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2024-12-19 16:17:46'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SCLASS
               originFieldType: VARCHAR2
               originTable: from AUTO_Student_AIM
-              pkId: 3ec97ca9c5a14ee6964844c38bd8b87a
-              updateTime: '2024-12-19 16:17:46'
+              pkId: 2db1a5eea2af4cfdbc350df65751ea43
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
           fromClause: from AUTO_Student_AIM
           isDel: '0'
@@ -3480,36 +3454,10 @@
           originDs: 758e98faff8e492093c148d4e8efc23b
           selectClause: select *
           stepOrder: 2
-          updateTime: '2024-12-19 16:17:46'
+          updateTime: '2025-03-10 11:09:50'
           updateUser: agnes
           whereClause: where 1=1
           paramFields: [ ]
-          fieldMap:
-            - fieldDesc: SNO1
-              fieldName: SNO1
-              fieldType: VARCHAR2
-              nullable: 1
-              tableName: ''
-            - fieldDesc: SNAME1
-              fieldName: SNAME1
-              fieldType: VARCHAR2
-              nullable: 1
-              tableName: ''
-            - fieldDesc: SSEX1
-              fieldName: SSEX1
-              fieldType: VARCHAR2
-              nullable: 1
-              tableName: ''
-            - fieldDesc: SBIRTHDAY1
-              fieldName: SBIRTHDAY1
-              fieldType: DATE
-              nullable: 0
-              tableName: ''
-            - fieldDesc: SCLASS1
-              fieldName: SCLASS1
-              fieldType: VARCHAR2
-              nullable: 0
-              tableName: ''
       blockParamInfos: [ ]
       isNeedCheck: '1'
   validate:
@@ -3551,7 +3499,7 @@
       blockDesc: test-copy
       blockName: autotest-数据采集类-ETL多JOB-copy
       blockType: '01'
-      crtTs: '2024-12-19 14:44:54'
+      crtTs: ${get_current_time2()}
       crtUser: agnes
       dealConfJson: '[]'
       dealId: 6504b4e952594dc9a967bd11e037e326
@@ -3561,72 +3509,72 @@
       isEditCode: false
       pkId: 1jab0rumekcd6
       status: '01'
-      updateTs: '2024-12-23 16:21:51'
+      updateTs: ${get_current_time2()}
       updateUser: agnes
       targetFields: [ ]
       dopETLReConfDBVos:
-        - confId: b74d1a7276354a21ab922267e8a7f173
-          confName: Test-c1job
+        - confId: 1932c24510424c4d94913b136a430c91
+          confName: test2-job120250310110950
           creator: agnes
-          crtTime: '2024-12-19 16:17:45'
+          crtTime: '2025-03-10 11:09:50'
           delDest: '0'
           destDs: 758e98faff8e492093c148d4e8efc23b
           destTable: AUTO_STUDENT_AIM_test
           dopETLReConfDBFields:
-            - confId: b74d1a7276354a21ab922267e8a7f173
+            - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2024-12-23 16:28:12'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SNO
               originFieldType: VARCHAR2
               originTable: from AUTO_Student
-              pkId: 195084abf6f947b0ac5d7231f4276c49
-              updateTime: '2024-12-23 16:28:12'
+              pkId: 64cd1cd6018f4eb78de18bb95c19c085
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: b74d1a7276354a21ab922267e8a7f173
+            - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2024-12-23 16:28:12'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SNAME
               originFieldType: VARCHAR2
               originTable: from AUTO_Student
-              pkId: 1a664f61b1fa498d8d9ce2a133669ab6
-              updateTime: '2024-12-23 16:28:12'
+              pkId: 1fb02869d7b54b6688e7299991f28603
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: b74d1a7276354a21ab922267e8a7f173
+            - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2024-12-23 16:28:12'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SSEX
               originFieldType: VARCHAR2
               originTable: from AUTO_Student
-              pkId: 9675b5b269c944fba0b67bc48cb84cb9
-              updateTime: '2024-12-23 16:28:12'
+              pkId: 694c47810527496d9a2e57a37e41b9b8
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: b74d1a7276354a21ab922267e8a7f173
+            - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2024-12-23 16:28:12'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SBIRTHDAY
               originFieldType: DATE
               originTable: from AUTO_Student
-              pkId: 7a579d7259344d8aa3debf32c3b13ffc
-              updateTime: '2024-12-23 16:28:12'
+              pkId: 35121a1e815e48d9b5b51ad5ddb20734
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: b74d1a7276354a21ab922267e8a7f173
+            - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2024-12-23 16:28:12'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SCLASS
               originFieldType: VARCHAR2
               originTable: from AUTO_Student
-              pkId: 5be9f3fa010c4858b9fc1289c4aaa7d0
-              updateTime: '2024-12-23 16:28:12'
+              pkId: c0373a46e53c4417bdc1ca714bffb334
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
           fromClause: from AUTO_Student
           isDel: '0'
@@ -3634,73 +3582,73 @@
           originDs: 758e98faff8e492093c148d4e8efc23b
           selectClause: select *
           stepOrder: 1
-          updateTime: '2024-12-23 16:28:12'
+          updateTime: '2025-03-10 11:09:50'
           updateUser: agnes
           whereClause: where 1=1
           paramFields: [ ]
-        - confId: 75eef8e8dc0449bfae30db1286f0e1d3
-          confName: Test-c2job
+        - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
+          confName: test2-job220250310110950
           creator: agnes
-          crtTime: '2024-12-19 16:17:46'
+          crtTime: '2025-03-10 11:09:50'
           delDest: '0'
           destDs: 758e98faff8e492093c148d4e8efc23b
           destTable: AUTO_STUDENT_AIM_test
           dopETLReConfDBFields:
-            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+            - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2024-12-23 16:28:12'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               isPk: '1'
               originField: SNO
               originFieldType: VARCHAR2
               originTable: from AUTO_Student_AIM
-              pkId: 2f04198150b94f57832bc0dc2761bcfd
-              updateTime: '2024-12-23 16:28:12'
+              pkId: 6e2b3695b94b4a7e9479959c48f9f8fb
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+            - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2024-12-23 16:28:12'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SNAME
               originFieldType: VARCHAR2
               originTable: from AUTO_Student_AIM
-              pkId: 3340e880c17c4bef90892c19d82ff1b4
-              updateTime: '2024-12-23 16:28:12'
+              pkId: 38f321c9cb9f490b813b7d8fa9ec2b6c
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+            - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2024-12-23 16:28:12'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SSEX
               originFieldType: VARCHAR2
               originTable: from AUTO_Student_AIM
-              pkId: 306489efe10949c88a150664bf1b8eb6
-              updateTime: '2024-12-23 16:28:12'
+              pkId: 727e2b6ac8fe48368dd36bb0366571d7
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+            - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2024-12-23 16:28:12'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SBIRTHDAY
               originFieldType: DATE
               originTable: from AUTO_Student_AIM
-              pkId: 8795121f8e994e4f95a2bb0d268f17a4
-              updateTime: '2024-12-23 16:28:12'
+              pkId: a4a5dcb489724f149ac621da6eb9c005
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
-            - confId: 75eef8e8dc0449bfae30db1286f0e1d3
+            - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2024-12-23 16:28:12'
+              crtTime: '2025-03-10 11:09:50'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SCLASS
               originFieldType: VARCHAR2
               originTable: from AUTO_Student_AIM
-              pkId: 747ae37fe641449bbdb9367a921e8174
-              updateTime: '2024-12-23 16:28:12'
+              pkId: 2db1a5eea2af4cfdbc350df65751ea43
+              updateTime: '2025-03-10 11:09:50'
               updateUser: agnes
           fromClause: from AUTO_Student_AIM
           isDel: '0'
@@ -3708,7 +3656,7 @@
           originDs: 758e98faff8e492093c148d4e8efc23b
           selectClause: select *
           stepOrder: 2
-          updateTime: '2024-12-23 16:28:12'
+          updateTime: '2025-03-10 11:09:50'
           updateUser: agnes
           whereClause: where 1=1
           paramFields: [ ]

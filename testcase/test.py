@@ -367,4 +367,4 @@ class Test_config:
 
 
 if __name__=='__main__':
-    pytest.main(['../test_test.py','-s'])
+    pytest.main(['../test.py','-s'])

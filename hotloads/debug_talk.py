@@ -437,6 +437,19 @@ class DebugTalk:
         formatted_time = current_time.strftime("%Y-%m-%d+%H:%M:%S")
         return formatted_time
 
+
+    """获取当前时间  年-月-日"""
+    def get_current_time1(self):
+        current_time = datetime.now()
+        formatted_time = current_time.strftime("%Y-%m-%d")
+        return formatted_time
+
+    """获取当前时间"""
+    def get_current_time2(self):
+        current_time = datetime.now()
+        formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+        return formatted_time
+
     # yaml文件内容转换成json格式
     def yaml_to_json(self,yamlPath):
         with open(yamlPath, encoding="utf-8") as f:
