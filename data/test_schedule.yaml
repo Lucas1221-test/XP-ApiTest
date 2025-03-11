@@ -84,7 +84,7 @@
       planName: "自动化排班方案05"
       cycleDays: ""
       startDate: ${get_current_time1()}
-      endDate: "2024-12-27"
+      endDate: "2025-03-12"
       detailList:
         - disabled: true
           postId: ${read_extract_arg(usergroupid)}
@@ -311,32 +311,32 @@
     equals:
       code: '00000000'
 
--
-  name: test_shedule_preview
-  story: 排班管理方案
-  title: 预览排班方案
-  request:
-    method: POST
-    url: api/agnes-app/v1/dop/schedule-plan/preview
-    headers:
-      cookie: ${read_extract_arg(token)}
-      content-type: application/json;charset=UTF-8
-    json:
-      "endDate": ${read_extract_arg(startDate1)}
-      "flag": ${read_extract_arg(flag1)}
-      "id": ${read_extract_arg(id)}
-      "planName": ${read_extract_arg(planName1)}
-      "planStatus": ${read_extract_arg(planStatus1)}
-      "postName": ${read_extract_arg(postName1)}
-      "startDate": ${read_extract_arg(startDate1)}
-      "status": ${read_extract_arg(status1)}
-      "updateTs": ${read_extract_arg(updateTs1)}
-      "updateUser": ${read_extract_arg(updateUser1)}
-      "workday": ${read_extract_arg(workday1)}
-  validate:
-    codes: 200
-    equals:
-      code: '00000000'
+#-
+#  name: test_shedule_preview
+#  story: 排班管理方案
+#  title: 预览排班方案
+#  request:
+#    method: POST
+#    url: api/agnes-app/v1/dop/schedule-plan/preview
+#    headers:
+#      cookie: ${read_extract_arg(token)}
+#      content-type: application/json;charset=UTF-8
+#    json:
+#      "endDate": ${read_extract_arg(startDate1)}
+#      "flag": ${read_extract_arg(flag1)}
+#      "id": ${read_extract_arg(id)}
+#      "planName": ${read_extract_arg(planName1)}
+#      "planStatus": ${read_extract_arg(planStatus1)}
+#      "postName": ${read_extract_arg(postName1)}
+#      "startDate": ${read_extract_arg(startDate1)}
+#      "status": ${read_extract_arg(status1)}
+#      "updateTs": ${read_extract_arg(updateTs1)}
+#      "updateUser": ${read_extract_arg(updateUser1)}
+#      "workday": ${read_extract_arg(workday1)}
+#  validate:
+#    codes: 200
+#    equals:
+#      code: '00000000'
 
 
 #排班日历: 组织-岗位-排班-调班

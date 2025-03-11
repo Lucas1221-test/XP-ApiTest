@@ -1,17 +1,25 @@
-import datetime
-from io import StringIO
-from pickletools import read_uint2
 
 import allure
 import pytest
-import yaml
-from dateutil.utils import today
+
 
 from common.ddt_utils import read_case_yaml
 from common.request_utils import RequestUtils
 from common.yaml_utils import write_yaml, read_yaml
 from common.files_path import data_path
-from hotloads.debug_talk import DebugTalk
+
+
+from datetime import datetime, timedelta
+
+# 获取当前时间
+now = datetime.now()
+
+# 计算明天的时间
+tomorrow = now + timedelta(days=1)
+
+# 格式化为“年月日”的形式
+formatted_date = tomorrow.strftime("%Y-%m-%d")
+
 """测试数据路径"""
 data_path = data_path + 'test_schedule.yaml'
 
@@ -81,7 +89,7 @@ class Test:
     def test_shedule_add(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        caseinfo["request"]["json"]["endDate"] = today + datetime.timedelta(days=1)
+        caseinfo["request"]["json"]["endDate"] = formatted_date
         caseinfo["request"]["json"]["detailList"][0]["smallPerList"] = read_yaml("grouplist1")
         RequestUtils().standard_yaml_case(caseinfo)
 
