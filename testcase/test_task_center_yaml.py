@@ -271,6 +271,7 @@ class Test2:
         RequestUtils().standard_yaml_case(caseinfo)
 
    #审批中心
+    time.sleep(30)
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
                                             'test_task_approval_list'))
@@ -297,6 +298,7 @@ class Test2:
         write_yaml({"urgenum": dict['urgeNum']})
         write_yaml({"idd": dict['id']})
 
+    time.sleep(30)
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
                                             'test_task_approval_refuse'))
@@ -460,6 +462,7 @@ class Test3:
         caseinfo["request"]["json"]["type"] = '1'
         RequestUtils().standard_yaml_case(caseinfo)
 
+    time.sleep(30)
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
                                             'test_task_approval_delay'))

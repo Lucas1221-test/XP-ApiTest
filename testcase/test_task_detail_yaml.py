@@ -194,6 +194,7 @@ class Test2:
         caseinfo["request"]["json"]["taskTimeTo"] = str(datetime.date.today())
         RequestUtils().standard_yaml_case(caseinfo)
 
+    time.sleep(30)
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
                                             'test_task_get_breif'))
