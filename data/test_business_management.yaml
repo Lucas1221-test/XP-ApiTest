@@ -538,28 +538,28 @@
     headers:
       cookie: ${read_extract_arg(token)}
     json:
-      businessType: "01"
-      contactType: "01"
-      checkContactList:
-        - '[{"refType":"1","memberId":"${read_extract_arg(user_id)","memberDesc":"${read_extract_arg(user_name)}"}]'
-        - '[]'
-      internalContact:
-        - linkmanId: "${read_extract_arg(linkmanId)}"
-          linkmanName: "${read_extract_arg(user_name)}"
+      productCode: 8888-edit
       contact:
-        - contactId: "${read_extract_arg(user_id)}"
-          contactName: "${read_extract_arg(user_name)}"
-          contactFrom: "00"
+        - contactId: ${read_extract_arg(user_id)}
+          contactName: ${read_extract_arg(user_name)}
+          contactFrom: '00'
+      contactType: '01'
+      businessType: '01'
       externalContact:
         - refType: "1"
-          memberId: "${read_extract_arg(user_id)}"
-          memberDesc: "${read_extract_arg(user_name)}"
-      productCode: "8888-edit"
+          memberId: ${read_extract_arg(user_id)}
+          memberDesc: ${read_extract_arg(user_name)}
+      internalContact: []
+      checkContactList:
+        - refType: "1"
+          memberId: ${read_extract_arg(user_id)}
+          memberDesc: ${read_extract_arg(user_name)}
+        - []
+      tempCode: '001'
       productCodeArr:
-        - "8888-edit"
+        - I43Z0078
   validate:
     codes: 200
-
 -
   name: test_check_after_add_product_contact
   story: 产品联系人维护

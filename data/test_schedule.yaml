@@ -108,7 +108,7 @@
             - person:
                 - ['${read_extract_arg(person1)}']
                 - ['${read_extract_arg(person2)}']
-              schedule: "ZB" # "ZB"
+              schedule: "FA早班"
           childColumns: []
           childCycleInfoRes:
             - person: []
@@ -182,7 +182,7 @@
             - person:
                 - ['${read_extract_arg(person1)}']
                 - ['${read_extract_arg(person2)}']
-              schedule: "ZB" # "ZB"
+              schedule: "FA早班"
           childColumns: []
           childCycleInfoRes:
             - person: []
@@ -291,7 +291,7 @@
               - person:
                   - [ '${read_extract_arg(person1)}' ]
                   - [ '${read_extract_arg(person2)}' ]
-                schedule: "ZB" # "ZB"
+                schedule: "FA早班"
             childColumns: [ ]
             childCycleInfoRes:
               - person: [ ]
@@ -477,7 +477,7 @@
       "endPickerOptions": { }
       "targetDate": "2025-03-11"
       "postId": ${read_extract_arg(postid)}
-      "rosterType": "ZB"  #早班："ZB"
+      "rosterType": "FA早班"
       "targetUser": ${read_extract_arg(targetuserid)}
       "rosterTypeDisabled": false
       "postList": "${read_extract_arg(postlist)}"
