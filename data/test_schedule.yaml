@@ -108,7 +108,7 @@
             - person:
                 - ['${read_extract_arg(person1)}']
                 - ['${read_extract_arg(person2)}']
-              schedule: "FA早班"
+              schedule: "00"  #FA早班
           childColumns: []
           childCycleInfoRes:
             - person: []
@@ -157,8 +157,8 @@
       id: ${read_extract_arg(id)}
       planName: "自动化排班方案05"
       cycleDays: ""
-      startDate: "2024-12-26"
-      endDate: "2024-12-27"
+      startDate: ${get_current_time1()}
+      endDate: ${get_next_date()}
       detailList:
         - disabled: true
           postId: ${read_extract_arg(usergroupid)}
@@ -182,7 +182,7 @@
             - person:
                 - ['${read_extract_arg(person1)}']
                 - ['${read_extract_arg(person2)}']
-              schedule: "FA早班"
+              schedule: "00"  #FA早班
           childColumns: []
           childCycleInfoRes:
             - person: []
@@ -291,7 +291,7 @@
               - person:
                   - [ '${read_extract_arg(person1)}' ]
                   - [ '${read_extract_arg(person2)}' ]
-                schedule: "FA早班"
+                schedule: "00"  #FA早班
             childColumns: [ ]
             childCycleInfoRes:
               - person: [ ]
@@ -477,7 +477,7 @@
       "endPickerOptions": { }
       "targetDate": "2025-03-11"
       "postId": ${read_extract_arg(postid)}
-      "rosterType": "FA早班"
+      "rosterType": "00"  #FA早班
       "targetUser": ${read_extract_arg(targetuserid)}
       "rosterTypeDisabled": false
       "postList": "${read_extract_arg(postlist)}"

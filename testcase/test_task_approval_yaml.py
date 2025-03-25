@@ -74,8 +74,8 @@ class Test2:
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-        list1 = read_yaml('approvallist')
-        dict1 = list1[0]
+        dict1 = read_yaml('approvallist')
+        # dict1 = list1[0]
 
         write_yaml({"applydata": dict1['applyData']})
         write_yaml({"applydate": dict1['applyDate']})

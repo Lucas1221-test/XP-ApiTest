@@ -11,13 +11,17 @@ from common.files_path import data_path
 from common.yaml_utils import read_yaml, write_yaml
 from datetime import datetime,timedelta
 import datetime
-
+from common.query_utils import QueryUtils
 from hotloads.debug_talk import DebugTalk
 
 """测试数据路径"""
 data_path0=data_path
 data_path = data_path0 + 'task_detail.yaml'
 data_path1 = data_path0 + 'task_create.yaml'
+
+
+timeout = 180  # 3分钟（180秒）
+interval = 5  # 每5秒查询一次
 
 @allure.epic("任务明细查询")
 @allure.feature("查询我的任务-查询中心任务-查询全部任务")
@@ -33,7 +37,8 @@ class Test1:
         caseinfo["request"]["json"]["taskName"] = ''
         caseinfo["request"]["json"]["taskTimeFrom"] = str(datetime.date.today())
         caseinfo["request"]["json"]["taskTimeTo"] =  str(datetime.date.today())
-        RequestUtils().standard_yaml_case(caseinfo)
+        QueryUtils().wait_until_total_positive(caseinfo)
+
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
@@ -45,7 +50,7 @@ class Test1:
         caseinfo["request"]["json"]["taskName"] = ''
         caseinfo["request"]["json"]["taskTimeFrom"] = str(datetime.date.today())
         caseinfo["request"]["json"]["taskTimeTo"] = str(datetime.date.today())
-        RequestUtils().standard_yaml_case(caseinfo)
+        QueryUtils().wait_until_total_positive(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
@@ -57,7 +62,7 @@ class Test1:
         caseinfo["request"]["json"]["taskName"] = ''
         caseinfo["request"]["json"]["taskTimeFrom"] = str(datetime.date.today())
         caseinfo["request"]["json"]["taskTimeTo"] = str(datetime.date.today())
-        RequestUtils().standard_yaml_case(caseinfo)
+        QueryUtils().wait_until_total_positive(caseinfo)
 
 @allure.feature("任务定制发布任务-任务明细查询我的任务-查询任务详情-详情查看执行记录-重新执行-修改结束时间-手工确认")
 class Test2:
@@ -186,13 +191,12 @@ class Test2:
                              read_case_yaml(data_path,
                                             'test_task_query_6'))
     def test_task_query_6(self, caseinfo):
-        time.sleep(180)
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         caseinfo["request"]["json"]["authQueryParam1"] = 1
         caseinfo["request"]["json"]["taskTimeFrom"] = str(datetime.date.today())
         caseinfo["request"]["json"]["taskTimeTo"] = str(datetime.date.today())
-        RequestUtils().standard_yaml_case(caseinfo)
+        QueryUtils().wait_until_total_positive(caseinfo)
 
     time.sleep(30)
     @pytest.mark.parametrize("caseinfo",

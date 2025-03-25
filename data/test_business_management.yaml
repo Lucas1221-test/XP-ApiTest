@@ -570,9 +570,7 @@
     headers:
       cookie: ${read_extract_arg(token)}
     json:
-      "productCode": "8888-edit"
-  extract:
-    product_contact_pkId: $.data.rows[0].pkId
+      "productCode": ""
   validate:
     codes: 200
     equals:
@@ -625,7 +623,7 @@
       "rootNodeCode": "0009"
   extract:
     product_type_info: $.data[0]
-    product_type_node_info: $.data[1]
+    product_type_node_info: $.data[0]
   validate:
     codes: 200
     equals:

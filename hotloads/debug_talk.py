@@ -1,6 +1,6 @@
 import base64
 import datetime
-from datetime import datetime
+from datetime import datetime, timedelta
 import hashlib
 import json
 import random
@@ -13,7 +13,6 @@ import yaml
 from common.base_url import is_test_url
 from common.files_path import extract_path, files_path, token_path
 from gmssl import sm2
-
 
 class DebugTalk:
     """"""
@@ -450,6 +449,18 @@ class DebugTalk:
         formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
         return formatted_time
 
+    """获取下一天"""
+    def get_next_date(self):
+        current_time = datetime.now()
+
+        # 格式化为 "年-月-日"
+        current_date = current_time.strftime("%Y-%m-%d")
+
+        # 加 1 天
+        next_day = current_time + timedelta(days=1)
+        next_date = next_day.strftime("%Y-%m-%d")
+        return next_date
+
     # yaml文件内容转换成json格式
     def yaml_to_json(self,yamlPath):
         with open(yamlPath, encoding="utf-8") as f:
@@ -478,5 +489,8 @@ class DebugTalk:
 
         return params
 
+
+
 if __name__=='__main__':
-    a=DebugTalk()
+    a=DebugTalk().get_next_date()
+    print(a)

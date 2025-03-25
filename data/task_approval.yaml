@@ -10,14 +10,19 @@
     headers:
       cookie: ${read_extract_arg(token)}
     json:
-      "pageIndex": 0
-      "pageSize": 100
-      "applyUserList": "agnes"
-      "statusList": "0"
-      "pageType": '1'  #我的审批："1"/我的发起："2"
-      "q": ""
+      pageIndex: 0
+      pageSize: 100
+      approvalUser: agnes
+      statusList: ''
+      typeList: null
+      applyUserList: null
+      summary: null
+      applyBeginDate: null
+      applyEndDate: null
+      pageType: '1'   #我的审批："1"/我的发起："2"
+      q: ''
   extract:
-    approvallist: $.data.rows
+    approvallist: $.data.rows[0]
   validate:
     codes: 200
     equals:

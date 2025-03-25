@@ -4,6 +4,7 @@ import allure
 import pytest
 
 from common.ddt_utils import read_case_yaml
+from common.query_utils import QueryUtils
 from common.request_utils import RequestUtils
 from common.files_path import data_path
 from common.yaml_utils import read_yaml, write_yaml
@@ -11,6 +12,10 @@ from datetime import datetime,timedelta
 import datetime
 
 from hotloads.debug_talk import DebugTalk
+
+
+timeout = 180  # 3分钟（180秒）
+interval = 5  # 每5秒查询一次
 
 """测试数据路径"""
 data_path0=data_path
@@ -236,10 +241,9 @@ class Test2:
                              read_case_yaml(data_path,
                                             'test_task_query_fortaskname'))
     def test_task_query_fortaskname(self, caseinfo):
-        time.sleep(180)
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
+        QueryUtils().wait_until_total_positive(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
@@ -271,14 +275,13 @@ class Test2:
         RequestUtils().standard_yaml_case(caseinfo)
 
    #审批中心
-    time.sleep(30)
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
                                             'test_task_approval_list'))
     def test_test_task_approval_list(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
+        QueryUtils().wait_until_total_positive(caseinfo)
 
         approvallist=read_yaml('approvallist')
         caseid = read_yaml('caseid')
@@ -448,10 +451,9 @@ class Test3:
                              read_case_yaml(data_path,
                                             'test_task_query_fortaskname'))
     def test_task_query_fortaskname(self, caseinfo):
-        time.sleep(180)
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
+        QueryUtils().wait_until_total_positive(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
@@ -652,10 +654,9 @@ class Test4:
                              read_case_yaml(data_path,
                                             'test_task_query_fortaskname'))
     def test_task_query_fortaskname(self, caseinfo):
-        time.sleep(180)
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
+        QueryUtils().wait_until_total_positive(caseinfo)
 
 
     @pytest.mark.parametrize("caseinfo",
@@ -796,10 +797,9 @@ class Test5:
                              read_case_yaml(data_path,
                                             'test_task_query_fortaskname'))
     def test_task_query_fortaskname(self, caseinfo):
-        time.sleep(180)
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
+        QueryUtils().wait_until_total_positive(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,

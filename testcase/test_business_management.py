@@ -520,7 +520,17 @@ class Test:
     def test_check_after_add_product_contact(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
+        res = RequestUtils().standard_yaml_case(caseinfo)
+        data = res.json()["data"]["rows"]
+        new_data = []
+        for item in data:
+            if item.get("tempName") == 'dtest':
+                new_data.append(item)
+
+        # 提取第一个匹配项的 pkId
+        product_contact_pkId = new_data[0]["pkId"]
+        data = {"product_contact_pkId": product_contact_pkId}
+        write_yaml(data)
 
 
     @pytest.mark.parametrize("caseinfo",
