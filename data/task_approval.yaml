@@ -13,7 +13,7 @@
       pageIndex: 0
       pageSize: 100
       approvalUser: agnes
-      statusList: ''
+      statusList: '0'
       typeList: null
       applyUserList: null
       summary: null
@@ -22,7 +22,7 @@
       pageType: '1'   #我的审批："1"/我的发起："2"
       q: ''
   extract:
-    approvallist: $.data.rows[0]
+    approvallist: $.data.rows
   validate:
     codes: 200
     equals:

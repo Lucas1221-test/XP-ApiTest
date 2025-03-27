@@ -283,11 +283,11 @@ class Test2:
         allure.dynamic.title(caseinfo['title'])
         QueryUtils().wait_until_total_positive(caseinfo)
 
-        approvallist=read_yaml('approvallist')
-        caseid = read_yaml('caseid')
+        approvallist = read_yaml('approvallist')
+        taskname = read_yaml('taskname')
         dict = {}
         for i in approvallist:
-            if caseid in i['applyData']:
+            if taskname in i['summary']:
                 dict = i
         write_yaml({"applydata":dict['applyData']})
         write_yaml({"applydate": dict['applyDate']})
@@ -487,10 +487,10 @@ class Test3:
         RequestUtils().standard_yaml_case(caseinfo)
 
         approvallist = read_yaml('approvallist')
-        caseid = read_yaml('caseid')
+        taskname = read_yaml('taskname')
         dict = {}
         for i in approvallist:
-            if caseid in i['applyData']:
+            if taskname in i['summary']:
                 dict = i
         write_yaml({"applydata": dict['applyData']})
         write_yaml({"applydate": dict['applyDate']})
