@@ -1,0 +1,195 @@
+#  套打模板
+
+
+-
+  name: test_td_model_upload
+  story: 套打模板
+  title: 套打模板-上传文件
+  request:
+    method: POST
+    url: api/agnes-app/v2/dop/template/uploadDoc
+    headers:
+      cookie: ${read_extract_arg(token)}
+      Content-Disposition: form-data
+    data:
+      filename: '套打模板.docx'
+    files:
+      file: ${get_model_path(套打模板.docx)}
+  extract:
+    DocId: $.data.docId
+  validate:
+    codes: 200
+    equals:
+      message: "上传成功"
+
+-
+  name: test_get_file_objectId
+  story: 套打模板
+  title: 获取上传文件objectId
+  request:
+    method: POST
+    url: api/ecm-server/ecm/file/list?
+    headers:
+      cookie: ${read_extract_arg(token)}
+      content-type: application/x-www-form-urlencoded
+    params:
+      docId: ${read_extract_arg(DocId)}
+  extract:
+    FileObjectId: $.[0].objectId
+    FileName: $.[0].name
+  validate:
+    codes: 200
+
+-
+  name: test_add_td_model
+  story: 套打模板
+  title: 新增套打模板
+  request:
+    method: POST
+    url: api/agnes-app/v2/dop/template/savePlaceholder
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      templateName: 自动化-套打模板测试
+      templateCode: '001'
+      templateGroup: '1'
+      notes: 套打模板测试
+      fieldB: multipleRow
+      fieldC: manualSign
+      picContent:
+        - ${read_extract_arg(FileObjectId)}: {}
+      prepareStampData:
+        id: NE28jAY1Dwq
+        docFile:
+          fileId: ${read_extract_arg(FileObjectId)}
+          fileName: ${read_extract_arg(FileName)}
+          fileIndex: 0
+        imgs: [ ]
+        imgInfos: [ ]
+        textInfos: [ ]
+      docId: ${read_extract_arg(DocId)}
+      varInfoList: [ ]
+  validate:
+    codes: 200
+    equals:
+      data: "保存成功"
+
+-
+  name: test_check_add
+  story: 套打模板
+  title: 新增套打模板后检查
+  request:
+    method: POST
+    url: api/agnes-app/v2/dop/template/selectList?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      templateName: "自动化-套打模板测试"
+  extract:
+    Td_pkId: $.data.rows[0].pkId
+  validate:
+    codes: 200
+    equals:
+      fileName: ${read_extract_arg(FileName)}
+      notes: "套打模板测试"
+      templateCode: "001"
+
+-
+  name: test_edit_td_model
+  story: 套打模板
+  title: 编辑套打模板
+  request:
+    method: POST
+    url: api/agnes-app/v2/dop/template/updatePlaceholder
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      templateId: ${read_extract_arg(Td_pkId)}
+      templateName: "自动化-套打模板测试-编辑"
+      templateCode: "002"
+      templateGroup: '1'
+      notes: "套打模板测试-编辑"
+      fieldB: multipleRow
+      fieldC: manualSign
+      picContent:
+        - ${read_extract_arg(FileObjectId)}: {}
+      prepareStampData:
+        id: NE28jAY1Dwq
+        docFile:
+          fileId: ${read_extract_arg(FileObjectId)}
+          fileName: ${read_extract_arg(FileName)}
+          fileIndex: 0
+        imgs: [ ]
+        imgInfos: [ ]
+        textInfos: [ ]
+      docId: ${read_extract_arg(DocId)}
+      varInfoList: [ ]
+  validate:
+    codes: 200
+    equals:
+      data: "修改成功"
+
+
+-
+  name: test_check_edit
+  story: 套打模板
+  title: 编辑套打模板后检查
+  request:
+    method: POST
+    url: api/agnes-app/v2/dop/template/selectList?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      templateName: "自动化-套打模板测试"
+  extract:
+    Td_pkId: $.data.rows[0].pkId
+  validate:
+    codes: 200
+    equals:
+      fileName: ${read_extract_arg(FileName)}
+      notes: "套打模板测试-编辑"
+      templateCode: "002"
+      templateName: "自动化-套打模板测试-编辑"
+
+-
+  name: test_delete_td_model
+  story: 套打模板
+  title: 删除套打模板
+  request:
+    method: POST
+    url: api/agnes-app/v2/dop/template/delete?
+    headers:
+      cookie: ${read_extract_arg(token)}
+      application/x-www-form-urlencoded: application/x-www-form-urlencoded
+    params:
+      id: ${read_extract_arg(Td_pkId)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+      message: "删除模板操作成功"
+
+
+-
+  name: test_check_delete
+  story: 套打模板
+  title: 删除套打模板后检查
+  request:
+    method: POST
+    url: api/agnes-app/v2/dop/template/selectList?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      templateName: "自动化-套打模板测试"
+  extract:
+    Td_pkId: $.data.rows[0].pkId
+  validate:
+    codes: 200
+    equals:
+      total: 0

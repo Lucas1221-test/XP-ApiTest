@@ -1,0 +1,317 @@
+# 账户信息管理
+
+-
+  name: test_get_product_info
+  story: 账户信息管理
+  title: 获取产品信息
+  request:
+    method: GET
+    url: api/agnes-app/acct/info/productList?
+    headers:
+      cookie: ${read_extract_arg(token)}
+    params:
+      _t: ''
+  extract:
+    ProductCode: $.data[0].productCode
+    ProductName: $.data[0].productName
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_get_account_type_info
+  story: 账户信息管理
+  title: 获取账户类型
+  request:
+    method: POST
+    url: api/agnes-app/acct/type/selectListByParamPage?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      typeCode: "888"
+      typeName: ""
+  extract:
+    TypeName: $.data.rows[0].typeName
+    TypeCode: $.data.rows[0].typeCode
+    RelatedForm: $.data.rows[0].relatedForm
+    RelatedDept: $.data.rows[0].relatedDept
+  validate:
+    codes: 200
+
+-
+  name: test_get_wbjg_info
+  story: 账户信息管理
+  title: 获取外部机构简称
+  request:
+    method: POST
+    url: api/agnes-app/acct/info/selectOpenOrgTree
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json: ${read_extract_arg(RelatedDept)}
+  extract:
+    ExtOrgName: $.data[0].children[0].extOrgName
+    wbjg_extOrgId: $.data[0].children[0].extOrgId
+  validate:
+    codes: 200
+
+
+
+-
+  name: test_get_objectId
+  story: 账户信息管理
+  title: 获取objectId
+  request:
+    method: POST
+    url: api/ecm-server/ecm/doc/createDocAndGetDocId?folderTag=2
+    headers:
+      cookie: ${read_extract_arg(token)}
+      content-type: application/x-www-form-urlencoded
+    data:
+      folderTag: 2
+  extract:
+    ObjectId: $.data.objectId
+  validate:
+    codes: 200
+
+-
+  name: test_get_td_template
+  story: 账户信息管理
+  title: 获取套打模板
+  request:
+    method: POST
+    url: api/agnes-app/v2/dop/template/queryList
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      templateGroup: ''
+  extract:
+    Td_name: $.data[0].fileName
+    Td_objectId: $.data[0].objectId
+    Td_pkId: $.data[0].pkId
+  validate:
+    codes: 200
+
+-
+  name: test_account_registration_upload
+  story: 账户信息管理
+  title: 账户登记-上传开户材料
+  request:
+    method: POST
+    url: api/ecm-server/ecm/doc/upload
+    headers:
+      cookie: ${read_extract_arg(token)}
+      Content-Disposition: form-data
+    data:
+      folderTag: 2
+      docId: ${read_extract_arg(ObjectId)}
+      filename: '账户登记-开户材料.pdf'
+    files:
+      file: ${get_model_path(账户登记-开户材料.pdf)}
+  extract:
+    FilesInfo: $.data.files[0]
+  validate:
+    codes: 200
+
+-
+  name: test_account_registration
+  story: 账户信息管理
+  title: 账户登记
+  request:
+    method: POST
+    url: api/agnes-app/acct/info/insert
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      openDoc:
+        -
+          fileType: "03"
+          name: ${read_extract_arg(Td_name)}
+          objectId: ${read_extract_arg(Td_objectId)}
+          tagName: "套打文件"
+          templateId: ${read_extract_arg(Td_pkId)}
+        - ${read_extract_arg(FilesInfo)}
+      relatedForm: ${read_extract_arg(RelatedForm)}
+      xcpData: { }
+      acctBankInfo: [ ]
+      acctTradeInfo: [ ]
+      zqhInfo: { }
+      sqInfo: { }
+      zzInfo: { }
+      prdName: ${read_extract_arg(ProductName)}
+      prdCode: ${read_extract_arg(ProductCode)}
+      applyUser: '致宇小智'
+      acctType: ${read_extract_arg(TypeCode)}
+      urgency: '01'
+      baseDesc: "自动化测试-账户登记"
+      baseStartDept: '01'
+      acctTypeName: ${read_extract_arg(TypeName)}
+      openBankId: ${read_extract_arg(wbjg_extOrgId)}
+      openBankName: 测试
+      openDocId: ${read_extract_arg(ObjectId)}
+      procType: '01'
+      acctRuApplyMaterialInfos:
+        - productName: ${read_extract_arg(ProductName)}
+          productCode: ${read_extract_arg(ProductCode)}
+          acctType: ${read_extract_arg(TypeCode)}
+          openBankId: ${read_extract_arg(wbjg_extOrgId)}
+          openDocId: ${read_extract_arg(ObjectId)}
+          acctEcmFile:
+            - fileType: "03"
+              name: ${read_extract_arg(Td_name)}
+              objectId: ${read_extract_arg(Td_objectId)}
+              tagName: "套打文件"
+              templateId: ${read_extract_arg(Td_pkId)}
+            - ${read_extract_arg(FilesInfo)}
+  validate:
+    codes: 200
+    equals:
+      status: "0000"
+
+-
+  name: test_
+  story: 账户信息管理
+  title: 开户材料--一键套打
+  request:
+    method: POST
+    url: api/agnes-app/v2/dop/template/queryTemplateInfoByPkId?
+    headers:
+      cookie: ${read_extract_arg(token)}
+      Content-Disposition: form-data
+    params:
+      templateId: ${read_extract_arg(Td_pkId)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+
+-
+  name: test_view_details
+  story: 账户信息管理
+  title: 账户登记后校验
+  request:
+    method: POST
+    url: api/agnes-app/acct/info/selectListByParamPage?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      prdName: []
+  validate:
+    codes: 200
+    equals:
+      status: "0000"
+
+
+-
+  name: test_query_account_info
+  story: 账户信息管理
+  title: 查看账户登记详情
+  request:
+    method: POST
+    url: api/agnes-app/acct/info/selectByPrimaryKey
+    headers:
+      cookie: ${read_extract_arg(token)}
+      Content-Disposition: form-data
+    data:
+      pkId: ${read_extract_arg(acct_pkId)}
+  extract:
+    account_info: $.data
+  validate:
+    codes: 200
+    equals:
+      status: "0000"
+
+-
+  name: test_edit_account_info
+  story: 账户信息管理
+  title: 编辑账户登记信息
+  request:
+    method: POST
+    url: api/agnes-app/acct/info/update
+    headers:
+      cookie: ${read_extract_arg(token)}
+      content-type: multipart/form-data
+    json: ${read_extract_arg(account_info)}
+  validate:
+    codes: 200
+    equals:
+      status: "0000"
+
+-
+  name: test_query_history
+  story: 账户信息管理
+  title: 查看历史
+  request:
+    method: POST
+    url: api/agnes-app/acct/info/query/history?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      acctId: ${read_extract_arg(acctId)}
+      prdCode: ${read_extract_arg(ProductCode)}
+      acctType: '001'
+      openBankId: ${read_extract_arg(wbjg_extOrgId)}
+      q: ''
+  validate:
+    codes: 200
+    equals:
+      status: "0000"
+
+-
+  name: test_get_objectId1
+  story: 账户信息管理
+  title: 获取objectId
+  request:
+    method: POST
+    url: api/ecm-server/ecm/doc/createDocAndGetDocId?
+    headers:
+      cookie: ${read_extract_arg(token)}
+      content-type: application/x-www-form-urlencoded
+    params:
+      folderTag: 2
+  extract:
+    objectId1: $.data.objectId
+  validate:
+    codes: 200
+    equals:
+      "message":"ok"
+
+
+-
+  name: test_change_account_info
+  story: 账户信息管理
+  title: 变更账户信息
+  request:
+    method: POST
+    url: api/agnes-app/acct/apply/submit
+    headers:
+      cookie: ${read_extract_arg(token)}
+      content-type: multipart/form-data
+    json:
+      prdName: ${read_extract_arg(ProductName)}
+      prdCode: ${read_extract_arg(ProductCode)}
+      baseStartDept: '01'
+      baseDesc: 自动化测试-账户登记
+      acctType: ${read_extract_arg(TypeCode)}
+      openBankId: ${read_extract_arg(wbjg_extOrgId)}
+      applyUser: 致宇小智
+      urgency: '01'
+      acctId: ${read_extract_arg(acctId)}
+      acctRuApplyMaterialInfos:
+        - acctType: ${read_extract_arg(TypeCode)}
+          orgId: ${read_extract_arg(wbjg_extOrgId)}
+          openBankId: ${read_extract_arg(wbjg_extOrgId)}
+          applyDocId: ${read_extract_arg(objectId1)}
+          acctEcmFile: [ ]
+      procType: '02'
+  validate:
+    codes: 200
+    equals:
+      status: "0000"

@@ -1,0 +1,148 @@
+###   账户类型管理  ###
+-
+  name: test_get_jg_info
+  story: 账户类型管理
+  title: 获取结构信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/org/type/list
+    headers:
+      cookie: ${read_extract_arg(token)}
+  extract:
+    jg_OrgTypeId: $.data[0].orgTypeId
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
+
+-
+  name: test_add_account_type_management
+  story: 账户类型管理
+  title: 新增账户类型
+  request:
+    method: POST
+    url: api/agnes-app/acct/type/insert
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      typeId: ''
+      typeCode: '999'
+      typeName: '自动化测试-新增账户类型'
+      relatedDept:
+        - ${read_extract_arg(jg_OrgTypeId)}
+      relatedForm: 'sqzhinfo'
+  validate:
+    codes: 200
+    equals:
+      message: "新增成功！"
+
+-
+  name: test_check_add
+  story: 账户类型管理
+  title: 新增账户类型后校验
+  request:
+    method: POST
+    url: api/agnes-app/acct/type/selectListByParamPage?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      typeCode: ""
+      typeName: "自动化测试-新增账户类型"
+  extract:
+    TypeId: $.data.rows[0].typeId
+    TypeName: $.data.rows[0].typeName
+    TypeCode: $.data.rows[0].typeCode
+  validate:
+    codes: 200
+    equals:
+      status: "0000"
+      typeName: "自动化测试-新增账户类型"
+      typeCode: "999"
+      relatedForm: 'sqzhinfo'
+
+
+-
+  name: test_edit_account_type_management
+  story: 账户类型管理
+  title: 编辑账户类型
+  request:
+    method: POST
+    url: api/agnes-app/acct/type/update
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      typeId: ${read_extract_arg(TypeId)}
+      typeCode: '888'
+      typeName: '自动化测试-编辑账户类型'
+      relatedDept:
+        - ${read_extract_arg(jg_OrgTypeId)}
+      relatedForm: 'sqzhinfo.xview'
+      isDel: '0'
+      crtUser: "agnes"
+      crtTs: ${get_current_time2()}
+  validate:
+    codes: 200
+    equals:
+      status: "0000"
+      message: "更新成功！"
+
+-
+  name: test_check_edit
+  story: 账户类型管理
+  title: 编辑账户类型后校验
+  request:
+    method: POST
+    url: api/agnes-app/acct/type/selectListByParamPage?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      typeCode: "888"
+      typeName: ""
+  validate:
+    codes: 200
+    equals:
+      status: "0000"
+      typeName: "自动化测试-编辑账户类型"
+      typeCode: "888"
+      relatedForm: 'sqzhinfo.xview'
+
+-
+  name: test_delete_account_type_management
+  story: 账户类型管理
+  title: 删除账户类型
+  request:
+    method: POST
+    url: api/agnes-app/acct/type/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+      content-type: multipart/form-data; boundary=----WebKitFormBoundaryI8BzJiAgi66BABnZ
+    params:
+      typeId: ${read_extract_arg(TypeId)}
+  validate:
+    codes: 200
+    equals:
+        message: "删除成功！"
+
+-
+  name: test_check_delete
+  story: 账户类型管理
+  title: 删除账户类型后校验
+  request:
+    method: POST
+    url: api/agnes-app/acct/type/selectListByParamPage?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      typeCode: ""
+      typeName: "自动化测试-编辑账户类型"
+  validate:
+    codes: 200
+    equals:
+      status: "0000"
+      total: 0

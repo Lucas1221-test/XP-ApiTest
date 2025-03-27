@@ -1,0 +1,246 @@
+#  产品套打信息
+
+-
+  name: test_get_str_info
+  story: 产品套打信息
+  title: 获取受托人信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/acnt/td/getOrgListByType
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      orgTypeCode: "ZHTGH"
+  extract:
+    tgr_ExtOrgName: $.data[0].extOrgName
+  validate:
+    codes: 200
+    equals:
+        msgType: "success"
+
+-
+  name: test_get_tgh_info
+  story: 产品套打信息
+  title: 获取托管行信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/acnt/td/getOrgListByType
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      orgTypeCode: "ZHSTR"
+  extract:
+    tgh_ExtOrgName: $.data[0].extOrgName
+  validate:
+    codes: 200
+    equals:
+        msgType: "success"
+
+-
+  name: test_get_dlr_info
+  story: 产品套打信息
+  title: 获取代理人/托管人信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/acnt/td/getOrgListByType
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      orgTypeCode: "ZHDLR"
+  extract:
+    dlr_ExtOrgName: $.data[0].extOrgName
+  validate:
+    codes: 200
+    equals:
+        msgType: "success"
+
+
+-
+  name: test_add_product_td_info
+  story: 产品套打信息
+  title: 新增产品套打信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/acnt/td/saveOrUpdate
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      tzjlGs: ''
+      tzjlGsId: ''
+      tzjlQy: ''
+      tzjlQyId: ''
+      hsjbr: ''
+      hsjbrId: ''
+      qsjbr: ''
+      qsjbrId: ''
+      pkId: ''
+      prdtCode: jj001
+      productCode: jj001
+      planName: 自动化-产品
+      acntName: 自动化-平安资产如意99号资产管理产品账户
+      acntShortName: 自动化-平安资产如意99号账户
+      productShortName: 自动化-test
+      productType: generalAccount   # 一般账户
+      runDate: ${get_current_time1()}
+      escrowBank: ${read_extract_arg(tgr_ExtOrgName)}
+      trustee: ${read_extract_arg(tgh_ExtOrgName)}
+      agent: ${read_extract_arg(dlr_ExtOrgName)}
+      planLetterNo: ''
+      filingsNo: ''
+      contractEndDate: ''
+      openBank: ''
+      paySystemBank: ''
+      escrowAcntNo: ''
+      escrowAcntName: ''
+      planFilingsDate: ''
+      consiignerBusiLicense: ''
+      investmentManager: ''
+      tgBankName: ''
+      annuityPensionNo: ''
+      customName: ''
+      enableDate: ${get_current_time1()}
+      contractSignedDate: ''
+      contractForceCondition: ''
+      isVirtual: false
+  validate:
+    codes: 200
+    equals:
+        message: "保存成功"
+
+-
+  name: test_check_add
+  story: 产品套打信息
+  title: 新增产品套打信息后校验
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/acnt/td/list?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      prdtCode: "jj001"
+      productType: ""
+  extract:
+    Product_td_pkId: $.data.rows[0].pkId
+  validate:
+    codes: 200
+    equals:
+        acntName: "自动化-平安资产如意99号资产管理产品账户"
+        acntShortName: "自动化-平安资产如意99号账户"
+        planName: "自动化-产品"
+        prdtCode: "jj001"
+        productShortName: "自动化-test"
+        agent: ${read_extract_arg(dlr_ExtOrgName)}
+        escrowBank: ${read_extract_arg(tgr_ExtOrgName)}
+        trustee: ${read_extract_arg(tgh_ExtOrgName)}
+
+
+-
+  name: test_edit_product_td_info
+  story: 产品套打信息
+  title: 编辑产品套打信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/acnt/td/saveOrUpdate
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pkId: ${read_extract_arg(Product_td_pkId)}
+      tzjlGs: ''
+      tzjlGsId: ''
+      tzjlQy: ''
+      tzjlQyId: ''
+      hsjbr: ''
+      hsjbrId: ''
+      qsjbr: ''
+      qsjbrId: ''
+      prdtCode: jj002
+      productCode: jj002
+      planName: 自动化-产品-编辑
+      acntName: 自动化-平安资产如意99号资产管理产品账户
+      acntShortName: 自动化-平安资产如意99号账户
+      productShortName: 自动化-test-编辑
+      productType: generalAccount   # 一般账户
+      runDate: ${get_next_date()}
+      escrowBank: ${read_extract_arg(tgr_ExtOrgName)}
+      trustee: ${read_extract_arg(tgh_ExtOrgName)}
+      agent: ${read_extract_arg(dlr_ExtOrgName)}
+      planLetterNo: ''
+      filingsNo: ''
+      contractEndDate: ''
+      openBank: ''
+      paySystemBank: ''
+      escrowAcntNo: ''
+      escrowAcntName: ''
+      planFilingsDate: ''
+      consiignerBusiLicense: ''
+      investmentManager: ''
+      tgBankName: ''
+      annuityPensionNo: ''
+      customName: ''
+      enableDate: ${get_next_date()}
+      contractSignedDate: ''
+      contractForceCondition: ''
+      isVirtual: false
+  validate:
+    codes: 200
+    equals:
+        message: "保存成功"
+
+-
+  name: test_check_edit
+  story: 产品套打信息
+  title: 编辑产品套打信息后校验
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/acnt/td/list?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      prdtCode: "jj002"
+      productType: ""
+  validate:
+    codes: 200
+    equals:
+        planName: "自动化-产品-编辑"
+        prdtCode: "jj002"
+        productShortName: "自动化-test-编辑"
+
+-
+  name: test_delete_product_td_info
+  story: 产品套打信息
+  title: 删除产品套打信息
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/acnt/td/remove
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pkIds:
+        - ${read_extract_arg(Product_td_pkId)}
+  validate:
+    codes: 200
+    equals:
+        message: "删除成功"
+
+-
+  name: test_check_delete
+  story: 产品套打信息
+  title: 删除产品套打信息后校验
+  request:
+    method: POST
+    url: api/agnes-app/v1/dop/acnt/td/list?pageIndex=0&pageSize=100
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      pageIndex: 0
+      pageSize: 100
+      prdtCode: "jj002"
+      productType: ""
+  validate:
+    codes: 200
+    equals:
+        total: 0
