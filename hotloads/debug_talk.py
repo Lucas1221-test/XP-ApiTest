@@ -461,6 +461,7 @@ class DebugTalk:
         next_date = next_day.strftime("%Y-%m-%d")
         return next_date
 
+
     # yaml文件内容转换成json格式
     def yaml_to_json(self,yamlPath):
         with open(yamlPath, encoding="utf-8") as f:
@@ -492,5 +493,5 @@ class DebugTalk:
 
 
 if __name__=='__main__':
-    a=DebugTalk().get_next_date()
+    a=DebugTalk().get_model_path('账户登记-开户材料.pdf')
     print(a)

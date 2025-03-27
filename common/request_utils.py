@@ -25,6 +25,8 @@ class RequestUtils:
         yaml_str = self.replace_hotload(yaml_str)
         caseinfo = yaml.safe_load(StringIO(yaml_str))
 
+
+
         # 检查一级目录是否包含必要字段
         required_case_keys = {"name", "story", "title", "request", "validate"}
         if not required_case_keys.issubset(caseinfo.keys()):

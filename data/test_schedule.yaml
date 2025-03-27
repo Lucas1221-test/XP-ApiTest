@@ -84,7 +84,7 @@
       planName: "自动化排班方案05"
       cycleDays: ""
       startDate: ${get_current_time1()}
-      endDate: "2025-03-12"
+      endDate: ${get_next_date()}
       detailList:
         - disabled: true
           postId: ${read_extract_arg(usergroupid)}
@@ -475,7 +475,7 @@
       "sourceDate": ${get_current_time1()}
       "pickerOptions": { }
       "endPickerOptions": { }
-      "targetDate": "2025-03-11"
+      "targetDate": ${get_next_date()}
       "postId": ${read_extract_arg(postid)}
       "rosterType": "00"  #FA早班
       "targetUser": ${read_extract_arg(targetuserid)}
