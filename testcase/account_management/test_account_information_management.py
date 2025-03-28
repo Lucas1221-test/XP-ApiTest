@@ -14,16 +14,67 @@ from common.ddt_utils import read_case_yaml
 from common.files_path import data_path
 from common.request_utils import RequestUtils
 from common.yaml_utils import read_yaml, write_yaml
-from hotloads.debug_talk import DebugTalk
 
 """测试数据路径"""
 
-data_path1 = data_path + 'account_management/account_information_management.yaml'
-
+data_path1 = data_path + 'account_management/test_account_information_management.yaml'
+data_path2 = data_path + 'account_management/test_account_type_management.yaml'
 
 @allure.epic("增值模块")
 @allure.feature("账户管理")
 class Test:
+    allure.description("获取结构信息")
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path2,
+                                            'test_get_jg_info'))
+    def test_get_jg_info(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+    allure.description("新增账户类型")
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path2,
+                                            'test_add_account_type_management'))
+    def test_add_account_type_management(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+    allure.description("新增账户类型后校验")
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path2,
+                                            'test_check_add'))
+    def test_check_add(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+    allure.description("编辑账户类型")
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path2,
+                                            'test_edit_account_type_management'))
+    def test_edit_account_type_management(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+    allure.description("编辑账户类型后校验")
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path2,
+                                            'test_check_edit'))
+    def test_check_edit(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+
+
     allure.description("获取产品信息")
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
@@ -157,9 +208,20 @@ class Test:
     #     allure.dynamic.title(caseinfo['title'])
     #     RequestUtils().standard_yaml_case(caseinfo)
 
+
+    allure.description("获取账户类型TypeId")
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path2,
+                            'test_check_add'))
+    def test_check_add(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+
     allure.description("删除账户类型")
     @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
+                             read_case_yaml(data_path2,
                             'test_delete_account_type_management'))
     def test_delete_account_type_management(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
@@ -168,7 +230,7 @@ class Test:
 
     allure.description("删除账户类型后校验")
     @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
+                             read_case_yaml(data_path2,
                             'test_check_delete'))
     def test_check_delete(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])

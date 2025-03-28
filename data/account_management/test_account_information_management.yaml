@@ -281,7 +281,7 @@
   validate:
     codes: 200
     equals:
-      "message":"ok"
+      "message": "ok"
 
 
 -

@@ -4,7 +4,7 @@ from datetime import datetime
 from pathlib import Path
 from pprint import pprint
 from random import random
-
+from hotloads.debug_talk import DebugTalk
 import allure
 import pytest
 
@@ -669,6 +669,7 @@ class Test:
         caseinfo["request"]["json"]["blockName"] += str(datetime.now().strftime("%Y%m%d%H%M%S"))
         caseinfo["request"]["json"]["dopETLReConfDBVos"][0]["confName"] += str(datetime.now().strftime("%Y%m%d%H%M%S"))
         caseinfo["request"]["json"]["dopETLReConfDBVos"][1]["confName"] += str(datetime.now().strftime("%Y%m%d%H%M%S"))
+        caseinfo["request"]["json"]["blockName"] = 'autotest-数据采集类-ETL多JOB-copy' + str(DebugTalk().get_random_number())
         new_data = []
         data = {"mulETL_copy_blockName": caseinfo["request"]["json"]["blockName"]}
         new_data.append(data)
@@ -779,6 +780,14 @@ class Test:
                              read_case_yaml(data_path,
                                             'test_mulETL_delete_blocks'))
     def test_mulETL_delete_blocks(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                                            'test_mulETL_delete_blocks1'))
+    def test_mulETL_delete_blocks1(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)

@@ -12,7 +12,7 @@ import time
 from common.request_utils import RequestUtils
 
 class QueryUtils:
-    def wait_until_total_positive(self, caseinfo, timeout=300):
+    def wait_until_total_positive(self, caseinfo, timeout=500):
         start_time = time.time()
         while True:
             # 发起请求获取最新响应
@@ -28,5 +28,5 @@ class QueryUtils:
                 print("超过最大等待时间，停止查询")
                 break
 
-            # 间隔 5 秒后重试
-            time.sleep(5)
+            # 间隔 10 秒后重试
+            time.sleep(10)

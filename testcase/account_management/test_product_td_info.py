@@ -1,12 +1,9 @@
 """
-@Filename:  td_model
-@Describe:  套打模板
+@Filename:  product_td_info
+@Describe:  产品套打信息
 @Author:    xuhui.ding
-@Time:      2025/3/26 10:58
+@Time:      2025/3/26 13:51
 """
-
-import json
-import time
 
 import allure
 import pytest
@@ -14,46 +11,52 @@ import pytest
 from common.ddt_utils import read_case_yaml
 from common.files_path import data_path
 from common.request_utils import RequestUtils
-from common.yaml_utils import read_yaml, write_yaml
-from hotloads.debug_talk import DebugTalk
 
 """测试数据路径"""
 
-data_path1 = data_path + 'account_management/td_model.yaml'
+data_path1 = data_path + 'account_management/test_product_td_info.yaml'
 
 
 @allure.epic("增值模块")
 @allure.feature("账户管理")
 class Test:
-    allure.description("套打模板-上传文件")
+    allure.description("获取受托人信息")
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
-                            'test_td_model_upload'))
-    def test_td_model_upload(self, caseinfo):
+                            'test_get_str_info'))
+    def test_get_str_info(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-    allure.description("获取上传文件objectId")
+    allure.description("获取托管行信息")
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
-                            'test_get_file_objectId'))
-    def test_get_file_objectId(self, caseinfo):
+                            'test_get_tgh_info'))
+    def test_get_tgh_info(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-
-    allure.description("新增套打模板")
+    allure.description("获取代理人/托管人信息")
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
-                            'test_add_td_model'))
-    def test_add_td_model(self, caseinfo):
+                            'test_get_dlr_info'))
+    def test_get_dlr_info(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-    allure.description("新增套打模板后检查")
+    allure.description("新增产品套打信息")
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path1,
+                            'test_add_product_td_info'))
+    def test_add_product_td_info(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+    allure.description("新增产品套打信息后校验")
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
                             'test_check_add'))
@@ -62,17 +65,17 @@ class Test:
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-    allure.description("编辑套打模板")
+
+    allure.description("编辑产品套打信息")
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
-                            'test_edit_td_model'))
-    def test_edit_td_model(self, caseinfo):
+                            'test_edit_product_td_info'))
+    def test_edit_product_td_info(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-
-    allure.description("编辑套打模板后检查")
+    allure.description("编辑产品套打信息后校验")
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
                             'test_check_edit'))
@@ -82,16 +85,17 @@ class Test:
         RequestUtils().standard_yaml_case(caseinfo)
 
 
-    allure.description("删除套打模板")
+
+    allure.description("删除产品套打信息")
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
-                            'test_delete_td_model'))
-    def test_delete_td_model(self, caseinfo):
+                            'test_delete_product_td_info'))
+    def test_delete_product_td_info(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-    allure.description("删除套打模板后检查")
+    allure.description("删除产品套打信息后校验")
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path1,
                             'test_check_delete'))

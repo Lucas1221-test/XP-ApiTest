@@ -1,5 +1,5 @@
 """
-@Filename:  material_management.py
+@Filename:  test_material_management.py
 @Describe:  材料管理
 @Author:    xuhui.ding
 @Time:      2025/3/26 14:57
@@ -17,7 +17,7 @@ from hotloads.debug_talk import DebugTalk
 
 """测试数据路径"""
 
-data_path1 = data_path + 'account_management/material_management.yaml'
+data_path1 = data_path + 'account_management/test_material_management.yaml'
 
 
 @allure.epic("增值模块")

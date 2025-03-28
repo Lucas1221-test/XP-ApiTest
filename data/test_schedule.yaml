@@ -158,7 +158,7 @@
       planName: "自动化排班方案05"
       cycleDays: ""
       startDate: ${get_current_time1()}
-      endDate: ${get_next_date()}
+      endDate: ${get_current_time1()}
       detailList:
         - disabled: true
           postId: ${read_extract_arg(usergroupid)}
