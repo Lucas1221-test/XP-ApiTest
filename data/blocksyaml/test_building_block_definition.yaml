@@ -3502,16 +3502,17 @@
       crtTs: ${get_current_time2()}
       crtUser: agnes
       dealConfJson: '[]'
-      dealId: 6504b4e952594dc9a967bd11e037e326
+      dealId: ''
       dealType: '26'
       isAllowExecAgain: '1'
       isDel: '0'
       isEditCode: false
-      pkId: 1jab0rumekcd6
+      pkId: ''
       status: '01'
-      updateTs: ${get_current_time2()}
+      updateTs: '2025-03-28 10:35:35'
       updateUser: agnes
       targetFields: [ ]
+      blockOwner: '[]'
       dopETLReConfDBVos:
         - confId: 1932c24510424c4d94913b136a430c91
           confName: test2-job120250310110950
@@ -3523,58 +3524,58 @@
           dopETLReConfDBFields:
             - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2025-03-10 11:09:50'
+              crtTime: '2025-03-28 10:35:35'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SNO
               originFieldType: VARCHAR2
               originTable: from AUTO_Student
-              pkId: 64cd1cd6018f4eb78de18bb95c19c085
-              updateTime: '2025-03-10 11:09:50'
+              pkId: d4c651014e2246e9b3837af1d3fc142c
+              updateTime: '2025-03-28 10:35:35'
               updateUser: agnes
             - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2025-03-10 11:09:50'
+              crtTime: '2025-03-28 10:35:35'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SNAME
               originFieldType: VARCHAR2
               originTable: from AUTO_Student
-              pkId: 1fb02869d7b54b6688e7299991f28603
-              updateTime: '2025-03-10 11:09:50'
+              pkId: bd8e50204b2a4feda85ae623a1bc7f20
+              updateTime: '2025-03-28 10:35:35'
               updateUser: agnes
             - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2025-03-10 11:09:50'
+              crtTime: '2025-03-28 10:35:35'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SSEX
               originFieldType: VARCHAR2
               originTable: from AUTO_Student
-              pkId: 694c47810527496d9a2e57a37e41b9b8
-              updateTime: '2025-03-10 11:09:50'
+              pkId: 107ae3040f3649349f8cf50295f1ed0f
+              updateTime: '2025-03-28 10:35:35'
               updateUser: agnes
             - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2025-03-10 11:09:50'
+              crtTime: '2025-03-28 10:35:35'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SBIRTHDAY
               originFieldType: DATE
               originTable: from AUTO_Student
-              pkId: 35121a1e815e48d9b5b51ad5ddb20734
-              updateTime: '2025-03-10 11:09:50'
+              pkId: a6872d5f45374a55bec75af7f65920b6
+              updateTime: '2025-03-28 10:35:35'
               updateUser: agnes
             - confId: 1932c24510424c4d94913b136a430c91
               creator: agnes
-              crtTime: '2025-03-10 11:09:50'
+              crtTime: '2025-03-28 10:35:35'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SCLASS
               originFieldType: VARCHAR2
               originTable: from AUTO_Student
-              pkId: c0373a46e53c4417bdc1ca714bffb334
-              updateTime: '2025-03-10 11:09:50'
+              pkId: 0cdb81fd445740af8d4d567c4f1d0bef
+              updateTime: '2025-03-28 10:35:35'
               updateUser: agnes
           fromClause: from AUTO_Student
           isDel: '0'
@@ -3582,7 +3583,7 @@
           originDs: 758e98faff8e492093c148d4e8efc23b
           selectClause: select *
           stepOrder: 1
-          updateTime: '2025-03-10 11:09:50'
+          updateTime: '2025-03-28 10:35:35'
           updateUser: agnes
           whereClause: where 1=1
           paramFields: [ ]
@@ -3596,59 +3597,59 @@
           dopETLReConfDBFields:
             - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2025-03-10 11:09:50'
+              crtTime: '2025-03-28 10:35:35'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               isPk: '1'
               originField: SNO
               originFieldType: VARCHAR2
               originTable: from AUTO_Student_AIM
-              pkId: 6e2b3695b94b4a7e9479959c48f9f8fb
-              updateTime: '2025-03-10 11:09:50'
+              pkId: 8ba64283380b4c1bb85e9720764d6199
+              updateTime: '2025-03-28 10:35:35'
               updateUser: agnes
             - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2025-03-10 11:09:50'
+              crtTime: '2025-03-28 10:35:35'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SNAME
               originFieldType: VARCHAR2
               originTable: from AUTO_Student_AIM
-              pkId: 38f321c9cb9f490b813b7d8fa9ec2b6c
-              updateTime: '2025-03-10 11:09:50'
+              pkId: 13a3b1abc05947ed9644e04d28a5f744
+              updateTime: '2025-03-28 10:35:35'
               updateUser: agnes
             - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2025-03-10 11:09:50'
+              crtTime: '2025-03-28 10:35:35'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SSEX
               originFieldType: VARCHAR2
               originTable: from AUTO_Student_AIM
-              pkId: 727e2b6ac8fe48368dd36bb0366571d7
-              updateTime: '2025-03-10 11:09:50'
+              pkId: d2d862bd377c478da55460fe7e576e64
+              updateTime: '2025-03-28 10:35:35'
               updateUser: agnes
             - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2025-03-10 11:09:50'
+              crtTime: '2025-03-28 10:35:35'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SBIRTHDAY
               originFieldType: DATE
               originTable: from AUTO_Student_AIM
-              pkId: a4a5dcb489724f149ac621da6eb9c005
-              updateTime: '2025-03-10 11:09:50'
+              pkId: 8e5215b43ee740b5b9767dbc2e454f7a
+              updateTime: '2025-03-28 10:35:35'
               updateUser: agnes
             - confId: f3457ab49a9c45b1b2a874ae3c70aaa5
               creator: agnes
-              crtTime: '2025-03-10 11:09:50'
+              crtTime: '2025-03-28 10:35:35'
               destTable: AUTO_STUDENT_AIM_test
               isDel: '0'
               originField: SCLASS
               originFieldType: VARCHAR2
               originTable: from AUTO_Student_AIM
-              pkId: 2db1a5eea2af4cfdbc350df65751ea43
-              updateTime: '2025-03-10 11:09:50'
+              pkId: 46bf056e1c3b4b63b9423c60a1ed3006
+              updateTime: '2025-03-28 10:35:35'
               updateUser: agnes
           fromClause: from AUTO_Student_AIM
           isDel: '0'
@@ -3656,12 +3657,13 @@
           originDs: 758e98faff8e492093c148d4e8efc23b
           selectClause: select *
           stepOrder: 2
-          updateTime: '2025-03-10 11:09:50'
+          updateTime: '2025-03-28 10:35:35'
           updateUser: agnes
           whereClause: where 1=1
           paramFields: [ ]
       blockParamInfos: [ ]
       isNeedCheck: '1'
+
   validate:
     codes: 200
     equals:
@@ -3726,7 +3728,23 @@
 
 
 
-
+-
+  name: test_mulETL_delete_blocks1
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: 数据采集类-ETL采集-多JOB-删除数据
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/delete
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      ids:
+        - ${read_extract_arg(pre_save_mulETL_pkId)}
+        - ${read_extract_arg(mulETL_copy_pkId)}
+  validate:
+    codes: 200
+    equals:
+      msgType: "success"
 
 
 
