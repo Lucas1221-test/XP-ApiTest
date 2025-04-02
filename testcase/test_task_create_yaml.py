@@ -429,13 +429,14 @@ class Test3:
         allure.dynamic.title(caseinfo['title'])
         RequestUtils().standard_yaml_case(caseinfo)
 
-    time.sleep(10)
+  
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
                                             'test_task_stop'))
     def test_task_stop(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        time.sleep(10)
         RequestUtils().standard_yaml_case(caseinfo)
 
     @pytest.mark.parametrize("caseinfo",
