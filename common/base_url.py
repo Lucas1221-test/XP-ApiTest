@@ -8,6 +8,8 @@ def get_base_url():
         return test_base_url
     elif is_test_url == 2:
         return dev
+    elif is_test_url == 3:
+        return demo
     else:
         return produce_base_url
 
@@ -18,4 +20,7 @@ dev = "http://172.18.25.250:8080/"
 
 
 test_base_url = "http://172.21.0.52:8080/"    #测试环境
-produce_base_url = "http://172.18.26.254:8080/"       #生产环境
+produce_base_url = "http://172.18.26.254:8080/"
+#生产环境
+
+demo = "http://172.131.128.4:8080/"
