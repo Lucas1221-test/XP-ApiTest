@@ -14,6 +14,7 @@ data_path = data_path + 'task_create.yaml'
 
 @allure.epic("任务定制")
 @allure.feature("新增单节点岗位任务-绑定积木-审核-验收-发布")
+@pytest.mark.parallel
 class Test1:
 
     @pytest.mark.parametrize("caseinfo",
@@ -157,6 +158,7 @@ class Test1:
         assert task_status=='03'
 
 @allure.feature("新增单节点岗位任务-绑定积木-上下移动积木顺序-删除积木-删除任务")
+@pytest.mark.parallel
 class Test2:
 
     @pytest.mark.parametrize("caseinfo",
@@ -286,6 +288,7 @@ class Test2:
         RequestUtils().standard_yaml_case(caseinfo)
 
 @allure.feature("新增单节点岗位任务-绑定积木-审核-验收-回退-审核-验收-发布-停用")
+@pytest.mark.parallel
 class Test3:
 
     @pytest.mark.parametrize("caseinfo",
