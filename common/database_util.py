@@ -10,11 +10,11 @@ import pymysql
 #创建乘数据库链接
 def create_connection():
     conn = pymysql.connect(
-        user="root",
-        password="admin123",
-        host="localhost",
-        database="phpwind",
-        port=3306,)
+        user="agnes_sit_20250107",
+        password="agnes_sit_20250107",
+        host="172.18.26.203",
+        database="helowin",
+        port=1521,)
     return conn
 
 

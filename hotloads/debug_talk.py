@@ -473,7 +473,7 @@ class DebugTalk:
     def set_sm2(self):
         params = {
             "userId": "agnes",
-            "password": "Agnes1324!",
+            "password": "000000",   #Agnes1324!
             "captcha": "",
             "captchaId": ""
         }

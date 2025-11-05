@@ -1,6 +1,6 @@
 
 #通过函数封装不同测试环境基础路径
-is_test_url = 4
+is_test_url = 5
 
 
 def get_base_url():
@@ -12,11 +12,14 @@ def get_base_url():
         return demo
     elif is_test_url == 4:
         return demo1
+    elif is_test_url == 5:
+        return hua_an
     else:
         return produce_base_url
 
 #OMS-dev环境
 dev = "http://172.18.25.250:8080/"
+hua_an = "http://172.18.26.244:8080/"
 
 test_base_url = "http://172.21.0.52:8080/"    #测试环境
 produce_base_url = "http://172.18.26.254:8080/"

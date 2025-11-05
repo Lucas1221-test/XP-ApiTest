@@ -158,7 +158,6 @@ class Test:
         allure.dynamic.title(caseinfo['title'])
         res = RequestUtils().standard_yaml_case(caseinfo)
         data = res.json()["data"]["rows"]
-        print(data)
         new_data = []
         for i in data:
             if i.get("baseDesc") == "自动化测试-账户登记":

@@ -168,7 +168,7 @@
   validate:
     codes: 200
     equals:
-      status: "0000"
+      msgType: "success"
 
 -
   name: test_
@@ -204,7 +204,7 @@
   validate:
     codes: 200
     equals:
-      status: "0000"
+      msgType: "success"
 
 
 -
@@ -224,7 +224,7 @@
   validate:
     codes: 200
     equals:
-      status: "0000"
+      msgType: "success"
 
 -
   name: test_edit_account_info
@@ -240,7 +240,7 @@
   validate:
     codes: 200
     equals:
-      status: "0000"
+      msgType: "success"
 
 -
   name: test_query_history
@@ -262,7 +262,7 @@
   validate:
     codes: 200
     equals:
-      status: "0000"
+      msgType: "success"
 
 -
   name: test_get_objectId1
@@ -314,4 +314,4 @@
   validate:
     codes: 200
     equals:
-      status: "0000"
+      msgType: "success"

@@ -57,7 +57,7 @@
   validate:
     codes: 200
     equals:
-      status: "0000"
+      msgType: "success"
       typeName: "自动化测试-新增账户类型"
       typeCode: "999"
       relatedForm: 'sqzhinfo'
@@ -85,7 +85,6 @@
   validate:
     codes: 200
     equals:
-      status: "0000"
       message: "更新成功！"
 
 -
@@ -105,7 +104,7 @@
   validate:
     codes: 200
     equals:
-      status: "0000"
+      msgType: "success"
       typeName: "自动化测试-编辑账户类型"
       typeCode: "888"
       relatedForm: 'sqzhinfo.xview'
@@ -144,5 +143,5 @@
   validate:
     codes: 200
     equals:
-      status: "0000"
+      msgType: "success"
       total: 0
