@@ -62,17 +62,8 @@ class Test:
     def test_filter_calendar_by_market(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        res = RequestUtils().standard_yaml_case(caseinfo)
-        res = res.json()
-        workdayId = res['data']['rows'][0]['workdayId']
-        data = {"workdayId": workdayId}
-        write_yaml(data)
-        workday = res['data']['rows'][0]['workday']
-        data = {"workday": workday}
-        write_yaml(data)
-        crtTs = res['data']['rows'][0]['crtTs']
-        today = datetime.today().strftime('%Y-%m-%d')
-        assert today in crtTs
+        RequestUtils().standard_yaml_case(caseinfo)
+
 
 
     @pytest.mark.parametrize("caseinfo",

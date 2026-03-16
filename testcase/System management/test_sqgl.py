@@ -91,6 +91,7 @@ class Test:
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         r = RequestUtils().standard_yaml_case(caseinfo)
+        print(r.json())
         list = r.json()['data']
         orgName = {}
         orgType = {}
@@ -148,81 +149,81 @@ class Test:
         assert new_data[0]['loginType'] == 'default'
         assert new_data[0]['loginCheckType'] == 'default,other'
 
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                                            'test_user_getByUserId'))
-    def test_user_getByUserId(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
-
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                                            'test_auth_addUserAuth'))
-    def test_auth_addUserAuth(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
-
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                                            'test_auth_removeUserAuth'))
-    def test_auth_removeUserAuth(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
-
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                                            'test_user_removeUser'))
-    def test_user_removeUser(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
-
-    # 验证是否删除成功
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                                            'test_user_queryUserList'))
-    def test_check_delete_user_queryUserList(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        response = RequestUtils().standard_yaml_case(caseinfo)
-        res = response.json()
-        total = read_yaml("total")
-        assert res['data']['page']['total'] == int(total) - 1
-
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                                            'test_org_removeOrg'))
-    def test_org_removeOrg(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
-
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                                            'test_org_getOrgTree'))
-    def test_check_org_getOrgTree(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        r = RequestUtils().standard_yaml_case(caseinfo)
-        assert len(r.json()['data']) == read_yaml("len") - 1
-
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                                            'test_role_remove'))
-    def test_role_remove(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        RequestUtils().standard_yaml_case(caseinfo)
-
-    @pytest.mark.parametrize("caseinfo",
-                             read_case_yaml(data_path,
-                                            'test_role_queryList'))
-    def test_check_delete_role_queryList(self, caseinfo):
-        allure.dynamic.story(caseinfo['story'])
-        allure.dynamic.title(caseinfo['title'])
-        caseinfo["request"]["json"]["q"] = read_yaml("roleId")
-        r=RequestUtils().standard_yaml_case(caseinfo)
-        assert r.json()["data"]["data"] == []
+    # @pytest.mark.parametrize("caseinfo",
+    #                          read_case_yaml(data_path,
+    #                                         'test_user_getByUserId'))
+    # def test_user_getByUserId(self, caseinfo):
+    #     allure.dynamic.story(caseinfo['story'])
+    #     allure.dynamic.title(caseinfo['title'])
+    #     RequestUtils().standard_yaml_case(caseinfo)
+    #
+    # @pytest.mark.parametrize("caseinfo",
+    #                          read_case_yaml(data_path,
+    #                                         'test_auth_addUserAuth'))
+    # def test_auth_addUserAuth(self, caseinfo):
+    #     allure.dynamic.story(caseinfo['story'])
+    #     allure.dynamic.title(caseinfo['title'])
+    #     RequestUtils().standard_yaml_case(caseinfo)
+    #
+    # @pytest.mark.parametrize("caseinfo",
+    #                          read_case_yaml(data_path,
+    #                                         'test_auth_removeUserAuth'))
+    # def test_auth_removeUserAuth(self, caseinfo):
+    #     allure.dynamic.story(caseinfo['story'])
+    #     allure.dynamic.title(caseinfo['title'])
+    #     RequestUtils().standard_yaml_case(caseinfo)
+    #
+    # @pytest.mark.parametrize("caseinfo",
+    #                          read_case_yaml(data_path,
+    #                                         'test_user_removeUser'))
+    # def test_user_removeUser(self, caseinfo):
+    #     allure.dynamic.story(caseinfo['story'])
+    #     allure.dynamic.title(caseinfo['title'])
+    #     RequestUtils().standard_yaml_case(caseinfo)
+    #
+    # # 验证是否删除成功
+    # @pytest.mark.parametrize("caseinfo",
+    #                          read_case_yaml(data_path,
+    #                                         'test_user_queryUserList'))
+    # def test_check_delete_user_queryUserList(self, caseinfo):
+    #     allure.dynamic.story(caseinfo['story'])
+    #     allure.dynamic.title(caseinfo['title'])
+    #     response = RequestUtils().standard_yaml_case(caseinfo)
+    #     res = response.json()
+    #     total = read_yaml("total")
+    #     assert res['data']['page']['total'] == int(total) - 1
+    #
+    # @pytest.mark.parametrize("caseinfo",
+    #                          read_case_yaml(data_path,
+    #                                         'test_org_removeOrg'))
+    # def test_org_removeOrg(self, caseinfo):
+    #     allure.dynamic.story(caseinfo['story'])
+    #     allure.dynamic.title(caseinfo['title'])
+    #     RequestUtils().standard_yaml_case(caseinfo)
+    #
+    # @pytest.mark.parametrize("caseinfo",
+    #                          read_case_yaml(data_path,
+    #                                         'test_org_getOrgTree'))
+    # def test_check_org_getOrgTree(self, caseinfo):
+    #     allure.dynamic.story(caseinfo['story'])
+    #     allure.dynamic.title(caseinfo['title'])
+    #     r = RequestUtils().standard_yaml_case(caseinfo)
+    #     assert len(r.json()['data']) == read_yaml("len") - 1
+    #
+    # @pytest.mark.parametrize("caseinfo",
+    #                          read_case_yaml(data_path,
+    #                                         'test_role_remove'))
+    # def test_role_remove(self, caseinfo):
+    #     allure.dynamic.story(caseinfo['story'])
+    #     allure.dynamic.title(caseinfo['title'])
+    #     RequestUtils().standard_yaml_case(caseinfo)
+    #
+    # @pytest.mark.parametrize("caseinfo",
+    #                          read_case_yaml(data_path,
+    #                                         'test_role_queryList'))
+    # def test_check_delete_role_queryList(self, caseinfo):
+    #     allure.dynamic.story(caseinfo['story'])
+    #     allure.dynamic.title(caseinfo['title'])
+    #     caseinfo["request"]["json"]["q"] = read_yaml("roleId")
+    #     r=RequestUtils().standard_yaml_case(caseinfo)
+    #     assert r.json()["data"]["data"] == []

@@ -665,7 +665,7 @@
 
 
 -
-  name: test_check_after_add_dcc_blocks
+  name: test_check_after_add_dcc_blocks1
   story: 积木定义-数据计算类-数值计算
   title: 查询积木信息
   request:
@@ -680,6 +680,26 @@
       cookie: ${read_extract_arg(token)}
   extract:
     total: $.data.total
+  validate:
+    codes: 200
+    equals:
+      msgType: 'success'
+
+
+-
+  name: test_check_after_add_dcc_blocks
+  story: 积木定义-数据计算类-数值计算
+  title: 查询积木信息
+  request:
+    method: POST
+    url: api/agnes-ac/v2/block/page/list?pageIndex=0&pageSize=500
+    json:
+      "blockType": ${read_extract_arg(dcm_blockType)}
+      "pageSize": 500
+      dealType: '06'
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
   validate:
     codes: 200
     equals:

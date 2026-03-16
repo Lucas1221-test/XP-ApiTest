@@ -32,7 +32,7 @@ def test_login():
     # json=DebugTalk().set_sm2()
     json = {
         "userId": "agnes",
-        "password": "04b1ba018bed208d9677dffcf4e82d6116b4e4ad311cad645e6bf6742e6fffa2be849d72b94cfdd65f4040ef8c53b5232c1bd4c55359140b2b0d87344f94d232267513513e891521d93d76a34cf41089939434d858da897f8590cfb166ea4753115be78ff29ec1"
+        "password": "0498e9543489833fcba3a9b04a6c3f1fd02d5f8387a580ece8386d38b46c5d2056c9c4313deb0fb8441d7d970a9ac66d17245d49e085d7475a7240d71b111dc608c4220d9ae36510439a7a0262755fda9b5b9663544dc64cd7f31ea938c512f50fea494aba675d9dc3019a"
     }
     res = requests.post(url=url, json=json)
     token = res.json()['data']['attrs']['token']

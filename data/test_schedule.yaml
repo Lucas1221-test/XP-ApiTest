@@ -36,7 +36,7 @@
 -
   name: test_shedule_get_org_post
   story: 排班管理方案
-  title: 查询org列表-获取岗位列表
+  title: get岗位信息
   request:
     method: POST
     url: api/agnes-app/v1/dop/ru/post/config/center/post/get
@@ -46,6 +46,8 @@
     headers:
       cookie: ${read_extract_arg(token)}
       content-type: application/json;charset=UTF-8
+  extract:
+    usergroupid: $.data.rows[0].userGroupId
   validate:
     codes: 200
     equals:
@@ -145,20 +147,38 @@
     equals:
       code: '00000000'
 
-
+-
+  name: test_get_detailList_info
+  story: 排班管理方案
+  title: 获取detailList信息
+  request:
+    method: GET
+    url: api/agnes-app/v1/dop/schedule-plan/getById
+    params:
+      "id":  ${read_extract_arg(id)}
+    headers:
+      cookie: ${read_extract_arg(token)}
+      content-type: application/json;charset=UTF-8
+  extract:
+    detailList: $.data.detailList
+  validate:
+    codes: 200
+    equals:
+      code: '00000000'
 
 - name: test_shedule_edit
   story: 排班管理方案
   title: 编辑排班方案
   request:
-    method: PUT
+    method: POST
     url: api/agnes-app/v1/dop/schedule-plan/edit
     json:
       id: ${read_extract_arg(id)}
       planName: "自动化排班方案05"
       cycleDays: ""
       startDate: ${get_current_time1()}
-      endDate: ${get_current_time1()}
+      endDate: ${get_next_date()}
+      updateTs: ${get_current_time1()}
       detailList:
         - disabled: true
           postId: ${read_extract_arg(usergroupid)}
@@ -177,19 +197,20 @@
                 - 1
                 - 1
               schedule: ""
-            - person: []
+            - person: [ ]
               schedule: ""
             - person:
-                - ['${read_extract_arg(person1)}']
-                - ['${read_extract_arg(person2)}']
+                - [ '${read_extract_arg(person1)}' ]
+                - [ '${read_extract_arg(person2)}' ]
               schedule: "00"  #FA早班
-          childColumns: []
+          childColumns: [ ]
           childCycleInfoRes:
-            - person: []
+            - person: [ ]
               schedule: ""
-            - person: []
+            - person: [ ]
               schedule: ""
       flag: "1"
+
     headers:
       cookie: ${read_extract_arg(token)}
       content-type: application/json;charset=UTF-8
@@ -310,6 +331,7 @@
     codes: 200
     equals:
       code: '00000000'
+
 
 #-
 #  name: test_shedule_preview

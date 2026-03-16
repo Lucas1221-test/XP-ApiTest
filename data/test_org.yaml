@@ -44,7 +44,7 @@
   story: 组织架构
   title: 编辑组织
   request:
-    method: PUT
+    method: POST
     url: api/agnes-app/v1/dop/ru/org/framework/edit
     json:
       ${read_extract_arg(new_org_case)}
@@ -149,7 +149,7 @@
   story: 用户设置
   title: 组织下编辑用户
   request:
-    method: PUT
+    method: POST
     url: api/agnes-app/v1/dop/ru/org/framework/editMember
     headers:
       cookie: ${read_extract_arg(token)}
@@ -250,7 +250,7 @@
   story: 岗位设置
   title: 编辑岗位
   request:
-    method: PUT
+    method: POST
     url: api/agnes-app/v1/dop/ru/post/config/edit
     headers:
       cookie: ${read_extract_arg(token)}

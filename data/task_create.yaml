@@ -56,8 +56,7 @@
     casedefid: $.data.caseDefId
     crtts1: $.data.reTaskDef.crtTs
     crtuser1: $.data.reTaskDef.crtUser
-    updatets1: $.data.reTaskDef.updateTs
-    updateuser1: $.data.reTaskDef.updateUser
+    updateuser1: $.data.reTaskDef.crtUser
     distype: $.data.reTaskDef.disType
     taskinitdays: $.data.reTaskDef.taskInitDays
     taskstatus: $.data.reTaskDef.taskStatus
@@ -168,7 +167,7 @@
         "crtUser": ${read_extract_arg(crtuser1)}
         "caseKey": ${read_extract_arg(caseid)}
         "isDel": "0"
-        "updateTs": ${read_extract_arg(updatets1)}
+        "updateTs":
         "taskId": ${read_extract_arg(taskid)}
         "taskInitDays": ${read_extract_arg(taskinitdays)}
         "taskStatus": ${read_extract_arg(taskstatus)}

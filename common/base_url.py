@@ -19,7 +19,7 @@ def get_base_url():
 
 #OMS-dev环境
 dev = "http://172.18.25.250:8080/"
-hua_an = "http://172.18.26.244:8080/"
+hua_an = "http://172.21.0.55:8080/"
 
 test_base_url = "http://172.21.0.52:8080/"    #测试环境
 produce_base_url = "http://172.18.26.254:8080/"

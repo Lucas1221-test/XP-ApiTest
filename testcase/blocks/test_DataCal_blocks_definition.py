@@ -297,6 +297,17 @@ class Test:
         RequestUtils().standard_yaml_case(caseinfo)
 
     """
+       积木定义-数据计算类-新增：数值计算 积木处理类型
+    """
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                                            'test_check_after_add_dcc_blocks1'))
+    def test_check_after_add_dcc_blocks1(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+    """
     积木定义-数据计算类-新增模型计算积木后获取blockCode
     """
     @pytest.mark.parametrize("caseinfo",

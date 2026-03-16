@@ -1097,6 +1097,23 @@
       msgType: "success"
 
 -
+  name: test_get_dopETLReConfDB1
+  story: 积木定义-数据采集-ETL采集 单JOB类
+  title: 获取dopETLReConfDB1
+  request:
+    method: POST
+    url: api/data-pipe/hexETL/extract/selectByConfId
+    headers:
+      cookie: ${read_extract_arg(token)}
+    json:
+      "confId": ${read_extract_arg(dealId_djob)}
+  extract:
+    dopETLReConfDB1: $.data
+  validate:
+    codes: 200
+
+
+-
   name: test_copy_dc_hexETL_blocks
   story: 积木定义-数据采集-ETL采集 单JOB类
   title: 新增数据采集-ETL单JOB-复制保存
@@ -3280,6 +3297,25 @@
     codes: 200
     equals:
       msgType: 'success'
+
+
+-
+  name: test_get_dopETLReConfDBVos
+  story: 积木定义-数据采集类-ETL采集-多JOB
+  title: 获取dopETLReConfDBVos信息
+  request:
+    method: POST
+    url: api/data-pipe/hexETL/extract/queryBlockTaskByTaskId
+    json:
+      taskId: ${read_extract_arg(dealId)}
+    headers:
+      content-type: application/json;charset=UTF-8
+      cookie: ${read_extract_arg(token)}
+  extract:
+    dopETLReConfDBVos: $.data
+  validate:
+    codes: 200
+
 
 
 -

@@ -147,7 +147,7 @@
 
 -
   name: test_user_addUser
-  story: 积木定义-系统交互
+  story: 系统管理-用户管理
   title: 新增
   request:
     method: POST
@@ -170,8 +170,8 @@
 
 -
   name: test_user_getByUserId
-  story: 积木定义-系统交互
-  title: 新增
+  story: 系统管理-用户管理
+  title: 新增后查询
   request:
     method: POST
     url: api/gf-admin/gf/user/getByUserId
@@ -199,7 +199,7 @@
 
 -
   name: test_user_queryUserList
-  story: 积木定义-系统交互
+  story: 系统管理-用户管理
   title: 获取id2
   request:
     method: POST
@@ -217,7 +217,7 @@
 
 -
   name: test_auth_addUserAuth
-  story: 积木定义-系统交互
+  story: 系统管理-用户管理
   title: 获取id2
   request:
     method: POST
@@ -235,7 +235,7 @@
 
 -
   name: test_auth_removeUserAuth
-  story: 积木定义-系统交互
+  story: 系统管理-用户管理
   title: 获取id2
   request:
     method: POST
@@ -259,7 +259,7 @@
 
 -
   name: test_user_removeUser
-  story: 积木定义-系统交互
+  story: 系统管理-用户管理
   title: 删除
   request:
     method: POST

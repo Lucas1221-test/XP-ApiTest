@@ -72,7 +72,7 @@
     pre_save_info : $.data.
     dealType : $.data.dealType
     crtUser: $.data.crtUser
-    updateUser: $.data.updateUser
+    updateUser: $.data.crtUser
   validate:
     codes: 200
     equals:

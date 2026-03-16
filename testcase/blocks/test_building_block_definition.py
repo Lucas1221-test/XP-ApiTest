@@ -357,15 +357,29 @@ class Test:
         res = RequestUtils().standard_yaml_case(caseinfo)
         res = res.json()
         datas = res["data"]["rows"]
-        print(datas)
-        print(id)
         new_data = []
+        id = read_yaml("pre_save_hexETL_pkId")
         for data in datas:
-            if isinstance(data, dict) and (
-                    data.get('pkId') == read_yaml("pre_save_hexETL_pkId")):
+            pkid = data["pkId"]
+            if pkid == id:
                 new_data.append(data)
-        for item in new_data:
-            assert item['status'] == '01'
+        dealId = new_data[0]["dealId"]
+        data = {"dealId_djob": dealId}
+        write_yaml(data)
+
+
+    """
+        积木定义-数据采集类-ETL采集 单JOB类-新增hexETL类积木后检查
+    """
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
+                            'test_get_dopETLReConfDB1'))
+    def test_get_dopETLReConfDB1(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title('新增hexETL类积木后检查')
+        RequestUtils().standard_yaml_case(caseinfo)
+
+
 
     """
         积木定义-数据采集类-ETL采集 单JOB类-编辑保存
@@ -376,7 +390,7 @@ class Test:
     def test_edit_dc_hexETL_blocks(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        caseinfo['request']['json']['dopETLReConfDB']['confName'] += str(datetime.now().strftime("%Y%m%d%H%M%S"))
+        caseinfo["request"]["json"]["dopETLReConfDB"] = read_yaml("dopETLReConfDB1")
         RequestUtils().standard_yaml_case(caseinfo)
 
 
@@ -620,10 +634,22 @@ class Test:
     """
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
+                                            'test_get_dopETLReConfDBVos'))
+    def test_get_dopETLReConfDBVos(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        RequestUtils().standard_yaml_case(caseinfo)
+
+    """
+        积木定义-数据采集类-编辑：ETL采集-多JOB积木
+    """
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
                                             'test_edit_mulETL_interface_building_blocks'))
     def test_edit_mulETL_interface_building_blocks(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
+        caseinfo["request"]["json"]["dopETLReConfDBVos"] = read_yaml('dopETLReConfDBVos')
         RequestUtils().standard_yaml_case(caseinfo)
 
     """
@@ -667,8 +693,7 @@ class Test:
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
         caseinfo["request"]["json"]["blockName"] += str(datetime.now().strftime("%Y%m%d%H%M%S"))
-        caseinfo["request"]["json"]["dopETLReConfDBVos"][0]["confName"] += str(datetime.now().strftime("%Y%m%d%H%M%S"))
-        caseinfo["request"]["json"]["dopETLReConfDBVos"][1]["confName"] += str(datetime.now().strftime("%Y%m%d%H%M%S"))
+        caseinfo["request"]["json"]["dopETLReConfDBVos"] = read_yaml("dopETLReConfDBVos")
         caseinfo["request"]["json"]["blockName"] = 'autotest-数据采集类-ETL多JOB-copy' + str(DebugTalk().get_random_number())
         new_data = []
         data = {"mulETL_copy_blockName": caseinfo["request"]["json"]["blockName"]}
@@ -689,7 +714,6 @@ class Test:
         res=RequestUtils().standard_yaml_case(caseinfo)
         res = res.json()
         datas = res["data"]["rows"]
-        print("datas 111 %s"%datas)
         new_data = []
         mulETL_copy_blockCode = read_yaml("mulETL_copy_blockCode")
         print("mulETL_copy_blockCode 111 %s" % mulETL_copy_blockCode)

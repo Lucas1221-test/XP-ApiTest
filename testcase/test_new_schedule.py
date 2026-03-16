@@ -1,3 +1,4 @@
+import ast
 
 import allure
 import pytest
@@ -64,14 +65,7 @@ class Test:
     def test_shedule_get_org_post(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title("查询org列表2")
-        r2=RequestUtils().standard_yaml_case(caseinfo)
-        list = r2.json()['data']['rows']
-        usergroupid = {}
-        for i in list:
-            if i['userGroupName'] == '测试岗位001':
-                usergroupid = i['userGroupId']
-        data = {"usergroupid": usergroupid}
-        write_yaml(data)
+        RequestUtils().standard_yaml_case(caseinfo)
 
 
     @pytest.mark.parametrize("caseinfo",
@@ -105,12 +99,27 @@ class Test:
 
     @pytest.mark.parametrize("caseinfo",
                              read_case_yaml(data_path,
+                            'test_get_detailList_info'))
+    def test_get_detailList_info(self, caseinfo):
+        allure.dynamic.story(caseinfo['story'])
+        allure.dynamic.title(caseinfo['title'])
+        res = RequestUtils().standard_yaml_case(caseinfo)
+        s = res.json()['data']
+        print(s)
+        detailList = {}
+        detailList = ast.literal_eval(s)
+        data = {"detailList": detailList['detailList']}
+        write_yaml(data)
+
+
+    @pytest.mark.parametrize("caseinfo",
+                             read_case_yaml(data_path,
                             'test_shedule_edit'))
     def test_shedule_edit(self, caseinfo):
         allure.dynamic.story(caseinfo['story'])
         allure.dynamic.title(caseinfo['title'])
-        caseinfo["request"]["json"]["detailList"][0]["smallPerList"] = read_yaml("grouplist1")
         RequestUtils().standard_yaml_case(caseinfo)
+
 
 
     @pytest.mark.parametrize("caseinfo",
