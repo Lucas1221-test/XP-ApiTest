@@ -10,14 +10,19 @@ def read_yaml(key):
     with open(extract_path, encoding='utf-8') as f:
         value = yaml.load(stream=f, Loader=yaml.FullLoader)
         return value[key]
-
-
+def read_yaml1(key):
+    with open(token_path, encoding='utf-8') as f:
+        value = yaml.load(stream=f, Loader=yaml.FullLoader)
+        return value[key]
 #写
 def write_yaml(data):
     with open(extract_path, encoding='utf-8', mode='a') as f:
         yaml.dump(data, stream=f, allow_unicode=True)
 
 
+def write_yaml1(data):
+    with open(token_path, encoding='utf-8', mode='a') as f:
+        yaml.dump(data, stream=f, allow_unicode=True)
 
 #清空
 def clear_yaml():

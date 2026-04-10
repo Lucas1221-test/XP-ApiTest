@@ -22,8 +22,8 @@ allure_path = os.path.join(root_path, 'output', 'allure_reports')
 files_path = os.path.join(root_path, 'files', '')
 
 """测试数据路径"""
-data_path =  os.path.join(root_path, 'data', '')
-
+data_path = os.path.join(root_path, 'data', '')
+user_path = os.path.join(root_path, 'data', 'test_user.yaml')
 
 
 
