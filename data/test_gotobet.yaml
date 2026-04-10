@@ -1,0 +1,381 @@
+# 篮球下注
+
+-
+  name: test_get_basketball_info
+  story: 比赛信息
+  title: 篮球比赛信息
+  service: xp-server
+  request:
+    method: GET
+    url: v1/match/search
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+      sport_id: 'sr:sport:2'
+      cursor: 0
+    verify: False
+  extract:
+    event_id: $.data.list[12].events[0].markets[0].event_id
+    market_id: '$.data.list[12].events[0].markets[0].market_id'
+    market_name: $.data.list[12].events[0].markets[0].name
+    outcome_id: $.data.list[12].events[0].markets[0].specifiers[0].outcomes[0].id
+    outcome_value: '$.data.list[12].events[0].markets[0].specifiers[0].outcomes[0].odds'
+    produce_id: '$.data.list[12].events[0].markets[0].specifiers[0].product'
+    specifiers: $.data.list[12].events[0].markets[0].specifiers[0].specifier_value
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+-
+  name: test_go_to_bet
+  story: 比赛信息
+  title: 下注
+  service: xp-server
+  request:
+    method: POST
+    url: v1/mts/order
+    headers:
+      authorization: ${read_extract_arg(token)}
+    json:
+      bet_type: 1
+      bets:
+        - selections:
+            - product_id: "${read_extract_arg(produce_id)}"
+              event_id: '${read_extract_arg(event_id)}'
+              market_id: '${read_extract_arg(market_id)}'
+              outcome_id: ${read_extract_arg(outcome_id)}
+              outcome_value: '${read_extract_arg(outcome_value)}'
+              specifiers: ${read_extract_arg(specifiers)}
+          stakes:
+            - type: cash
+              currency: MXN
+              amount: '100'
+    verify: False
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+-
+  name: test_get_bet_result
+  story: 比赛信息
+  title: 公布比赛结果
+  service: xp-server
+  request:
+    method: POST
+    url: v1/bet/settlement
+    headers:
+      authorization: ${read_extract_arg(token)}
+    json:
+      event_id: ${read_extract_arg(event_id)}
+      product: '${read_extract_arg(produce_id)}'   #3赛前盘  1滚球盘
+      timestamp: '1766475100333'
+      certainty: '1'
+      outcomes:
+        Market:
+          - id: '${read_extract_arg(market_id)}'
+            specifiers: ${read_extract_arg(specifiers)}
+            outcome:
+              - id: '${read_extract_arg(outcome_id)}'
+                result: '0'    # 0输  1赢
+                void_factor: ''   #（0-1]
+    verify: False
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+-
+  name: test_sync_bet_result
+  story: 比赛信息
+  title: 同步比赛结果
+  service: xp-server
+  request:
+    method: POST
+    url: v1/bet/process_events
+    headers:
+      authorization: ${read_extract_arg(token)}
+    json:
+    verify: False
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+
+-
+  name: test_get_bet_history
+  story: 比赛信息
+  title: 查看bet历史
+  service: xp
+  request:
+    method: GET
+    url: v1/account/bet/history
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+      currency_id: 3
+    verify: False
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+
+
+-
+  name: test_get_transactions_history
+  story: 比赛信息
+  title: 查看transactions历史
+  service: xp
+  request:
+    method: GET
+    url: v1/account/transaction/history
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+      currency_id: 3
+    verify: False
+  extract:
+    amount: $.data.list[0].amount
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+        "data.list[0].amount": "-100"
+#      - path: message
+#        expected: "success"
+#      - path: data.list[0].amount
+#        expected: "-100"
+
+
+-
+  name: test_get_basketball_info1
+  story: 比赛信息
+  title: 篮球比赛信息
+  service: xp-server
+  request:
+    method: GET
+    url: v1/match/search
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+      sport_id: 'sr:sport:2'
+      cursor: 0
+    verify: False
+  extract:
+    event_id: $.data.list[9].events[0].markets[0].event_id
+    market_id: '$.data.list[9].events[0].markets[0].market_id'
+    outcome_id: $.data.list[9].events[0].markets[0].specifiers[0].outcomes[0].id
+    outcome_value: '$.data.list[9].events[0].markets[0].specifiers[0].outcomes[0].odds'
+    produce_id: '$.data.list[9].events[0].markets[0].specifiers[0].product'
+    specifiers: $.data.list[9].events[0].markets[0].specifiers[0].specifier_value
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+
+##### 足球信息######
+
+
+-
+  name: test_get_soccer_info
+  story: 比赛信息
+  title: 足球比赛信息
+  service: xp-server
+  request:
+    method: GET
+    url: v1/match/search
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+      sport_id: 'sr:sport:1'
+      cursor: 0
+    verify: False
+  extract:
+    event_id: $.data.list[10].events[0].markets[0].event_id
+    market_id: '$.data.list[10].events[0].markets[0].market_id'
+    outcome_id: $.data.list[10].events[0].markets[0].specifiers[0].outcomes[0].id
+    outcome_value: '$.data.list[10].events[0].markets[0].specifiers[0].outcomes[0].odds'
+    produce_id: '$.data.list[10].events[0].markets[0].specifiers[0].product'
+    specifiers: $.data.list[10].events[0].markets[0].specifiers[0].specifier_value
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+
+
+-
+  name: test_get_soccer_info1
+  story: 比赛信息
+  title: 足球比赛信息
+  service: xp-server
+  request:
+    method: GET
+    url: v1/match/search
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+      sport_id: 'sr:sport:1'
+      cursor: 0
+    verify: False
+  extract:
+    event_id: $.data.list[9].events[0].markets[0].event_id
+    market_id: '$.data.list[9].events[0].markets[0].market_id'
+    outcome_id: $.data.list[9].events[0].markets[0].specifiers[0].outcomes[0].id
+    outcome_value: '$.data.list[9].events[0].markets[0].specifiers[0].outcomes[0].odds'
+    produce_id: '$.data.list[9].events[0].markets[0].specifiers[0].product'
+    specifiers: $.data.list[9].events[0].markets[0].specifiers[0].specifier_value
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+
+###### 串关数据 ########
+
+
+-
+  name: test_get_soccer_info_parlay
+  story: 比赛信息
+  title: 足球比赛信息
+  service: xp-server
+  request:
+    method: GET
+    url: v1/match/search
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+      sport_id: 'sr:sport:1'
+      cursor: 0
+    verify: False
+  extract:
+    soccer_event_id: $.data.list[9].events[0].markets[0].event_id
+    soccer_market_id: '$.data.list[9].events[0].markets[0].market_id'
+    soccer_outcome_id: $.data.list[9].events[0].markets[0].specifiers[0].outcomes[0].id
+    soccer_outcome_value: '$.data.list[9].events[0].markets[0].specifiers[0].outcomes[0].odds'
+    soccer_produce_id: '$.data.list[9].events[0].markets[0].specifiers[0].product'
+    soccer_specifiers: $.data.list[9].events[0].markets[0].specifiers[0].specifier_value
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+-
+  name: test_get_soccer_info_parlay_0
+  story: 比赛信息
+  title: 足球比赛信息
+  service: xp-server
+  request:
+    method: GET
+    url: v1/match/search
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+      sport_id: 'sr:sport:1'
+      cursor: 0
+    verify: False
+  extract:
+    soccer_event_id: $.data.list[8].events[0].markets[0].event_id
+    soccer_market_id: '$.data.list[8].events[0].markets[0].market_id'
+    soccer_outcome_id: $.data.list[8].events[0].markets[0].specifiers[0].outcomes[0].id
+    soccer_outcome_value: '$.data.list[8].events[0].markets[0].specifiers[0].outcomes[0].odds'
+    soccer_produce_id: '$.data.list[8].events[0].markets[0].specifiers[0].product'
+    soccer_specifiers: $.data.list[8].events[0].markets[0].specifiers[0].specifier_value
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+-
+  name: test_go_to_bet_parlay
+  story: 比赛信息
+  title: 串关下注
+  service: xp-server
+  request:
+    method: POST
+    url: v1/mts/order
+    headers:
+      authorization: ${read_extract_arg(token)}
+    json:
+      bet_type: 2
+      bets:
+        - selections:
+            - product_id: "${read_extract_arg(produce_id)}"
+              event_id: '${read_extract_arg(event_id)}'
+              market_id: '${read_extract_arg(market_id)}'
+              outcome_id: ${read_extract_arg(outcome_id)}
+              outcome_value: '${read_extract_arg(outcome_value)}'
+              specifiers: ${read_extract_arg(specifiers)}
+            - product_id: "${read_extract_arg(soccer_produce_id)}"
+              event_id: '${read_extract_arg(soccer_event_id)}'
+              market_id: '${read_extract_arg(soccer_market_id)}'
+              outcome_id: ${read_extract_arg(soccer_outcome_id)}
+              outcome_value: '${read_extract_arg(soccer_outcome_value)}'
+              specifiers: ${read_extract_arg(soccer_specifiers)}
+          stakes:
+            - type: cash
+              currency: MXN
+              amount: '111'
+    verify: False
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+
+
+-
+  name: test_get_order_info
+  story: 比赛信息
+  title: 获取order信息
+  service: xp-server
+  request:
+    method: GET
+    url: v1/mts/order
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+      tab: 1
+      limit: 20
+    verify: False
+  extract:
+    bet_id: $.data.list[0].bet_id
+    stake_amount: $.data.list[0].stake_amount
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+
+-
+  name: test_get_bet_result_1
+  story: 比赛信息
+  title: 公布比赛结果
+  service: xp-server
+  request:
+    method: POST
+    url: v1/bet/settlement
+    headers:
+      authorization: ${read_extract_arg(token)}
+    json:
+      event_id: ${read_extract_arg(soccer_event_id)}
+      product: '${read_extract_arg(soccer_produce_id)}'   #3赛前盘  1滚球盘
+      timestamp: '1766475100333'
+      certainty: '1'
+      outcomes:
+        Market:
+          - id: '${read_extract_arg(soccer_market_id)}'
+            specifiers: ${read_extract_arg(soccer_specifiers)}
+            outcome:
+              - id: '${read_extract_arg(soccer_outcome_id)}'
+                result: '1'    # 0输  1赢
+                void_factor: ''   #（0-1]
+    verify: False
+  validate:
+    codes: 200
+    equals:
+        message: "success"

@@ -1,0 +1,152 @@
+
+###  取消比赛  ###
+
+-
+  name: test_get_basketball_info
+  story: 比赛信息
+  title: 篮球比赛信息
+  service: xp-server
+  request:
+    method: GET
+    url: v1/match/search
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+      sport_id: 'sr:sport:2'
+      cursor: 0
+    verify: False
+  extract:
+    event_id: $.data.list[3].events[0].markets[0].event_id
+    market_id: '$.data.list[3].events[0].markets[0].market_id'
+    market_name: $.data.list[3].events[0].markets[0].name
+    outcome_id: $.data.list[3].events[0].markets[0].specifiers[0].outcomes[0].id
+    outcome_value: '$.data.list[3].events[0].markets[0].specifiers[0].outcomes[0].odds'
+    produce_id: '$.data.list[3].events[0].markets[0].specifiers[0].product'
+    specifiers: $.data.list[3].events[0].markets[0].specifiers[0].specifier_value
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+
+-
+  name: test_get_basketball_info1
+  story: 比赛信息
+  title: 篮球比赛信息
+  service: xp-server
+  request:
+    method: GET
+    url: v1/match/search
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+      sport_id: 'sr:sport:2'
+      cursor: 0
+    verify: False
+  extract:
+    event_id: $.data.list[15].events[0].markets[0].event_id
+    market_id: '$.data.list[15].events[0].markets[0].market_id'
+    market_name: $.data.list[15].events[0].markets[0].name
+    outcome_id: $.data.list[15].events[0].markets[0].specifiers[0].outcomes[0].id
+    outcome_value: '$.data.list[15].events[0].markets[0].specifiers[0].outcomes[0].odds'
+    produce_id: '$.data.list[15].events[0].markets[0].specifiers[0].product'
+    specifiers: $.data.list[15].events[0].markets[0].specifiers[0].specifier_value
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+-
+  name: test_get_settled
+  story: 比赛信息
+  title: 比赛结果
+  service: xp-server
+  request:
+    method: GET
+    url: v1/mts/order
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+      tab:  2
+      cursor:
+      limit: 20
+    verify: False
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+
+-
+  name: test_cancel_match
+  story: 比赛信息
+  title: 取消比赛
+  service: xp-server
+  request:
+    method: POST
+    url: v1/bet/cancel
+    headers:
+      authorization: ${read_extract_arg(token)}
+    json:
+      event_id:  ${read_extract_arg(event_id)}
+      product:  '${read_extract_arg(produce_id)}'
+      timestamp: '1540991811722'
+      market:
+        - id:  '${read_extract_arg(market_id)}'
+          name: ${read_extract_arg(market_name)}
+          specifiers: ${read_extract_arg(specifiers)}
+          void_reason: '下雨'
+    verify: False
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+
+-
+  name: test_rollback_cancel
+  story: 比赛信息
+  title: 回滚取消
+  service: xp-server
+  request:
+    method: POST
+    url: v1/bet/rollback_settlement
+    headers:
+      authorization: ${read_extract_arg(token)}
+    json:
+      event_id:  ${read_extract_arg(event_id)}
+      product:  '${read_extract_arg(produce_id)}'
+      timestamp: '1540991811722'
+      market:
+        - id:  '${read_extract_arg(market_id)}'
+          name: ${read_extract_arg(market_name)}
+          specifiers: ${read_extract_arg(specifiers)}
+          void_reason: "不下雨"
+    verify: False
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+-
+  name: test_rollback_settlement
+  story: 比赛信息
+  title: 回滚结算
+  service: xp-server
+  request:
+    method: POST
+    url: v1/bet/rollback_settlement
+    headers:
+      authorization: ${read_extract_arg(token)}
+    json:
+      event_id:  ${read_extract_arg(event_id)}
+      product:  '${read_extract_arg(produce_id)}'
+      timestamp: '1540991811722'
+      market:
+        - id:  '${read_extract_arg(market_id)}'
+          specifiers: ${read_extract_arg(specifiers)}
+    verify: False
+  validate:
+    codes: 200
+    equals:
+        message: "success"

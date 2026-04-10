@@ -1,0 +1,107 @@
+# 账户信息管理
+
+-
+  name: test_get_balance
+  story: 账户信息
+  title: 查询账户余额
+  service: xp
+  request:
+    method: GET
+    url: v1/account/balance
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+    verify: False
+  extract:
+    main_balance: $.data.main
+    total_balance: $.data.total
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+-
+  name: test_recharge
+  story: 账户信息
+  title: 充值
+  service: xp-1
+  request:
+    method: POST
+    url: v1/payin/order
+    headers:
+      authorization: ${read_extract_arg(token)}
+    json:
+      currency_id: 3
+      amount: 101
+      success_url: 'https://xp-match-pc-test1.helix.city/es/sports/promotions/first-deposit-bonus'
+      fail_url: 'https://xp-match-pc-test1.helix.city/es/sports/promotions/first-deposit-bonus'
+    verify: False
+  extract:
+    order_no: $.data.order_no
+  validate:
+    codes: 200
+    equals:
+        message: "success"
+
+
+-
+  name: test_get_recharge_id
+  story: 账户信息
+  title: 获取充值id
+  service: cms
+  request:
+    method: GET
+    url: api/apiProxy/admin/eyJiYXNlVXJsIjoiaHR0cHM6Ly94cC1nby1jbXMtdGVzdDEtYXBpLmhlbGl4LmNpdHkiLCJzZXJ2aWNlIjoiZmluYW5jZSJ9/v1/order/deposit/process?
+    headers:
+      token: ${read_extract_arg(token_cms)}
+    params:
+      order_no: ${read_extract_arg(order_no)}
+      action_status: process
+      page_size: 10
+      page_num: 1
+    verify: False
+  extract:
+    id: $.data.list[0].id
+    order_price: $.data.list[0].order_price
+  validate:
+    codes: 200
+    equals:
+        code: 0
+
+
+-
+  name: test_put_recharge
+  story: 账户信息
+  title: 提交充值
+  service: cms
+  request:
+    method: PUT
+    url: api/apiProxy/admin/eyJiYXNlVXJsIjoiaHR0cHM6Ly94cC1nby1jbXMtdGVzdDEtYXBpLmhlbGl4LmNpdHkiLCJzZXJ2aWNlIjoiZmluYW5jZSJ9/v1/order/deposit/process/${read_extract_arg(id)}/approve
+    headers:
+      token: ${read_extract_arg(token_cms)}
+    json:
+      action_status: process
+      id: ${read_extract_arg(id)}
+      notice: '11'
+    verify: False
+  validate:
+    codes: 200
+    equals:
+        code: 0
+
+-
+  name: test_check_balance
+  story: 账户信息
+  title: 校验账户余额
+  service: xp
+  request:
+    method: GET
+    url: v1/account/balance
+    headers:
+      authorization: ${read_extract_arg(token)}
+    params:
+    verify: False
+  validate:
+    codes: 200
+    equals:
+        message: "success"

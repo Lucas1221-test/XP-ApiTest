@@ -1,0 +1,8 @@
+user1:
+  user: '+525512345665'
+  password: '111'
+  type: 1
+
+user2:
+  user: "Lucas"
+  password: "Lucas123456"
